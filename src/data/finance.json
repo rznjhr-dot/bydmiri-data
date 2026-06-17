@@ -1,0 +1,11 @@
+{
+  "interestRate": 2.20,
+  "interestRateUnit": "%",
+  "loanMargin": 90,
+  "loanMarginUnit": "%",
+  "defaultTenure": 9,
+  "defaultTenureUnit": "years",
+  "availableTenures": [5, 7, 9],
+  "tenureUnit": "years",
+  "disclaimer": "Interest rate and loan margin are subject to bank approval. Terms may vary based on individual credit assessment."
+}

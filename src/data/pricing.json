@@ -1,0 +1,10 @@
+{
+  "currency": "MYR",
+  "electricityRate": 0.30,
+  "disclaimer": "All prices are On-The-Road (OTR) without insurance. Prices subject to change without prior notice.",
+  "notes": [
+    "OTR price does not include insurance",
+    "Rebates are estimates and subject to SEB approval",
+    "Range figures are NEDC estimated"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "doNotSell": [
+    "kWh",
+    "kW",
+    "Nm",
+    "Technical jargon"
+  ],
+  "sell": [
+    "Savings",
+    "Comfort",
+    "Technology",
+    "Silence",
+    "Family usability",
+    "Instant pickup"
+  ],
+  "ridzuanRule": "Do not sell specifications. Sell savings. Sell comfort. Sell ownership experience."
+}

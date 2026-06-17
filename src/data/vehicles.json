@@ -1,0 +1,108 @@
+[
+  {
+    "model": "Atto 2",
+    "variants": [
+      {
+        "name": "Premium",
+        "otr": 106353,
+        "rebate": 9000,
+        "range": 410,
+        "battery": 51.13,
+        "chargeCost": 15.34,
+        "maxChargePower": "82kW DC"
+      }
+    ]
+  },
+  {
+    "model": "Atto 3",
+    "variants": [
+      {
+        "name": "Ultra",
+        "otr": 132729.25,
+        "rebate": 10000,
+        "range": 480,
+        "battery": 60.48,
+        "chargeCost": 18.14,
+        "maxChargePower": "110kW DC"
+      },
+      {
+        "name": "Premium",
+        "otr": 146227.90,
+        "rebate": 10000,
+        "range": 600,
+        "battery": 74.88,
+        "chargeCost": 22.46,
+        "maxChargePower": "220kW DC"
+      }
+    ]
+  },
+  {
+    "model": "Sealion 7",
+    "variants": [
+      {
+        "name": "Premium",
+        "otr": 192115.85,
+        "rebate": 9000,
+        "range": 567,
+        "battery": null,
+        "maxChargePower": "150kW DC"
+      },
+      {
+        "name": "Performance",
+        "otr": 209061.55,
+        "rebate": 9000,
+        "range": 542,
+        "battery": null,
+        "maxChargePower": "150kW DC"
+      }
+    ]
+  },
+  {
+    "model": "Seal",
+    "variants": [
+      {
+        "name": "Premium",
+        "otr": 179879.05,
+        "rebate": 2000,
+        "range": 650,
+        "battery": null,
+        "maxChargePower": "150kW DC"
+      },
+      {
+        "name": "Performance",
+        "otr": 200903.70,
+        "rebate": 2000,
+        "range": 580,
+        "battery": null,
+        "maxChargePower": "150kW DC"
+      }
+    ]
+  },
+  {
+    "model": "Seal 6",
+    "variants": [
+      {
+        "name": "Premium",
+        "otr": 122551.95,
+        "rebate": 1800,
+        "range": 485,
+        "battery": null,
+        "maxChargePower": "100kW DC"
+      }
+    ]
+  },
+  {
+    "model": "M6",
+    "variants": [
+      {
+        "name": "Extended",
+        "otr": 130729.25,
+        "rebate": 6000,
+        "range": 530,
+        "battery": 71.8,
+        "chargeCost": 21.54,
+        "maxChargePower": "115kW DC"
+      }
+    ]
+  }
+]

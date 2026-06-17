@@ -1,0 +1,16 @@
+{
+  "vehicleOrder": [
+    "Atto 2",
+    "Atto 3",
+    "Sealion 7",
+    "Seal",
+    "Seal 6",
+    "M6"
+  ],
+  "sortingRules": [
+    "Never sort alphabetically",
+    "Never sort by price",
+    "Never sort by launch date",
+    "Always render vehicles in the specified order"
+  ]
+}

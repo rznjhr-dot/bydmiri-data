@@ -1,0 +1,91 @@
+{
+  "lastUpdated": "2026-06-17",
+  "electricityRate": "RM0.30/kWh",
+  "cities": [
+    {
+      "city": "Miri",
+      "stations": [
+        {
+          "location": "ICC Boulevard",
+          "power": "180kW DC",
+          "provider": "Gentari x SEB"
+        },
+        {
+          "location": "Starbucks Marina Parkcity",
+          "power": "60kW DC",
+          "provider": "ChargEV"
+        }
+      ]
+    },
+    {
+      "city": "Bintulu",
+      "stations": [
+        {
+          "location": "Town Square Bintulu",
+          "power": "180kW DC",
+          "provider": "Gentari x SEB"
+        },
+        {
+          "location": "The Spring Mall Bintulu",
+          "power": "22kW AC",
+          "provider": "ChargEV"
+        }
+      ]
+    },
+    {
+      "city": "Sibu",
+      "stations": [
+        {
+          "location": "Sanyan Square",
+          "power": "120kW DC",
+          "provider": "Gentari x SEB"
+        },
+        {
+          "location": "Kingwood Hotel",
+          "power": "60kW DC",
+          "provider": "JomCharge"
+        }
+      ]
+    },
+    {
+      "city": "Sri Aman",
+      "stations": [
+        {
+          "location": "Sri Aman Square",
+          "power": "120kW DC",
+          "provider": "Gentari x SEB"
+        },
+        {
+          "location": "Medan Niaga",
+          "power": "22kW AC",
+          "provider": "JomCharge"
+        }
+      ]
+    },
+    {
+      "city": "Betong",
+      "stations": [
+        {
+          "location": "R&R Mid Layer Betong",
+          "power": "30kW DC",
+          "provider": "JomCharge"
+        }
+      ]
+    },
+    {
+      "city": "Kuching",
+      "stations": [
+        {
+          "location": "iCom Square",
+          "power": "180kW DC",
+          "provider": "Gentari x SEB"
+        },
+        {
+          "location": "Boulevard Shopping Mall",
+          "power": "120kW DC",
+          "provider": "Gentari"
+        }
+      ]
+    }
+  ]
+}
