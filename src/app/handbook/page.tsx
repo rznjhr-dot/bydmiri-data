@@ -16,87 +16,95 @@ const appData = {
 
 export default function HandbookPage() {
   return (
-    <div className="min-h-screen bg-byd-gray">
-      <header className="header-gradient text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-5 sm:py-7">
+    <div className="min-h-screen">
+      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
           <Link
             href="/"
-            className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1"
+            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
           >
-            &larr; Dashboard
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Dashboard
           </Link>
-          <h1 className="text-lg sm:text-2xl font-bold mt-2 text-gradient">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">
             Master Handbook
           </h1>
-          <p className="text-xs sm:text-sm text-gray-400 mt-0.5">
+          <p className="text-sm text-neutral-400 mt-1">
             Complete reference for all BYD Miri operations.
           </p>
         </div>
-      </header>
+      </section>
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-5 sm:space-y-6">
-        <div className="card">
-          <h2 className="font-bold text-byd-dark text-sm sm:text-lg mb-3 sm:mb-4">
+      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+        <div className="card card-elevated">
+          <h2 className="font-bold text-neutral-800 text-base mb-3">
             About This Handbook
           </h2>
-          <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-            This handbook serves as the Single Source of Truth (SSOT) for all
-            BYD Miri operations. It replaces scattered documents and provides a
-            central authority for vehicle information, pricing, rebates,
-            financing, sales rules, website rules, charging network information,
-            and content creation rules.
-          </p>
-          <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mt-2 sm:mt-3">
-            The handbook is designed to be read by both humans and AI agents.
-            All data is stored in static JSON files and requires no code changes
-            to update.
-          </p>
+          <div className="space-y-2 text-sm text-neutral-500 leading-relaxed">
+            <p>
+              This handbook serves as the Single Source of Truth (SSOT) for all
+              BYD Miri operations. It replaces scattered documents and provides a
+              central authority for vehicle information, pricing, rebates,
+              financing, sales rules, website rules, charging network information,
+              and content creation rules.
+            </p>
+            <p>
+              The handbook is designed to be read by both humans and AI agents.
+              All data is stored in static JSON files and requires no code changes
+              to update.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {Object.entries(appData).map(([key, item]) => (
             <Link
               key={key}
               href={item.href}
-              className="card flex items-center justify-between hover:border-byd-blue/30 transition-all active:scale-[0.99]"
+              className="card card-interactive flex items-center justify-between hover:border-accent/30 transition-all"
             >
-              <span className="font-medium text-byd-dark text-xs sm:text-sm">
-                {item.label}
-              </span>
-              <span className="text-byd-blue text-xs sm:text-sm">&rarr;</span>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <span className="font-medium text-neutral-800 text-sm">
+                  {item.label}
+                </span>
+              </div>
+              <span className="text-accent text-sm">&rarr;</span>
             </Link>
           ))}
         </div>
 
-        <div className="card bg-byd-light/80 border border-blue-100/60">
-          <h3 className="font-semibold text-byd-dark text-sm sm:text-base mb-2">
+        <div className="card bg-accent/5 border border-accent/10">
+          <h3 className="font-semibold text-neutral-800 text-sm mb-3">
             Quick Reference
           </h3>
-          <ul className="space-y-1.5 text-xs sm:text-sm text-gray-600">
-            <li>
-              <strong className="text-byd-dark">Sales Consultant:</strong>{" "}
-              {company.salesConsultant}
-            </li>
-            <li>
-              <strong className="text-byd-dark">Phone:</strong> {company.phone}
-            </li>
-            <li>
-              <strong className="text-byd-dark">Version:</strong>{" "}
-              {company.version}
-            </li>
-            <li>
-              <strong className="text-byd-dark">Last Updated:</strong>{" "}
-              {company.lastUpdated}
-            </li>
-          </ul>
+          <div className="space-y-1.5 text-sm text-neutral-500">
+            <div className="data-row justify-start gap-2">
+              <span className="text-neutral-400 font-medium">Sales Consultant:</span>
+              <span className="text-neutral-700">{company.salesConsultant}</span>
+            </div>
+            <div className="data-row justify-start gap-2">
+              <span className="text-neutral-400 font-medium">Phone:</span>
+              <span className="text-neutral-700">{company.phone}</span>
+            </div>
+            <div className="data-row justify-start gap-2">
+              <span className="text-neutral-400 font-medium">Version:</span>
+              <span className="text-neutral-700">{company.version}</span>
+            </div>
+            <div className="data-row justify-start gap-2">
+              <span className="text-neutral-400 font-medium">Last Updated:</span>
+              <span className="text-neutral-700">{company.lastUpdated}</span>
+            </div>
+          </div>
         </div>
       </main>
 
-      <footer className="border-t border-gray-200 bg-white mt-8 sm:mt-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-5 sm:py-6 text-center">
-          <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} {company.company} &mdash;{" "}
-            {company.branch}.
+      <footer className="border-t border-neutral-200/60 bg-white mt-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-center">
+          <p className="text-xs text-neutral-400">
+            &copy; {new Date().getFullYear()} {company.company} &mdash; {company.branch}.
           </p>
         </div>
       </footer>

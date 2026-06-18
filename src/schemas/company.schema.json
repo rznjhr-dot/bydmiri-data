@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Company",
+  "description": "Company and dealership information",
+  "type": "object",
+  "required": ["name", "company", "branch", "phone"],
+  "properties": {
+    "name": { "type": "string", "description": "Full display name of the knowledge base" },
+    "version": { "type": "string", "description": "Current version identifier" },
+    "company": { "type": "string", "description": "Parent company name" },
+    "branch": { "type": "string", "description": "Branch location" },
+    "salesConsultant": { "type": "string", "description": "Primary sales consultant name" },
+    "phone": { "type": "string", "description": "Contact phone number" },
+    "address": { "type": "string", "description": "Physical showroom address" },
+    "mapsUrl": { "type": "string", "format": "uri", "description": "Google Maps URL" },
+    "status": { "type": "string", "enum": ["Active"] },
+    "lastUpdated": { "type": "string", "description": "ISO date of last update" }
+  }
+}

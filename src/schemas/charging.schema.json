@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Charging Network",
+  "description": "EV charging station locations in Sarawak",
+  "type": "object",
+  "required": ["cities"],
+  "properties": {
+    "cities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["city"],
+        "properties": {
+          "city": { "type": "string", "description": "City name" },
+          "stations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "location": { "type": "string", "description": "Station name/venue" },
+                "power": { "type": "string", "description": "Charging power (e.g., 180kW DC)" },
+                "provider": { "type": "string", "description": "Charging network provider" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

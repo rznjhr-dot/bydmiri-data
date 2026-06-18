@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Vehicles",
+  "description": "BYD vehicle hierarchy — models and their variants with pricing, range, battery specs",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["model", "variants"],
+    "properties": {
+      "model": {
+        "type": "string",
+        "description": "Vehicle model name (e.g., Atto 3, Sealion 7)",
+        "examples": ["Atto 3", "Seal", "M6"]
+      },
+      "variants": {
+        "type": "array",
+        "description": "Trim/variant configurations for this model",
+        "items": {
+          "type": "object",
+          "required": ["name", "otr", "rebate", "range"],
+          "properties": {
+            "name": { "type": "string", "description": "Variant/trim name (e.g., Premium, Ultra)" },
+            "otr": { "type": "number", "description": "On-The-Road price in Malaysian Ringgit (RM)" },
+            "rebate": { "type": "number", "description": "Rebate amount in RM (0 if none)" },
+            "range": { "type": "number", "description": "WLTP range in kilometres" },
+            "battery": { "type": ["number", "null"], "description": "Battery capacity in kWh" },
+            "chargeCost": { "type": "number", "description": "Cost for full charge in RM" },
+            "maxChargePower": { "type": "string", "description": "Max DC charging rate (e.g., 110kW DC)" }
+          }
+        }
+      }
+    }
+  }
+}

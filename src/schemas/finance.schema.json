@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Finance",
+  "description": "Loan and financing rules for BYD Miri",
+  "type": "object",
+  "required": ["interestRate", "loanMargin", "defaultTenure", "availableTenures"],
+  "properties": {
+    "interestRate": { "type": "number", "description": "Flat interest rate percentage" },
+    "interestRateUnit": { "type": "string", "enum": ["%"] },
+    "loanMargin": { "type": "number", "description": "Maximum loan margin as percentage of price" },
+    "loanMarginUnit": { "type": "string", "enum": ["%"] },
+    "defaultTenure": { "type": "integer", "description": "Default loan tenure in years" },
+    "defaultTenureUnit": { "type": "string", "enum": ["years"] },
+    "availableTenures": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "description": "Available loan tenure options in years"
+    },
+    "tenureUnit": { "type": "string", "enum": ["years"] },
+    "disclaimer": { "type": "string", "description": "Legal disclaimer text" }
+  }
+}

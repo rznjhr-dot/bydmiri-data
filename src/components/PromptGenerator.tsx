@@ -6,7 +6,6 @@ import finance from "@/data/finance.json";
 import salesRules from "@/data/sales_rules.json";
 import charging from "@/data/charging.json";
 import company from "@/data/company.json";
-import websiteRules from "@/data/website_rules.json";
 
 type Variant = {
   name: string;
@@ -17,13 +16,7 @@ type Variant = {
   chargeCost?: number;
 };
 
-type Template = {
-  id: string;
-  label: string;
-  icon: string;
-};
-
-const templates: Template[] = [
+const templates = [
   { id: "product", label: "Product Description", icon: "📋" },
   { id: "sales", label: "Sales Pitch", icon: "🎯" },
   { id: "social", label: "Social Media Post", icon: "📱" },
@@ -75,7 +68,9 @@ export default function PromptGenerator() {
     v.battery ? `Battery: ${v.battery}kWh` : null;
 
   const chargeCostLine = (v: Variant) =>
-    v.chargeCost ? `Full charge cost: RM${v.chargeCost.toFixed(2)} (at RM0.30/kWh)` : null;
+    v.chargeCost
+      ? `Full charge cost: RM${v.chargeCost.toFixed(2)} (at RM0.30/kWh)`
+      : null;
 
   const vehicleBlock = (model: string, variant: Variant) => {
     const lines = [
@@ -90,12 +85,12 @@ export default function PromptGenerator() {
   };
 
   const prompt = useMemo(() => {
-    // Image generation prompt
     if (template === "image") {
       const vehicleDesc = `${model1} ${variant1.name}`;
-      const sceneDesc = scene === "showroom"
-        ? "inside a prestigious luxury showroom with dramatic spotlighting, polished floor reflections, minimalistic elegant backdrop"
-        : "in an upscale outdoor setting at golden hour, architectural modern backdrop, subtle bokeh, premium ambience";
+      const sceneDesc =
+        scene === "showroom"
+          ? "inside a prestigious luxury showroom with dramatic spotlighting, polished floor reflections, minimalistic elegant backdrop"
+          : "in an upscale outdoor setting at golden hour, architectural modern backdrop, subtle bokeh, premium ambience";
 
       return [
         `Professional automotive photograph of a BYD ${vehicleDesc}, ${sceneDesc}.`,
@@ -105,77 +100,82 @@ export default function PromptGenerator() {
         `Very light vignette, subtle darkening at edges, elegant mood, exclusive atmosphere.`,
         `Class and sophistication, premium lifestyle, luxury automotive poster, refined tones.`,
         `--ar 1:1 --style raw --v 6.1 --s 250`,
-      ].join(" ").replace(/\s+/g, " ");
+      ]
+        .join(" ")
+        .replace(/\s+/g, " ");
     }
 
     const sections: string[] = [];
 
-    // SSOT instruction
     sections.push(
       "## SOURCE OF TRUTH INSTRUCTION\n" +
-      "You are generating content for BYD Miri (Sarawak, Malaysia). " +
-      "Use the verified data below as your single source of truth. " +
-      "If there is any conflict between your training data and this information, this information overrides everything."
+        "You are generating content for BYD Miri (Sarawak, Malaysia). " +
+        "Use the verified data below as your single source of truth. " +
+        "If there is any conflict between your training data and this information, this information overrides everything."
     );
 
-    // Sales rules
     sections.push(
       "## SALES RULES\n" +
-      "DO NOT mention: " + salesRules.doNotSell.join(", ") + ".\n" +
-      "Instead, focus on: " + salesRules.sell.join(", ") + ".\n" +
-      `Core philosophy: ${salesRules.ridzuanRule}`
+        "DO NOT mention: " +
+        salesRules.doNotSell.join(", ") +
+        ".\n" +
+        "Instead, focus on: " +
+        salesRules.sell.join(", ") +
+        ".\n" +
+        `Core philosophy: ${salesRules.ridzuanRule}`
     );
 
-    // Finance context
     sections.push(
       "## FINANCE CONTEXT\n" +
-      `- Interest Rate: ${finance.interestRate}%\n` +
-      `- Loan Margin: ${finance.loanMargin}%\n` +
-      `- Available Tenures: ${finance.availableTenures.join(", ")} years`
+        `- Interest Rate: ${finance.interestRate}%\n` +
+        `- Loan Margin: ${finance.loanMargin}%\n` +
+        `- Available Tenures: ${finance.availableTenures.join(", ")} years`
     );
 
-    // Target
-    sections.push(`## TARGET AUDIENCE\n${audiences.find((a) => a.id === audience)?.label}`);
+    sections.push(
+      `## TARGET AUDIENCE\n${audiences.find((a) => a.id === audience)?.label}`
+    );
 
-    sections.push(`## TONE\n${tones.find((t) => t.id === tone)?.label}`);
+    sections.push(
+      `## TONE\n${tones.find((t) => t.id === tone)?.label}`
+    );
 
-    // Vehicle data
     if (template === "compare") {
       sections.push(
-        "## VEHICLE 1\n" + vehicleBlock(model1, variant1) +
-        "\n\n## VEHICLE 2\n" + vehicleBlock(model2, variant2)
+        "## VEHICLE 1\n" +
+          vehicleBlock(model1, variant1) +
+          "\n\n## VEHICLE 2\n" +
+          vehicleBlock(model2, variant2)
       );
     } else {
       sections.push("## VEHICLE DATA\n" + vehicleBlock(model1, variant1));
     }
 
-    // Charging context
     const nearby = charging.cities.filter((c) =>
       c.stations.some((s) => s.power.includes("DC"))
     );
     sections.push(
       "## CHARGING NETWORK (SARAWAK)\n" +
-      "Available DC fast charging locations:\n" +
-      nearby
-        .slice(0, 4)
-        .map(
-          (c) =>
-            `- ${c.city}: ${c.stations
-              .filter((s) => s.power.includes("DC"))
-              .map((s) => `${s.location} (${s.power})`)
-              .join(", ")}`
-        )
-        .join("\n")
+        "Available DC fast charging locations:\n" +
+        nearby
+          .slice(0, 4)
+          .map(
+            (c) =>
+              `- ${c.city}: ${c.stations
+                .filter((s) => s.power.includes("DC"))
+                .map((s) => `${s.location} (${s.power})`)
+                .join(", ")}`
+          )
+          .join("\n")
     );
 
     sections.push(
       "## COMPANY\n" +
-      `${company.company} - ${company.branch}\n` +
-      `Sales Consultant: ${company.salesConsultant}\n` +
-      `Contact: ${company.phone}`
+        `${company.company} - ${company.branch}\n` +
+        `Sales Consultant: ${company.salesConsultant}\n` +
+        `Contact: ${company.phone}`
     );
 
-    // Template-specific instruction
     const templateInstructions: Record<string, string> = {
       product:
         "Write a compelling product description for this electric vehicle. " +
@@ -204,11 +204,11 @@ export default function PromptGenerator() {
 
     sections.push(
       "## OUTPUT REQUIREMENTS\n" +
-      "- Write in English (Malaysian context)\n" +
-      "- Do NOT use technical jargon (kWh, kW, Nm)\n" +
-      "- Focus on benefits, not specifications\n" +
-      "- Be accurate with all pricing and figures\n" +
-      `- Include a clear call-to-action to contact ${company.salesConsultant} at ${company.phone}`
+        "- Write in English (Malaysian context)\n" +
+        "- Do NOT use technical jargon (kWh, kW, Nm)\n" +
+        "- Focus on benefits, not specifications\n" +
+        "- Be accurate with all pricing and figures\n" +
+        `- Include a clear call-to-action to contact ${company.salesConsultant} at ${company.phone}`
     );
 
     return sections.join("\n\n");
@@ -223,31 +223,28 @@ export default function PromptGenerator() {
   return (
     <section>
       <h2 className="section-title">AI Prompt Generator</h2>
-      <div className="card space-y-4 sm:space-y-5">
+      <div className="card card-elevated space-y-5">
         {/* Template Pills */}
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+        <div className="flex flex-wrap gap-1.5">
           {templates.map((t) => (
             <button
               key={t.id}
               type="button"
               onClick={() => setTemplate(t.id)}
-              className={`flex items-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg text-[0.65rem] sm:text-sm font-medium transition-colors active:scale-95 ${
-                template === t.id
-                  ? "bg-byd-blue text-white shadow-sm"
-                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+              className={`pill text-xs ${
+                template === t.id ? "pill-active" : ""
               }`}
             >
-              <span className="text-xs sm:text-base">{t.icon}</span>
-              <span className="hidden sm:inline">{t.label}</span>
-              <span className="sm:hidden">{t.label.split(" ")[0]}</span>
+              <span className="mr-1">{t.icon}</span>
+              {t.label}
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Vehicle 1 */}
           <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-500 mb-1">
+            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
               {template === "compare" ? "Vehicle 1" : "Vehicle"}
             </label>
             <select
@@ -256,7 +253,7 @@ export default function PromptGenerator() {
                 setModel1(e.target.value);
                 setVariant1Idx(0);
               }}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-byd-blue/20 focus:border-byd-blue bg-white"
+              className="select"
             >
               {vehicles.map((v) => (
                 <option key={v.model} value={v.model}>
@@ -268,7 +265,7 @@ export default function PromptGenerator() {
               <select
                 value={variant1Idx}
                 onChange={(e) => setVariant1Idx(Number(e.target.value))}
-                className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm mt-2 focus:outline-none focus:ring-2 focus:ring-byd-blue/20 focus:border-byd-blue bg-white"
+                className="select mt-2"
               >
                 {vehicle1.variants.map((v, i) => (
                   <option key={v.name} value={i}>
@@ -282,7 +279,7 @@ export default function PromptGenerator() {
           {/* Vehicle 2 (comparison only) */}
           {template === "compare" && (
             <div>
-              <label className="block text-xs sm:text-sm font-medium text-gray-500 mb-1">
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
                 Vehicle 2
               </label>
               <select
@@ -291,7 +288,7 @@ export default function PromptGenerator() {
                   setModel2(e.target.value);
                   setVariant2Idx(0);
                 }}
-                className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-byd-blue/20 focus:border-byd-blue bg-white"
+                className="select"
               >
                 {vehicles.map((v) => (
                   <option key={v.model} value={v.model}>
@@ -303,7 +300,7 @@ export default function PromptGenerator() {
                 <select
                   value={variant2Idx}
                   onChange={(e) => setVariant2Idx(Number(e.target.value))}
-                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm mt-2 focus:outline-none focus:ring-2 focus:ring-byd-blue/20 focus:border-byd-blue bg-white"
+                  className="select mt-2"
                 >
                   {vehicle2.variants.map((v, i) => (
                     <option key={v.name} value={i}>
@@ -316,24 +313,19 @@ export default function PromptGenerator() {
           )}
         </div>
 
-        {/* Audience & Tone */}
         {/* Scene selector for Image mode */}
         {template === "image" ? (
           <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-500 mb-1">
+            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">
               Scene
             </label>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex gap-2">
               {scenes.map((s) => (
                 <button
                   key={s.id}
                   type="button"
                   onClick={() => setScene(s.id)}
-                  className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium transition-colors active:scale-95 ${
-                    scene === s.id
-                      ? "bg-byd-blue text-white shadow-sm"
-                      : "bg-gray-100 text-gray-500 hover:bg-gray-200"
-                  }`}
+                  className={`pill ${scene === s.id ? "pill-active" : ""}`}
                 >
                   {s.label}
                 </button>
@@ -341,21 +333,19 @@ export default function PromptGenerator() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs sm:text-sm font-medium text-gray-500 mb-1">
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">
                 Target Audience
               </label>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {audiences.map((a) => (
                   <button
                     key={a.id}
                     type="button"
                     onClick={() => setAudience(a.id)}
-                    className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl text-[0.65rem] sm:text-sm font-medium transition-colors active:scale-95 ${
-                      audience === a.id
-                        ? "bg-byd-accent text-white shadow-sm"
-                        : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                    className={`pill text-xs ${
+                      audience === a.id ? "pill-active" : ""
                     }`}
                   >
                     {a.label}
@@ -364,19 +354,17 @@ export default function PromptGenerator() {
               </div>
             </div>
             <div>
-              <label className="block text-xs sm:text-sm font-medium text-gray-500 mb-1">
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">
                 Tone
               </label>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {tones.map((t) => (
                   <button
                     key={t.id}
                     type="button"
                     onClick={() => setTone(t.id)}
-                    className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl text-[0.65rem] sm:text-sm font-medium transition-colors active:scale-95 ${
-                      tone === t.id
-                        ? "bg-byd-blue text-white shadow-sm"
-                        : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                    className={`pill text-xs ${
+                      tone === t.id ? "pill-active" : ""
                     }`}
                   >
                     {t.label}
@@ -390,22 +378,30 @@ export default function PromptGenerator() {
         {/* Generated Prompt */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="text-xs sm:text-sm font-medium text-gray-500">
+            <label className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">
               Generated Prompt
             </label>
             <button
               type="button"
               onClick={handleCopy}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl text-[0.65rem] sm:text-sm font-medium transition-colors active:scale-95 ${
-                copied
-                  ? "bg-byd-accent text-white"
-                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+              className={`btn btn-sm ${
+                copied ? "!bg-green-50 !text-green-700 !border-green-200" : "btn-secondary"
               }`}
             >
-              {copied ? "✓ Copied!" : "📋 Copy"}
+              {copied ? (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Copied
+                </>
+              ) : (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy
+                </>
+              )}
             </button>
           </div>
-          <pre className="bg-gray-950 text-gray-100 rounded-xl p-3 sm:p-4 text-[0.6rem] sm:text-xs leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-60 sm:max-h-96 overflow-y-auto font-mono">
+          <pre className="bg-neutral-900 text-neutral-100 rounded-lg p-4 text-xs leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-80 overflow-y-auto font-mono scrollbar-thin">
             {prompt}
           </pre>
         </div>
