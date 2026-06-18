@@ -26,10 +26,10 @@ export default function VehiclesPage() {
     <div className="min-h-screen">
       {/* Header */}
       <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-2"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
@@ -43,17 +43,17 @@ export default function VehiclesPage() {
         </div>
       </section>
 
-      <main id="main-content" className="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      <main id="main-content" className="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4">
         {vehicles.map((vehicle) => (
           <section key={vehicle.model}>
-            <h2 className="section-title text-lg">{vehicle.model}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <h2 className="section-title text-base">{vehicle.model}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {vehicle.variants.map((variant) => {
                 const effectivePrice = variant.otr - (variant.rebate || 0);
                 return (
                   <div key={variant.name} className="card card-elevated">
                     {/* Header */}
-                    <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-start justify-between mb-1.5">
                       <div>
                         <h3 className="font-bold text-neutral-800 text-base">
                           {vehicle.model}
@@ -62,23 +62,43 @@ export default function VehiclesPage() {
                       </div>
                       {variant.rebate && variant.rebate > 0 ? (
                         <span className="badge badge-green shrink-0">
-                          -RM{(variant.rebate / 1000).toFixed(0)}k
+                          -{formatCurrency(variant.rebate)}
                         </span>
                       ) : null}
                     </div>
 
-                    {/* Specs */}
-                    <div className="space-y-1.5 mb-3">
+                    {/* Prices */}
+                    <div className="space-y-1 mb-1.5">
+                      <div className="data-row">
+                        <span className="data-row-label">OTR without Insurance</span>
+                        <span className="data-row-value">
+                          {formatCurrency(variant.otrWithoutInsurance)}
+                        </span>
+                      </div>
+                      <div className="data-row">
+                        <span className="data-row-label">
+                          Est. Insurance
+                          {variant.sumInsured && (
+                            <span className="text-[0.55rem] text-blue-400 ml-1 font-normal">
+                              (Sum Insured RM {variant.sumInsured.toLocaleString("en-MY")})
+                            </span>
+                          )}
+                        </span>
+                        <span className="data-row-value">
+                          {formatCurrency(variant.otr - variant.otrWithoutInsurance)}
+                        </span>
+                      </div>
+                      <div className="border-t border-neutral-100/50 my-1.5" />
                       <div className="data-row">
                         <span className="data-row-label">OTR Price</span>
-                        <span className="data-row-value">
+                        <span className="data-row-value font-bold text-base">
                           {formatCurrency(variant.otr)}
                         </span>
                       </div>
                       {variant.rebate && variant.rebate > 0 && (
                         <div className="data-row">
                           <span className="data-row-label">Rebate</span>
-                          <span className="data-row-value text-green-600">
+                          <span className="data-row-value text-green-600 font-bold text-base">
                             -{formatCurrency(variant.rebate)}
                           </span>
                         </div>
@@ -89,6 +109,33 @@ export default function VehiclesPage() {
                           {formatCurrency(effectivePrice)}
                         </span>
                       </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="border-t border-neutral-100 mb-1.5" />
+
+                    {/* Monthly */}
+                    <div className="bg-accent/5 rounded-lg p-2 space-y-0.5 mb-1.5">
+                      <p className="text-[0.6rem] font-semibold text-neutral-400 uppercase tracking-wider">
+                        Monthly Instalment
+                      </p>
+                      <div className="flex justify-between items-baseline">
+                        <span className="text-xs text-neutral-400">0% Down</span>
+                        <span className="text-xl font-extrabold text-accent whitespace-nowrap">
+                          {formatCurrency(calcMonthly(effectivePrice, 0))}
+                          <span className="text-xs font-normal text-neutral-400">/mo</span>
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm text-neutral-400">
+                        <span>10% Down</span>
+                        <span className="font-semibold whitespace-nowrap">
+                          {formatCurrency(calcMonthly(effectivePrice, 10))}/mo
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Specs */}
+                    <div className="space-y-1">
                       <div className="data-row">
                         <span className="data-row-label">Range</span>
                         <span className="data-row-value">
@@ -112,26 +159,6 @@ export default function VehiclesPage() {
                         </div>
                       )}
                     </div>
-
-                    {/* Monthly */}
-                    <div className="bg-accent/5 rounded-lg p-3 space-y-1.5">
-                      <p className="text-[0.65rem] font-semibold text-neutral-400 uppercase tracking-wider">
-                        Monthly Instalment
-                      </p>
-                      <div className="flex justify-between items-baseline">
-                        <span className="text-xs text-neutral-400">0% Down</span>
-                        <span className="text-lg font-extrabold text-accent">
-                          {formatCurrency(calcMonthly(effectivePrice, 0))}
-                          <span className="text-xs font-normal text-neutral-400">/mo</span>
-                        </span>
-                      </div>
-                      <div className="flex justify-between text-xs text-neutral-400">
-                        <span>10% Down</span>
-                        <span>
-                          {formatCurrency(calcMonthly(effectivePrice, 10))}/mo
-                        </span>
-                      </div>
-                    </div>
                   </div>
                 );
               })}
@@ -140,10 +167,10 @@ export default function VehiclesPage() {
         ))}
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
+      <footer className="border-t border-neutral-200/60 bg-white mt-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
           <p className="text-xs text-neutral-400">
-            &copy; {new Date().getFullYear()} {company.company} &mdash; {company.branch}.
+            &copy; {new Date().getFullYear()} Ridzuan Jahari
           </p>
         </div>
       </footer>

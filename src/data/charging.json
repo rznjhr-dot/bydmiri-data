@@ -6,13 +6,18 @@
       "city": "Miri",
       "stations": [
         {
-          "location": "ICC Boulevard",
+          "location": "Islamic Comm. Centre, Boulevard",
           "power": "180kW DC",
           "provider": "Gentari x SEB"
         },
         {
-          "location": "Starbucks Marina Parkcity",
+          "location": "Starbucks Marina",
           "power": "60kW DC",
+          "provider": "ChargEV"
+        },
+        {
+          "location": "Permy Mall",
+          "power": "22kW AC",
           "provider": "ChargEV"
         }
       ]
@@ -21,12 +26,12 @@
       "city": "Bintulu",
       "stations": [
         {
-          "location": "Town Square Bintulu",
+          "location": "Town Square",
           "power": "180kW DC",
           "provider": "Gentari x SEB"
         },
         {
-          "location": "The Spring Mall Bintulu",
+          "location": "The Spring Mall",
           "power": "22kW AC",
           "provider": "ChargEV"
         }
@@ -44,6 +49,21 @@
           "location": "Kingwood Hotel",
           "power": "60kW DC",
           "provider": "JomCharge"
+        },
+        {
+          "location": "Wisma Sanyan",
+          "power": "22kW AC",
+          "provider": "ChargEV (Percuma)"
+        }
+      ]
+    },
+    {
+      "city": "Betong",
+      "stations": [
+        {
+          "location": "R&R Mid Layar, Betong",
+          "power": "30kW DC",
+          "provider": "JomCharge"
         }
       ]
     },
@@ -54,21 +74,6 @@
           "location": "Sri Aman Square",
           "power": "120kW DC",
           "provider": "Gentari x SEB"
-        },
-        {
-          "location": "Medan Niaga",
-          "power": "22kW AC",
-          "provider": "JomCharge"
-        }
-      ]
-    },
-    {
-      "city": "Betong",
-      "stations": [
-        {
-          "location": "R&R Mid Layer Betong",
-          "power": "30kW DC",
-          "provider": "JomCharge"
         }
       ]
     },
@@ -81,9 +86,19 @@
           "provider": "Gentari x SEB"
         },
         {
-          "location": "Boulevard Shopping Mall",
+          "location": "CityOne Megamall",
           "power": "120kW DC",
           "provider": "Gentari"
+        },
+        {
+          "location": "Boulevard Shopping Mall",
+          "power": "2×120kW DC",
+          "provider": "Gentari"
+        },
+        {
+          "location": "Petros MFS Batu Kawa",
+          "power": "200kW DC + 22kW AC",
+          "provider": "SEDC Energy x JomCharge"
         }
       ]
     }

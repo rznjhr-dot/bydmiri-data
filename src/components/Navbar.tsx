@@ -45,13 +45,16 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo / Brand */}
-          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+          <Link
+            href="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex items-center gap-2.5 group shrink-0">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
               <span className="text-white text-[0.625rem] font-extrabold tracking-tight">RJ</span>
             </div>
             <div className="hidden sm:block">
               <p className="text-sm font-bold text-neutral-800 tracking-tight leading-tight">
-                Master Databook
+                BYD Miri Knowledge Base Masterbook
               </p>
               <p className="text-[0.6rem] text-neutral-400 font-medium leading-tight -mt-0.5">
                 {company.company}

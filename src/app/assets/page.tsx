@@ -1,5 +1,4 @@
 import Link from "next/link";
-import company from "@/data/company.json";
 
 const assets = [
   { category: "Posters", icon: "🖼️", count: 0 },
@@ -13,7 +12,7 @@ export default function AssetsPage() {
   return (
     <div className="min-h-screen">
       <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/"
             className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
@@ -30,11 +29,11 @@ export default function AssetsPage() {
         </div>
       </section>
 
-      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-4">
         {/* Asset categories */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
           {assets.map((asset) => (
-            <div key={asset.category} className="card card-elevated flex flex-col items-center justify-center py-10 text-center">
+            <div key={asset.category} className="card card-elevated flex flex-col items-center justify-center py-6 text-center">
               <span className="text-3xl mb-3">{asset.icon}</span>
               <h3 className="font-bold text-neutral-800 text-base mb-1">{asset.category}</h3>
               <p className="text-xs text-neutral-400">
@@ -69,10 +68,10 @@ export default function AssetsPage() {
         </div>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-12">
+      <footer className="border-t border-neutral-200/60 bg-white mt-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-center">
           <p className="text-xs text-neutral-400">
-            &copy; {new Date().getFullYear()} {company.company} &mdash; {company.branch}.
+            &copy; {new Date().getFullYear()} Ridzuan Jahari
           </p>
         </div>
       </footer>

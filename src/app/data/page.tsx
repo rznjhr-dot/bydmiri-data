@@ -1,5 +1,4 @@
 import Link from "next/link";
-import company from "@/data/company.json";
 
 const datasets = [
   { name: "company.json", path: "/data/company.json", schema: "company" },
@@ -18,7 +17,7 @@ export default function DataIndex() {
   return (
     <div className="min-h-screen">
       <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <Link
             href="/"
             className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
@@ -35,7 +34,7 @@ export default function DataIndex() {
         </div>
       </section>
 
-      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-6">
         <div className="space-y-2">
           {datasets.map((ds) => (
             <a
@@ -63,7 +62,7 @@ export default function DataIndex() {
           ))}
         </div>
 
-        <div className="mt-8 card bg-amber-50/80 border border-amber-200/60">
+        <div className="mt-6 card bg-amber-50/80 border border-amber-200/60">
           <div className="flex items-start gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600 shrink-0 mt-0.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             <p className="text-sm text-amber-800">
@@ -74,7 +73,7 @@ export default function DataIndex() {
           </div>
         </div>
 
-        <div className="mt-4 card bg-accent/5 border border-accent/10">
+        <div className="mt-3 card bg-accent/5 border border-accent/10">
           <div className="flex items-start gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
             <div>
@@ -90,10 +89,10 @@ export default function DataIndex() {
         </div>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-center">
+      <footer className="border-t border-neutral-200/60 bg-white mt-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 text-center">
           <p className="text-xs text-neutral-400">
-            &copy; {new Date().getFullYear()} {company.company} &mdash; {company.branch}.
+            &copy; {new Date().getFullYear()} Ridzuan Jahari
           </p>
         </div>
       </footer>

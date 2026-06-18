@@ -18,7 +18,7 @@ export default function HandbookPage() {
   return (
     <div className="min-h-screen">
       <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <Link
             href="/"
             className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
@@ -35,9 +35,9 @@ export default function HandbookPage() {
         </div>
       </section>
 
-      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-4">
         <div className="card card-elevated">
-          <h2 className="font-bold text-neutral-800 text-base mb-3">
+          <h2 className="font-bold text-neutral-800 text-base mb-2">
             About This Handbook
           </h2>
           <div className="space-y-2 text-sm text-neutral-500 leading-relaxed">
@@ -56,7 +56,7 @@ export default function HandbookPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {Object.entries(appData).map(([key, item]) => (
             <Link
               key={key}
@@ -77,7 +77,7 @@ export default function HandbookPage() {
         </div>
 
         <div className="card bg-accent/5 border border-accent/10">
-          <h3 className="font-semibold text-neutral-800 text-sm mb-3">
+          <h3 className="font-semibold text-neutral-800 text-sm mb-2">
             Quick Reference
           </h3>
           <div className="space-y-1.5 text-sm text-neutral-500">
@@ -99,12 +99,22 @@ export default function HandbookPage() {
             </div>
           </div>
         </div>
+
+        <div className="text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-semibold hover:bg-accent/90 transition-all"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Back to Dashboard
+          </Link>
+        </div>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-12">
+      <footer className="border-t border-neutral-200/60 bg-white mt-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-center">
           <p className="text-xs text-neutral-400">
-            &copy; {new Date().getFullYear()} {company.company} &mdash; {company.branch}.
+            &copy; {new Date().getFullYear()} Ridzuan Jahari
           </p>
         </div>
       </footer>

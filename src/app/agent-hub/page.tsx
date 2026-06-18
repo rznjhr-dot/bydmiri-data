@@ -22,7 +22,7 @@ export default function AgentHubPage() {
   return (
     <div className="min-h-screen">
       <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/"
             className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
@@ -39,7 +39,7 @@ export default function AgentHubPage() {
         </div>
       </section>
 
-      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* System Status */}
         <div className="card border-l-4 border-l-accent bg-accent/5">
           <div className="flex items-start gap-3">
@@ -72,7 +72,7 @@ export default function AgentHubPage() {
 
         {/* Prompt Templates */}
         <section>
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-2">
             <h2 className="section-title mb-0">Prompt Templates</h2>
             <Link
               href="/#prompt-generator"
@@ -81,7 +81,7 @@ export default function AgentHubPage() {
               Open Generator &rarr;
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {promptTemplates.map((pt) => (
               <div key={pt.name} className="card">
                 <div className="flex items-center justify-between mb-1">
@@ -97,7 +97,7 @@ export default function AgentHubPage() {
         {/* SOPs & Workflows */}
         <section>
           <h2 className="section-title">SOPs &amp; Workflows</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {sopItems.map((sop) => (
               <div key={sop.title} className="card card-interactive">
                 <div className="flex items-center justify-between mb-1">
@@ -135,10 +135,10 @@ export default function AgentHubPage() {
         </section>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-12">
+      <footer className="border-t border-neutral-200/60 bg-white mt-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-center">
           <p className="text-xs text-neutral-400">
-            &copy; {new Date().getFullYear()} {company.company} &mdash; {company.branch}.
+            &copy; {new Date().getFullYear()} Ridzuan Jahari
           </p>
         </div>
       </footer>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
+import html2canvas from "html2canvas";
 import vehicles from "@/data/vehicles.json";
 import finance from "@/data/finance.json";
 
@@ -16,6 +17,8 @@ function formatCurrency(amount: number): string {
 type Variant = {
   name: string;
   otr: number;
+  otrWithoutInsurance: number;
+  sumInsured?: number;
   rebate: number;
   range: number;
   battery: number | null;
@@ -62,13 +65,23 @@ export default function LoanCalculator() {
     return totalPayable / (tenure * 12);
   }, [loanAmount, tenure]);
 
-  const totalPayable = useMemo(() => {
-    return monthlyPayment * tenure * 12;
-  }, [monthlyPayment, tenure]);
+  const resultsRef = useRef<HTMLDivElement>(null);
 
-  const totalInterest = useMemo(() => {
-    return totalPayable - loanAmount;
-  }, [totalPayable, loanAmount]);
+  const handleScreenshot = useCallback(async () => {
+    if (!resultsRef.current) return;
+    try {
+      const canvas = await html2canvas(resultsRef.current, {
+        backgroundColor: "#ffffff",
+        scale: 2,
+      });
+      const link = document.createElement("a");
+      link.download = "finance-calculator.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    } catch {
+      // silently fail
+    }
+  }, []);
 
   return (
     <section>
@@ -76,10 +89,10 @@ export default function LoanCalculator() {
       <div className="card card-elevated overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
           {/* Controls */}
-          <div className="lg:col-span-3 p-4 sm:p-6 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="lg:col-span-3 p-3 sm:p-4 space-y-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div>
-                <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
                   Model
                 </label>
                 <select
@@ -100,7 +113,7 @@ export default function LoanCalculator() {
 
               {currentVehicle.variants.length > 1 && (
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
                     Variant
                   </label>
                   <select
@@ -147,10 +160,10 @@ export default function LoanCalculator() {
 
             {/* Downpayment */}
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
                 Downpayment
               </label>
-              <div className="flex gap-2 mb-2">
+              <div className="flex gap-1.5 mb-1.5">
                 {[0, 10, 15, 20].map((pct) => (
                   <button
                     key={pct}
@@ -188,16 +201,16 @@ export default function LoanCalculator() {
 
             {/* Tenure */}
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
                 Loan Tenure
               </label>
-              <div className="flex gap-2">
+              <div className="grid grid-cols-4 sm:grid-cols-8 gap-1">
                 {[2, 3, 4, 5, 6, 7, 8, 9].map((t) => (
                   <button
                     key={t}
                     type="button"
                     onClick={() => setTenure(t)}
-                    className={`pill flex-1 ${tenure === t ? "pill-active" : ""}`}
+                    className={`pill ${tenure === t ? "pill-active" : ""}`}
                   >
                     {t}y
                   </button>
@@ -207,23 +220,58 @@ export default function LoanCalculator() {
           </div>
 
           {/* Results */}
-          <div className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-white border-t lg:border-t-0 lg:border-l border-neutral-200/60 p-4 sm:p-6 flex flex-col justify-between">
+          <div
+            ref={resultsRef}
+            className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-white border-t lg:border-t-0 lg:border-l border-neutral-200/60 p-3 sm:p-4 flex flex-col justify-between"
+          >
             <div>
-              <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-4">
-                Payment Summary
-              </h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">
+                  Payment Summary
+                </h3>
+                <button
+                  type="button"
+                  onClick={handleScreenshot}
+                  className="p-1 rounded-md text-neutral-300 hover:text-accent hover:bg-accent/5 transition-all cursor-pointer touch-target"
+                  aria-label="Screenshot results"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                    <circle cx="12" cy="13" r="4"/>
+                  </svg>
+                </button>
+              </div>
 
-              <div className="space-y-2 text-sm">
+              <div className="space-y-1 text-sm">
+                <div className="data-row">
+                  <span className="data-row-label">OTR without Insurance</span>
+                  <span className="data-row-value">
+                    {formatCurrency(currentVariant.otrWithoutInsurance)}
+                  </span>
+                </div>
+                <div className="data-row">
+                  <span className="data-row-label">
+                    Est. Insurance
+                    {currentVariant.sumInsured && (
+                      <span className="text-[0.55rem] text-blue-400 ml-1 font-normal">
+                        (Sum Insured RM {currentVariant.sumInsured.toLocaleString("en-MY")})
+                      </span>
+                    )}
+                  </span>
+                  <span className="data-row-value">
+                    {formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance)}
+                  </span>
+                </div>
                 <div className="data-row">
                   <span className="data-row-label">OTR Price</span>
-                  <span className="data-row-value">
+                  <span className="data-row-value font-bold text-base">
                     {formatCurrency(currentVariant.otr)}
                   </span>
                 </div>
                 {includeRebate && currentVariant.rebate > 0 && (
                   <div className="data-row">
                     <span className="data-row-label">Rebate</span>
-                    <span className="font-semibold text-green-600">
+                    <span className="font-bold text-green-600 text-base">
                       -{formatCurrency(currentVariant.rebate)}
                     </span>
                   </div>
@@ -234,7 +282,7 @@ export default function LoanCalculator() {
                     {formatCurrency(priceAfterRebate)}
                   </span>
                 </div>
-                <div className="border-t border-neutral-100 pt-2 data-row">
+                <div className="border-t border-neutral-100 pt-1.5 data-row">
                   <span className="data-row-label">Downpayment</span>
                   <span className="data-row-value">
                     {downpaymentAmount > 0
@@ -258,32 +306,20 @@ export default function LoanCalculator() {
                   <span className="data-row-label">Tenure</span>
                   <span className="data-row-value">{tenure} Years</span>
                 </div>
-                <div className="data-row">
-                  <span className="data-row-label">Total Interest</span>
-                  <span className="data-row-value">
-                    {formatCurrency(totalInterest)}
-                  </span>
-                </div>
-                <div className="data-row">
-                  <span className="data-row-label">Total Payable</span>
-                  <span className="data-row-value">
-                    {formatCurrency(totalPayable)}
-                  </span>
-                </div>
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t-2 border-accent/20">
+            <div className="mt-3 pt-2 border-t-2 border-accent/20">
               <div className="flex items-end justify-between">
                 <div>
                   <p className="text-xs text-neutral-400 font-medium">
                     Monthly Payment
                   </p>
                   <p className="text-xs text-neutral-300 mt-0.5">
-                    Flat rate · {tenure} years
+                    {finance.interestRate}% × {tenure}y
                   </p>
                 </div>
-                <p className="text-2xl sm:text-3xl font-extrabold text-accent tracking-tight">
+                <p className="text-xl sm:text-2xl font-extrabold text-accent tracking-tight">
                   {formatCurrency(monthlyPayment)}
                   <span className="text-sm font-normal text-neutral-400">/mo</span>
                 </p>

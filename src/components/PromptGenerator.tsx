@@ -223,9 +223,9 @@ export default function PromptGenerator() {
   return (
     <section>
       <h2 className="section-title">AI Prompt Generator</h2>
-      <div className="card card-elevated space-y-5">
+      <div className="card card-elevated space-y-1.5">
         {/* Template Pills */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1">
           {templates.map((t) => (
             <button
               key={t.id}
@@ -235,16 +235,16 @@ export default function PromptGenerator() {
                 template === t.id ? "pill-active" : ""
               }`}
             >
-              <span className="mr-1">{t.icon}</span>
+              <span className="mr-0.5">{t.icon}</span>
               {t.label}
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5">
           {/* Vehicle 1 */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
               {template === "compare" ? "Vehicle 1" : "Vehicle"}
             </label>
             <select
@@ -265,7 +265,7 @@ export default function PromptGenerator() {
               <select
                 value={variant1Idx}
                 onChange={(e) => setVariant1Idx(Number(e.target.value))}
-                className="select mt-2"
+                className="select mt-1"
               >
                 {vehicle1.variants.map((v, i) => (
                   <option key={v.name} value={i}>
@@ -279,7 +279,7 @@ export default function PromptGenerator() {
           {/* Vehicle 2 (comparison only) */}
           {template === "compare" && (
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
                 Vehicle 2
               </label>
               <select
@@ -300,7 +300,7 @@ export default function PromptGenerator() {
                 <select
                   value={variant2Idx}
                   onChange={(e) => setVariant2Idx(Number(e.target.value))}
-                  className="select mt-2"
+                  className="select mt-1.5"
                 >
                   {vehicle2.variants.map((v, i) => (
                     <option key={v.name} value={i}>
@@ -316,10 +316,10 @@ export default function PromptGenerator() {
         {/* Scene selector for Image mode */}
         {template === "image" ? (
           <div>
-            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
               Scene
             </label>
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               {scenes.map((s) => (
                 <button
                   key={s.id}
@@ -333,12 +333,12 @@ export default function PromptGenerator() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
                 Target Audience
               </label>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1">
                 {audiences.map((a) => (
                   <button
                     key={a.id}
@@ -354,10 +354,10 @@ export default function PromptGenerator() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
                 Tone
               </label>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1">
                 {tones.map((t) => (
                   <button
                     key={t.id}
@@ -377,7 +377,7 @@ export default function PromptGenerator() {
 
         {/* Generated Prompt */}
         <div>
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-1">
             <label className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">
               Generated Prompt
             </label>
@@ -401,7 +401,7 @@ export default function PromptGenerator() {
               )}
             </button>
           </div>
-          <pre className="bg-neutral-900 text-neutral-100 rounded-lg p-4 text-xs leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-80 overflow-y-auto font-mono scrollbar-thin">
+          <pre className="bg-neutral-900 text-neutral-100 rounded-lg p-1.5 text-xs leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-60 overflow-y-auto font-mono scrollbar-thin">
             {prompt}
           </pre>
         </div>
