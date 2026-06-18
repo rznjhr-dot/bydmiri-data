@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef, useCallback } from "react";
-import html2canvas from "html2canvas";
+import { useState, useMemo, useCallback } from "react";
 import vehicles from "@/data/vehicles.json";
 import finance from "@/data/finance.json";
 
@@ -65,23 +64,66 @@ export default function LoanCalculator() {
     return totalPayable / (tenure * 12);
   }, [loanAmount, tenure]);
 
-  const resultsRef = useRef<HTMLDivElement>(null);
+  const totalInterest = useMemo(() => {
+    const rate = finance.interestRate / 100;
+    return loanAmount * rate * tenure;
+  }, [loanAmount, tenure]);
 
-  const handleScreenshot = useCallback(async () => {
-    if (!resultsRef.current) return;
-    try {
-      const canvas = await html2canvas(resultsRef.current, {
-        backgroundColor: "#ffffff",
-        scale: 2,
-      });
-      const link = document.createElement("a");
-      link.download = "finance-calculator.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    } catch {
-      // silently fail
+  const totalPayable = useMemo(() => {
+    return loanAmount + totalInterest;
+  }, [loanAmount, totalInterest]);
+
+  const [copied, setCopied] = useState(false);
+
+  const buildQuotation = useCallback(() => {
+    const today = new Date().toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric" });
+    const lines = [
+      "Quotation for " + currentVehicle.model + " " + currentVariant.name + " (" + today + ")",
+      "━━━━━━━━━━━━━━━━━━",
+      "Price Breakdown",
+      "OTR without Insurance: " + formatCurrency(currentVariant.otrWithoutInsurance),
+      "Est. Insurance: " + formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance),
+      "OTR Price: " + formatCurrency(currentVariant.otr),
+    ];
+    if (includeRebate && currentVariant.rebate > 0) {
+      lines.push("Rebate: -" + formatCurrency(currentVariant.rebate));
     }
-  }, []);
+    lines.push("After Rebate: " + formatCurrency(priceAfterRebate));
+    lines.push("");
+    lines.push("Financing");
+    lines.push("Downpayment: " + formatCurrency(downpaymentAmount));
+    lines.push("Loan Amount: " + formatCurrency(loanAmount));
+    lines.push("Est. Interest Rate: " + finance.interestRate + "%");
+    lines.push("Tenure: " + tenure + " Years");
+    lines.push("");
+    lines.push("Monthly Payment");
+    lines.push(formatCurrency(monthlyPayment) + "/month (" + finance.interestRate + "% × " + tenure + "y)");
+    lines.push("");
+    lines.push("━━━━━━━━━━━━━━━━━━");
+    lines.push("BYD Miri - Ridzuan Jahari");
+    return lines.join("\n");
+  }, [currentVehicle, currentVariant, includeRebate, priceAfterRebate, downpaymentAmount, loanAmount, tenure, monthlyPayment, totalInterest, totalPayable]);
+
+  const handleCopyQuotation = useCallback(async () => {
+    const text = buildQuotation();
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // fallback for older browsers
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, [buildQuotation]);
 
   return (
     <section>
@@ -221,7 +263,6 @@ export default function LoanCalculator() {
 
           {/* Results */}
           <div
-            ref={resultsRef}
             className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-[var(--color-bg-secondary)] border-t lg:border-t-0 lg:border-l border-[var(--color-border-primary)]/60 p-3 sm:p-4 flex flex-col justify-between"
           >
             <div>
@@ -231,14 +272,21 @@ export default function LoanCalculator() {
                 </h3>
                 <button
                   type="button"
-                  onClick={handleScreenshot}
-                  className="p-1 rounded-md text-neutral-300 hover:text-accent hover:bg-accent/5 transition-all cursor-pointer touch-target"
-                  aria-label="Screenshot results"
+                  onClick={handleCopyQuotation}
+                  className="p-1.5 rounded-md text-neutral-300 hover:text-accent hover:bg-accent/5 transition-all cursor-pointer touch-target flex items-center gap-1 text-xs font-medium"
+                  aria-label="Copy quotation"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                    <circle cx="12" cy="13" r="4"/>
-                  </svg>
+                  {copied ? (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span className="text-green-500">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                      Quotation
+                    </>
+                  )}
                 </button>
               </div>
 
