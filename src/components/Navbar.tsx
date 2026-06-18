@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import company from "@/data/company.json";
 import { useEffect, useState } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Dashboard" },
@@ -38,8 +39,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 transition-all duration-200 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-xl border-b border-neutral-200/80 shadow-sm"
-          : "bg-white border-b border-neutral-200/50"
+          ? "bg-[var(--color-bg-secondary)]/90 backdrop-blur-xl border-b border-[var(--color-border-primary)]/80 shadow-sm"
+          : "bg-[var(--color-bg-secondary)] border-b border-[var(--color-border-primary)]/50"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,6 +88,7 @@ export default function Navbar() {
 
           {/* Right section */}
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <button
               onClick={openPalette}
               aria-label="Open command palette"
