@@ -176,18 +176,16 @@ export default function ChargingTimeEstimator() {
               <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
                 Charger Type
               </label>
-              <div className="flex flex-row gap-1.5 overflow-hidden">
+              <div className="grid grid-cols-2 sm:flex sm:flex-row gap-1.5">
                 {CHARGER_TYPES.map((ct, i) => (
                   <button
                     key={ct.power}
                     type="button"
                     onClick={() => setChargerIdx(i)}
-                    className={`pill text-center flex-1 min-w-0 overflow-hidden ${
-                      chargerIdx === i ? "pill-active" : ""
-                    }`}
+                    className={`pill text-center ${chargerIdx === i ? "pill-active" : ""}`}
                   >
-                    <span className="text-[0.6rem] sm:text-xs font-semibold truncate">{ct.label}</span>
-                    <span className="text-[0.55rem] sm:text-[0.6rem] text-neutral-400 ml-0.5 hidden sm:inline">| {ct.power}kW</span>
+                    <span className="text-[0.6rem] sm:text-xs font-semibold">{ct.label}</span>
+                    <span className="text-[0.55rem] sm:text-[0.6rem] text-neutral-400 ml-0.5">| {ct.power}kW</span>
                   </button>
                 ))}
               </div>
@@ -265,7 +263,7 @@ export default function ChargingTimeEstimator() {
           </div>
 
           {/* Results */}
-          <div className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-white border-t lg:border-t-0 lg:border-l border-neutral-200/60 p-4 sm:p-5 flex flex-col justify-between">
+          <div className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-[var(--color-bg-secondary)] border-t lg:border-t-0 lg:border-l border-[var(--color-border-primary)]/60 p-4 sm:p-5 flex flex-col justify-between">
             <div>
               <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">
                 Estimated Charging Time

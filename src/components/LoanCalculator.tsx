@@ -222,7 +222,7 @@ export default function LoanCalculator() {
           {/* Results */}
           <div
             ref={resultsRef}
-            className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-white border-t lg:border-t-0 lg:border-l border-neutral-200/60 p-3 sm:p-4 flex flex-col justify-between"
+            className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-[var(--color-bg-secondary)] border-t lg:border-t-0 lg:border-l border-[var(--color-border-primary)]/60 p-3 sm:p-4 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-2">
