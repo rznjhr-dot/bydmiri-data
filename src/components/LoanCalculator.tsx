@@ -192,14 +192,14 @@ export default function LoanCalculator() {
                 Loan Tenure
               </label>
               <div className="flex gap-2">
-                {finance.availableTenures.map((t) => (
+                {[2, 3, 4, 5, 6, 7, 8, 9].map((t) => (
                   <button
                     key={t}
                     type="button"
                     onClick={() => setTenure(t)}
                     className={`pill flex-1 ${tenure === t ? "pill-active" : ""}`}
                   >
-                    {t} years
+                    {t}y
                   </button>
                 ))}
               </div>
