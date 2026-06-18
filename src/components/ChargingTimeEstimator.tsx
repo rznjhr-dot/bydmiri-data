@@ -176,17 +176,17 @@ export default function ChargingTimeEstimator() {
               <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
                 Charger Type
               </label>
-              <div className="flex flex-row gap-1.5">
+              <div className="flex flex-row gap-1.5 overflow-hidden">
                 {CHARGER_TYPES.map((ct, i) => (
                   <button
                     key={ct.power}
                     type="button"
                     onClick={() => setChargerIdx(i)}
-                    className={`pill text-center flex-1 min-w-0 ${
+                    className={`pill text-center flex-1 min-w-0 overflow-hidden ${
                       chargerIdx === i ? "pill-active" : ""
                     }`}
                   >
-                    <span className="text-[0.6rem] sm:text-xs font-semibold whitespace-nowrap">{ct.label}</span>
+                    <span className="text-[0.6rem] sm:text-xs font-semibold truncate">{ct.label}</span>
                     <span className="text-[0.55rem] sm:text-[0.6rem] text-neutral-400 ml-0.5 hidden sm:inline">| {ct.power}kW</span>
                   </button>
                 ))}

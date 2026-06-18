@@ -36,52 +36,52 @@ export default function Home() {
           <div className="flex flex-row gap-1.5">
             <Link
               href="/vehicles"
-              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-2 sm:py-3 text-center"
+              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-accent/10 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[18px] sm:h-[18px] text-accent"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C1.5 11.5 1 12.5 1 13.6V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
               </div>
-              <span className="text-[0.7rem] sm:text-sm font-semibold text-neutral-700 whitespace-nowrap">Vehicle DB</span>
+              <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">Vehicle DB</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Browse all models</span>
             </Link>
             <a
               href="#loan-calculator"
-              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-2 sm:py-3 text-center"
+              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-amber-50 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[18px] sm:h-[18px] text-amber-600"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </div>
-              <span className="text-[0.7rem] sm:text-sm font-semibold text-neutral-700 whitespace-nowrap">Finance Calc</span>
+              <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">Finance Calc</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Monthly payments</span>
             </a>
             <a
               href="#charging-estimator"
-              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-2 sm:py-3 text-center"
+              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-blue-50 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[18px] sm:h-[18px] text-blue-600"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
               </div>
-              <span className="text-[0.7rem] sm:text-sm font-semibold text-neutral-700 whitespace-nowrap">Charging</span>
+              <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">Charging</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Station map</span>
             </a>
             <a
               href="#warranty"
-              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-2 sm:py-3 text-center"
+              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-teal-50 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[18px] sm:h-[18px] text-teal-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <span className="text-[0.7rem] sm:text-sm font-semibold text-neutral-700 whitespace-nowrap">Warranty</span>
+              <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">Warranty</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Coverage info</span>
             </a>
             <a
               href="#prompt-generator"
-              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-2 sm:py-3 text-center"
+              className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-purple-50 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[18px] sm:h-[18px] text-purple-600"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               </div>
-              <span className="text-[0.7rem] sm:text-sm font-semibold text-neutral-700 whitespace-nowrap">AI Prompts</span>
+              <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">AI Prompts</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Generate content</span>
             </a>
           </div>
