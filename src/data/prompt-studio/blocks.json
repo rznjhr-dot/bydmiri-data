@@ -1,0 +1,620 @@
+{
+  "description": "Modular prompt blocks for AI Prompt Studio — assembled dynamically by the Prompt Builder",
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-21",
+  "blocks": [
+    {
+      "id": "brand",
+      "name": "Brand Identity",
+      "order": 1,
+      "description": "Establishes brand identity and design language",
+      "options": [
+        {
+          "id": "byd_premium",
+          "name": "BYD Premium EV",
+          "selected": true,
+          "content": "Brand: BYD (Build Your Dreams). Brand Identity: Premium electric vehicle manufacturer. Design Language: Ocean aesthetics — fluid, sculptural lines inspired by marine biology. Minimalist interior with rotating touchscreen, premium soft-touch materials. Brand Colors: Deep blue (#0055A5), crystal white, brushed silver accents."
+        },
+        {
+          "id": "byd_sport",
+          "name": "BYD Sport Performance",
+          "content": "Brand: BYD. Brand Identity: High-performance electric vehicle. Design Language: Aggressive aerodynamics, sharp character lines, low stance. Performance-oriented cockpit with sports seats, carbon-fibre trim, race-inspired UI. Brand Colors: Dark grey, crimson accents, anodised black."
+        },
+        {
+          "id": "byd_family",
+          "name": "BYD Family Comfort",
+          "content": "Brand: BYD. Brand Identity: Family-oriented electric vehicle. Design Language: Warm, approachable, spacious design. Comfort-focused interior with panoramic roof, spacious rear seats, family-friendly storage. Brand Colors: Warm silver, soft beige, ocean blue."
+        }
+      ]
+    },
+    {
+      "id": "editorial",
+      "name": "Editorial Style",
+      "order": 2,
+      "description": "Defines the editorial and photographic direction",
+      "options": [
+        {
+          "id": "luxury_magazine",
+          "name": "Luxury Magazine",
+          "selected": true,
+          "content": "Editorial Style: Luxury automotive magazine cover. High-end editorial photography featured in GQ, Robb Report, or Wallpaper*. Polished, aspirational, sophisticated. Every detail meticulously composed."
+        },
+        {
+          "id": "minimal_editorial",
+          "name": "Minimal Editorial",
+          "content": "Editorial Style: Clean, minimal editorial photography. Whitespace-dominant composition. Apple product launch aesthetic. Simple, elegant, focused on product purity."
+        },
+        {
+          "id": "documentary",
+          "name": "Documentary Style",
+          "content": "Editorial Style: Documentary-style automotive photography. Real-world settings, natural moments, honest lighting. Found-frame compositions. Authentic, unposed, lifestyle-driven."
+        },
+        {
+          "id": "cinematic",
+          "name": "Cinematic Editorial",
+          "content": "Editorial Style: Cinematic film still aesthetic. 35mm film grain, anamorphic lens characteristics, rich colour grading. Movie poster quality. Dramatic, evocative, narrative-driven."
+        },
+        {
+          "id": "fashion_editorial",
+          "name": "Fashion Editorial",
+          "content": "Editorial Style: High-fashion editorial photography. Vogue or Harper's Bazaar aesthetic. Bold composition, avant-garde styling, artistic lighting. Glamorous, trendsetting, editorially bold."
+        }
+      ]
+    },
+    {
+      "id": "typography",
+      "name": "Typography",
+      "order": 3,
+      "description": "Typography guidelines for the design",
+      "options": [
+        {
+          "id": "premium_sans",
+          "name": "Premium Sans (Default)",
+          "selected": true,
+          "content": "Typography: Premium sans-serif font family. Headline: Bold weight, tight tracking, sentence case. Body: Regular weight, generous leading, left-aligned. Hierarchy established through weight and size. No more than two font families. Clean, modern, highly legible."
+        },
+        {
+          "id": "editorial_serif",
+          "name": "Editorial Serif",
+          "content": "Typography: Luxury serif font for headlines (e.g. Didot, Playfair Display). Clean sans-serif for body copy. Headline: Light or regular weight, wide tracking, uppercase or title case. Body: Small size, generous line-height. Classical, sophisticated, editorial."
+        },
+        {
+          "id": "modern_tech",
+          "name": "Modern Tech",
+          "content": "Typography: Geometric sans-serif with tech-forward feel. Headline: Bold weight, negative tracking, uppercase for impact. Body: Light weight, wide leading. Mono-spaced numerals for specifications. Futuristic, clean, innovation-focused."
+        },
+        {
+          "id": "minimal_clean",
+          "name": "Minimal Clean",
+          "content": "Typography: Ultra-clean sans-serif. Single weight family used across all text. Hierarchy through size and spacing only. Maximum one font. Abundant white space around all text elements. Minimal, calm, refined."
+        }
+      ]
+    },
+    {
+      "id": "composition",
+      "name": "Composition",
+      "order": 4,
+      "description": "Layout and composition guidelines",
+      "options": [
+        {
+          "id": "hero_centered",
+          "name": "Hero Centered",
+          "selected": true,
+          "content": "Composition: Hero vehicle centered in frame. Symmetrical balance. Vehicle occupying 60-70% of frame. Negative space above and around for headline placement. Rule of thirds applied to vehicle positioning. Clean, bold, impactful."
+        },
+        {
+          "id": "dynamic_angle",
+          "name": "Dynamic Angle",
+          "content": "Composition: Dynamic three-quarter front angle. Vehicle emerging from bottom-left or bottom-right corner. Diagonal leading lines drawing eye across frame. Asymmetrical balance with text opposite the visual weight. Energetic, movement-oriented."
+        },
+        {
+          "id": "split_layout",
+          "name": "Split Layout",
+          "content": "Composition: Split-screen or side-by-side layout. Two distinct visual zones. Left: vehicle hero shot. Right: key messaging or secondary visual. Clean dividing line or natural break. Used for comparison or before/after narratives."
+        },
+        {
+          "id": "minimal_whitespace",
+          "name": "Minimal Whitespace",
+          "content": "Composition: Generous white space composition. Vehicle positioned in lower third. Top 60% reserved for headline and breathing room. Minimal elements, maximum impact. Apple-inspired product purity."
+        },
+        {
+          "id": "editorial_grid",
+          "name": "Editorial Grid",
+          "content": "Composition: Strict editorial grid layout. Multiple content zones clearly delineated. Magazine-style structured composition. Text blocks aligned to grid columns. Sophisticated, structured, publication-quality."
+        }
+      ]
+    },
+    {
+      "id": "camera",
+      "name": "Camera & Lens",
+      "order": 5,
+      "description": "Camera angle, lens choice, and photography technique",
+      "options": [
+        {
+          "id": "pro_studio",
+          "name": "Professional Studio",
+          "selected": true,
+          "content": "Camera: Medium format digital (Hasselblad H6D or equivalent). Lens: 80mm portrait lens (equivalent 50mm full-frame). Aperture: f/8-f/11 for maximum sharpness. Perspective: Eye-level, slight downward angle. Sharp focus on vehicle front three-quarter."
+        },
+        {
+          "id": "wide_architectural",
+          "name": "Wide Architectural",
+          "content": "Camera: Full-frame DSLR. Lens: 24mm wide-angle. Aperture: f/8. Perspective: Low angle, looking up at vehicle. Foreground leading lines. Architectural context included. Grand, imposing, setting-driven."
+        },
+        {
+          "id": "telephoto_compression",
+          "name": "Telephoto Compression",
+          "content": "Camera: Full-frame DSLR. Lens: 135mm telephoto. Aperture: f/2.8 for subject isolation. Perspective: Distance shot, compressed background. Vehicle isolated from environment. Cinematic depth of field, professional finish."
+        },
+        {
+          "id": "macro_detail",
+          "name": "Macro Detail",
+          "content": "Camera: Macro lens. Extreme close-up on design details. Lens: 100mm macro. Aperture: f/4 for partial focus. Focus on: headlight detail, badging, wheel design, interior stitching. Artistic, detail-oriented, craftsmanship-focused."
+        },
+        {
+          "id": "drone_aerial",
+          "name": "Drone / Aerial",
+          "content": "Camera: Drone-mounted camera (DJI Inspire or equivalent). Lens: 24mm equivalent. Perspective: Top-down 45-degree angle. Vehicle as subject in environmental context. Leading roads or landscape elements. Grand scale, location storytelling."
+        }
+      ]
+    },
+    {
+      "id": "lighting",
+      "name": "Lighting",
+      "order": 6,
+      "description": "Lighting style and mood",
+      "options": [
+        {
+          "id": "studio_controlled",
+          "name": "Studio Controlled",
+          "selected": true,
+          "content": "Lighting: Professional studio lighting. Key light from above-left at 45 degrees. Fill light from right at reduced power. Rim light from behind for edge definition. Large softboxes for soft shadows. Clean, product-focused, premium."
+        },
+        {
+          "id": "golden_hour",
+          "name": "Golden Hour",
+          "content": "Lighting: Golden hour natural light. Warm directional sunlight from low angle. Long soft shadows. Sun flare or lens flare as artistic element. Warm colour temperature (3500-4500K). Natural, warm, aspirational."
+        },
+        {
+          "id": "dramatic_shadow",
+          "name": "Dramatic Shadow",
+          "content": "Lighting: High contrast dramatic lighting. Single strong key light source. Deep shadows with defined edges. Chiaroscuro effect. Moody, mysterious, cinematic. Black and white or desaturated colour palette."
+        },
+        {
+          "id": "soft_diffused",
+          "name": "Soft Diffused",
+          "content": "Lighting: Soft diffused natural light. Overcast sky or large diffusion panel. Minimal shadows, even illumination. Soft colour palette, pastel tones. Gentle, approachable, lifestyle-oriented."
+        },
+        {
+          "id": "neon_nocturnal",
+          "name": "Neon / Nocturnal",
+          "content": "Lighting: Night-time urban lighting. Neon signs, city lights as colour sources. Mixed lighting temperatures (warm streetlights + cool ambient). Light trails, reflections on wet surfaces. Urban, energetic, futuristic."
+        },
+        {
+          "id": "museum_gallery",
+          "name": "Museum / Gallery",
+          "content": "Lighting: Gallery-inspired spotlighting. Dark background with precisely directed spotlights on vehicle. Dramatic light-to-shadow ratio. Vehicle as art object. Single highlight on key design elements. Ultra-premium, exhibition-quality."
+        }
+      ]
+    },
+    {
+      "id": "colour",
+      "name": "Colour Palette",
+      "order": 7,
+      "description": "Colour palette and grading direction",
+      "options": [
+        {
+          "id": "byd_corporate",
+          "name": "BYD Corporate",
+          "selected": true,
+          "content": "Colour Palette: BYD brand colours. Primary: Deep blue (#0055A5). Secondary: Crystal white (#FFFFFF). Accent: Electric blue (#00AEEF). Neutral: Warm grey (#8B8B8B). Metallic: Brushed silver. Palette: Corporate, trusted, premium."
+        },
+        {
+          "id": "monochrome_elegance",
+          "name": "Monochrome Elegance",
+          "content": "Colour Palette: Monochrome with single accent. Base: Black and white tones. Accent: BYD blue (#0055A5) used sparingly. Greyscale gradient from pure black to pure white. Palette: Timeless, sophisticated, editorial."
+        },
+        {
+          "id": "warm_editorial",
+          "name": "Warm Editorial",
+          "content": "Colour Palette: Warm editorial tones. Primary: Warm beige (#F5E6CC). Secondary: Deep brown (#8B7355). Accent: BYD blue (#0055A5). Neutral: Warm cream (#FFF8F0). Palette: Inviting, lifestyle-oriented, premium casual."
+        },
+        {
+          "id": "cool_modern",
+          "name": "Cool Modern",
+          "content": "Colour Palette: Cool modern tones. Primary: Ice white (#F5F5F5). Secondary: Charcoal (#1A1A1A). Accent: Cyan (#00AEEF). Neutral: Cool grey (#E0E0E0). Palette: Clean, tech-forward, contemporary."
+        },
+        {
+          "id": "dark_luxury",
+          "name": "Dark Luxury",
+          "content": "Colour Palette: Dark luxury tones. Primary: Deep charcoal (#1A1A2E). Secondary: Midnight blue (#16213E). Accent: Gold (#D4AF37). Neutral: Warm white (#F5F0E8). Palette: Exclusive, nocturnal, ultra-premium."
+        },
+        {
+          "id": "vibrant_energetic",
+          "name": "Vibrant Energetic",
+          "content": "Colour Palette: Vibrant energetic palette. Primary: BYD blue (#0055A5). Secondary: Vibrant orange (#FF6B35). Accent: Electric blue (#00AEEF). Neutral: Pure white (#FFFFFF). Palette: Dynamic, youthful, exciting."
+        }
+      ]
+    },
+    {
+      "id": "automotive",
+      "name": "Automotive Context",
+      "order": 8,
+      "description": "Automotive photography genre and context",
+      "options": [
+        {
+          "id": "studio_beauty",
+          "name": "Studio Beauty Shot",
+          "selected": true,
+          "content": "Automotive Genre: Studio beauty shot. Clean background (white, black, or gradient). Vehicle as pure sculptural object. No environmental distractions. Focus on design lines, paint quality, and presence. Standard automotive photography gold standard."
+        },
+        {
+          "id": "urban_lifestyle",
+          "name": "Urban Lifestyle",
+          "content": "Automotive Genre: Urban lifestyle setting. City architecture, modern buildings, street scenes. Vehicle integrated into urban environment. City dwellers, professionals, modern life. Context: Contemporary, metropolitan, aspirational."
+        },
+        {
+          "id": "scenic_landscape",
+          "name": "Scenic Landscape",
+          "content": "Automotive Genre: Scenic landscape photography. Open roads, coastal highways, mountain passes. Vehicle as part of journey narrative. Grand natural backdrops. Context: Adventurous, free, experiential."
+        },
+        {
+          "id": "action_motion",
+          "name": "Action / Motion",
+          "content": "Automotive Genre: Motion/action photography. Vehicle in motion on track or open road. Motion blur on wheels or background. Speed, dynamics, performance. Context: Thrilling, energetic, performance-focused."
+        },
+        {
+          "id": "family_lifestyle",
+          "name": "Family Lifestyle",
+          "content": "Automotive Genre: Family lifestyle setting. Suburban or recreational context. Family activities around vehicle. Warm, inviting scenarios. Context: Family-oriented, safe, practical."
+        },
+        {
+          "id": "corporate_executive",
+          "name": "Corporate Executive",
+          "content": "Automotive Genre: Corporate/executive setting. Modern office park, business district. Executive driver, professional context. Luxury as professional tool. Context: Successful, professional, status-oriented."
+        }
+      ]
+    },
+    {
+      "id": "vehicle",
+      "name": "Vehicle Details",
+      "order": 9,
+      "description": "Specific vehicle model details for the prompt",
+      "options": [
+        {
+          "id": "atto3",
+          "name": "BYD Atto 3",
+          "content": "Vehicle: BYD Atto 3 — Compact electric SUV. Design: Dragon Face 3.0 front fascia, swept-back LED headlights, floating roof design, sporty rear spoiler. Interior: 15.6-inch rotating touchscreen, guitar-string door handles, premium vegan leather. Known for: Unique design character, practical SUV proportions."
+        },
+        {
+          "id": "seal",
+          "name": "BYD Seal",
+          "selected": true,
+          "content": "Vehicle: BYD Seal — Electric sports sedan (Model E). Design: Low-slung coupe-like silhouette, full-width LED light bar, active grille shutters, flush door handles. Interior: 15.6-inch rotating touchscreen, premium Nappa leather, 12-speaker Dynaudio system, panoramic glass roof. Known for: 0-100 in 3.8s (AWD), sports car proportions, luxury interior."
+        },
+        {
+          "id": "sealion7",
+          "name": "BYD Sealion 7",
+          "content": "Vehicle: BYD Sealion 7 — Mid-size electric SUV coupe. Design: Coupe SUV silhouette, aggressive front end, sculpted body sides, roof-mounted spoiler. Interior: Premium cabin with ambient lighting, large centre console, sport seats. Known for: Striking road presence, performance SUV proportions."
+        },
+        {
+          "id": "atto2",
+          "name": "BYD Atto 2",
+          "content": "Vehicle: BYD Atto 2 — Compact electric crossover. Design: Robust SUV stance, short overhangs, protective cladding, roof rails. Interior: Practical layout, elevated seating position, modular storage. Known for: City-friendly dimensions, approachable design, young family focus."
+        },
+        {
+          "id": "seal6",
+          "name": "BYD Seal 6",
+          "content": "Vehicle: BYD Seal 6 (Sea Lion 06) — Electric family SUV. Design: Modern SUV proportions, prominent grille area, sculpted bonnet, strong shoulder line. Interior: Spacious cabin, three-row seating option, premium materials throughout. Known for: Family versatility, commanding road presence."
+        },
+        {
+          "id": "m6",
+          "name": "BYD M6",
+          "content": "Vehicle: BYD M6 — Electric multi-purpose vehicle (MPV). Design: Aerodynamic MPV shape, sliding rear doors (where applicable), maximised interior space. Interior: Flexible seating configurations, generous passenger and cargo space. Known for: Practical family transport, maximum interior volume."
+        }
+      ]
+    },
+    {
+      "id": "campaign",
+      "name": "Campaign Context",
+      "order": 10,
+      "description": "Marketing campaign context and messaging",
+      "options": [
+        {
+          "id": "product_launch",
+          "name": "Product Launch",
+          "selected": true,
+          "content": "Campaign: New model launch. Messaging: 'The Future Is Here' — introducing innovation, first-to-market technology. Tone: Bold, confident, news-making. Objective: Awareness, consideration, test drive bookings. Urgency: High — launch window limited."
+        },
+        {
+          "id": "promotional",
+          "name": "Promotional / Rebate",
+          "content": "Campaign: Rebate promotion. Messaging: Limited-time offer, government rebate, savings highlight. Tone: Exciting, urgent, value-driven. Objective: Conversion, sales, lead generation. Urgency: High — offer expiry date."
+        },
+        {
+          "id": "festive_seasonal",
+          "name": "Festive / Seasonal",
+          "content": "Campaign: Festive season celebration. Messaging: Celebratory, family-oriented, gift of innovation. Tone: Warm, celebratory, culturally aware. Objective: Engagement, brand love, seasonal conversion. Urgency: Medium — tied to calendar."
+        },
+        {
+          "id": "educational",
+          "name": "Educational / EV Awareness",
+          "content": "Campaign: EV education and awareness. Messaging: Why EV, charging explained, cost savings, environmental benefit. Tone: Educational, helpful, patient. Objective: Education, trust building, EV adoption. Urgency: Low — long-term brand building."
+        },
+        {
+          "id": "testimonial",
+          "name": "Customer Story / Testimonial",
+          "content": "Campaign: Customer success story. Messaging: Real owner, real experience, authentic testimonial. Tone: Authentic, relatable, trustworthy. Objective: Social proof, trust building, community. Urgency: Medium — ongoing."
+        },
+        {
+          "id": "event_roadshow",
+          "name": "Event / Roadshow",
+          "content": "Campaign: Event or roadshow promotion. Messaging: Experience in person, test drive available, exclusive event. Tone: Inviting, exclusive, experiential. Objective: Attendance, test drive bookings, leads. Urgency: High — event date fixed."
+        }
+      ]
+    },
+    {
+      "id": "platform",
+      "name": "Platform & Format",
+      "order": 11,
+      "description": "Target platform and output format",
+      "options": [
+        {
+          "id": "poster_portrait",
+          "name": "Poster (Portrait)",
+          "selected": true,
+          "content": "Platform: Print poster or social media poster. Format: Portrait orientation. Aspect Ratio: 4:5 or 9:16. Canvas: 1080×1920px (digital) or A3 (print). Design: Full-bleed hero image with overlay text. Suitable for: Instagram feed, Facebook, print display, showroom."
+        },
+        {
+          "id": "poster_landscape",
+          "name": "Poster (Landscape)",
+          "content": "Platform: Landscape poster. Format: Landscape orientation. Aspect Ratio: 16:9 or 1.91:1. Canvas: 1920×1080px (digital). Design: Wide cinematic composition with text overlay. Suitable for: Facebook feed, YouTube thumbnail, website hero, presentation."
+        },
+        {
+          "id": "carousel_square",
+          "name": "Carousel (Square)",
+          "content": "Platform: Social media carousel. Format: Square orientation. Aspect Ratio: 1:1. Canvas: 1080×1080px per slide. Design: Multi-slide sequence with consistent branding. Suitable for: Instagram carousel, Facebook multi-image, LinkedIn carousel."
+        },
+        {
+          "id": "story_vertical",
+          "name": "Story (Vertical Fullscreen)",
+          "content": "Platform: Social media story. Format: Vertical fullscreen. Aspect Ratio: 9:16. Canvas: 1080×1920px. Design: Full-screen vertical, minimal text, strong visual hierarchy. Suitable for: Instagram stories, Facebook stories, TikTok, WhatsApp status."
+        },
+        {
+          "id": "email_banner",
+          "name": "Email / Newsletter Banner",
+          "content": "Platform: Email marketing. Format: Landscape banner. Aspect Ratio: 16:9 or 600×300px. Canvas: 1200×600px. Design: Clean hero image with CTA overlay, compatible with email clients. Suitable for: Mailchimp, Brevo, email campaigns."
+        },
+        {
+          "id": "billboard",
+          "name": "Billboard / Outdoor",
+          "content": "Platform: Outdoor advertising. Format: Landscape. Aspect Ratio: 2:1 or 4:1. Canvas: Large format (5000×2500px recommended). Design: High-impact, minimal text maximum visibility. Suitable for: Billboard, bus shelter, mall display, banner."
+        },
+        {
+          "id": "digital_display",
+          "name": "Digital Display / Web Banner",
+          "content": "Platform: Digital display advertising. Format: Various standard banner sizes. Canvas: 728×90px (leaderboard), 300×250px (medium rectangle), 300×600px (half page). Design: Clean, high-contrast, brand-forward. Suitable for: Google Ads, programmatic display, website banners."
+        }
+      ]
+    },
+    {
+      "id": "background",
+      "name": "Background",
+      "order": 12,
+      "description": "Background style and environment",
+      "options": [
+        {
+          "id": "clean_gradient",
+          "name": "Clean Gradient",
+          "selected": true,
+          "content": "Background: Clean gradient background. Smooth transition from dark to light. BYD brand colours or complementary tones. Subtle texture or no texture. Minimal, professional, product-focused."
+        },
+        {
+          "id": "architectural",
+          "name": "Architectural Setting",
+          "content": "Background: Modern architectural environment. Clean lines, glass facades, geometric structures. Natural light interacting with architecture. Contemporary, sophisticated, aspirational."
+        },
+        {
+          "id": "natural_landscape",
+          "name": "Natural Landscape",
+          "content": "Background: Natural landscape setting. Open road, coastal view, mountain panorama, forest clearing. Golden hour or soft overcast light. Organic, free, experiential."
+        },
+        {
+          "id": "urban_night",
+          "name": "Urban Nightscape",
+          "content": "Background: Urban night environment. City skyline, street lights, neon signs, rain reflections. High contrast between dark sky and city lights. Energetic, futuristic, cosmopolitan."
+        },
+        {
+          "id": "minimal_studio",
+          "name": "Minimal Studio (White)",
+          "content": "Background: Pure white studio background. Infinite white cove effect. No shadows or subtle floating shadow. Extreme focus on vehicle. Cleanest possible presentation: Apple-style product isolation."
+        },
+        {
+          "id": "dark_studio",
+          "name": "Dark Studio (Black)",
+          "content": "Background: Pure black studio background. Infinite black cove effect. Vehicle illuminated by controlled lighting. Maximum drama and contrast. Gallery or museum presentation quality."
+        }
+      ]
+    },
+    {
+      "id": "mood",
+      "name": "Mood & Emotion",
+      "order": 13,
+      "description": "Overall mood, emotion, and atmosphere",
+      "options": [
+        {
+          "id": "luxurious_refined",
+          "name": "Luxurious & Refined",
+          "selected": true,
+          "content": "Mood: Luxurious and refined. Elegant, sophisticated, exclusive. The viewer should feel aspirational desire. Premium materials, careful lighting, perfect execution. Emotional Response: Desire, admiration, aspiration."
+        },
+        {
+          "id": "warm_welcoming",
+          "name": "Warm & Welcoming",
+          "content": "Mood: Warm and welcoming. Inviting, approachable, comforting. Family-friendly atmosphere. Soft lighting, warm tones, genuine smiles. Emotional Response: Trust, comfort, belonging."
+        },
+        {
+          "id": "exciting_dynamic",
+          "name": "Exciting & Dynamic",
+          "content": "Mood: Exciting and dynamic. Energetic, thrilling, adrenaline-inducing. Motion, speed, performance. Bold colours, dramatic angles, sense of movement. Emotional Response: Excitement, desire, urgency."
+        },
+        {
+          "id": "calm_serene",
+          "name": "Calm & Serene",
+          "content": "Mood: Calm and serene. Peaceful, meditative, tranquil. Quiet luxury, understated elegance. Soft tones, simple compositions, breathing room. Emotional Response: Peace, contentment, clarity."
+        },
+        {
+          "id": "futuristic_innovative",
+          "name": "Futuristic & Innovative",
+          "content": "Mood: Futuristic and innovative. Forward-looking, technological, progressive. Clean lines, blue/cyan tones, tech elements. Vision of tomorrow, available today. Emotional Response: Curiosity, wonder, excitement for future."
+        }
+      ]
+    },
+    {
+      "id": "output_quality",
+      "name": "Output Quality",
+      "order": 14,
+      "description": "Image quality and rendering instructions",
+      "options": [
+        {
+          "id": "ultra_high",
+          "name": "Ultra-High Quality",
+          "selected": true,
+          "content": "Output Quality: Ultra-high quality. 8K resolution detail level. Maximum sharpness, zero compression artefacts. Photorealistic rendering with accurate materials, reflections, and lighting. Professional-grade output suitable for print advertising at any size."
+        },
+        {
+          "id": "high_quality",
+          "name": "High Quality",
+          "content": "Output Quality: High quality. 4K resolution detail level. Clean, sharp rendering with good material definition. Suitable for digital publishing, social media, and web use. Professional-grade digital output."
+        },
+        {
+          "id": "standard_quality",
+          "name": "Standard Quality",
+          "content": "Output Quality: Standard quality. HD resolution detail level. Clean rendering suitable for social media and web. Balanced quality and generation speed."
+        }
+      ]
+    },
+    {
+      "id": "negative",
+      "name": "Negative Instructions",
+      "order": 15,
+      "description": "What NOT to include in the generated image",
+      "options": [
+        {
+          "id": "standard_negatives",
+          "name": "Standard Negatives",
+          "selected": true,
+          "content": "Negative Instructions: NO text or typography errors. NO distorted vehicle proportions. NO unrealistic reflections. NO cheap or generic design elements. NO cluttered backgrounds. NO low-resolution quality. NO pixelation. NO watermarks or logos (except BYD logo). NO awkward cropping. NO unnatural shadows. NO unrealistic lighting. NO oversaturated colours. NO lens distortion artifacts."
+        },
+        {
+          "id": "strict_negatives",
+          "name": "Strict Professional Negatives",
+          "content": "Negative Instructions: NO text rendering. NO people (unless specified). NO other vehicles. NO reflections of photographer or equipment. NO lens flare (unless specified as creative choice). NO chromatic aberration. NO compression artifacts. NO unnatural poses or scenarios. NO outdated car models. NO generic backgrounds. NO clipart or illustration style. NO cartoon or 3D render aesthetic (photorealism only). NO watermark or branding other than BYD."
+        }
+      ]
+    },
+    {
+      "id": "final_output",
+      "name": "Final Production Instructions",
+      "order": 16,
+      "description": "Final rendering and production notes",
+      "options": [
+        {
+          "id": "print_ready",
+          "name": "Print-Ready",
+          "selected": true,
+          "content": "Final Output: Print-ready professional automotive marketing image. CMYK-compatible colour space. Full-bleed layout with safe margins. High-resolution suitable for A3+ print. Professional retouching standard. Commercial usage rights required."
+        },
+        {
+          "id": "digital_social",
+          "name": "Digital / Social Media",
+          "content": "Final Output: Digital-optimised image for social media platforms. sRGB colour space. Platform-specific dimensions. Compressed for fast loading while maintaining visual quality. Mobile-first viewing consideration."
+        },
+        {
+          "id": "presentation_pitch",
+          "name": "Presentation / Pitch Deck",
+          "content": "Final Output: Presentation-quality image for pitch decks and proposals. Clean, professional, compatible with presentation software. Sufficient resolution for projection. Designed to impress stakeholders and clients."
+        }
+      ]
+    },
+    {
+      "id": "aspect_ratio",
+      "name": "Aspect Ratio",
+      "order": 17,
+      "description": "Canvas size and aspect ratio for the output image",
+      "options": [
+        {
+          "id": "ar_1_1",
+          "name": "1:1 Square",
+          "selected": false,
+          "content": "Canvas: 1:1 square aspect ratio. Recommended resolution: 1080×1080px. Best for: Instagram feed, Facebook square posts, LinkedIn, carousel slides. Balanced composition with equal width and height."
+        },
+        {
+          "id": "ar_4_5_portrait",
+          "name": "4:5 Portrait",
+          "selected": true,
+          "content": "Canvas: 4:5 portrait aspect ratio. Recommended resolution: 1080×1350px. Best for: Instagram feed portrait, Facebook posts, digital display. Standard portrait orientation with slightly more height than width."
+        },
+        {
+          "id": "ar_9_16_story",
+          "name": "9:16 Story / Full Portrait",
+          "content": "Canvas: 9:16 full portrait aspect ratio. Recommended resolution: 1080×1920px. Best for: Instagram stories, Facebook stories, TikTok, WhatsApp status, vertical video thumbnails. Full-screen mobile viewing."
+        },
+        {
+          "id": "ar_16_9_landscape",
+          "name": "16:9 Landscape",
+          "content": "Canvas: 16:9 landscape aspect ratio. Recommended resolution: 1920×1080px. Best for: YouTube thumbnails, website heroes, presentations, Facebook feed landscape, email banners. Wide cinematic framing."
+        },
+        {
+          "id": "ar_3_2",
+          "name": "3:2 Classic",
+          "content": "Canvas: 3:2 classic aspect ratio. Recommended resolution: 2400×1600px. Best for: Print photography, editorial layouts, brochures, catalogs. Traditional photographic frame with natural proportions."
+        }
+      ]
+    },
+    {
+      "id": "final_instruction",
+      "name": "Final Instructions",
+      "order": 18,
+      "description": "Closing instructions and output directives for the generated prompt",
+      "options": [
+        {
+          "id": "standard",
+          "name": "Standard Professional",
+          "selected": true,
+          "content": "Final Instructions: Generate the image exactly as described above. Maintain absolute consistency across all visual elements. Ensure the vehicle is the undisputed focal point. Deliver a production-grade marketing image ready for client presentation. Quality must exceed automotive industry standards."
+        },
+        {
+          "id": "detailed",
+          "name": "Detailed Technical",
+          "content": "Final Instructions: Follow every specification precisely. Prioritise photorealism and material accuracy. Ensure reflections, shadows, and lighting behave realistically. No artistic interpretation beyond what is specified. The output must pass professional automotive photographer review. Render at maximum quality setting."
+        },
+        {
+          "id": "minimal",
+          "name": "Minimal Clean",
+          "content": "Final Instructions: Generate a clean, minimal interpretation of the brief. Prioritise simplicity and elegance. Avoid unnecessary details or embellishments. The output should feel effortless, calm, and refined. Quality should match Apple-level product presentation standards."
+        }
+      ]
+    }
+  ],
+  "promptStructure": [
+    "brand",
+    "editorial",
+    "typography",
+    "composition",
+    "camera",
+    "lighting",
+    "colour",
+    "automotive",
+    "vehicle",
+    "campaign",
+    "platform",
+    "background",
+    "mood",
+    "output_quality",
+    "negative",
+    "final_output",
+    "aspect_ratio",
+    "final_instruction"
+  ]
+}

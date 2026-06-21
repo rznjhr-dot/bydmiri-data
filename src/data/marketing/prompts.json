@@ -1,0 +1,67 @@
+{
+  "description": "Prompt templates for AI image and video generation tools",
+  "lastUpdated": "2026-06-21",
+  "tools": [
+    {
+      "id": "gpt-image",
+      "name": "GPT Image (DALL-E)",
+      "description": "OpenAI DALL-E 3 image generation",
+      "model": "dall-e-3",
+      "bestFor": ["photorealistic", "product shots", "lifestyle"],
+      "templatePrefix": "Generate a professional automotive marketing image:",
+      "parameters": ["style", "lighting", "composition", "color_palette"]
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "description": "High-quality artistic image generation",
+      "model": "midjourney-v6",
+      "bestFor": ["artistic", "dramatic", "cinematic", "conceptual"],
+      "templatePrefix": "/imagine prompt:",
+      "parameters": ["aspect_ratio", "style_raw", "lighting", "mood", "vibe"]
+    },
+    {
+      "id": "flux",
+      "name": "Flux",
+      "description": "Black Forest Labs Flux Pro",
+      "model": "flux-pro",
+      "bestFor": ["photorealistic", "product visualization", "detailed scenes"],
+      "templatePrefix": "Generate:",
+      "parameters": ["detail_level", "lighting", "perspective"]
+    },
+    {
+      "id": "stable-diffusion",
+      "name": "Stable Diffusion",
+      "description": "Open-source image generation",
+      "model": "sd-xl",
+      "bestFor": ["custom styles", "iterative design", "concept art"],
+      "templatePrefix": "masterpiece, best quality, automotive photography:",
+      "parameters": ["negative_prompt", "style", "cfg_scale", "steps"]
+    },
+    {
+      "id": "veo",
+      "name": "Veo",
+      "description": "Google Veo video generation",
+      "model": "veo-2",
+      "bestFor": ["video ads", "product demos", "lifestyle videos"],
+      "templatePrefix": "Generate a video:",
+      "parameters": ["duration", "motion", "scene_description", "camera_movement"]
+    },
+    {
+      "id": "runway",
+      "name": "Runway",
+      "description": "Runway Gen-3 video generation",
+      "model": "gen-3",
+      "bestFor": ["short videos", "transitions", "cinematic clips"],
+      "templatePrefix": "Cinematic shot:",
+      "parameters": ["motion_scale", "camera_angle", "atmosphere"]
+    }
+  ],
+  "promptEnhancers": [
+    { "id": "lighting", "label": "Lighting", "options": ["studio lighting", "golden hour", "dramatic shadow", "soft diffused", "neon night", "high key", "low key"] },
+    { "id": "mood", "label": "Mood", "options": ["luxurious", "energetic", "calm", "futuristic", "warm", "professional", "adventurous", "elegant"] },
+    { "id": "perspective", "label": "Perspective", "options": ["eye level", "low angle", "bird's eye", "close up", "wide shot", "dutch angle", "aerial"] },
+    { "id": "color_palette", "label": "Color Palette", "options": ["monochrome", "warm tones", "cool tones", "vibrant", "muted", "pastel", "high contrast"] },
+    { "id": "style", "label": "Style", "options": ["photorealistic", "cinematic", "minimalist", "editorial", "documentary", "commercial", "luxury magazine"] }
+  ]
+}

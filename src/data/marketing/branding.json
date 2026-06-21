@@ -1,0 +1,98 @@
+{
+  "description": "Brand guidelines and compliance rules for BYD marketing",
+  "lastUpdated": "2026-06-21",
+  "brandIdentity": {
+    "colors": {
+      "primary": "#0055A5",
+      "secondary": "#003366",
+      "accent": "#00AEEF",
+      "neutral": "#333333",
+      "white": "#FFFFFF"
+    },
+    "typography": {
+      "primaryFont": "Geist Sans",
+      "secondaryFont": "Geist Mono",
+      "headlineStyle": "Bold, clean, minimal",
+      "bodyStyle": "Regular, readable, modern"
+    },
+    "tone": {
+      "primary": "Professional, confident, forward-thinking",
+      "secondary": "Warm, approachable, helpful",
+      "avoid": "Cheap, aggressive, exaggerated, overly casual"
+    }
+  },
+  "rules": [
+    {
+      "id": "logo_usage",
+      "rule": "Always use official BYD logo. Never stretch, distort, or recolor.",
+      "severity": "critical"
+    },
+    {
+      "id": "color_compliance",
+      "rule": "Use brand colors consistently. Avoid neon, overly bright, or clashing combinations.",
+      "severity": "high"
+    },
+    {
+      "id": "typography_discipline",
+      "rule": "Maximum 2 font families per design. Maintain hierarchy with weight and size.",
+      "severity": "high"
+    },
+    {
+      "id": "spacing_standards",
+      "rule": "Maintain generous white space. Never crowd elements. Luxury brands breathe.",
+      "severity": "medium"
+    },
+    {
+      "id": "image_quality",
+      "rule": "Use only high-resolution professional images. No pixelation, compression artifacts, or watermarks.",
+      "severity": "critical"
+    },
+    {
+      "id": "cta_clarity",
+      "rule": "Every piece must have a clear, single CTA. Avoid multiple competing actions.",
+      "severity": "high"
+    },
+    {
+      "id": "pricing_honesty",
+      "rule": "Always display accurate OTR pricing. Include disclaimer for terms and conditions.",
+      "severity": "critical"
+    },
+    {
+      "id": "cultural_sensitivity",
+      "rule": "Respect all Malaysian cultures and religious sensitivities. Avoid stereotypes.",
+      "severity": "critical"
+    },
+    {
+      "id": "competitor_comparison",
+      "rule": "When comparing, be factual and respectful. Never disparage competitors.",
+      "severity": "high"
+    },
+    {
+      "id": "social_media_consistency",
+      "rule": "Maintain consistent brand voice across all platforms. Adapt format, not message.",
+      "severity": "medium"
+    },
+    {
+      "id": "festive_template_quality",
+      "rule": "Festive designs must match brand quality standards. No cheap clipart or generic templates.",
+      "severity": "high"
+    },
+    {
+      "id": "ai_generated_content",
+      "rule": "AI-generated content must be reviewed by human. Never publish AI content unverified.",
+      "severity": "critical"
+    }
+  ],
+  "rejectionReasons": [
+    "Generic AI design — lacks brand personality",
+    "Cheap festive template — does not meet premium standards",
+    "Poor typography — wrong hierarchy or font pairing",
+    "Bad spacing — elements too crowded or misaligned",
+    "Weak CTA — unclear or buried in design",
+    "Wrong colours — does not match brand palette",
+    "Inconsistent branding — does not reflect BYD identity",
+    "Brand violation — logo misuse or incorrect naming",
+    "Low resolution image — not suitable for professional use",
+    "Cultural insensitivity — potentially offensive to target audience"
+  ]
+}

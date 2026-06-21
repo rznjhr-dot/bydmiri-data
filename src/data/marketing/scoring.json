@@ -1,0 +1,130 @@
+{
+  "description": "Creative quality scoring criteria for content review",
+  "lastUpdated": "2026-06-21",
+  "criteria": [
+    {
+      "id": "typography",
+      "name": "Typography",
+      "weight": 15,
+      "description": "Font choice, hierarchy, kerning, readability",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "Wrong fonts, no hierarchy, hard to read" },
+        { "score": 2, "label": "Basic", "description": "Acceptable fonts but weak hierarchy" },
+        { "score": 3, "label": "Good", "description": "Clean typography with clear hierarchy" },
+        { "score": 4, "label": "Excellent", "description": "Premium typography, perfect kerning and flow" },
+        { "score": 5, "label": "Outstanding", "description": "World-class typography, editorial quality" }
+      ]
+    },
+    {
+      "id": "hierarchy",
+      "name": "Visual Hierarchy",
+      "weight": 15,
+      "description": "Information prioritization, eye flow, focal points",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "No clear hierarchy, everything competes" },
+        { "score": 2, "label": "Basic", "description": "Some hierarchy but confusing elements" },
+        { "score": 3, "label": "Good", "description": "Clear hierarchy with good focal points" },
+        { "score": 4, "label": "Excellent", "description": "Strong hierarchy, effortless information absorption" },
+        { "score": 5, "label": "Outstanding", "description": "Masterful hierarchy, guides viewer perfectly" }
+      ]
+    },
+    {
+      "id": "spacing",
+      "name": "Spacing & Composition",
+      "weight": 15,
+      "description": "White space, margins, alignment, balance",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "Crowded, misaligned, no breathing room" },
+        { "score": 2, "label": "Basic", "description": "Some spacing but inconsistent" },
+        { "score": 3, "label": "Good", "description": "Well-spaced with good composition" },
+        { "score": 4, "label": "Excellent", "description": "Generous white space, premium feel" },
+        { "score": 5, "label": "Outstanding", "description": "Effortless composition, luxury magazine quality" }
+      ]
+    },
+    {
+      "id": "brand_consistency",
+      "name": "Brand Consistency",
+      "weight": 20,
+      "description": "Alignment with BYD brand identity, colors, and voice",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "Does not represent BYD brand at all" },
+        { "score": 2, "label": "Basic", "description": "Some brand elements but inconsistent" },
+        { "score": 3, "label": "Good", "description": "Mostly consistent with brand identity" },
+        { "score": 4, "label": "Excellent", "description": "Strong brand presence throughout" },
+        { "score": 5, "label": "Outstanding", "description": "Perfect brand embodiment, instantly recognizable" }
+      ]
+    },
+    {
+      "id": "composition",
+      "name": "Composition",
+      "weight": 10,
+      "description": "Layout structure, grid usage, element placement",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "Chaotic layout, no grid discipline" },
+        { "score": 2, "label": "Basic", "description": "Functional layout but not engaging" },
+        { "score": 3, "label": "Good", "description": "Clean layout with good structure" },
+        { "score": 4, "label": "Excellent", "description": "Sophisticated composition with visual interest" },
+        { "score": 5, "label": "Outstanding", "description": "Exhibition-quality composition" }
+      ]
+    },
+    {
+      "id": "color",
+      "name": "Colour",
+      "weight": 10,
+      "description": "Color harmony, palette choice, contrast",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "Clashing colors, wrong palette" },
+        { "score": 2, "label": "Basic", "description": "Acceptable colors but not harmonious" },
+        { "score": 3, "label": "Good", "description": "Pleasant color scheme with good contrast" },
+        { "score": 4, "label": "Excellent", "description": "Sophisticated palette, enhances message" },
+        { "score": 5, "label": "Outstanding", "description": "Masterful color theory application" }
+      ]
+    },
+    {
+      "id": "balance",
+      "name": "Balance",
+      "weight": 5,
+      "description": "Visual weight distribution, symmetry/asymmetry",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "Heavily unbalanced, feels unstable" },
+        { "score": 2, "label": "Basic", "description": "Some imbalance but functional" },
+        { "score": 3, "label": "Good", "description": "Well-balanced composition" },
+        { "score": 4, "label": "Excellent", "description": "Beautifully balanced with intentional asymmetry" },
+        { "score": 5, "label": "Outstanding", "description": "Perfect equilibrium, visually satisfying" }
+      ]
+    },
+    {
+      "id": "luxury_feel",
+      "name": "Luxury Feel",
+      "weight": 5,
+      "description": "Premium aesthetic, sophistication, exclusivity",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "Feels cheap or generic" },
+        { "score": 2, "label": "Basic", "description": "Standard quality, not premium" },
+        { "score": 3, "label": "Good", "description": "Premium feel in most elements" },
+        { "score": 4, "label": "Excellent", "description": "Clearly luxury grade" },
+        { "score": 5, "label": "Outstanding", "description": "Ultra-premium, world-class luxury" }
+      ]
+    },
+    {
+      "id": "professionalism",
+      "name": "Professionalism",
+      "weight": 5,
+      "description": "Overall polish, attention to detail, execution quality",
+      "levels": [
+        { "score": 1, "label": "Poor", "description": "Amateur execution, noticeable flaws" },
+        { "score": 2, "label": "Basic", "description": "Functional but unpolished" },
+        { "score": 3, "label": "Good", "description": "Professional quality, few flaws" },
+        { "score": 4, "label": "Excellent", "description": "High polish, agency-quality" },
+        { "score": 5, "label": "Outstanding", "description": "Flawless execution, award-worthy" }
+      ]
+    }
+  ],
+  "scoringRanges": [
+    { "min": 0, "max": 20, "label": "Needs Major Revision", "color": "red" },
+    { "min": 21, "max": 40, "label": "Needs Improvement", "color": "orange" },
+    { "min": 41, "max": 60, "label": "Acceptable", "color": "yellow" },
+    { "min": 61, "max": 80, "label": "Good", "color": "lightgreen" },
+    { "min": 81, "max": 100, "label": "Excellent", "color": "green" }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "description": "Marketing events, festivities, and opportunities for campaign planning",
+  "lastUpdated": "2026-06-21",
+  "categories": [
+    {
+      "id": "national",
+      "label": "National Events",
+      "events": [
+        { "name": "Hari Kebangsaan", "date": "2026-08-31", "type": "public_holiday", "opportunity": "Patriotic campaigns, Merdeka promos", "leadTime": "3 weeks" },
+        { "name": "Malaysia Day", "date": "2026-09-16", "type": "public_holiday", "opportunity": "East Malaysia focused campaigns", "leadTime": "2 weeks" },
+        { "name": "Agong's Birthday", "date": "2026-06-07", "type": "public_holiday", "opportunity": "Royal-themed appreciation", "leadTime": "1 week" }
+      ]
+    },
+    {
+      "id": "festive",
+      "label": "Festive Campaigns",
+      "events": [
+        { "name": "Hari Raya Aidiladha", "date": "2026-07-10", "type": "festive", "opportunity": "Family gathering campaigns, balik kampung promos", "leadTime": "4 weeks" },
+        { "name": "Deepavali", "date": "2026-11-08", "type": "festive", "opportunity": "Festival of lights campaigns", "leadTime": "3 weeks" },
+        { "name": "Christmas", "date": "2026-12-25", "type": "festive", "opportunity": "Year-end celebration campaigns", "leadTime": "4 weeks" },
+        { "name": "Chinese New Year", "date": "2027-02-10", "type": "festive", "opportunity": "New year prosperity campaigns, balik kampung", "leadTime": "5 weeks" },
+        { "name": "Hari Raya Puasa", "date": "2027-03-12", "type": "festive", "opportunity": "Open house campaigns, Raya promos", "leadTime": "5 weeks" },
+        { "name": "Gawai Dayak", "date": "2026-06-01", "type": "festive", "opportunity": "Sarawak harvest festival campaigns", "leadTime": "3 weeks" },
+        { "name": "Kaamatan", "date": "2026-05-30", "type": "festive", "opportunity": "Sabah harvest festival campaigns", "leadTime": "3 weeks" }
+      ]
+    },
+    {
+      "id": "appreciation",
+      "label": "Appreciation Days",
+      "events": [
+        { "name": "Father's Day", "date": "2026-06-21", "type": "appreciation", "opportunity": "Dad-themed EV campaigns", "leadTime": "2 weeks" },
+        { "name": "Mother's Day", "date": "2026-05-10", "type": "appreciation", "opportunity": "Mom-themed family EV campaigns", "leadTime": "2 weeks" },
+        { "name": "Teacher's Day", "date": "2026-05-16", "type": "appreciation", "opportunity": "Educator appreciation campaigns", "leadTime": "1 week" },
+        { "name": "Women's Day", "date": "2027-03-08", "type": "appreciation", "opportunity": "Women empowerment campaigns", "leadTime": "2 weeks" },
+        { "name": "Earth Day", "date": "2027-04-22", "type": "appreciation", "opportunity": "Eco-friendly EV campaigns", "leadTime": "3 weeks" }
+      ]
+    },
+    {
+      "id": "automotive",
+      "label": "Automotive Events",
+      "events": [
+        { "name": "Malaysia Autoshow", "date": "2026-11-15", "type": "automotive", "opportunity": "Major auto show campaigns", "leadTime": "6 weeks" },
+        { "name": "MIECC EV Expo", "date": "2026-08-15", "type": "automotive", "opportunity": "EV-specific exhibition campaigns", "leadTime": "4 weeks" },
+        { "name": "Sarawak Autoshow", "date": "2026-09-20", "type": "automotive", "opportunity": "Local autoshow campaigns", "leadTime": "4 weeks" },
+        { "name": "Test Drive Event", "date": "2026-07-25", "type": "automotive", "opportunity": "Monthly test drive campaign", "leadTime": "2 weeks" }
+      ]
+    },
+    {
+      "id": "environmental",
+      "label": "Environmental Campaigns",
+      "events": [
+        { "name": "World Environment Day", "date": "2026-06-05", "type": "environmental", "opportunity": "Go green EV campaigns", "leadTime": "2 weeks" },
+        { "name": "Earth Hour", "date": "2027-03-27", "type": "environmental", "opportunity": "Sustainability campaigns", "leadTime": "2 weeks" },
+        { "name": "National Energy Efficiency Day", "date": "2026-07-14", "type": "environmental", "opportunity": "Energy saving EV campaigns", "leadTime": "2 weeks" }
+      ]
+    },
+    {
+      "id": "monthly",
+      "label": "Monthly Opportunities",
+      "events": [
+        { "name": "Payday Campaign", "date": "2026-06-25", "type": "monthly", "opportunity": "End of month salary campaigns", "leadTime": "1 week" },
+        { "name": "Mid-Year Sale", "date": "2026-07-01", "type": "monthly", "opportunity": "Mid-year clearance campaigns", "leadTime": "3 weeks" },
+        { "name": "Year-End Sale", "date": "2026-12-01", "type": "monthly", "opportunity": "Year-end clearance campaigns", "leadTime": "4 weeks" },
+        { "name": "Bonus Season", "date": "2026-12-15", "type": "monthly", "opportunity": "Bonus spending campaigns", "leadTime": "3 weeks" },
+        { "name": "School Holidays", "date": "2026-06-15", "type": "monthly", "opportunity": "Family travel campaigns", "leadTime": "2 weeks" }
+      ]
+    }
+  ]
+}

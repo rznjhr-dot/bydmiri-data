@@ -31,14 +31,27 @@ export default function LoanCalculator() {
   const [tenure, setTenure] = useState(finance.defaultTenure);
   const [downpaymentPct, setDownpaymentPct] = useState<number | null>(10);
   const [downpaymentCustom, setDownpaymentCustom] = useState("");
+  const [includeCspRebate, setIncludeCspRebate] = useState(true);
+  const [customInterestRate, setCustomInterestRate] = useState(String(finance.interestRate));
 
   const currentVehicle = vehicles.find((v) => v.model === selectedModel)!;
   const currentVariant: Variant = currentVehicle.variants[selectedVariantIdx];
 
+  const cspRebateAmount = useMemo(() => {
+    if (!includeCspRebate) return 0;
+    const overrides = finance.additionalRebate.overrides as Record<string, number>;
+    return overrides[selectedModel] ?? finance.additionalRebate.default;
+  }, [selectedModel, includeCspRebate]);
+
+  const parsedInterestRate = useMemo(() => {
+    const val = parseFloat(customInterestRate);
+    return isNaN(val) || val <= 0 ? finance.interestRate : val;
+  }, [customInterestRate]);
+
   const priceAfterRebate = useMemo(() => {
     const rebate = includeRebate ? currentVariant.rebate : 0;
-    return Math.max(0, currentVariant.otr - rebate);
-  }, [currentVariant, includeRebate]);
+    return Math.max(0, currentVariant.otr - rebate - cspRebateAmount);
+  }, [currentVariant, includeRebate, cspRebateAmount]);
 
   const loanAmount = useMemo(() => {
     if (downpaymentCustom) {
@@ -58,16 +71,16 @@ export default function LoanCalculator() {
   }, [priceAfterRebate, loanAmount]);
 
   const monthlyPayment = useMemo(() => {
-    const rate = finance.interestRate / 100;
+    const rate = parsedInterestRate / 100;
     const totalInterest = loanAmount * rate * tenure;
     const totalPayable = loanAmount + totalInterest;
     return totalPayable / (tenure * 12);
-  }, [loanAmount, tenure]);
+  }, [loanAmount, tenure, parsedInterestRate]);
 
   const totalInterest = useMemo(() => {
-    const rate = finance.interestRate / 100;
+    const rate = parsedInterestRate / 100;
     return loanAmount * rate * tenure;
-  }, [loanAmount, tenure]);
+  }, [loanAmount, tenure, parsedInterestRate]);
 
   const totalPayable = useMemo(() => {
     return loanAmount + totalInterest;
@@ -77,9 +90,13 @@ export default function LoanCalculator() {
 
   const buildQuotation = useCallback(() => {
     const today = new Date().toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric" });
+    const downRemark = downpaymentCustom
+      ? "(custom: RM " + downpaymentCustom + ")"
+      : "(" + downpaymentPct + "% downpayment)";
     const lines = [
-      "Quotation for " + currentVehicle.model + " " + currentVariant.name + " (" + today + ")",
+      "Quotation for " + currentVehicle.model + " " + currentVariant.name,
       "━━━━━━━━━━━━━━━━━━",
+      "",
       "Price Breakdown",
       "OTR without Insurance: " + formatCurrency(currentVariant.otrWithoutInsurance),
       "Est. Insurance: " + formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance),
@@ -88,21 +105,24 @@ export default function LoanCalculator() {
     if (includeRebate && currentVariant.rebate > 0) {
       lines.push("Rebate: -" + formatCurrency(currentVariant.rebate));
     }
+    if (includeCspRebate && cspRebateAmount > 0) {
+      lines.push("CSP/GSP/SSP Rebate: -" + formatCurrency(cspRebateAmount));
+    }
     lines.push("After Rebate: " + formatCurrency(priceAfterRebate));
     lines.push("");
     lines.push("Financing");
-    lines.push("Downpayment: " + formatCurrency(downpaymentAmount));
+    lines.push("Downpayment: " + formatCurrency(downpaymentAmount) + " " + downRemark);
     lines.push("Loan Amount: " + formatCurrency(loanAmount));
-    lines.push("Est. Interest Rate: " + finance.interestRate + "%");
+    lines.push("Est. Interest Rate: " + parsedInterestRate + "%");
     lines.push("Tenure: " + tenure + " Years");
     lines.push("");
     lines.push("Monthly Payment");
-    lines.push(formatCurrency(monthlyPayment) + "/month (" + finance.interestRate + "% × " + tenure + "y)");
+    lines.push(formatCurrency(monthlyPayment) + "/month (" + parsedInterestRate + "% × " + tenure + "y)");
     lines.push("");
     lines.push("━━━━━━━━━━━━━━━━━━");
-    lines.push("BYD Miri - Ridzuan Jahari");
+    lines.push("BYD Miri - Ridzuan Jahari " + today);
     return lines.join("\n");
-  }, [currentVehicle, currentVariant, includeRebate, priceAfterRebate, downpaymentAmount, loanAmount, tenure, monthlyPayment, totalInterest, totalPayable]);
+  }, [currentVehicle, currentVariant, includeRebate, includeCspRebate, cspRebateAmount, parsedInterestRate, priceAfterRebate, downpaymentAmount, loanAmount, tenure, monthlyPayment, downpaymentPct, downpaymentCustom]);
 
   const handleCopyQuotation = useCallback(async () => {
     const text = buildQuotation();
@@ -200,6 +220,26 @@ export default function LoanCalculator() {
               )}
             </div>
 
+            {/* CSP/GSP/SSP Rebate */}
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  className={`toggle ${includeCspRebate ? "active" : ""}`}
+                  onClick={() => setIncludeCspRebate(!includeCspRebate)}
+                >
+                  <div className="toggle-track">
+                    <div className="toggle-thumb" />
+                  </div>
+                  <span className="ml-3 text-sm font-medium text-neutral-600">
+                    {finance.additionalRebate.label}
+                  </span>
+                </label>
+                <span className="text-sm font-semibold text-green-600">
+                  {formatCurrency(cspRebateAmount)}
+                </span>
+              </div>
+            </div>
+
             {/* Downpayment */}
             <div>
               <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
@@ -257,6 +297,27 @@ export default function LoanCalculator() {
                     {t}y
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Interest Rate */}
+            <div>
+              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
+                Interest Rate (%)
+              </label>
+              <div className="input-group">
+                <span className="text-xs text-neutral-400 mr-2">%</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="2.30"
+                  value={customInterestRate}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^0-9.]/g, "");
+                    setCustomInterestRate(val);
+                  }}
+                  className="input"
+                />
               </div>
             </div>
           </div>
@@ -324,6 +385,14 @@ export default function LoanCalculator() {
                     </span>
                   </div>
                 )}
+                {includeCspRebate && cspRebateAmount > 0 && (
+                  <div className="data-row">
+                    <span className="data-row-label">{finance.additionalRebate.label}</span>
+                    <span className="font-bold text-blue-600 text-base">
+                      -{formatCurrency(cspRebateAmount)}
+                    </span>
+                  </div>
+                )}
                 <div className="data-row">
                   <span className="data-row-label">After Rebate</span>
                   <span className="data-row-value">
@@ -347,7 +416,7 @@ export default function LoanCalculator() {
                 <div className="data-row">
                   <span className="data-row-label">Interest Rate</span>
                   <span className="data-row-value">
-                    {finance.interestRate}%
+                    {parsedInterestRate}%
                   </span>
                 </div>
                 <div className="data-row">
@@ -364,7 +433,7 @@ export default function LoanCalculator() {
                     Monthly Payment
                   </p>
                   <p className="text-xs text-neutral-300 mt-0.5">
-                    {finance.interestRate}% × {tenure}y
+                    {parsedInterestRate}% × {tenure}y
                   </p>
                 </div>
                 <p className="text-xl sm:text-2xl font-extrabold text-accent tracking-tight">

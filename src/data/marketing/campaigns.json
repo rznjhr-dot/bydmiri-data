@@ -1,0 +1,81 @@
+{
+  "description": "Campaign templates and generator configuration",
+  "lastUpdated": "2026-06-21",
+  "campaignTypes": [
+    {
+      "id": "launch",
+      "name": "Product Launch",
+      "description": "New vehicle model launch campaign",
+      "assets": ["poster", "carousel", "story", "facebook", "instagram", "tiktok", "whatsapp", "broadcast", "blog", "email"],
+      "defaultTimeline": "4 weeks",
+      "objectives": ["awareness", "interest", "test_drive_booking"],
+      "suggestedCTA": ["Book Test Drive", "Learn More", "Reserve Now"]
+    },
+    {
+      "id": "promotion",
+      "name": "Promotional Campaign",
+      "description": "Rebate, discount or limited-time offer campaign",
+      "assets": ["poster", "story", "facebook", "instagram", "whatsapp", "broadcast", "email"],
+      "defaultTimeline": "2 weeks",
+      "objectives": ["conversion", "sales", "lead_generation"],
+      "suggestedCTA": ["Claim Offer", "Get Rebate", "Enquire Now"]
+    },
+    {
+      "id": "festive",
+      "name": "Festive Campaign",
+      "description": "Holiday and celebration themed campaign",
+      "assets": ["poster", "carousel", "story", "facebook", "instagram", "whatsapp", "broadcast"],
+      "defaultTimeline": "3 weeks",
+      "objectives": ["engagement", "brand_love", "conversion"],
+      "suggestedCTA": ["Celebrate With Us", "Festive Offer", "Shop Now"]
+    },
+    {
+      "id": "educational",
+      "name": "Educational Campaign",
+      "description": "EV education and awareness campaign",
+      "assets": ["carousel", "blog", "story", "facebook", "instagram", "tiktok"],
+      "defaultTimeline": "2 weeks",
+      "objectives": ["education", "awareness", "trust_building"],
+      "suggestedCTA": ["Learn About EVs", "FAQ", "Talk to Expert"]
+    },
+    {
+      "id": "event",
+      "name": "Event Campaign",
+      "description": "Roadshow, test drive event or exhibition campaign",
+      "assets": ["poster", "story", "facebook", "instagram", "whatsapp", "broadcast", "email"],
+      "defaultTimeline": "3 weeks",
+      "objectives": ["attendance", "test_drive_booking", "lead_generation"],
+      "suggestedCTA": ["Register Now", "Book Slot", "Visit Us"]
+    },
+    {
+      "id": "testimonial",
+      "name": "Testimonial Campaign",
+      "description": "Customer story and review campaign",
+      "assets": ["carousel", "story", "facebook", "instagram", "blog"],
+      "defaultTimeline": "1 week",
+      "objectives": ["trust_building", "social_proof", "engagement"],
+      "suggestedCTA": ["Read Story", "See Reviews", "Join Our Community"]
+    },
+    {
+      "id": "comparison",
+      "name": "Comparison Campaign",
+      "description": "Comparison with competitors or between models",
+      "assets": ["carousel", "blog", "facebook", "instagram", "tiktok"],
+      "defaultTimeline": "2 weeks",
+      "objectives": ["conversion", "education", "interest"],
+      "suggestedCTA": ["Compare Now", "Find Your Match", "See Difference"]
+    }
+  ],
+  "assetFormats": {
+    "poster": { "dimensions": "1080x1920", "format": "portrait", "platforms": ["all"] },
+    "carousel": { "dimensions": "1080x1080", "format": "square", "platforms": ["instagram", "facebook", "linkedin"] },
+    "story": { "dimensions": "1080x1920", "format": "portrait", "platforms": ["instagram", "facebook", "tiktok"] },
+    "facebook": { "dimensions": "1200x630", "format": "landscape", "platforms": ["facebook"] },
+    "instagram": { "dimensions": "1080x1080", "format": "square", "platforms": ["instagram"] },
+    "tiktok": { "dimensions": "1080x1920", "format": "portrait", "platforms": ["tiktok"] },
+    "whatsapp": { "dimensions": "800x800", "format": "square", "platforms": ["whatsapp"] },
+    "broadcast": { "type": "text", "format": "message", "platforms": ["whatsapp", "telegram"] },
+    "blog": { "type": "article", "format": "longform", "platforms": ["website", "medium", "linkedin"] },
+    "email": { "type": "email", "format": "html", "platforms": ["mailchimp", "brevo", "gmail"] }
+  }
+}

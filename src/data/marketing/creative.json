@@ -1,0 +1,44 @@
+{
+  "description": "Creative design briefs and reference library",
+  "lastUpdated": "2026-06-21",
+  "designPrinciples": [
+    "Clean and minimal — every element serves a purpose",
+    "Generous white space — luxury brands breathe",
+    "Strong typography hierarchy — guide the viewer's eye",
+    "Consistent brand colours — blue primary, use accent sparingly",
+    "High-quality imagery — only professional photography",
+    "Single CTA per piece — clarity over choice",
+    "Mobile-first — design for small screens first"
+  ],
+  "visualReferences": [
+    { "brand": "Apple", "principle": "Minimalist product focus", "takeaway": "Let the product speak, remove distractions" },
+    { "brand": "Mercedes-Benz", "principle": "Luxury editorial", "takeaway": "Premium photography, elegant typography, confident tone" },
+    { "brand": "Tesla", "principle": "Clean tech minimalism", "takeaway": "Bold headlines, product-centric, futuristic feel" },
+    { "brand": "Ralph Lauren", "principle": "Editorial lifestyle", "takeaway": "Storytelling through imagery, aspirational lifestyle" },
+    { "brand": "IKEA", "principle": "Functional clarity", "takeaway": "Clear information hierarchy, approachable design" }
+  ],
+  "do": [
+    "Use BYD blue (#0055A5) as primary colour",
+    "Maintain 40%+ white space in every design",
+    "Use Geist Sans for headlines and body",
+    "Feature the vehicle as the hero element",
+    "Include clear CTA in every asset",
+    "Use high-contrast text for readability",
+    "Keep mobile layouts simple and thumb-friendly"
+  ],
+  "dont": [
+    "Never use clipart or low-quality illustrations",
+    "Never stretch or distort BYD logo",
+    "Never use more than 2 font families",
+    "Never crowd elements together",
+    "Never use neon or overly bright colours",
+    "Never hide the CTA or make it small",
+    "Never publish without brand guardian review"
+  ],
+  "moodboards": {
+    "luxury": { "colour_palette": ["#0055A5", "#003366", "#FFFFFF", "#D4AF37", "#333333"], "vibe": "Sophisticated, exclusive, premium" },
+    "modern": { "colour_palette": ["#0055A5", "#00AEEF", "#F5F5F5", "#1A1A1A", "#E0E0E0"], "vibe": "Clean, tech-forward, contemporary" },
+    "warm": { "colour_palette": ["#0055A5", "#F5E6CC", "#8B7355", "#FFFFFF", "#4A4A4A"], "vibe": "Welcoming, family-oriented, comfortable" },
+    "energetic": { "colour_palette": ["#0055A5", "#FF6B35", "#00AEEF", "#FFFFFF", "#1A1A1A"], "vibe": "Dynamic, exciting, youthful" }
+  }
+}

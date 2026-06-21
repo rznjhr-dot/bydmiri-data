@@ -1,0 +1,62 @@
+{
+  "description": "Template designs and layouts for marketing assets",
+  "lastUpdated": "2026-06-21",
+  "templates": [
+    {
+      "id": "hero_product",
+      "name": "Hero Product",
+      "type": "poster",
+      "description": "Full-bleed vehicle image with headline overlay",
+      "layout": "full_bleed_image + bottom_overlay",
+      "elements": ["vehicle_image", "headline", "tagline", "cta", "logo", "rebate_badge"]
+    },
+    {
+      "id": "split_comparison",
+      "name": "Split Comparison",
+      "type": "carousel",
+      "description": "Side-by-side comparison for carousel format",
+      "layout": "split_screen + stat_overlay",
+      "elements": ["left_image", "right_image", "headline", "stats", "cta"]
+    },
+    {
+      "id": "minimal_editorial",
+      "name": "Minimal Editorial",
+      "type": "poster",
+      "description": "Clean editorial style with generous white space",
+      "layout": "centered_composition + white_space",
+      "elements": ["vehicle_image_cropped", "headline_small", "body_text", "logo_small"]
+    },
+    {
+      "id": "offer_spotlight",
+      "name": "Offer Spotlight",
+      "type": "story",
+      "description": "Full-screen offer with prominent rebate display",
+      "layout": "gradient_background + centered_offer",
+      "elements": ["gradient_bg", "rebate_amount", "headline", "terms", "cta", "logo"]
+    },
+    {
+      "id": "lifestyle_moment",
+      "name": "Lifestyle Moment",
+      "type": "facebook",
+      "description": "Lifestyle scene with vehicle in real-world setting",
+      "layout": "landscape_scene + bottom_text",
+      "elements": ["lifestyle_image", "headline", "caption", "cta", "logo"]
+    },
+    {
+      "id": "educational_carousel",
+      "name": "Educational Carousel",
+      "type": "carousel",
+      "description": "Multi-slide educational content about EV benefits",
+      "layout": "slide_by_slide + icon_based",
+      "elements": ["slide_1_intro", "slide_2_benefit", "slide_3_benefit", "slide_4_cta"]
+    },
+    {
+      "id": "countdown_timer",
+      "name": "Countdown Timer",
+      "type": "story",
+      "description": "Urgency-based design with countdown for limited offers",
+      "layout": "timer_hero + urgency_elements",
+      "elements": ["countdown", "offer_details", "headline", "cta"]
+    }
+  ]
+}

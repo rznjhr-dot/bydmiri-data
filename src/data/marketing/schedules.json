@@ -1,0 +1,67 @@
+{
+  "description": "Content posting schedules and frequency recommendations",
+  "lastUpdated": "2026-06-21",
+  "platforms": [
+    {
+      "id": "facebook",
+      "name": "Facebook",
+      "recommendedFrequency": "3-4 posts per week",
+      "bestTimes": ["Wednesday 12pm", "Thursday 1pm", "Saturday 10am"],
+      "contentMix": [
+        { "type": "product", "percentage": 30 },
+        { "type": "educational", "percentage": 20 },
+        { "type": "lifestyle", "percentage": 20 },
+        { "type": "testimonial", "percentage": 15 },
+        { "type": "promotion", "percentage": 15 }
+      ]
+    },
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "recommendedFrequency": "4-5 posts per week",
+      "bestTimes": ["Tuesday 11am", "Wednesday 2pm", "Thursday 12pm", "Friday 10am"],
+      "contentMix": [
+        { "type": "visual_product", "percentage": 35 },
+        { "type": "lifestyle", "percentage": 25 },
+        { "type": "stories", "percentage": 20 },
+        { "type": "reels", "percentage": 20 }
+      ]
+    },
+    {
+      "id": "tiktok",
+      "name": "TikTok",
+      "recommendedFrequency": "5-7 posts per week",
+      "bestTimes": ["Tuesday 7pm", "Thursday 8pm", "Saturday 6pm", "Sunday 5pm"],
+      "contentMix": [
+        { "type": "entertainment", "percentage": 30 },
+        { "type": "educational", "percentage": 25 },
+        { "type": "behind_scenes", "percentage": 20 },
+        { "type": "product_showcase", "percentage": 25 }
+      ]
+    },
+    {
+      "id": "whatsapp",
+      "name": "WhatsApp Broadcast",
+      "recommendedFrequency": "2-3 broadcasts per week",
+      "bestTimes": ["Wednesday 11am", "Friday 3pm", "Saturday 10am"],
+      "contentMix": [
+        { "type": "promotion", "percentage": 35 },
+        { "type": "educational", "percentage": 25 },
+        { "type": "event_invite", "percentage": 20 },
+        { "type": "testimonial", "percentage": 20 }
+      ]
+    },
+    {
+      "id": "email",
+      "name": "Email Newsletter",
+      "recommendedFrequency": "1-2 emails per week",
+      "bestTimes": ["Tuesday 10am", "Thursday 11am"],
+      "contentMix": [
+        { "type": "promotion", "percentage": 30 },
+        { "type": "educational", "percentage": 25 },
+        { "type": "company_update", "percentage": 20 },
+        { "type": "event_invite", "percentage": 25 }
+      ]
+    }
+  ]
+}

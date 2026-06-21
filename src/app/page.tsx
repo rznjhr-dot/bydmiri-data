@@ -5,7 +5,6 @@ import charging from "@/data/charging.json";
 import salesRules from "@/data/sales_rules.json";
 import changelog from "@/data/changelog.json";
 import LoanCalculator from "@/components/LoanCalculator";
-import PromptGenerator from "@/components/PromptGenerator";
 import ChargingTimeEstimator from "@/components/ChargingTimeEstimator";
 import WarrantyCard from "@/components/WarrantyCard";
 
@@ -74,16 +73,16 @@ export default function Home() {
               <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">Warranty</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Coverage info</span>
             </a>
-            <a
-              href="#prompt-generator"
+            <Link
+              href="/ai-prompt-studio"
               className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-purple-50 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[18px] sm:h-[18px] text-purple-600"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               </div>
-              <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">AI Prompts</span>
-              <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Generate content</span>
-            </a>
+              <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">AI Prompt Studio</span>
+              <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Build &amp; manage prompts</span>
+            </Link>
           </div>
         </section>
 
@@ -139,10 +138,6 @@ export default function Home() {
           <WarrantyCard />
         </div>
 
-        {/* ─── Prompt Generator ───────────────────────────── */}
-        <div id="prompt-generator">
-          <PromptGenerator />
-        </div>
 
         {/* ─── AI Agent Section ─────────────────────────────── */}
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">

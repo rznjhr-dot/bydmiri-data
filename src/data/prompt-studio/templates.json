@@ -1,0 +1,271 @@
+{
+  "description": "Generator templates — pre-configured block selections for each content type",
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-21",
+  "templates": [
+    {
+      "id": "poster",
+      "name": "Poster Generator",
+      "description": "High-impact print-style poster for showroom, digital display, or social media",
+      "purpose": "Create hero-centric poster with bold headline placement, premium automotive photography aesthetic",
+      "platform": "Print / Digital Display",
+      "aspectRatio": "4:5 or 16:9",
+      "bestFor": ["Showroom displays", "Social media posts", "Digital advertising", "Event promotions"],
+      "blocks": [
+        { "blockId": "composition", "selectedOptionId": "hero_centered" },
+        { "blockId": "editorial", "selectedOptionId": "luxury_magazine" },
+        { "blockId": "typography", "selectedOptionId": "premium_sans" },
+        { "blockId": "background", "selectedOptionId": "clean_gradient" },
+        { "blockId": "output_quality", "selectedOptionId": "ultra_high" }
+      ]
+    },
+    {
+      "id": "carousel",
+      "name": "Carousel Generator",
+      "description": "Multi-slide carousel for Instagram, Facebook, and LinkedIn — tell a story across slides",
+      "purpose": "Create multi-slide narrative carousel showcasing product features, benefits, or customer journey",
+      "platform": "Instagram / Facebook / LinkedIn",
+      "aspectRatio": "1:1",
+      "bestFor": ["Product launches", "Feature highlights", "Educational content", "Comparison stories"],
+      "blocks": [
+        { "blockId": "composition", "selectedOptionId": "split_layout" },
+        { "blockId": "editorial", "selectedOptionId": "minimal_editorial" },
+        { "blockId": "typography", "selectedOptionId": "modern_tech" },
+        { "blockId": "platform", "selectedOptionId": "carousel_square" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "story",
+      "name": "Story Generator",
+      "description": "Full-screen vertical story for Instagram, Facebook, and TikTok",
+      "purpose": "Create immersive full-screen vertical content with minimal text and strong visual hierarchy",
+      "platform": "Instagram / Facebook / TikTok",
+      "aspectRatio": "9:16",
+      "bestFor": ["Behind-the-scenes", "Quick announcements", "Teaser campaigns", "Day-in-life"],
+      "blocks": [
+        { "blockId": "platform", "selectedOptionId": "story_vertical" },
+        { "blockId": "composition", "selectedOptionId": "dynamic_angle" },
+        { "blockId": "editorial", "selectedOptionId": "cinematic" },
+        { "blockId": "background", "selectedOptionId": "architectural" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "facebook",
+      "name": "Facebook Post Generator",
+      "description": "Landscape-optimised post for Facebook feed with engaging composition",
+      "purpose": "Create scroll-stopping Facebook feed posts optimised for engagement and sharing",
+      "platform": "Facebook",
+      "aspectRatio": "1.91:1",
+      "bestFor": ["Brand awareness", "Event promotion", "Customer stories", "Offer announcements"],
+      "blocks": [
+        { "blockId": "platform", "selectedOptionId": "poster_landscape" },
+        { "blockId": "composition", "selectedOptionId": "hero_centered" },
+        { "blockId": "editorial", "selectedOptionId": "documentary" },
+        { "blockId": "campaign", "selectedOptionId": "promotional" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "instagram",
+      "name": "Instagram Generator",
+      "description": "Square-format Instagram post with lifestyle or editorial aesthetic",
+      "purpose": "Create aesthetically cohesive Instagram feed posts aligned with brand identity",
+      "platform": "Instagram",
+      "aspectRatio": "1:1",
+      "bestFor": ["Lifestyle content", "Product showcase", "Brand storytelling", "Community engagement"],
+      "blocks": [
+        { "blockId": "platform", "selectedOptionId": "carousel_square" },
+        { "blockId": "editorial", "selectedOptionId": "fashion_editorial" },
+        { "blockId": "composition", "selectedOptionId": "minimal_whitespace" },
+        { "blockId": "mood", "selectedOptionId": "luxurious_refined" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "tiktok",
+      "name": "TikTok Generator",
+      "description": "Vertical video thumbnail with bold, youthful, energetic aesthetic",
+      "purpose": "Create engaging TikTok thumbnails and post visuals for younger audiences",
+      "platform": "TikTok",
+      "aspectRatio": "9:16",
+      "bestFor": ["Young audience targeting", "Viral content", "Trending topics", "Behind-the-scenes"],
+      "blocks": [
+        { "blockId": "platform", "selectedOptionId": "story_vertical" },
+        { "blockId": "mood", "selectedOptionId": "exciting_dynamic" },
+        { "blockId": "colour", "selectedOptionId": "vibrant_energetic" },
+        { "blockId": "composition", "selectedOptionId": "dynamic_angle" },
+        { "blockId": "output_quality", "selectedOptionId": "standard_quality" }
+      ]
+    },
+    {
+      "id": "news-editorial",
+      "name": "News Editorial Generator",
+      "description": "Publication-quality news or editorial piece with journalistic tone",
+      "purpose": "Create press-release quality imagery for news, blogs, and editorial publications",
+      "platform": "News / Editorial / Blog",
+      "aspectRatio": "16:9",
+      "bestFor": ["Press releases", "Industry news", "Expert commentary", "Thought leadership"],
+      "blocks": [
+        { "blockId": "editorial", "selectedOptionId": "documentary" },
+        { "blockId": "typography", "selectedOptionId": "editorial_serif" },
+        { "blockId": "composition", "selectedOptionId": "editorial_grid" },
+        { "blockId": "lighting", "selectedOptionId": "soft_diffused" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "promotion",
+      "name": "Promotion Generator",
+      "description": "Urgency-driven promotional creative with rebate or offer focus",
+      "purpose": "Create high-conversion promotional visuals with clear offer hierarchy and CTAs",
+      "platform": "Multi-platform",
+      "aspectRatio": "4:5",
+      "bestFor": ["Rebate campaigns", "Limited-time offers", "Sales events", "Year-end promotions"],
+      "blocks": [
+        { "blockId": "campaign", "selectedOptionId": "promotional" },
+        { "blockId": "mood", "selectedOptionId": "exciting_dynamic" },
+        { "blockId": "colour", "selectedOptionId": "vibrant_energetic" },
+        { "blockId": "composition", "selectedOptionId": "hero_centered" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "holiday",
+      "name": "Holiday Generator",
+      "description": "Festive and celebration-themed creative for seasonal campaigns",
+      "purpose": "Create culturally-aware festive content for holidays, celebrations, and seasonal moments",
+      "platform": "Multi-platform",
+      "aspectRatio": "4:5",
+      "bestFor": ["Festive greetings", "Holiday offers", "Seasonal campaigns", "Cultural celebrations"],
+      "blocks": [
+        { "blockId": "campaign", "selectedOptionId": "festive_seasonal" },
+        { "blockId": "mood", "selectedOptionId": "warm_welcoming" },
+        { "blockId": "colour", "selectedOptionId": "warm_editorial" },
+        { "blockId": "background", "selectedOptionId": "architectural" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "delivery",
+      "name": "Delivery Generator",
+      "description": "Celebratory delivery handover imagery for social sharing",
+      "purpose": "Create memorable delivery-day content that owners will want to share on social media",
+      "platform": "Instagram / Facebook / WhatsApp",
+      "aspectRatio": "4:5",
+      "bestFor": ["Car delivery posts", "Customer celebration", "Handover ceremony", "New owner welcome"],
+      "taglines": [
+        { "id": "congrats", "text": "Congratulations on Your New BYD {model}!", "selected": true },
+        { "id": "welcome", "text": "Welcome to the BYD Family!" },
+        { "id": "dream", "text": "Your Dream Ride Has Arrived!" },
+        { "id": "future", "text": "The Future Is Yours — Congratulations!" },
+        { "id": "happy", "text": "Another Happy BYD Owner!" },
+        { "id": "journey", "text": "Start Your Electric Journey — Congratulations!" }
+      ],
+      "blocks": [
+        { "blockId": "automotive", "selectedOptionId": "studio_beauty" },
+        { "blockId": "mood", "selectedOptionId": "warm_welcoming" },
+        { "blockId": "colour", "selectedOptionId": "byd_corporate" },
+        { "blockId": "background", "selectedOptionId": "clean_gradient" },
+        { "blockId": "output_quality", "selectedOptionId": "ultra_high" }
+      ]
+    },
+    {
+      "id": "photography",
+      "name": "Photography Generator",
+      "description": "Pure automotive photography brief for studio or location shoots",
+      "purpose": "Generate detailed photography briefs for professional automotive photoshoots",
+      "platform": "Print / Digital",
+      "aspectRatio": "3:2",
+      "bestFor": ["Professional photoshoots", "Studio sessions", "Location scouting", "Portfolio building"],
+      "blocks": [
+        { "blockId": "automotive", "selectedOptionId": "studio_beauty" },
+        { "blockId": "camera", "selectedOptionId": "pro_studio" },
+        { "blockId": "lighting", "selectedOptionId": "studio_controlled" },
+        { "blockId": "background", "selectedOptionId": "minimal_studio" },
+        { "blockId": "output_quality", "selectedOptionId": "ultra_high" }
+      ]
+    },
+    {
+      "id": "brochure",
+      "name": "Brochure Generator",
+      "description": "Multi-page brochure or catalog layout with editorial polish",
+      "purpose": "Create publication-quality brochure layouts for print or digital distribution",
+      "platform": "Print / PDF / Digital",
+      "aspectRatio": "A4",
+      "bestFor": ["Product catalogs", "Dealer brochures", "Specification sheets", "Showroom materials"],
+      "blocks": [
+        { "blockId": "composition", "selectedOptionId": "editorial_grid" },
+        { "blockId": "typography", "selectedOptionId": "premium_sans" },
+        { "blockId": "editorial", "selectedOptionId": "luxury_magazine" },
+        { "blockId": "automotive", "selectedOptionId": "studio_beauty" },
+        { "blockId": "output_quality", "selectedOptionId": "ultra_high" }
+      ]
+    },
+    {
+      "id": "comparison",
+      "name": "Comparison Generator",
+      "description": "Side-by-side comparison layout for model vs model or EV vs ICE",
+      "purpose": "Create clear comparison visuals that highlight differences and advantages",
+      "platform": "Social Media / Web / Showroom",
+      "aspectRatio": "16:9",
+      "bestFor": ["Model comparisons", "EV vs ICE education", "Feature differentiation", "Buying guides"],
+      "blocks": [
+        { "blockId": "composition", "selectedOptionId": "split_layout" },
+        { "blockId": "campaign", "selectedOptionId": "educational" },
+        { "blockId": "typography", "selectedOptionId": "modern_tech" },
+        { "blockId": "editorial", "selectedOptionId": "documentary" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "announcement",
+      "name": "Announcement Generator",
+      "description": "Bold announcement creative for new model, milestone, or company news",
+      "purpose": "Create impactful announcement visuals that command attention and drive conversations",
+      "platform": "Multi-platform",
+      "aspectRatio": "16:9",
+      "bestFor": ["New model announcements", "Milestone celebrations", "Partnership news", "Company updates"],
+      "blocks": [
+        { "blockId": "campaign", "selectedOptionId": "product_launch" },
+        { "blockId": "mood", "selectedOptionId": "exciting_dynamic" },
+        { "blockId": "editorial", "selectedOptionId": "cinematic" },
+        { "blockId": "composition", "selectedOptionId": "hero_centered" },
+        { "blockId": "output_quality", "selectedOptionId": "ultra_high" }
+      ]
+    },
+    {
+      "id": "customer-appreciation",
+      "name": "Customer Appreciation Generator",
+      "description": "Warm thank-you and appreciation content for existing customers",
+      "purpose": "Create genuine appreciation content that strengthens customer relationships and loyalty",
+      "platform": "WhatsApp / Email / Social Media",
+      "aspectRatio": "4:5",
+      "bestFor": ["Customer thank-you", "Loyalty programs", "Owner clubs", "Referral programs"],
+      "blocks": [
+        { "blockId": "campaign", "selectedOptionId": "testimonial" },
+        { "blockId": "mood", "selectedOptionId": "warm_welcoming" },
+        { "blockId": "colour", "selectedOptionId": "warm_editorial" },
+        { "blockId": "editorial", "selectedOptionId": "documentary" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    },
+    {
+      "id": "greeting",
+      "name": "Greeting Generator",
+      "description": "Festive greeting card for Hari Raya, CNY, Deepavali, Christmas, and more",
+      "purpose": "Create culturally-appropriate greeting cards for Malaysian festive seasons",
+      "platform": "WhatsApp / Social Media / Email",
+      "aspectRatio": "4:5",
+      "bestFor": ["Hari Raya greetings", "Chinese New Year", "Deepavali wishes", "Christmas greetings", "Birthday wishes"],
+      "blocks": [
+        { "blockId": "campaign", "selectedOptionId": "festive_seasonal" },
+        { "blockId": "mood", "selectedOptionId": "warm_welcoming" },
+        { "blockId": "colour", "selectedOptionId": "warm_editorial" },
+        { "blockId": "typography", "selectedOptionId": "editorial_serif" },
+        { "blockId": "output_quality", "selectedOptionId": "high_quality" }
+      ]
+    }
+  ]
+}

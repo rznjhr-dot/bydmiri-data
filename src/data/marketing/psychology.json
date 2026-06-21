@@ -1,0 +1,113 @@
+{
+  "description": "Sales psychology customer personas and marketing strategies",
+  "lastUpdated": "2026-06-21",
+  "personas": [
+    {
+      "id": "family",
+      "name": "Family",
+      "description": "Parents looking for safe, spacious family transport",
+      "priorities": ["safety", "space", "cost_per_km", "warranty", "child_friendly"],
+      "tone": "warm_protective",
+      "suggestedHeadline": "Drive Your Family Safely Into The Future",
+      "suggestedCTA": "Book Family Test Drive",
+      "buyingTriggers": ["safety ratings", "spacious interior", "low maintenance", "government rebate"],
+      "visualDirection": "Family road trip, kids smiling, spacious trunk"
+    },
+    {
+      "id": "executive",
+      "name": "Executive",
+      "description": "Professionals seeking premium, status EV",
+      "priorities": ["prestige", "technology", "comfort", "performance", "design"],
+      "tone": "premium_confident",
+      "suggestedHeadline": "Command The Road. Lead The Change.",
+      "suggestedCTA": "Schedule Exclusive Preview",
+      "buyingTriggers": ["premium features", "brand status", "technology", "design"],
+      "visualDirection": "Executive parking, urban setting, sleek lighting"
+    },
+    {
+      "id": "young_professional",
+      "name": "Young Professional",
+      "description": "Early career individuals seeking modern, trendy EV",
+      "priorities": ["style", "technology", "affordability", "eco_friendly", "connectivity"],
+      "tone": "modern_aspirational",
+      "suggestedHeadline": "Your First EV. Your Statement.",
+      "suggestedCTA": "Explore Models",
+      "buyingTriggers": ["modern tech", "sleek design", "affordable entry", "eco status"],
+      "visualDirection": "Urban lifestyle, cafe setting, young diverse group"
+    },
+    {
+      "id": "retiree",
+      "name": "Retiree",
+      "description": "Retired individuals seeking comfort and reliability",
+      "priorities": ["comfort", "reliability", "ease_of_use", "safety", "low_running_cost"],
+      "tone": "respectful_reassuring",
+      "suggestedHeadline": "Enjoy Your Golden Years With Effortless Driving",
+      "suggestedCTA": "Learn More",
+      "buyingTriggers": ["easy to drive", "low maintenance", "comfortable ride", "reliable"],
+      "visualDirection": "Scenic drive, relaxed setting, mature couple"
+    },
+    {
+      "id": "first_time_buyer",
+      "name": "First-Time Buyer",
+      "description": "New car buyers considering their first EV",
+      "priorities": ["affordability", "education", "trust", "warranty", "support"],
+      "tone": "friendly_educational",
+      "suggestedHeadline": "Your First EV Made Simple",
+      "suggestedCTA": "Get Started Guide",
+      "buyingTriggers": ["easy financing", "comprehensive warranty", "low running cost", "expert guidance"],
+      "visualDirection": "Friendly showroom, warm lighting, welcoming staff"
+    },
+    {
+      "id": "performance_enthusiast",
+      "name": "Performance Enthusiast",
+      "description": "Car enthusiasts interested in EV performance",
+      "priorities": ["speed", "handling", "acceleration", "technology", "exclusivity"],
+      "tone": "bold_exciting",
+      "suggestedHeadline": "Electric. But Make It Thrilling.",
+      "suggestedCTA": "Book Performance Test Drive",
+      "buyingTriggers": ["0-100 time", "horsepower", "handling", "exclusive features"],
+      "visualDirection": "Dynamic driving shots, speed blur, track setting"
+    },
+    {
+      "id": "value_seeker",
+      "name": "Value Seeker",
+      "description": "Cost-conscious buyers looking for best value",
+      "priorities": ["price", "rebate", "running_cost", "warranty", "resale_value"],
+      "tone": "practical_direct",
+      "suggestedHeadline": "Most Car For Your Money. Zero Compromise.",
+      "suggestedCTA": "Check Pricing",
+      "buyingTriggers": ["rebate amount", "lowest cost per km", "maintenance savings", "fuel savings"],
+      "visualDirection": "Clean, simple, price-focused, comparison layout"
+    },
+    {
+      "id": "fleet",
+      "name": "Fleet",
+      "description": "Business owners managing vehicle fleets",
+      "priorities": ["tco", "reliability", "charging_infra", "after_sales", "bulk_pricing"],
+      "tone": "professional_business",
+      "suggestedHeadline": "Reduce Fleet Operating Cost By Up To 70%",
+      "suggestedCTA": "Request Fleet Proposal",
+      "buyingTriggers": ["lower TCO", "bulk discount", "charging solution", "service package"],
+      "visualDirection": "Corporate setting, multiple vehicles, professional"
+    },
+    {
+      "id": "corporate",
+      "name": "Corporate",
+      "description": "Companies for corporate social responsibility and branding",
+      "priorities": ["esg", "brand_Image", "tax_incentives", "sustainability", "innovation"],
+      "tone": "visionary_impact",
+      "suggestedHeadline": "Lead Your Industry Towards A Greener Future",
+      "suggestedCTA": "Discuss Corporate Partnership",
+      "buyingTriggers": ["ESG goals", "green branding", "tax benefits", "innovation image"],
+      "visualDirection": "Corporate building, professional driver, modern HQ"
+    }
+  ],
+  "strategies": [
+    { "id": "emotional", "name": "Emotional Connection", "description": "Build emotional bond through storytelling and values", "bestFor": ["family", "young_professional", "retiree"] },
+    { "id": "rational", "name": "Rational Benefits", "description": "Focus on facts, figures, and logical advantages", "bestFor": ["value_seeker", "fleet", "corporate"] },
+    { "id": "aspirational", "name": "Aspirational", "description": "Appeal to status, success, and lifestyle goals", "bestFor": ["executive", "young_professional"] },
+    { "id": "educational", "name": "Educational", "description": "Inform and build trust through expertise", "bestFor": ["first_time_buyer", "retiree"] },
+    { "id": "thrilling", "name": "Thrilling", "description": "Excite through performance and adrenaline", "bestFor": ["performance_enthusiast"] },
+    { "id": "practical", "name": "Practical", "description": "Demonstrate tangible value and ROI", "bestFor": ["value_seeker", "fleet"] }
+  ]
+}

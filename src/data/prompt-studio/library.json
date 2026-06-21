@@ -1,0 +1,279 @@
+{
+  "description": "Pre-built prompt library with entries organized in thematic folders",
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-21",
+  "folders": [
+    { "id": "automotive", "name": "Automotive", "description": "Automotive photography and vehicle showcase prompts" },
+    { "id": "luxury", "name": "Luxury", "description": "Premium luxury lifestyle and brand positioning prompts" },
+    { "id": "editorial", "name": "Editorial", "description": "Publication-quality editorial and magazine-style prompts" },
+    { "id": "lifestyle", "name": "Lifestyle", "description": "Real-world lifestyle and family-oriented prompts" },
+    { "id": "promotion", "name": "Promotion", "description": "Sales, rebate, and promotional campaign prompts" },
+    { "id": "festive", "name": "Festive", "description": "Holiday, celebration, and seasonal greeting prompts" },
+    { "id": "corporate", "name": "Corporate", "description": "Corporate communications and executive imagery prompts" },
+    { "id": "news", "name": "News", "description": "Press release and news editorial imagery prompts" },
+    { "id": "photography", "name": "Photography", "description": "Pure photography briefs and technical shoot guides" },
+    { "id": "product", "name": "Product", "description": "Product showcase and feature highlight prompts" },
+    { "id": "delivery", "name": "Delivery", "description": "Vehicle delivery and customer handover celebration prompts" },
+    { "id": "events", "name": "Events", "description": "Event, roadshow, and exhibition promotion prompts" },
+    { "id": "customer", "name": "Customer", "description": "Customer appreciation and testimonial prompts" },
+    { "id": "sales", "name": "Sales", "description": "Sales enablement and lead generation prompts" },
+    { "id": "greeting", "name": "Greeting", "description": "Festive and celebratory greeting card prompts" }
+  ],
+  "entries": [
+    {
+      "id": "lib-seal-launch-poster",
+      "name": "BYD Seal Launch Poster",
+      "description": "High-impact launch poster for BYD Seal sports sedan featuring hero-centric composition",
+      "folder": "automotive",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["seal", "launch", "poster", "hero"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "seal" },
+        { "blockId": "campaign", "selectedOptionId": "product_launch" },
+        { "blockId": "composition", "selectedOptionId": "hero_centered" },
+        { "blockId": "background", "selectedOptionId": "clean_gradient" }
+      ]
+    },
+    {
+      "id": "lib-atto3-family-lifestyle",
+      "name": "Atto 3 Family Lifestyle",
+      "description": "Warm family lifestyle composition showing Atto 3 as the perfect family EV",
+      "folder": "lifestyle",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["atto3", "family", "lifestyle", "warm"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "atto3" },
+        { "blockId": "automotive", "selectedOptionId": "family_lifestyle" },
+        { "blockId": "mood", "selectedOptionId": "warm_welcoming" },
+        { "blockId": "colour", "selectedOptionId": "warm_editorial" }
+      ]
+    },
+    {
+      "id": "lib-sealion7-urban-night",
+      "name": "Sealion 7 Urban Night",
+      "description": "Dramatic urban nightscape composition showcasing Sealion 7's road presence",
+      "folder": "automotive",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["sealion7", "urban", "night", "dramatic"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "sealion7" },
+        { "blockId": "lighting", "selectedOptionId": "neon_nocturnal" },
+        { "blockId": "background", "selectedOptionId": "urban_night" },
+        { "blockId": "mood", "selectedOptionId": "futuristic_innovative" }
+      ]
+    },
+    {
+      "id": "lib-hariraya-greeting-2026",
+      "name": "Hari Raya Festive Greeting 2026",
+      "description": "Warm Hari Raya Aidilfitri greeting with BYD Seal and traditional elements",
+      "folder": "greeting",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["harirraya", "festive", "greeting", "cultural"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "campaign", "selectedOptionId": "festive_seasonal" },
+        { "blockId": "mood", "selectedOptionId": "warm_welcoming" },
+        { "blockId": "colour", "selectedOptionId": "warm_editorial" },
+        { "blockId": "typography", "selectedOptionId": "editorial_serif" }
+      ]
+    },
+    {
+      "id": "lib-seal-promotion-rebate",
+      "name": "Seal Rebate Promotion",
+      "description": "Urgency-driven promotional creative for Seal limited-time rebate campaign",
+      "folder": "promotion",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["seal", "promotion", "rebate", "urgent"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "seal" },
+        { "blockId": "campaign", "selectedOptionId": "promotional" },
+        { "blockId": "mood", "selectedOptionId": "exciting_dynamic" },
+        { "blockId": "colour", "selectedOptionId": "vibrant_energetic" }
+      ]
+    },
+    {
+      "id": "lib-m6-comparison-guide",
+      "name": "M6 vs MPV Comparison",
+      "description": "Educational comparison between BYD M6 and traditional MPVs for EV conversion",
+      "folder": "sales",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["m6", "comparison", "educational", "ev-vs-ice"],
+      "status": "draft",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "m6" },
+        { "blockId": "composition", "selectedOptionId": "split_layout" },
+        { "blockId": "campaign", "selectedOptionId": "educational" },
+        { "blockId": "typography", "selectedOptionId": "modern_tech" }
+      ]
+    },
+    {
+      "id": "lib-atto2-city-crossover",
+      "name": "Atto 2 City Crossover",
+      "description": "Urban lifestyle composition for Atto 2 — compact crossover for modern city living",
+      "folder": "lifestyle",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["atto2", "city", "urban", "crossover"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "atto2" },
+        { "blockId": "automotive", "selectedOptionId": "urban_lifestyle" },
+        { "blockId": "background", "selectedOptionId": "architectural" },
+        { "blockId": "mood", "selectedOptionId": "calm_serene" }
+      ]
+    },
+    {
+      "id": "lib-delivery-handover-ceremony",
+      "name": "Delivery Handover Ceremony",
+      "description": "Celebratory delivery handover with new owner and BYD Seal — social media ready",
+      "folder": "delivery",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["delivery", "handover", "celebration", "customer"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "seal" },
+        { "blockId": "automotive", "selectedOptionId": "studio_beauty" },
+        { "blockId": "mood", "selectedOptionId": "warm_welcoming" },
+        { "blockId": "background", "selectedOptionId": "clean_gradient" }
+      ]
+    },
+    {
+      "id": "lib-sealion7-scenic-landscape",
+      "name": "Sealion 7 Coastal Drive",
+      "description": "Scenic coastal landscape composition for Sealion 7 — freedom and adventure",
+      "folder": "photography",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["sealion7", "scenic", "landscape", "coastal"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "sealion7" },
+        { "blockId": "automotive", "selectedOptionId": "scenic_landscape" },
+        { "blockId": "lighting", "selectedOptionId": "golden_hour" },
+        { "blockId": "background", "selectedOptionId": "natural_landscape" }
+      ]
+    },
+    {
+      "id": "lib-executive-seal-corporate",
+      "name": "Executive Seal Corporate",
+      "description": "Corporate executive composition for BYD Seal — success and professionalism",
+      "folder": "corporate",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["seal", "corporate", "executive", "professional"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "seal" },
+        { "blockId": "automotive", "selectedOptionId": "corporate_executive" },
+        { "blockId": "colour", "selectedOptionId": "dark_luxury" },
+        { "blockId": "mood", "selectedOptionId": "luxurious_refined" }
+      ]
+    },
+    {
+      "id": "lib-cny-festive-2027",
+      "name": "Chinese New Year 2027 Festive",
+      "description": "CNY greeting with BYD Seal — prosperity, family, and new beginnings",
+      "folder": "festive",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["cny", "chinese-new-year", "festive", "prosperity"],
+      "status": "draft",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "campaign", "selectedOptionId": "festive_seasonal" },
+        { "blockId": "vehicle", "selectedOptionId": "seal" },
+        { "blockId": "colour", "selectedOptionId": "vibrant_energetic" },
+        { "blockId": "mood", "selectedOptionId": "warm_welcoming" }
+      ]
+    },
+    {
+      "id": "lib-atto3-action-motion",
+      "name": "Atto 3 Action Motion",
+      "description": "Dynamic motion shot of Atto 3 on coastal highway — speed and excitement",
+      "folder": "automotive",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["atto3", "action", "motion", "dynamic"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "atto3" },
+        { "blockId": "automotive", "selectedOptionId": "action_motion" },
+        { "blockId": "mood", "selectedOptionId": "exciting_dynamic" },
+        { "blockId": "composition", "selectedOptionId": "dynamic_angle" }
+      ]
+    },
+    {
+      "id": "lib-seal6-family-roadtrip",
+      "name": "Seal 6 Family Road Trip",
+      "description": "Family road trip lifestyle composition for BYD Seal 6 — adventure together",
+      "folder": "lifestyle",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["seal6", "family", "roadtrip", "adventure"],
+      "status": "draft",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "seal6" },
+        { "blockId": "automotive", "selectedOptionId": "family_lifestyle" },
+        { "blockId": "background", "selectedOptionId": "natural_landscape" },
+        { "blockId": "lighting", "selectedOptionId": "golden_hour" }
+      ]
+    },
+    {
+      "id": "lib-seal-luxury-editorial",
+      "name": "Seal Luxury Magazine Editorial",
+      "description": "Premium magazine editorial spread for BYD Seal — GQ / Robb Report quality",
+      "folder": "editorial",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["seal", "editorial", "magazine", "luxury"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "vehicle", "selectedOptionId": "seal" },
+        { "blockId": "editorial", "selectedOptionId": "luxury_magazine" },
+        { "blockId": "composition", "selectedOptionId": "editorial_grid" },
+        { "blockId": "lighting", "selectedOptionId": "museum_gallery" }
+      ]
+    },
+    {
+      "id": "lib-ev-education-carousel",
+      "name": "EV Education Carousel",
+      "description": "Educational carousel explaining EV benefits — cost savings, environment, technology",
+      "folder": "news",
+      "version": "1.0.0",
+      "created": "2026-06-21",
+      "tags": ["ev", "education", "carousel", "awareness"],
+      "status": "published",
+      "prompt": "[full generated prompt content]",
+      "selections": [
+        { "blockId": "campaign", "selectedOptionId": "educational" },
+        { "blockId": "platform", "selectedOptionId": "carousel_square" },
+        { "blockId": "typography", "selectedOptionId": "modern_tech" },
+        { "blockId": "colour", "selectedOptionId": "cool_modern" }
+      ]
+    }
+  ]
+}

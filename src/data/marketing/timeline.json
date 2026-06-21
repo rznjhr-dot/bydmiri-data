@@ -1,0 +1,41 @@
+{
+  "description": "Campaign timeline templates and rollout schedules",
+  "lastUpdated": "2026-06-21",
+  "timelines": [
+    {
+      "id": "4_week_launch",
+      "name": "4-Week Launch Timeline",
+      "description": "Standard product launch or major campaign rollout",
+      "phases": [
+        { "week": 1, "phase": "Teaser", "activities": ["Social media teasers", "Countdown stories", "Email save-the-date"], "assets": ["story", "facebook_teaser"] },
+        { "week": 2, "phase": "Reveal", "activities": ["Full reveal post", "Blog article", "WhatsApp broadcast", "Email campaign"], "assets": ["poster", "carousel", "blog", "email"] },
+        { "week": 3, "phase": "Engage", "activities": ["Testimonial posts", "Educational content", "Behind the scenes"], "assets": ["testimonial", "educational_carousel", "story"] },
+        { "week": 4, "phase": "Convert", "activities": ["Promotional push", "Last chance reminders", "Event/Test drive booking"], "assets": ["offer_poster", "broadcast", "cta_focused"] }
+      ]
+    },
+    {
+      "id": "2_week_promo",
+      "name": "2-Week Promotion Timeline",
+      "description": "Short promotional campaign for rebates or limited offers",
+      "phases": [
+        { "week": 1, "phase": "Announce", "activities": ["Launch post", "WhatsApp broadcast", "Email blast", "Instagram story"], "assets": ["poster", "story", "broadcast", "email"] },
+        { "week": 2, "phase": "Urgency", "activities": ["Countdown posts", "Last chance reminders", "Testimonial push"], "assets": ["countdown_story", "testimonial", "final_cta"] }
+      ]
+    },
+    {
+      "id": "1_week_blitz",
+      "name": "1-Week Blitz Timeline",
+      "description": "Quick campaign for events, flash sales, or same-week opportunities",
+      "phases": [
+        { "week": 1, "phase": "Blitz", "activities": ["Daily posts", "Story every day", "WhatsApp broadcast mid-week"], "assets": ["poster", "story", "broadcast", "carousel"] }
+      ]
+    }
+  ],
+  "postingFrequency": {
+    "facebook": "1 post per day during campaign, 3-4 per week normally",
+    "instagram": "1-2 posts per day during campaign, 4-5 per week normally",
+    "tiktok": "1-2 videos per day during campaign, 5-7 per week normally",
+    "whatsapp": "2-3 broadcasts per week during campaign, 1-2 normally",
+    "email": "1-2 emails per week during campaign, 1 per week normally"
+  }
+}
