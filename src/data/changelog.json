@@ -1,5 +1,19 @@
 [
   {
+    "version": "V4.1",
+    "date": "2026-06-24",
+    "changes": [
+      "RJEOS editorial campaign engine launched with constitution, design directions, creative package builder",
+      "Dashboard restructuring — Finance Calc, Charging, Warranty moved to standalone pages",
+      "Vehicle DB mobile compact view with search filter and expandable specs",
+      "Finance Calculator compact redesign for iPhone 16 (tighter padding, toggle switches)",
+      "Dark/light mode support added to RJEOS page via semantic CSS variables",
+      "Added OEM Social design direction in RJEOS (clean, bright, family-oriented artwork)",
+      "Fixed Seal rebate to RM2,000 and Seal 6 rebate to RM1,800",
+      "Navbar simplified — core navigation only (Dashboard, Vehicles, AI Prompt Studio, RJEOS, Changelog)"
+    ]
+  },
+  {
     "version": "V4.0",
     "date": "2026-06-17",
     "changes": [

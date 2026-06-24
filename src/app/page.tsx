@@ -1,12 +1,8 @@
 import Link from "next/link";
 import company from "@/data/company.json";
 import finance from "@/data/finance.json";
-import charging from "@/data/charging.json";
 import salesRules from "@/data/sales_rules.json";
 import changelog from "@/data/changelog.json";
-import LoanCalculator from "@/components/LoanCalculator";
-import ChargingTimeEstimator from "@/components/ChargingTimeEstimator";
-import WarrantyCard from "@/components/WarrantyCard";
 
 export default function Home() {
   const latestChangelog = changelog[0];
@@ -33,7 +29,7 @@ export default function Home() {
         <section>
           <h2 className="section-title mb-2 sm:mb-4">Quick Actions</h2>
           <div className="flex flex-row gap-1.5">
-            <Link
+            <a
               href="/vehicles"
               className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
@@ -42,9 +38,9 @@ export default function Home() {
               </div>
               <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">Vehicle DB</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Browse all models</span>
-            </Link>
+            </a>
             <a
-              href="#loan-calculator"
+              href="/finance"
               className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-amber-50 flex items-center justify-center">
@@ -54,7 +50,7 @@ export default function Home() {
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Monthly payments</span>
             </a>
             <a
-              href="#charging-estimator"
+              href="/charging"
               className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-blue-50 flex items-center justify-center">
@@ -64,7 +60,7 @@ export default function Home() {
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Station map</span>
             </a>
             <a
-              href="#warranty"
+              href="/warranty"
               className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
               <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-teal-50 flex items-center justify-center">
@@ -73,7 +69,7 @@ export default function Home() {
               <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">Warranty</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Coverage info</span>
             </a>
-            <Link
+            <a
               href="/rjeos"
               className="flex-1 card card-interactive card-elevated flex flex-col items-center gap-0.5 sm:gap-1 py-1.5 sm:py-3 !px-1 sm:!px-3 text-center overflow-hidden"
             >
@@ -82,62 +78,9 @@ export default function Home() {
               </div>
               <span className="text-[0.55rem] sm:text-sm font-semibold text-neutral-700 truncate">RJEOS</span>
               <span className="hidden sm:block text-[0.6rem] sm:text-xs text-neutral-400">Editorial campaign engine</span>
-            </Link>
+            </a>
           </div>
         </section>
-
-        {/* ─── Loan Calculator ────────────────────────────── */}
-        <div id="loan-calculator">
-          <LoanCalculator />
-        </div>
-
-
-        {/* ─── Charging Time Estimator ──────────────────── */}
-        <div id="charging-estimator">
-          <ChargingTimeEstimator />
-        </div>
-
-        {/* ─── Charging Network ────────────────────────────── */}
-        <section id="charging-network">
-          <h2 className="section-title">Charging Network</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            {charging.cities.map((city) => (
-              <div key={city.city} className="card card-elevated">
-                <h3 className="font-bold text-neutral-800 text-sm mb-1.5 flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent shrink-0"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  {city.city}
-                </h3>
-                <div className="space-y-1">
-                  {city.stations.map((station, i) => (
-                    <div
-                      key={i}
-                      className="bg-neutral-50 rounded p-1.5 text-xs"
-                    >
-                      <p className="font-medium text-neutral-700 truncate text-xs">
-                        {station.location}
-                      </p>
-                      <div className="flex justify-between mt-0.5 text-[0.65rem] text-neutral-400">
-                        <span>{station.power}</span>
-                        <span>{station.provider}</span>
-                      </div>
-                    </div>
-                  ))}
-                  {city.stations.length === 0 && (
-                    <p className="text-xs text-neutral-400 italic">
-                      No charging stations listed
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ─── Warranty ──────────────────────────────────── */}
-        <div id="warranty">
-          <WarrantyCard />
-        </div>
-
 
         {/* ─── AI Agent Section ─────────────────────────────── */}
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">

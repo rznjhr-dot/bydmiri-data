@@ -131,7 +131,6 @@ export default function LoanCalculator() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // fallback for older browsers
       const ta = document.createElement("textarea");
       ta.value = text;
       ta.style.position = "fixed";
@@ -147,14 +146,15 @@ export default function LoanCalculator() {
 
   return (
     <section>
-      <h2 className="section-title">Finance Calculator</h2>
-      <div className="card card-elevated overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
+      <h2 className="section-title text-[0.85rem]">Finance Calculator</h2>
+      <div className="card card-elevated overflow-hidden !p-0">
+        <div className="divide-y divide-[var(--color-border-primary)]/60">
           {/* Controls */}
-          <div className="lg:col-span-3 p-3 sm:p-4 space-y-2">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="p-2.5 space-y-2">
+            {/* Model + Variant row */}
+            <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
+                <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
                   Model
                 </label>
                 <select
@@ -163,7 +163,7 @@ export default function LoanCalculator() {
                     setSelectedModel(e.target.value);
                     setSelectedVariantIdx(0);
                   }}
-                  className="select"
+                  className="select !text-xs !py-1.5"
                 >
                   {vehicles.map((v) => (
                     <option key={v.model} value={v.model}>
@@ -172,16 +172,15 @@ export default function LoanCalculator() {
                   ))}
                 </select>
               </div>
-
               {currentVehicle.variants.length > 1 && (
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
+                  <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
                     Variant
                   </label>
                   <select
                     value={selectedVariantIdx}
                     onChange={(e) => setSelectedVariantIdx(Number(e.target.value))}
-                    className="select"
+                    className="select !text-xs !py-1.5"
                   >
                     {currentVehicle.variants.map((v, i) => (
                       <option key={v.name} value={i}>
@@ -193,59 +192,36 @@ export default function LoanCalculator() {
               )}
             </div>
 
-            {/* Rebate Toggle */}
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  className={`toggle ${includeRebate ? "active" : ""}`}
-                  onClick={() => setIncludeRebate(!includeRebate)}
-                >
-                  <div className="toggle-track">
-                    <div className="toggle-thumb" />
+            {/* Rebate toggles row */}
+            <div className="grid grid-cols-2 gap-2">
+              <div className="flex items-center justify-between bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80">
+                <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeRebate(!includeRebate)}>
+                  <div className={`w-7 h-4 rounded-full transition-colors relative ${includeRebate ? "bg-accent" : "bg-neutral-300"}`}>
+                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
                   </div>
-                  <span className="ml-3 text-sm font-medium text-neutral-600">
-                    Apply Rebate
-                  </span>
+                  <span className="text-[0.6rem] font-medium text-neutral-600">Rebate</span>
                 </label>
                 {currentVariant.rebate > 0 && (
-                  <span className="text-sm font-semibold text-green-600">
-                    {formatCurrency(currentVariant.rebate)}
-                  </span>
+                  <span className="text-[0.6rem] font-semibold text-green-600">{formatCurrency(currentVariant.rebate)}</span>
                 )}
               </div>
-              {currentVariant.rebate === 0 && (
-                <p className="text-xs text-neutral-400 mt-1 ml-10">
-                  No rebate available for this variant
-                </p>
-              )}
-            </div>
-
-            {/* CSP/GSP/SSP Rebate */}
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  className={`toggle ${includeCspRebate ? "active" : ""}`}
-                  onClick={() => setIncludeCspRebate(!includeCspRebate)}
-                >
-                  <div className="toggle-track">
-                    <div className="toggle-thumb" />
+              <div className="flex items-center justify-between bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80">
+                <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeCspRebate(!includeCspRebate)}>
+                  <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
+                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
-                  <span className="ml-3 text-sm font-medium text-neutral-600">
-                    {finance.additionalRebate.label}
-                  </span>
+                  <span className="text-[0.6rem] font-medium text-neutral-600 truncate">{finance.additionalRebate.label.split(" ")[0]}</span>
                 </label>
-                <span className="text-sm font-semibold text-green-600">
-                  {formatCurrency(cspRebateAmount)}
-                </span>
+                <span className="text-[0.6rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount)}</span>
               </div>
             </div>
 
             {/* Downpayment */}
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
+              <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
                 Downpayment
               </label>
-              <div className="flex gap-1.5 mb-1.5">
+              <div className="flex gap-1 mb-1">
                 {[0, 10, 15, 20].map((pct) => (
                   <button
                     key={pct}
@@ -254,10 +230,8 @@ export default function LoanCalculator() {
                       setDownpaymentPct(pct);
                       setDownpaymentCustom("");
                     }}
-                    className={`pill flex-1 ${
-                      downpaymentPct === pct && !downpaymentCustom
-                        ? "pill-active"
-                        : ""
+                    className={`pill !text-[0.65rem] !py-1 flex-1 ${
+                      downpaymentPct === pct && !downpaymentCustom ? "pill-active" : ""
                     }`}
                   >
                     {pct}%
@@ -265,7 +239,7 @@ export default function LoanCalculator() {
                 ))}
               </div>
               <div className="input-group">
-                <span className="input-prefix">RM</span>
+                <span className="input-prefix !text-[0.65rem]">RM</span>
                 <input
                   type="text"
                   inputMode="numeric"
@@ -276,171 +250,126 @@ export default function LoanCalculator() {
                     setDownpaymentCustom(val);
                     if (val) setDownpaymentPct(null);
                   }}
-                  className="input"
+                  className="input !text-xs !py-1.5"
                 />
               </div>
             </div>
 
-            {/* Tenure */}
-            <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
-                Loan Tenure
-              </label>
-              <div className="grid grid-cols-4 sm:grid-cols-8 gap-1">
-                {[2, 3, 4, 5, 6, 7, 8, 9].map((t) => (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() => setTenure(t)}
-                    className={`pill ${tenure === t ? "pill-active" : ""}`}
-                  >
-                    {t}y
-                  </button>
-                ))}
+            {/* Tenure + Interest row */}
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+                  Tenure
+                </label>
+                <div className="flex gap-1 flex-wrap">
+                  {[2, 3, 4, 5, 6, 7, 8, 9].map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => setTenure(t)}
+                      className={`pill !text-[0.55rem] !py-1 !px-1.5 ${tenure === t ? "pill-active" : ""}`}
+                    >
+                      {t}y
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            {/* Interest Rate */}
-            <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
-                Interest Rate (%)
-              </label>
-              <div className="input-group">
-                <span className="text-xs text-neutral-400 mr-2">%</span>
-                <input
-                  type="text"
-                  inputMode="decimal"
-                  placeholder="2.30"
-                  value={customInterestRate}
-                  onChange={(e) => {
-                    const val = e.target.value.replace(/[^0-9.]/g, "");
-                    setCustomInterestRate(val);
-                  }}
-                  className="input"
-                />
+              <div>
+                <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+                  Interest Rate
+                </label>
+                <div className="input-group">
+                  <span className="input-prefix !text-[0.65rem]">%</span>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    placeholder="2.30"
+                    value={customInterestRate}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/[^0-9.]/g, "");
+                      setCustomInterestRate(val);
+                    }}
+                    className="input !text-xs !py-1.5"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
           {/* Results */}
-          <div
-            className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-[var(--color-bg-secondary)] border-t lg:border-t-0 lg:border-l border-[var(--color-border-primary)]/60 p-3 sm:p-4 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">
-                  Payment Summary
-                </h3>
-                <button
-                  type="button"
-                  onClick={handleCopyQuotation}
-                  className="p-1.5 rounded-md text-neutral-300 hover:text-accent hover:bg-accent/5 transition-all cursor-pointer touch-target flex items-center gap-1 text-xs font-medium"
-                  aria-label="Copy quotation"
-                >
-                  {copied ? (
-                    <>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      <span className="text-green-500">Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                      Quotation
-                    </>
-                  )}
-                </button>
-              </div>
+          <div className="p-2.5 bg-gradient-to-r from-accent/5 to-[var(--color-bg-secondary)]">
+            <div className="flex items-center justify-between mb-1.5">
+              <h3 className="text-[0.6rem] font-semibold text-neutral-400 uppercase tracking-widest">
+                Payment Summary
+              </h3>
+              <button
+                type="button"
+                onClick={handleCopyQuotation}
+                className="p-1 rounded-md text-neutral-300 hover:text-accent hover:bg-accent/5 transition-all cursor-pointer flex items-center gap-1 text-[0.55rem] font-medium"
+                aria-label="Copy quotation"
+              >
+                {copied ? (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span className="text-green-500">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Quotation
+                  </>
+                )}
+              </button>
+            </div>
 
-              <div className="space-y-1 text-sm">
-                <div className="data-row">
-                  <span className="data-row-label">OTR without Insurance</span>
-                  <span className="data-row-value">
-                    {formatCurrency(currentVariant.otrWithoutInsurance)}
-                  </span>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[0.6rem]">
+              <div className="flex justify-between">
+                <span className="text-neutral-400">OTR w/o Ins.</span>
+                <span className="font-medium text-neutral-800">{formatCurrency(currentVariant.otrWithoutInsurance)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-400">Insurance</span>
+                <span className="font-medium text-neutral-800">{formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance)}</span>
+              </div>
+              <div className="flex justify-between col-span-2 border-t border-neutral-100/50 pt-0.5">
+                <span className="text-neutral-800 font-semibold">OTR Price</span>
+                <span className="font-bold text-neutral-800">{formatCurrency(currentVariant.otr)}</span>
+              </div>
+              {includeRebate && currentVariant.rebate > 0 && (
+                <div className="flex justify-between col-span-2">
+                  <span className="text-neutral-400">Rebate</span>
+                  <span className="font-semibold text-green-600">-{formatCurrency(currentVariant.rebate)}</span>
                 </div>
-                <div className="data-row">
-                  <span className="data-row-label">
-                    Est. Insurance
-                    {currentVariant.sumInsured && (
-                      <span className="text-[0.55rem] text-blue-400 ml-1 font-normal">
-                        (Sum Insured RM {currentVariant.sumInsured.toLocaleString("en-MY")})
-                      </span>
-                    )}
-                  </span>
-                  <span className="data-row-value">
-                    {formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance)}
-                  </span>
+              )}
+              {includeCspRebate && cspRebateAmount > 0 && (
+                <div className="flex justify-between col-span-2">
+                  <span className="text-neutral-400">{finance.additionalRebate.label}</span>
+                  <span className="font-semibold text-blue-600">-{formatCurrency(cspRebateAmount)}</span>
                 </div>
-                <div className="data-row">
-                  <span className="data-row-label">OTR Price</span>
-                  <span className="data-row-value font-bold text-base">
-                    {formatCurrency(currentVariant.otr)}
-                  </span>
-                </div>
-                {includeRebate && currentVariant.rebate > 0 && (
-                  <div className="data-row">
-                    <span className="data-row-label">Rebate</span>
-                    <span className="font-bold text-green-600 text-base">
-                      -{formatCurrency(currentVariant.rebate)}
-                    </span>
-                  </div>
-                )}
-                {includeCspRebate && cspRebateAmount > 0 && (
-                  <div className="data-row">
-                    <span className="data-row-label">{finance.additionalRebate.label}</span>
-                    <span className="font-bold text-blue-600 text-base">
-                      -{formatCurrency(cspRebateAmount)}
-                    </span>
-                  </div>
-                )}
-                <div className="data-row">
-                  <span className="data-row-label">After Rebate</span>
-                  <span className="data-row-value">
-                    {formatCurrency(priceAfterRebate)}
-                  </span>
-                </div>
-                <div className="border-t border-neutral-100 pt-1.5 data-row">
-                  <span className="data-row-label">Downpayment</span>
-                  <span className="data-row-value">
-                    {downpaymentAmount > 0
-                      ? formatCurrency(downpaymentAmount)
-                      : "RM0"}
-                  </span>
-                </div>
-                <div className="data-row">
-                  <span className="data-row-label">Loan Amount</span>
-                  <span className="data-row-value">
-                    {formatCurrency(loanAmount)}
-                  </span>
-                </div>
-                <div className="data-row">
-                  <span className="data-row-label">Interest Rate</span>
-                  <span className="data-row-value">
-                    {parsedInterestRate}%
-                  </span>
-                </div>
-                <div className="data-row">
-                  <span className="data-row-label">Tenure</span>
-                  <span className="data-row-value">{tenure} Years</span>
-                </div>
+              )}
+              <div className="flex justify-between col-span-2 border-t border-neutral-100/50 pt-0.5">
+                <span className="text-neutral-400">After Rebate</span>
+                <span className="font-semibold">{formatCurrency(priceAfterRebate)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-400">Downpayment</span>
+                <span className="font-medium">{downpaymentAmount > 0 ? formatCurrency(downpaymentAmount) : "RM0"}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-400">{parsedInterestRate}% × {tenure}y</span>
+                <span className="font-medium">{formatCurrency(loanAmount)}</span>
               </div>
             </div>
 
-            <div className="mt-3 pt-2 border-t-2 border-accent/20">
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="text-xs text-neutral-400 font-medium">
-                    Monthly Payment
-                  </p>
-                  <p className="text-xs text-neutral-300 mt-0.5">
-                    {parsedInterestRate}% × {tenure}y
-                  </p>
-                </div>
-                <p className="text-xl sm:text-2xl font-extrabold text-accent tracking-tight">
-                  {formatCurrency(monthlyPayment)}
-                  <span className="text-sm font-normal text-neutral-400">/mo</span>
-                </p>
+            <div className="mt-2 pt-1.5 border-t-2 border-accent/20 flex items-center justify-between">
+              <div>
+                <p className="text-[0.55rem] text-neutral-400 font-medium">Monthly</p>
+                <p className="text-[0.45rem] text-neutral-300">{parsedInterestRate}% × {tenure}y</p>
               </div>
+              <p className="text-lg sm:text-xl font-extrabold text-accent tracking-tight">
+                {formatCurrency(monthlyPayment)}
+                <span className="text-[0.6rem] font-normal text-neutral-400">/mo</span>
+              </p>
             </div>
           </div>
         </div>
