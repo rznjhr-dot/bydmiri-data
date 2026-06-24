@@ -118,6 +118,29 @@ export default function AIPromptStudioPage() {
           ))}
         </div>
 
+        {/* RJEOS Note */}
+        <Link
+          href="/rjeos"
+          className="card card-interactive group border-l-4 border-l-amber-500 bg-gradient-to-r from-amber-50/80 to-white overflow-hidden"
+        >
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shrink-0 shadow-sm">
+              <span className="text-white text-[0.55rem] font-black tracking-tight">RJ</span>
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 mb-0.5">
+                <h2 className="font-bold text-neutral-800 text-sm">RJEOS™ — Editorial Campaign Engine</h2>
+                <span className="badge badge-amber text-[0.5rem] py-0 px-1.5">Separate System</span>
+              </div>
+              <p className="text-xs text-neutral-500 leading-relaxed">
+                A completely separate prompt engine for premium automotive editorial campaign artwork.
+                Locked-down constitutional system — typography, hierarchy, and composition rules are immutable.
+                <span className="text-amber-600 font-medium ml-1 group-hover:underline">Open RJEOS &rarr;</span>
+              </p>
+            </div>
+          </div>
+        </Link>
+
         {/* System Overview */}
         <div className="card border-l-4 border-l-purple-500 bg-purple-50/50">
           <div className="flex items-start gap-3">

@@ -1,0 +1,123 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-06-24",
+  "constitution": {
+    "version": "1.0",
+    "status": "LOCKED",
+    "articles": [
+      {
+        "number": 1,
+        "title": "PURPOSE",
+        "content": "RJEOS exists to produce premium automotive editorial campaign artwork. RJEOS does not create promotional flyers. RJEOS does not create social media advertisements. RJEOS does not create discount posters. Every generated artwork must resemble an official premium campaign created by an international automotive brand. The output must communicate confidence before information. Luxury before promotion. Emotion before specification. Consistency before creativity."
+      },
+      {
+        "number": 2,
+        "title": "DESIGN DNA",
+        "content": "Every artwork SHALL inherit the same visual identity. This identity SHALL remain unchanged regardless of: Vehicle, Campaign, Promotion, AI Model, Future software updates. Every artwork SHALL appear to belong to the same campaign."
+      },
+      {
+        "number": 3,
+        "title": "IMMUTABLE RULES",
+        "content": "The following components are LOCKED. User SHALL NOT modify: Typography, Tracking, Kerning, Grid, Margins, Safe Area, Spacing, Logo Placement, Signature Placement, Visual Hierarchy, Colour Palette, Editorial Style, Photography Style, Composition Rules, Quality Rules. Only the Prompt Builder may inject these values."
+      },
+      {
+        "number": 4,
+        "title": "USER CONTROL",
+        "content": "The user may ONLY choose: Output Size, Model, Scene, Design Direction, Headline, Show/Hide Price, Show/Hide Features, Show/Hide CTA, Show/Hide BYD Logo, Show/Hide Sales Advisor, Target AI. No other creative decisions shall be exposed."
+      },
+      {
+        "number": 5,
+        "title": "OUTPUT SIZE",
+        "content": "Available: Square (1:1), Portrait (4:5), Story (9:16). No other formats shall be displayed by default."
+      },
+      {
+        "number": 6,
+        "title": "DESIGN DIRECTION",
+        "content": "Available: Executive, Luxury, Performance, Lifestyle, OEM Social. The Prompt Builder SHALL automatically inject the corresponding visual language."
+      },
+      {
+        "number": 7,
+        "title": "SCENE",
+        "content": "Available: Studio, Architecture, Showroom. The Prompt Builder SHALL automatically build the environment description."
+      },
+      {
+        "number": 8,
+        "title": "VEHICLE",
+        "content": "The uploaded vehicle photograph is the single source of truth. The AI SHALL NEVER: Generate another vehicle, Modify body shape, Modify wheels, Modify mirrors, Modify paint, Modify headlights, Modify taillights, Modify proportions. Only the following are permitted: Background removal, Professional retouching, Reflection enhancement, Contrast adjustment, Exposure adjustment, Sharpening, Ground shadow."
+      },
+      {
+        "number": 9,
+        "title": "SALES ADVISOR",
+        "content": "Three modes exist: Portrait, Signature Only, Hidden. If Portrait is disabled, every portrait instruction SHALL be removed. If Signature Only is selected, only text may appear. No portrait."
+      },
+      {
+        "number": 10,
+        "title": "TYPOGRAPHY",
+        "content": "Model Name: ALL CAPS, Satoshi Bold, Tracking +160, White. Headline: Satoshi Medium, Tracking +20, Sentence Case. Price: Second largest text. Features: Maximum 3. Signature: RIDZUAN JAHARI, BYD MIRI, Tracking +120. Typography SHALL NEVER change."
+      },
+      {
+        "number": 11,
+        "title": "HIERARCHY",
+        "content": "The visual reading order SHALL remain: Logo ↓ Model Name ↓ Headline ↓ Vehicle ↓ Features ↓ Price ↓ CTA ↓ Signature. No module may alter this hierarchy."
+      },
+      {
+        "number": 12,
+        "title": "QUALITY CONTROL",
+        "content": "Before the final prompt is produced, the Rendering Engine SHALL verify: Vehicle unchanged, Portrait unchanged, Model spelling correct, Typography rules injected, Hierarchy preserved, Maximum three features, Whitespace preserved, No promotional language, No AI gibberish, No visual clutter. If any rule fails, the Prompt Builder SHALL rebuild the prompt."
+      },
+      {
+        "number": 13,
+        "title": "PROMOTIONAL LANGUAGE",
+        "content": "Forbidden words: Promotion, Cheap, Discount, Best Price, Hot Deal, Limited Stock, Buy Now, Lowest Price, Special Offer, Free Gift. Unless explicitly enabled by the user."
+      },
+      {
+        "number": 14,
+        "title": "PROMPT GENERATION",
+        "content": "The user SHALL NEVER write prompts manually. The Prompt Builder SHALL assemble the prompt automatically using: Model Database + RJEOS Constitution + Selected Options + Prompt Engine → Creative Package."
+      },
+      {
+        "number": 15,
+        "title": "FINAL OBJECTIVE",
+        "content": "Every generated artwork shall be immediately recognisable as part of the RJEOS Editorial Campaign System. The artwork shall resemble an official premium automotive campaign rather than a dealership advertisement."
+      }
+    ]
+  },
+  "outputSizes": [
+    { "id": "1:1", "name": "Square", "dimensions": "1024×1024" },
+    { "id": "4:5", "name": "Portrait", "dimensions": "1024×1280" },
+    { "id": "9:16", "name": "Story", "dimensions": "1080×1920" }
+  ],
+  "designDirections": [
+    { "id": "executive", "name": "Executive", "description": "Professional, authoritative, corporate sophistication", "visualLanguage": "Clean lines, dark tones, precise composition. Minimalist backdrop with subtle gradient lighting. Dark suit aesthetic — charcoal, navy, deep silver. Sharp contrast, controlled highlights." },
+    { "id": "luxury", "name": "Luxury", "description": "Opulent, refined, aspirational elegance", "visualLanguage": "Warm ambient lighting, rich shadows, golden hour tones. Premium materials visible in reflections. Deep blacks, warm metallics, soft focus falloff. Atmosphere of exclusivity and refinement." },
+    { "id": "performance", "name": "Performance", "description": "Dynamic, aggressive, technical precision", "visualLanguage": "High contrast, dramatic lighting, motion blur hints. Angular compositions, leading lines, speed cues. Cool blues and stark whites. G-forces implied through composition and light." },
+    { "id": "lifestyle", "name": "Lifestyle", "description": "Aspirational, modern, everyday premium", "visualLanguage": "Natural lighting, environmental context. Modern architecture or scenic backdrops. Warm, approachable yet premium. The vehicle integrated into an aspirational lifestyle setting." },
+    { "id": "oem-social", "name": "OEM Social", "description": "Clean, bright, functional family-oriented social content", "visualLanguage": "Bright, clean, flat composition. Vehicle occupies 85–90% of frame — text only 10–15%. Pure white typography, no shadows, no strokes, no glow. Large BYD logo top-left, flat vector white. Vertical 2px white divider anchors a left-aligned information stack: extra-bold model name ALL CAPS (tracking 0 to +5), bold variant name (tracking +10 to +20), medium-weight range text (tracking +80 to +120, opacity 90%). Thin elegant script signature paired with dealership text bottom-right. Family-oriented, approachable, practical mood. No aggressive or luxury cues." }
+  ],
+  "scenes": [
+    { "id": "studio", "name": "Studio", "description": "Controlled environment with professional lighting", "environmentDescription": "Professional studio environment with controlled lighting. Seamless backdrop or cyclorama wall. Soft key light with fill and rim highlights. Clean, distraction-free composition. The vehicle is the sole subject. Shadow gradient beneath the vehicle for grounding." },
+    { "id": "architecture", "name": "Architecture", "description": "Modern architectural backdrop", "environmentDescription": "Contemporary architectural setting — clean concrete, glass, steel, or geometric facades. The environment complements without competing. Natural light through architectural elements. Reflections on polished surfaces. Urban sophistication framing the vehicle." },
+    { "id": "showroom", "name": "Showroom", "description": "Premium dealership or brand experience space", "environmentDescription": "Premium brand showroom environment. Curated lighting with accent spots on the vehicle. Minimalist interior design with luxury materials. Brand-consistent colours and finishes. The vehicle is presented as an exhibit, centre stage." }
+  ],
+  "salesAdvisorModes": [
+    { "id": "portrait", "name": "Portrait", "description": "Full portrait of sales advisor alongside the vehicle" },
+    { "id": "signature", "name": "Signature Only", "description": "Only the RIDZUAN JAHARI | BYD MIRI signature text, no portrait" },
+    { "id": "hidden", "name": "Hidden", "description": "No sales advisor elements at all" }
+  ],
+  "forbiddenWords": ["Promotion", "Cheap", "Discount", "Best Price", "Hot Deal", "Limited Stock", "Buy Now", "Lowest Price", "Special Offer", "Free Gift"],
+  "typography": {
+    "modelName": "ALL CAPS, Satoshi Bold, Tracking +160, White",
+    "headline": "Satoshi Medium, Tracking +20, Sentence Case",
+    "price": "Second largest text element",
+    "features": "Maximum 3 features listed",
+    "signature": "RIDZUAN JAHARI | BYD MIRI, Tracking +120"
+  },
+  "hierarchy": {
+    "order": ["Logo", "Model Name", "Headline", "Vehicle", "Features", "Price", "CTA", "Signature"]
+  },
+  "signature": {
+    "name": "RIDZUAN JAHARI",
+    "dealership": "BYD MIRI",
+    "tracking": "+120"
+  }
+}

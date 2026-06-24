@@ -75,7 +75,7 @@
         "otr": 179879.05,
         "otrWithoutInsurance": 176045,
         "sumInsured": 175300,
-        "rebate": 1800,
+        "rebate": 2000,
         "range": 650,
         "battery": 82.56,
         "maxChargePower": "150kW DC"
@@ -85,7 +85,7 @@
         "otr": 200903.70,
         "otrWithoutInsurance": 196675,
         "sumInsured": 195300,
-        "rebate": 1800,
+        "rebate": 2000,
         "range": 580,
         "battery": 82.56,
         "maxChargePower": "150kW DC"

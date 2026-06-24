@@ -14,6 +14,7 @@ const navLinks = [
   { href: "/agent-hub", label: "AI Hub" },
   { href: "/marketing-ai", label: "Marketing AI" },
   { href: "/ai-prompt-studio", label: "AI Prompt Studio" },
+  { href: "/rjeos", label: "RJEOS" },
   { href: "/data", label: "API" },
   { href: "/changelog", label: "Changelog" },
 ];
