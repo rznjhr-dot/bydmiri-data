@@ -1,5 +1,23 @@
 [
   {
+    "version": "V4.2",
+    "date": "2026-07-05",
+    "changes": [
+      "EV Market Malaysia hub launched — live news feed for EV industry updates, pricing & rebate changes",
+      "EV comparison tool — side-by-side BYD vs competitor comparison with auto-suggest",
+      "7 competitor brands added: Proton e.MAS, Chery, MG, Leapmotor, Jaecoo, Jetour, Tesla (36 variants total)",
+      "All competitor specs researched and verified from Paul Tan, SoyaCincau, AutoBuzz & official sources",
+      "NEDC ranges added for all BYD models (official BYD Malaysia data)",
+      "East Malaysia pricing markup tracked (Proton +RM3k confirmed, Jaecoo +RM2,750 confirmed, Tesla national pricing)",
+      "Monthly payment estimator with 2.30% flat rate, 9yr, 10% down — includes EM markup & insurance estimate",
+      "Insurance estimate tiers: RM2.3k (<RM100k), RM3k (RM100-150k), RM3.5k (RM150-200k), RM4k (>RM200k)",
+      "BYD advantages section — Blade Battery, 6+8 yr warranty, V2L standard, World #1 EV maker",
+      "Live-data badge, category filters, market highlights, and mobile-optimised layout",
+      "Font optimised for screen readability (system-ui stack, subpixel antialiasing, max contrast)",
+      "24 EV news items with source links from Malaysia's top automotive publications"
+    ]
+  },
+  {
     "version": "V4.1",
     "date": "2026-06-24",
     "changes": [

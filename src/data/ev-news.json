@@ -1,0 +1,237 @@
+{
+  "lastUpdated": "2026-07-05",
+  "items": [
+    {
+      "id": "news-001",
+      "date": "2026-06-12",
+      "title": "Proton e.MAS 7 Premium Plus Launched at KLIMS 2026",
+      "summary": "New flagship variant with 68.39 kWh battery, 450 km range, massage seats, front passenger leg rest. Priced at RM125,800 before rebate.",
+      "category": "launch",
+      "brand": "Proton",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/06/12/proton-emas-7-premium-plus-official-specs-price/"
+    },
+    {
+      "id": "news-002",
+      "date": "2026-04-24",
+      "title": "MG S5 EV CKD Launched — More Power, Lower Price",
+      "summary": "Locally assembled at Melaka. Upgraded 205 PS motor, 350 Nm torque, 446 km range. Priced at RM117,528 — undercuts CBU version by RM11k.",
+      "category": "launch",
+      "brand": "MG",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/04/24/mg-s5-ev-ckd-launched-in-malaysia/"
+    },
+    {
+      "id": "news-003",
+      "date": "2026-04-14",
+      "title": "Leapmotor B10 Gets Up to RM18,000 Rebate; C10 Plus Up to RM13,000 Savings",
+      "summary": "B10 Life at RM99,800 after RM8k rebate. B10 Design at RM109,800 after RM9k rebate. C10 Plus at RM139,000 after RM9k rebate + RM4k insurance subsidy.",
+      "category": "rebate",
+      "brand": "Leapmotor",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/04/14/own-the-leapmotor-b10-ev-now-with-up-to-rm18k-rebate/"
+    },
+    {
+      "id": "news-004",
+      "date": "2026-02-26",
+      "title": "Leapmotor C10 Plus Launched with 800V Architecture",
+      "summary": "81.9 kWh battery, 510 km range, 180 kW DC charging. 299 PS motor. Priced from RM148,000. New Night Edition at RM156,000.",
+      "category": "launch",
+      "brand": "Leapmotor",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/02/26/leapmotor-c10-plus-in-malaysia/"
+    },
+    {
+      "id": "news-005",
+      "date": "2026-06-11",
+      "title": "Jetour T2 i-DM PHEV Open for Booking",
+      "summary": "PHEV version of T2 with 1.5T + dual motors, 360 PS, 100 km EV range, 1,200 km combined range. Estimated price RM168,888.",
+      "category": "launch",
+      "brand": "Jetour",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/06/11/jetour-t2-i-dm-phev-malaysia-open-for-booking-klims-2026/"
+    },
+    {
+      "id": "news-006",
+      "date": "2026-06-03",
+      "title": "Jaecoo J5 EV Teased for Malaysia — 399 km Range, RM108k Estimated",
+      "summary": "Full BEV with 61.1 kWh LFP battery, 130 kW DC charging, pet-friendly interior. Expected launch Q3 2026.",
+      "category": "launch",
+      "brand": "Jaecoo",
+      "source": "AutoBuzz",
+      "url": "https://autobuzz.my/2026/06/03/jaecoo-j5-ev-officially-teased-for-malaysia/"
+    },
+    {
+      "id": "news-007",
+      "date": "2026-03-18",
+      "title": "Omoda C9 PHEV Launched — 537 HP, RM208,800",
+      "summary": "Tri-motor AWD PHEV with 34.46 kWh battery, 169 km EV range, 4.9s 0-100 km/h. 70 kW DC charging.",
+      "category": "launch",
+      "brand": "Jaecoo",
+      "source": "AutoBuzz",
+      "url": "https://autobuzz.my/2026/03/18/2026-omoda-c9-phev-launched-in-malaysia/"
+    },
+    {
+      "id": "news-008",
+      "date": "2025-10-30",
+      "title": "Proton e.MAS 5 Launched — From RM56,800 After Rebate",
+      "summary": "Entry-level BEV hatchback. 30.12 kWh (225 km) and 40.16 kWh (325 km) variants. Free 7kW home charger + RM1k trade-in bonus.",
+      "category": "launch",
+      "brand": "Proton",
+      "source": "SoyaCincau",
+      "url": "https://soyacincau.com/2025/10/30/proton-emas-5-official-price-launch-package/"
+    },
+    {
+      "id": "news-009",
+      "date": "2025-10-01",
+      "title": "MG4 EV Price Drop — Up to RM28,741 Reduction",
+      "summary": "MG4 Lux now RM100,888 (down from RM129,629). Lux ER RM128,888. XPower RM138,888. Aggressive pricing to compete with BYD Atto 3 and Proton e.MAS 7.",
+      "category": "price",
+      "brand": "MG",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2025/10/01/mg4-in-malaysia-priced-down-by-rm20k-28k/"
+    },
+    {
+      "id": "news-010",
+      "date": "2025-12-10",
+      "title": "Leapmotor B10 Launched — C-Segment EV SUV from RM107,800",
+      "summary": "Two variants: Life (56.2 kWh, 361 km) and Design (67.1 kWh, 434 km). 11 kW AC charging standard. 140-168 kW DC charging.",
+      "category": "launch",
+      "brand": "Leapmotor",
+      "source": "SoyaCincau",
+      "url": "https://soyacincau.com/2025/12/10/leapmotor-b10-malaysia-launch-price-specs/"
+    },
+    {
+      "id": "news-011",
+      "date": "2026-01-30",
+      "title": "Chery Tiggo 7 & 8 PHEV CNY Promos — Up to RM6,888 Rebate",
+      "summary": "Tiggo 7 PHEV from RM109,800. Tiggo 8 PHEV from RM138,800. Both with combined 1,200 km range, 90 km EV range.",
+      "category": "rebate",
+      "brand": "Chery",
+      "source": "SoyaCincau",
+      "url": "https://soyacincau.com/2026/01/30/chery-tiggo-7-8-phev-cny-rebates/"
+    },
+    {
+      "id": "news-012",
+      "date": "2025-06-17",
+      "title": "Leapmotor C10 Price Cut — RM125,000 (Down RM34,000 from Launch)",
+      "summary": "Added 11 kW AC charging. Price reduced from RM159,000 to RM125,000. CKD at Stellantis Gurun plant.",
+      "category": "price",
+      "brand": "Leapmotor",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2025/06/17/2025-leapmotor-c10-in-malaysia/"
+    },
+    {
+      "id": "news-013",
+      "date": "2026-07-01",
+      "title": "EV Market Update: Malaysia EV Adoption Accelerating",
+      "summary": "Over 20 full EV models now available in Malaysia under RM200k. Price competition intensifying between Proton, BYD, MG, Chery, and Leapmotor. Government EV incentives continue with tax exemptions.",
+      "category": "market",
+      "highlighted": true
+    },
+    {
+      "id": "news-022",
+      "date": "2026-01-23",
+      "title": "Tesla Model 3 Standard RWD Launched — RM147,600, Most Affordable Tesla",
+      "summary": "Entry-level Model 3 with 62.5 kWh LFP battery, 534 km WLTP range, 170 kW DC charging. New EV Switcher Programme offers up to RM7,500 trade-in uplift.",
+      "category": "launch",
+      "brand": "Tesla",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/01/23/tesla-model-3-standard-malaysia/"
+    },
+    {
+      "id": "news-023",
+      "date": "2026-02-06",
+      "title": "Tesla Model 3 & Model Y Get OTA Range Boost — Up to 55 km Extra",
+      "summary": "Over-the-air update increases WLTP range across all variants. Model 3 Long Range RWD now achieves 750 km. Model Y Long Range RWD gets 691 km.",
+      "category": "tech",
+      "brand": "Tesla",
+      "source": "SoyaCincau",
+      "url": "https://soyacincau.com/2026/02/06/tesla-model-3-and-model-y-malaysia-update-more-range/"
+    },
+    {
+      "id": "news-024",
+      "date": "2026-07-05",
+      "title": "Tesla Model Y Juniper Facelift — Now Up to 691 km Range",
+      "summary": "Updated Model Y with 691 km Long Range RWD variant, 629 km Long Range AWD. New 6-seater L Premium variant at RM260,000. Prices maintained despite tax changes.",
+      "category": "launch",
+      "brand": "Tesla",
+      "source": "SoyaCincau",
+      "url": "https://soyacincau.com/2025/01/10/tesla-model-y-2025-malaysia-price-specs-launch-series/"
+    },
+    {
+      "id": "news-014",
+      "date": "2026-07-05",
+      "title": "BYD Atto 3 vs MG4 vs Proton e.MAS 7 — Segment Comparison",
+      "summary": "Three top contenders in C-segment EV under RM150k. Atto 3 starts at RM132,729, MG4 Lux at RM100,888, e.MAS 7 Prime at RM96,800 after rebate. Each offers different strengths in range, power, and features.",
+      "category": "comparison",
+      "brand": "BYD",
+      "highlighted": true
+    },
+    {
+      "id": "news-015",
+      "date": "2026-06-17",
+      "title": "BYD M6 Extended — Best Value EV MPV at RM130,729",
+      "summary": "71.8 kWh battery, 530 km range, 7-seater. Monthly from RM1,234 after rebate. Only EV MPV in Malaysia under RM150k.",
+      "category": "market",
+      "brand": "BYD"
+    },
+    {
+      "id": "news-016",
+      "date": "2026-05-15",
+      "title": "MG S5 EV CKD vs CBU — What's Different?",
+      "summary": "CKD version has upgraded motor (205 PS vs 170 PS), +100 Nm torque, more range (446 km vs 425 km), full leatherette seats, power passenger seat, hands-free tailgate — all at RM117,528 vs CBU Lux at RM128,548.",
+      "category": "comparison",
+      "brand": "MG",
+      "source": "Paul Tan"
+    },
+    {
+      "id": "news-017",
+      "date": "2026-04-20",
+      "title": "Omoda Jaecoo Malaysia: Up to RM18,888 Rebates Across SUV Range",
+      "summary": "J7 PHEV gets RM10k cash rebate (July Mega Promo). Omoda C9 PHEV launched with RM3k rebate + free insurance. 6 new models planned for 2026.",
+      "category": "rebate",
+      "brand": "Jaecoo",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/04/20/check-out-the-omoda-jaecoo-suv-range-up-to-rm18888-rebates/"
+    },
+    {
+      "id": "news-018",
+      "date": "2026-03-05",
+      "title": "Jaecoo J5 ICE Launched at RM108k — EV Version Coming",
+      "summary": "Petrol J5 launched with pet-friendly interior. Full BEV version teased for Q3 2026 with 61.1 kWh battery, 399 km range.",
+      "category": "launch",
+      "brand": "Jaecoo",
+      "source": "AutoBuzz"
+    },
+    {
+      "id": "news-019",
+      "date": "2026-06-15",
+      "title": "Jetour T2 Buyer's Guide — Everything You Need to Know",
+      "summary": "Boxy off-road SUV with 2.0T engine, 245 PS, XWD AWD. RM157,669. PHEV i-DM version open for booking. Warranty: 7yr vehicle + 10yr powertrain.",
+      "category": "launch",
+      "brand": "Jetour",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/06/15/jetour-t2-buyers-guide-in-malaysia/"
+    },
+    {
+      "id": "news-020",
+      "date": "2026-04-25",
+      "title": "Leapmotor A10 (B03X) — Next New Model for Malaysia",
+      "summary": "B-segment EV SUV expected end 2026 or Q1 2027. Will compete with Atto 2 and e.MAS 5. CKD at Gurun.",
+      "category": "launch",
+      "brand": "Leapmotor",
+      "source": "Paul Tan",
+      "url": "https://paultan.org/2026/04/25/leapmotor-a10-is-the-next-new-model-for-malaysia/"
+    },
+    {
+      "id": "news-021",
+      "date": "2026-07-05",
+      "title": "Chery OMODA E5 at RM99,800 — Cheapest C-Segment EV SUV?",
+      "summary": "61 kWh battery, 430 km range, 150 kW motor, 80 kW DC charging. Promo price for 2025 stock. Free home wallbox. Undercuts most competitors on price-per-range ratio.",
+      "category": "price",
+      "brand": "Chery",
+      "highlighted": true
+    }
+  ]
+}

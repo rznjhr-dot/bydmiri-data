@@ -9,6 +9,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 const navLinks = [
   { href: "/", label: "Dashboard" },
   { href: "/vehicles", label: "Vehicles" },
+  { href: "/ev-market", label: "EV Market" },
   { href: "/ai-prompt-studio", label: "AI Prompt Studio" },
   { href: "/rjeos", label: "RJEOS" },
   { href: "/changelog", label: "Changelog" },

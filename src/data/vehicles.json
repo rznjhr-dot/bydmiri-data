@@ -1,6 +1,7 @@
 [
   {
     "model": "Atto 2",
+    "segment": "B-Segment SUV",
     "variants": [
       {
         "name": "Premium",
@@ -9,14 +10,21 @@
         "sumInsured": 103500,
         "rebate": 9000,
         "range": 410,
+        "rangeNedc": 410,
         "battery": 51.13,
         "chargeCost": 15.34,
+        "motorPower": 130,
+        "torque": 290,
+        "zeroToHundred": "7.9",
+        "drive": "FWD",
+        "acCharging": "7 kW (1-phase)",
         "maxChargePower": "82kW DC"
       }
     ]
   },
   {
     "model": "Atto 3",
+    "segment": "C-Segment SUV",
     "variants": [
       {
         "name": "Ultra",
@@ -25,8 +33,14 @@
         "sumInsured": 129300,
         "rebate": 10000,
         "range": 480,
+        "rangeNedc": 480,
         "battery": 60.48,
         "chargeCost": 18.14,
+        "motorPower": 150,
+        "torque": 310,
+        "zeroToHundred": "7.3",
+        "drive": "FWD",
+        "acCharging": "7 kW (1-phase)",
         "maxChargePower": "110kW DC"
       },
       {
@@ -36,14 +50,21 @@
         "sumInsured": 142300,
         "rebate": 10000,
         "range": 600,
+        "rangeNedc": 600,
         "battery": 74.88,
         "chargeCost": 22.46,
+        "motorPower": 230,
+        "torque": 380,
+        "zeroToHundred": "5.5",
+        "drive": "RWD",
+        "acCharging": "11 kW (3-phase)",
         "maxChargePower": "220kW DC"
       }
     ]
   },
   {
     "model": "Sealion 7",
+    "segment": "D-Segment SUV",
     "variants": [
       {
         "name": "Premium",
@@ -52,7 +73,13 @@
         "sumInsured": 187300,
         "rebate": 9000,
         "range": 567,
+        "rangeNedc": 567,
         "battery": 82.5,
+        "motorPower": 230,
+        "torque": 380,
+        "zeroToHundred": "6.7",
+        "drive": "RWD",
+        "acCharging": "11 kW (3-phase)",
         "maxChargePower": "150kW DC"
       },
       {
@@ -62,13 +89,20 @@
         "sumInsured": 203300,
         "rebate": 9000,
         "range": 542,
+        "rangeNedc": 542,
         "battery": 82.5,
+        "motorPower": 390,
+        "torque": 690,
+        "zeroToHundred": "4.5",
+        "drive": "AWD",
+        "acCharging": "11 kW (3-phase)",
         "maxChargePower": "150kW DC"
       }
     ]
   },
   {
     "model": "Seal",
+    "segment": "D-Segment Sedan",
     "variants": [
       {
         "name": "Premium",
@@ -77,7 +111,13 @@
         "sumInsured": 175300,
         "rebate": 2000,
         "range": 650,
+        "rangeNedc": 650,
         "battery": 82.56,
+        "motorPower": 230,
+        "torque": 360,
+        "zeroToHundred": "5.9",
+        "drive": "RWD",
+        "acCharging": "7 kW (1-phase)",
         "maxChargePower": "150kW DC"
       },
       {
@@ -87,13 +127,20 @@
         "sumInsured": 195300,
         "rebate": 2000,
         "range": 580,
+        "rangeNedc": 580,
         "battery": 82.56,
+        "motorPower": 390,
+        "torque": 670,
+        "zeroToHundred": "3.8",
+        "drive": "AWD",
+        "acCharging": "7 kW (1-phase)",
         "maxChargePower": "150kW DC"
       }
     ]
   },
   {
     "model": "Seal 6",
+    "segment": "C-Segment Sedan",
     "variants": [
       {
         "name": "Premium",
@@ -102,13 +149,20 @@
         "sumInsured": 119300,
         "rebate": 1800,
         "range": 485,
+        "rangeNedc": 485,
         "battery": 56.64,
+        "motorPower": 160,
+        "torque": 330,
+        "zeroToHundred": "7.5",
+        "drive": "RWD",
+        "acCharging": "7 kW (1-phase)",
         "maxChargePower": "100kW DC"
       }
     ]
   },
   {
     "model": "M6",
+    "segment": "C-Segment MPV",
     "variants": [
       {
         "name": "Extended",
@@ -117,8 +171,14 @@
         "sumInsured": 127300,
         "rebate": 6000,
         "range": 530,
+        "rangeNedc": 530,
         "battery": 71.8,
         "chargeCost": 21.54,
+        "motorPower": 150,
+        "torque": 310,
+        "zeroToHundred": "8.6",
+        "drive": "FWD",
+        "acCharging": "7 kW (1-phase)",
         "maxChargePower": "115kW DC"
       }
     ]
