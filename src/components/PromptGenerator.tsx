@@ -6,6 +6,7 @@ import finance from "@/data/finance.json";
 import salesRules from "@/data/sales_rules.json";
 import charging from "@/data/charging.json";
 import company from "@/data/company.json";
+import { getRebate } from "@/utils/promotions";
 
 type Variant = {
   name: string;
@@ -59,9 +60,9 @@ export default function PromptGenerator() {
   const vehicle2 = vehicles.find((v) => v.model === model2)!;
   const variant2: Variant = vehicle2.variants[variant2Idx];
 
-  const rebateLine = (v: Variant) =>
+  const rebateLine = (model: string, v: Variant) =>
     v.rebate > 0
-      ? `Rebate: RM${v.rebate.toLocaleString()} (Sarawak Energy Berhad)`
+      ? `Promotion/Rebate: RM${(getRebate(model, v.name) ?? v.rebate).toLocaleString()}`
       : null;
 
   const batteryLine = (v: Variant) =>
@@ -77,7 +78,7 @@ export default function PromptGenerator() {
       `- **Model:** ${model} ${variant.name}`,
       `- **OTR Price:** RM${variant.otr.toLocaleString()}`,
       `- **Range:** ${variant.range}km`,
-      rebateLine(variant),
+      rebateLine(model, variant),
       batteryLine(variant),
       chargeCostLine(variant),
     ].filter(Boolean);

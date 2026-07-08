@@ -1,0 +1,28 @@
+{
+  "period": "July 2026",
+  "validFrom": "2026-07-01",
+  "validTo": "2026-07-31",
+  "lastUpdated": "2026-07-08",
+  "rebates": {
+    "Atto 2": { "Premium": 11000 },
+    "Atto 3": { "Ultra": 10000, "Premium": 10000 },
+    "Sealion 7": { "Premium": 7000, "Performance": 7000 },
+    "Seal": { "Premium": 3000, "Performance": 3000 },
+    "Seal 6": { "Premium": 1000 },
+    "M6": { "Extended": 4000 }
+  },
+  "cspRebate": {
+    "default": 2000,
+    "overrides": {
+      "Sealion 7": 4000,
+      "Atto 3": 0
+    },
+    "label": "CSP/GSP/SSP"
+  },
+  "cspReplacements": {
+    "Atto 3": "6 Years Standard Service Package (worth RM3,888)"
+  },
+  "freebies": [],
+  "interestRate": 2.30,
+  "notes": "Prices are East Malaysia OTR with insurance. Promotion valid for July 2026 only. T&Cs apply."
+}

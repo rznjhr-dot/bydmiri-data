@@ -1,5 +1,17 @@
 [
   {
+    "version": "V4.3",
+    "date": "2026-07-08",
+    "changes": [
+      "Dedicated promotions.json — single source of truth for monthly-changing rebates, CSP/GSP/SSP & freebies",
+      "July 2026 promo live: Atto 2 RM11k, Atto 3 RM10k (+6yr service pkg), Seal RM3k, Sealion 7 RM7k, M6 RM4k, Seal 6 RM1k",
+      "Promotion system: all components read from promotions.json instead of vehicles.json for rebates",
+      "CSP replacement support — Atto 3 gets 6-Year Service Package (RM3,888) instead of cash rebate",
+      "Published on /data page as machine-readable JSON for external agents",
+      "Clean SEB references from rebate data (rebates are dealer discounts, not electricity subsidies)"
+    ]
+  },
+  {
     "version": "V4.2",
     "date": "2026-07-05",
     "changes": [

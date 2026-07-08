@@ -8,6 +8,7 @@ import blocksData from "@/data/prompt-studio/blocks.json";
 import rulesData from "@/data/prompt-studio/rules.json";
 import vehiclesData from "@/data/vehicles.json";
 import companyData from "@/data/company.json";
+import { getRebate } from "@/utils/promotions";
 import type { GeneratorTemplate, BlocksData, RulesData, TaglineOption } from "@/types/prompt-studio";
 
 const templates = (templatesData as { templates: GeneratorTemplate[] }).templates;
@@ -18,14 +19,16 @@ const vehicles = vehiclesData as Array<{ model: string; variants: Array<{ name: 
 const company = companyData as { rebatePeriod: string };
 
 function buildDynamicVehicleBlock(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }): string {
-  return `Vehicle: BYD ${model} ${variant.name}. OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2 })}. Range: ${variant.range} km. Battery: ${variant.battery} kWh. Max Charge: ${variant.maxChargePower}. Monthly Rebate (${company.rebatePeriod}): -RM${variant.rebate.toLocaleString("en-MY")}.`;
+  const rebate = getRebate(model, variant.name) ?? variant.rebate;
+  return `Vehicle: BYD ${model} ${variant.name}. OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2 })}. Range: ${variant.range} km. Battery: ${variant.battery} kWh. Max Charge: ${variant.maxChargePower}. Monthly Rebate (${company.rebatePeriod}): -RM${rebate.toLocaleString("en-MY")}.`;
 }
 
 function buildVehicleContext(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }): string {
+  const rebate = getRebate(model, variant.name) ?? variant.rebate;
   return `═══ VEHICLE DATA CONTEXT ═══
 Model: BYD ${model} ${variant.name}
 OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-Monthly Rebate (${company.rebatePeriod}): -RM${variant.rebate.toLocaleString("en-MY")}
+Monthly Rebate (${company.rebatePeriod}): -RM${rebate.toLocaleString("en-MY")}
 Range: ${variant.range} km
 Battery: ${variant.battery} kWh`;
 }
@@ -351,7 +354,7 @@ function GeneratorsContent() {
             </div>
             <div>
               <label className="text-[0.65rem] text-neutral-400 block mb-0.5">Monthly Rebate ({company.rebatePeriod})</label>
-              <p className="text-sm font-bold text-green-700">-RM{currentVariant.rebate.toLocaleString("en-MY")}</p>
+              <p className="text-sm font-bold text-green-700">-RM{(getRebate(currentVehicle.model, currentVariant.name) ?? currentVariant.rebate).toLocaleString("en-MY")}</p>
             </div>
             <div className="col-span-2 sm:col-span-1">
               <label className="text-[0.65rem] text-neutral-400 block mb-0.5">Range / Battery</label>

@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import vehicles from "@/data/vehicles.json";
 import competitors from "@/data/competitors.json";
+import { getRebate } from "@/utils/promotions";
 import type { CompetitorBrand, CompetitorModel, CompetitorVariant } from "@/types/ev-market";
 
 interface BYDVariant {
@@ -98,8 +99,8 @@ export default function ComparePage() {
       { label: "Type", byd: "BEV", comp: compModel?.type === "BEV" ? "BEV" : compModel?.type || "—" },
       { label: "Variant", byd: bydVariant.name, comp: compVariant.name },
       { label: "OTR Price", byd: formatCurrency(bydVariant.otr), comp: `${formatCurrency(compVariant.otr)}${formatEMarkup(selectedBrandData?.emMarkup || 0)}` },
-      ...(compVariant.otrAfterRebate || bydVariant.rebate ? [{ label: "After Rebate", byd: `${formatCurrency(bydVariant.otr - bydVariant.rebate)} (rebate -RM${bydVariant.rebate.toLocaleString()})`, comp: `${formatCurrency(compVariant.otrAfterRebate || compVariant.otr)}${formatEMarkup(selectedBrandData?.emMarkup || 0)}` }] : []),
-      { label: "Monthly (9yr, 10% down)", byd: calcMonthly(bydVariant.otr - bydVariant.rebate), comp: (() => { const base = compVariant.otrAfterRebate || compVariant.otr; const total = base + (selectedBrandData?.emMarkup || 0) + estInsurance(base); return `${calcMonthly(total)} (incl. EM + ins)`; })() },
+      ...(compVariant.otrAfterRebate || true ? (() => { const r = getRebate(bydModel!.model, bydVariant.name) ?? bydVariant.rebate; return [{ label: "After Rebate", byd: `${formatCurrency(bydVariant.otr - r)} (promo -RM${r.toLocaleString()})`, comp: `${formatCurrency(compVariant.otrAfterRebate || compVariant.otr)}${formatEMarkup(selectedBrandData?.emMarkup || 0)}` }]; })() : []),
+      { label: "Monthly (9yr, 10% down)", byd: (() => { const r = getRebate(bydModel!.model, bydVariant.name) ?? bydVariant.rebate; return calcMonthly(bydVariant.otr - r); })(), comp: (() => { const base = compVariant.otrAfterRebate || compVariant.otr; const total = base + (selectedBrandData?.emMarkup || 0) + estInsurance(base); return `${calcMonthly(total)} (incl. EM + ins)`; })() },
       { label: "Range", byd: `${bydVariant.rangeNedc} km (NEDC)`, comp: compVariant.rangeNedc ? `${compVariant.rangeNedc} km (NEDC)` : `${compVariant.range} km` },
       { label: "Battery", byd: `${bydVariant.battery} kWh LFP`, comp: `${compVariant.battery} kWh` },
       { label: "Motor", byd: `${bydVariant.motorPower} kW`, comp: `${compVariant.motorPower} kW` },
@@ -276,7 +277,7 @@ export default function ComparePage() {
               <>
                 <li className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex gap-1.5 leading-relaxed font-medium">
                   <span className="font-black shrink-0">💰</span>
-                  <span>BYD {formatCurrency(bydVariant!.otr - bydVariant!.rebate)}{compVariant.otrAfterRebate ? ` vs ${selectedBrandData?.name} ${formatCurrency(compVariant.otrAfterRebate)}` : ` vs ${selectedBrandData?.name} ${formatCurrency(compVariant.otr)}`}</span>
+                  <span>BYD {formatCurrency(bydVariant!.otr - (getRebate(bydModel!.model, bydVariant!.name) ?? bydVariant!.rebate))}{compVariant.otrAfterRebate ? ` vs ${selectedBrandData?.name} ${formatCurrency(compVariant.otrAfterRebate)}` : ` vs ${selectedBrandData?.name} ${formatCurrency(compVariant.otr)}`}</span>
                 </li>
                 <li className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex gap-1.5 leading-relaxed font-medium">
                   <span className="font-black shrink-0">🔋</span>

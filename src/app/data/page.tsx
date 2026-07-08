@@ -3,6 +3,7 @@ import Link from "next/link";
 const datasets = [
   { name: "company.json", path: "/data/company.json", schema: "company" },
   { name: "vehicles.json", path: "/data/vehicles.json", schema: "vehicles" },
+  { name: "promotions.json", path: "/data/promotions.json", schema: null },
   { name: "pricing.json", path: "/data/pricing.json", schema: null },
   { name: "rebates.json", path: "/data/rebates.json", schema: null },
   { name: "finance.json", path: "/data/finance.json", schema: "finance" },

@@ -5,6 +5,7 @@ import Link from "next/link";
 import company from "@/data/company.json";
 import vehicles from "@/data/vehicles.json";
 import finance from "@/data/finance.json";
+import { getRebate } from "@/utils/promotions";
 
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-MY", {
@@ -130,7 +131,8 @@ export default function VehiclesPage() {
                   <span className="text-[0.45rem] font-semibold text-neutral-400 uppercase tracking-wider text-right">10%/mo</span>
                 </div>
                 {vehicle.variants.map((variant) => {
-                  const effectivePrice = variant.otr - (variant.rebate || 0);
+                  const rebate = getRebate(vehicle.model, variant.name) ?? (variant.rebate || 0);
+                  const effectivePrice = variant.otr - rebate;
                   return (
                     <div
                       key={variant.name}
@@ -151,9 +153,9 @@ export default function VehiclesPage() {
                         {variant.range}km
                       </span>
                       {/* Rebate */}
-                      {variant.rebate && variant.rebate > 0 ? (
+                      {rebate && rebate > 0 ? (
                         <span className="text-[0.55rem] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded leading-tight justify-self-start">
-                          -RM{variant.rebate.toLocaleString("en-MY")}
+                          -RM{rebate.toLocaleString("en-MY")}
                         </span>
                       ) : (
                         <span className="text-[0.5rem] text-neutral-300 leading-tight">—</span>
@@ -175,7 +177,8 @@ export default function VehiclesPage() {
                 {expandedModel === vehicle.model && (
                   <div className="mt-2 space-y-2">
                     {vehicle.variants.map((variant) => {
-                      const effectivePrice = variant.otr - (variant.rebate || 0);
+                      const rebate = getRebate(vehicle.model, variant.name) ?? (variant.rebate || 0);
+                      const effectivePrice = variant.otr - rebate;
                       return (
                         <div key={variant.name} className="rounded-lg border border-neutral-200 bg-neutral-50/50 p-2.5">
                           <p className="text-[0.65rem] font-bold text-neutral-800 mb-1.5">{vehicle.model} {variant.name}</p>
@@ -193,10 +196,10 @@ export default function VehiclesPage() {
                               <span className="data-row-label text-[0.55rem]">OTR Price</span>
                               <span className="data-row-value text-[0.55rem] font-bold">{formatCurrency(variant.otr)}</span>
                             </div>
-                            {variant.rebate && variant.rebate > 0 && (
+                            {rebate && rebate > 0 && (
                               <div className="data-row">
                                 <span className="data-row-label text-[0.55rem]">Rebate</span>
-                                <span className="data-row-value text-[0.55rem] text-green-600 font-bold">-{formatCurrency(variant.rebate)}</span>
+                                <span className="data-row-value text-[0.55rem] text-green-600 font-bold">-{formatCurrency(rebate)}</span>
                               </div>
                             )}
                             <div className="data-row">
@@ -242,7 +245,8 @@ export default function VehiclesPage() {
                 <h2 className="section-title text-base">{vehicle.model}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                   {vehicle.variants.map((variant) => {
-                    const effectivePrice = variant.otr - (variant.rebate || 0);
+                    const rebate = getRebate(vehicle.model, variant.name) ?? (variant.rebate || 0);
+                    const effectivePrice = variant.otr - rebate;
                     return (
                       <div key={variant.name} className="card card-elevated">
                         {/* Header */}
@@ -253,9 +257,9 @@ export default function VehiclesPage() {
                             </h3>
                             <p className="text-xs text-neutral-400">{variant.name}</p>
                           </div>
-                          {variant.rebate && variant.rebate > 0 ? (
+                          {rebate && rebate > 0 ? (
                             <span className="badge badge-green shrink-0">
-                              -{formatCurrency(variant.rebate)}
+                              -{formatCurrency(rebate)}
                             </span>
                           ) : null}
                         </div>
@@ -288,11 +292,11 @@ export default function VehiclesPage() {
                               {formatCurrency(variant.otr)}
                             </span>
                           </div>
-                          {variant.rebate && variant.rebate > 0 && (
+                          {rebate && rebate > 0 && (
                             <div className="data-row">
                               <span className="data-row-label">Rebate</span>
                               <span className="data-row-value text-green-600 font-bold text-base">
-                                -{formatCurrency(variant.rebate)}
+                                -{formatCurrency(rebate)}
                               </span>
                             </div>
                           )}

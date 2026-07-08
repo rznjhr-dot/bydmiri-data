@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from "react";
 import vehicles from "@/data/vehicles.json";
 import finance from "@/data/finance.json";
+import { getRebate, getCspRebate, getCspReplacement } from "@/utils/promotions";
 
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-MY", {
@@ -37,10 +38,15 @@ export default function LoanCalculator() {
   const currentVehicle = vehicles.find((v) => v.model === selectedModel)!;
   const currentVariant: Variant = currentVehicle.variants[selectedVariantIdx];
 
+  const cspReplacement = getCspReplacement(selectedModel);
+
+  const promoRebateVal = useMemo(() => {
+    return getRebate(selectedModel, currentVariant.name) ?? currentVariant.rebate;
+  }, [selectedModel, currentVariant.name, currentVariant.rebate]);
+
   const cspRebateAmount = useMemo(() => {
     if (!includeCspRebate) return 0;
-    const overrides = finance.additionalRebate.overrides as Record<string, number>;
-    return overrides[selectedModel] ?? finance.additionalRebate.default;
+    return getCspRebate(selectedModel);
   }, [selectedModel, includeCspRebate]);
 
   const parsedInterestRate = useMemo(() => {
@@ -49,9 +55,10 @@ export default function LoanCalculator() {
   }, [customInterestRate]);
 
   const priceAfterRebate = useMemo(() => {
-    const rebate = includeRebate ? currentVariant.rebate : 0;
+    const promoRebate = getRebate(selectedModel, currentVariant.name) ?? currentVariant.rebate;
+    const rebate = includeRebate ? promoRebate : 0;
     return Math.max(0, currentVariant.otr - rebate - cspRebateAmount);
-  }, [currentVariant, includeRebate, cspRebateAmount]);
+  }, [currentVariant, includeRebate, cspRebateAmount, selectedModel]);
 
   const loanAmount = useMemo(() => {
     if (downpaymentCustom) {
@@ -102,11 +109,11 @@ export default function LoanCalculator() {
       "Est. Insurance: " + formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance),
       "OTR Price: " + formatCurrency(currentVariant.otr),
     ];
-    if (includeRebate && currentVariant.rebate > 0) {
-      lines.push("Rebate: -" + formatCurrency(currentVariant.rebate));
+    if (includeRebate && promoRebateVal > 0) {
+      lines.push("Rebate: -" + formatCurrency(promoRebateVal));
     }
-    if (includeCspRebate && cspRebateAmount > 0) {
-      lines.push("CSP/GSP/SSP Rebate: -" + formatCurrency(cspRebateAmount));
+    if (includeCspRebate && (cspReplacement || cspRebateAmount > 0)) {
+      lines.push(cspReplacement || ("CSP/GSP/SSP Rebate: -" + formatCurrency(cspRebateAmount)));
     }
     lines.push("After Rebate: " + formatCurrency(priceAfterRebate));
     lines.push("");
@@ -122,7 +129,7 @@ export default function LoanCalculator() {
     lines.push("━━━━━━━━━━━━━━━━━━");
     lines.push("BYD Miri - Ridzuan Jahari " + today);
     return lines.join("\n");
-  }, [currentVehicle, currentVariant, includeRebate, includeCspRebate, cspRebateAmount, parsedInterestRate, priceAfterRebate, downpaymentAmount, loanAmount, tenure, monthlyPayment, downpaymentPct, downpaymentCustom]);
+  }, [currentVehicle, currentVariant, includeRebate, promoRebateVal, includeCspRebate, cspReplacement, cspRebateAmount, parsedInterestRate, priceAfterRebate, downpaymentAmount, loanAmount, tenure, monthlyPayment, downpaymentPct, downpaymentCustom]);
 
   const handleCopyQuotation = useCallback(async () => {
     const text = buildQuotation();
@@ -201,8 +208,8 @@ export default function LoanCalculator() {
                   </div>
                   <span className="text-[0.6rem] font-medium text-neutral-600">Rebate</span>
                 </label>
-                {currentVariant.rebate > 0 && (
-                  <span className="text-[0.6rem] font-semibold text-green-600">{formatCurrency(currentVariant.rebate)}</span>
+                {promoRebateVal > 0 && (
+                  <span className="text-[0.6rem] font-semibold text-green-600">{formatCurrency(promoRebateVal)}</span>
                 )}
               </div>
               <div className="flex items-center justify-between bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80">
@@ -210,9 +217,13 @@ export default function LoanCalculator() {
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
                     <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
-                  <span className="text-[0.6rem] font-medium text-neutral-600 truncate">{finance.additionalRebate.label.split(" ")[0]}</span>
+                  <span className="text-[0.6rem] font-medium text-neutral-600 truncate">{cspReplacement || finance.additionalRebate.label.split(" ")[0]}</span>
                 </label>
-                <span className="text-[0.6rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount)}</span>
+                {cspReplacement ? (
+                  <span className="text-[0.55rem] font-semibold text-purple-600 text-right leading-tight max-w-[50%]">{cspReplacement.replace(" (worth RM3,888)", "")}</span>
+                ) : (
+                  <span className="text-[0.6rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount)}</span>
+                )}
               </div>
             </div>
 
@@ -335,16 +346,20 @@ export default function LoanCalculator() {
                 <span className="text-neutral-800 font-semibold">OTR Price</span>
                 <span className="font-bold text-neutral-800">{formatCurrency(currentVariant.otr)}</span>
               </div>
-              {includeRebate && currentVariant.rebate > 0 && (
+              {includeRebate && promoRebateVal > 0 && (
                 <div className="flex justify-between col-span-2">
                   <span className="text-neutral-400">Rebate</span>
-                  <span className="font-semibold text-green-600">-{formatCurrency(currentVariant.rebate)}</span>
+                  <span className="font-semibold text-green-600">-{formatCurrency(promoRebateVal)}</span>
                 </div>
               )}
-              {includeCspRebate && cspRebateAmount > 0 && (
+              {includeCspRebate && (cspReplacement || cspRebateAmount > 0) && (
                 <div className="flex justify-between col-span-2">
-                  <span className="text-neutral-400">{finance.additionalRebate.label}</span>
-                  <span className="font-semibold text-blue-600">-{formatCurrency(cspRebateAmount)}</span>
+                  <span className="text-neutral-400">{cspReplacement || finance.additionalRebate.label}</span>
+                  {cspReplacement ? (
+                    <span className="font-semibold text-purple-600 text-right text-[0.55rem] max-w-[50%] leading-tight">{cspReplacement}</span>
+                  ) : (
+                    <span className="font-semibold text-blue-600">-{formatCurrency(cspRebateAmount)}</span>
+                  )}
                 </div>
               )}
               <div className="flex justify-between col-span-2 border-t border-neutral-100/50 pt-0.5">
