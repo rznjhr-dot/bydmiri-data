@@ -10,6 +10,7 @@ type Variant = {
   range: number;
   battery: number | null;
   chargeCost?: number;
+  acCharging?: string;
   maxChargePower?: string;
 };
 
@@ -21,7 +22,13 @@ const CHARGER_TYPES = [
   { label: "DC Ultra-fast", power: 180, type: "dc", desc: "Ultra-fast" },
 ];
 
-const AC_MAX = 7; // Most BYD cars in Malaysia have 7kW onboard AC charger
+function parseACKW(val: string | undefined): number {
+  if (!val) return 7;
+  const match = val.match(/([\d.]+)\s*kW/);
+  if (!match) return 7;
+  const num = parseFloat(match[1]);
+  return isNaN(num) ? 7 : num;
+}
 
 function parseDCWatts(val: string | undefined): number {
   if (!val) return 50; // fallback
@@ -53,15 +60,17 @@ export default function ChargingTimeEstimator() {
   const battery = currentVariant.battery ?? 0;
   const charger = CHARGER_TYPES[chargerIdx];
 
-  // Effective power = min(changer power, car's limit)
+  const acLimit = useMemo(() => parseACKW(currentVariant.acCharging), [currentVariant.acCharging]);
+
+  // Effective power = min(charger power, car's limit)
   const effectivePower = useMemo(() => {
     if (charger.type === "ac") {
-      return Math.min(charger.power, AC_MAX);
+      return Math.min(charger.power, acLimit);
     }
     // DC: car's max DC charge power limits the charger
     const carMaxDC = parseDCWatts(currentVariant.maxChargePower);
     return Math.min(charger.power, carMaxDC);
-  }, [charger, currentVariant.maxChargePower]);
+  }, [charger, acLimit, currentVariant.maxChargePower]);
 
   const energyNeeded = useMemo(() => {
     if (battery <= 0) return 0;
@@ -283,10 +292,10 @@ export default function ChargingTimeEstimator() {
                   </span>
                 </div>
                 <div className="data-row">
-                  <span className="data-row-label">Car Limit</span>
+                  <span className="data-row-label">Car OBC Limit</span>
                   <span className="data-row-value">
                     {charger.type === "ac"
-                      ? `${AC_MAX}kW AC`
+                      ? `${acLimit}kW AC`
                       : currentVariant.maxChargePower || "—"}
                   </span>
                 </div>
