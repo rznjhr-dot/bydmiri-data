@@ -1,13 +1,79 @@
 {
   "lastUpdated": "2026-07-09",
-  "electricityRate": "RM0.30/kWh",
-  "dcTariffRange": "RM1.00 – RM1.40/kWh",
-  "tariffRules": [
-    "AC charging (3-Pin, Wallbox, AC Public) → RM0.30/kWh flat rate (home/tariff)",
-    "DC charging (DC Fast, DC Ultra-fast) → RM1.00 – RM1.40/kWh range",
-    "Charging time estimator must use per-variant acCharging value as cap for AC",
-    "Effective AC power = min(charger power, variant's acCharging kW)",
-    "Effective DC power = min(charger power, variant's maxChargePower kW)"
+  "disclaimer": "Public charging fees vary between charging networks and locations. RM1.40/kWh is used as the default estimate for cost calculations.",
+  "chargingProfiles": [
+    {
+      "id": "home",
+      "name": "Home Charging",
+      "rate": 0.30,
+      "unit": "kWh",
+      "type": "ac",
+      "estimated": true,
+      "description": "Estimated Malaysian residential electricity tariff."
+    },
+    {
+      "id": "public_default",
+      "name": "Public DC Fast Charging",
+      "rate": 1.40,
+      "unit": "kWh",
+      "type": "dc",
+      "estimated": true,
+      "description": "Estimated public DC charging rate based primarily on the Gentari × Sarawak Energy charging network."
+    },
+    {
+      "id": "gentari_seb",
+      "name": "Gentari × Sarawak Energy",
+      "rate": 1.40,
+      "unit": "kWh",
+      "type": "dc",
+      "estimated": false,
+      "description": "Current audited Gentari × Sarawak Energy charging rate."
+    },
+    {
+      "id": "chargev",
+      "name": "ChargEV",
+      "rate": 1.40,
+      "unit": "kWh",
+      "type": "dc",
+      "estimated": true,
+      "description": "ChargEV public charging network rate."
+    },
+    {
+      "id": "jomcharge",
+      "name": "JomCharge",
+      "rate": 1.20,
+      "unit": "kWh",
+      "type": "dc",
+      "estimated": true,
+      "description": "JomCharge public charging network rate."
+    },
+    {
+      "id": "shell_recharge",
+      "name": "Shell Recharge",
+      "rate": 1.50,
+      "unit": "kWh",
+      "type": "dc",
+      "estimated": true,
+      "description": "Shell Recharge public charging network rate."
+    },
+    {
+      "id": "ev_connection",
+      "name": "EV Connection",
+      "rate": 1.20,
+      "unit": "kWh",
+      "type": "dc",
+      "estimated": true,
+      "description": "EV Connection public charging network rate."
+    },
+    {
+      "id": "tesla_supercharger",
+      "name": "Tesla Supercharger",
+      "rate": 1.50,
+      "unit": "kWh",
+      "type": "dc",
+      "estimated": true,
+      "description": "Tesla Supercharger network rate."
+    }
   ],
   "cities": [
     {

@@ -1,6 +1,19 @@
 [
   {
-    "version": "V4.3",
+    "version": "V1.4",
+    "date": "2026-07-09",
+    "changes": [
+      "Charging rate database restructured with configurable charging profiles — rates no longer hardcoded in components",
+      "8 charging profiles added: Home (RM0.30/kWh), Public DC Fast Charging (RM1.40/kWh default), plus future-ready operator slots",
+      "Charging Time Estimator now reads all rates from charging.json — AC uses home profile, DC uses public_default (RM1.40/kWh)",
+      "DC charging cost simplified to single rate (RM1.40/kWh) — no range display or operator dropdown",
+      "Prompt Generator reads home charging rate from profile instead of hardcoded RM0.30",
+      "Disclaimer added to /charging page: 'Public charging fees vary between charging networks and locations'",
+      "Charging schema updated to validate new chargingProfiles structure"
+    ]
+  },
+  {
+    "version": "V1.3",
     "date": "2026-07-08",
     "changes": [
       "Dedicated promotions.json — single source of truth for monthly-changing rebates, CSP/GSP/SSP & freebies",
@@ -12,7 +25,7 @@
     ]
   },
   {
-    "version": "V4.2",
+    "version": "V1.2",
     "date": "2026-07-05",
     "changes": [
       "EV Market Malaysia hub launched — live news feed for EV industry updates, pricing & rebate changes",
@@ -30,7 +43,7 @@
     ]
   },
   {
-    "version": "V4.1",
+    "version": "V1.1",
     "date": "2026-06-24",
     "changes": [
       "RJEOS editorial campaign engine launched with constitution, design directions, creative package builder",
@@ -44,7 +57,7 @@
     ]
   },
   {
-    "version": "V4.0",
+    "version": "V1.0",
     "date": "2026-06-17",
     "changes": [
       "Initial launch of BYD Miri Knowledge Base",

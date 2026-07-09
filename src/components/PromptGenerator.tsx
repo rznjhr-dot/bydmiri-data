@@ -5,6 +5,8 @@ import vehicles from "@/data/vehicles.json";
 import finance from "@/data/finance.json";
 import salesRules from "@/data/sales_rules.json";
 import charging from "@/data/charging.json";
+
+const homeProfileRate = (charging.chargingProfiles as Array<{ id: string; rate: number }>).find((p) => p.id === "home")?.rate ?? 0.30;
 import company from "@/data/company.json";
 import { getRebate } from "@/utils/promotions";
 
@@ -70,7 +72,7 @@ export default function PromptGenerator() {
 
   const chargeCostLine = (v: Variant) =>
     v.chargeCost
-      ? `Full charge cost: RM${v.chargeCost.toFixed(2)} (at RM0.30/kWh)`
+      ? `Full charge cost: RM${v.chargeCost.toFixed(2)} (at RM${homeProfileRate.toFixed(2)}/kWh)`
       : null;
 
   const vehicleBlock = (model: string, variant: Variant) => {

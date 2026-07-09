@@ -1,10 +1,35 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Charging Network",
-  "description": "EV charging station locations in Sarawak",
+  "description": "EV charging configuration with station locations in Sarawak",
   "type": "object",
-  "required": ["cities"],
+  "required": ["chargingProfiles", "cities"],
   "properties": {
+    "lastUpdated": {
+      "type": "string",
+      "description": "Date of last update (YYYY-MM-DD)"
+    },
+    "disclaimer": {
+      "type": "string",
+      "description": "Disclaimer about charging cost estimates"
+    },
+    "chargingProfiles": {
+      "type": "array",
+      "description": "Configurable charging rate profiles",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "rate", "unit", "type", "estimated", "description"],
+        "properties": {
+          "id": { "type": "string", "description": "Unique profile identifier" },
+          "name": { "type": "string", "description": "Display name" },
+          "rate": { "type": "number", "description": "Rate in RM per unit" },
+          "unit": { "type": "string", "description": "Unit (e.g., kWh)" },
+          "type": { "type": "string", "enum": ["ac", "dc"], "description": "Charging type" },
+          "estimated": { "type": "boolean", "description": "Whether this rate is an estimate" },
+          "description": { "type": "string", "description": "Description of the rate" }
+        }
+      }
+    },
     "cities": {
       "type": "array",
       "items": {

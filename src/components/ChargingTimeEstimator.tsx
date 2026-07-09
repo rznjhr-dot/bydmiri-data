@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useRef, useCallback } from "react";
 import vehicles from "@/data/vehicles.json";
+import charging from "@/data/charging.json";
 
 type Variant = {
   name: string;
@@ -14,6 +15,16 @@ type Variant = {
   maxChargePower?: string;
 };
 
+type ChargingProfile = {
+  id: string;
+  name: string;
+  rate: number;
+  unit: string;
+  type: "ac" | "dc";
+  estimated: boolean;
+  description: string;
+};
+
 const CHARGER_TYPES = [
   { label: "3-Pin Plug", power: 3, type: "ac", desc: "Standard outlet" },
   { label: "Wallbox", power: 7, type: "ac", desc: "Home charger" },
@@ -21,6 +32,12 @@ const CHARGER_TYPES = [
   { label: "DC Fast", power: 60, type: "dc", desc: "Fast charger" },
   { label: "DC Ultra-fast", power: 180, type: "dc", desc: "Ultra-fast" },
 ];
+
+// Extract profiles from charging data
+const profiles = charging.chargingProfiles as ChargingProfile[];
+const homeProfile = profiles.find((p) => p.id === "home")!;
+const dcProfiles = profiles.filter((p) => p.type === "dc");
+const defaultDcProfile = dcProfiles.find((p) => p.id === "public_default") ?? dcProfiles[0];
 
 function parseACKW(val: string | undefined): number {
   if (!val) return 7;
@@ -31,7 +48,7 @@ function parseACKW(val: string | undefined): number {
 }
 
 function parseDCWatts(val: string | undefined): number {
-  if (!val) return 50; // fallback
+  if (!val) return 50;
   const num = parseFloat(val);
   return isNaN(num) ? 50 : num;
 }
@@ -60,6 +77,9 @@ export default function ChargingTimeEstimator() {
   const battery = currentVariant.battery ?? 0;
   const charger = CHARGER_TYPES[chargerIdx];
 
+  // Current charging profile — AC always uses home, DC uses public_default
+  const currentProfile = charger.type === "ac" ? homeProfile : defaultDcProfile;
+
   const acLimit = useMemo(() => parseACKW(currentVariant.acCharging), [currentVariant.acCharging]);
 
   // Effective power = min(charger power, car's limit)
@@ -67,7 +87,6 @@ export default function ChargingTimeEstimator() {
     if (charger.type === "ac") {
       return Math.min(charger.power, acLimit);
     }
-    // DC: car's max DC charge power limits the charger
     const carMaxDC = parseDCWatts(currentVariant.maxChargePower);
     return Math.min(charger.power, carMaxDC);
   }, [charger, acLimit, currentVariant.maxChargePower]);
@@ -82,17 +101,11 @@ export default function ChargingTimeEstimator() {
     return energyNeeded / effectivePower;
   }, [energyNeeded, effectivePower]);
 
-  const chargeCostLow = useMemo(() => {
+  // Charge cost using profile rate (never hardcoded)
+  const chargeCost = useMemo(() => {
     if (energyNeeded <= 0) return 0;
-    if (charger.type === "ac") return energyNeeded * 0.30;
-    return energyNeeded * 1.00;
-  }, [energyNeeded, charger.type]);
-
-  const chargeCostHigh = useMemo(() => {
-    if (energyNeeded <= 0) return 0;
-    if (charger.type === "ac") return 0;
-    return energyNeeded * 1.40;
-  }, [energyNeeded, charger.type]);
+    return energyNeeded * currentProfile.rate;
+  }, [energyNeeded, currentProfile.rate]);
 
   // Custom slider pointer handlers
   const getPctFromPointer = useCallback((e: React.PointerEvent | PointerEvent) => {
@@ -269,6 +282,13 @@ export default function ChargingTimeEstimator() {
                 Battery capacity not available for this variant
               </p>
             )}
+
+            {/* Disclaimer */}
+            <p className="text-[0.6rem] text-neutral-400 italic leading-tight">
+              {currentProfile.estimated
+                ? `* ${currentProfile.description} Actual charging fees vary by operator and location.`
+                : `* ${currentProfile.description}`}
+            </p>
           </div>
 
           {/* Results */}
@@ -316,13 +336,11 @@ export default function ChargingTimeEstimator() {
                 <div className="data-row">
                   <span className="data-row-label">Est. Cost</span>
                   <span className="data-row-value">
-                    {chargeCostLow > 0
-                      ? charger.type === "dc"
-                        ? `RM${chargeCostLow.toFixed(2)} – RM${chargeCostHigh.toFixed(2)}`
-                        : `RM${chargeCostLow.toFixed(2)}`
+                    {chargeCost > 0
+                      ? `RM${chargeCost.toFixed(2)}`
                       : "—"}
                     <span className="text-[0.55rem] text-neutral-400 ml-1">
-                      {charger.type === "dc" ? "@ RM1.00–1.40/kWh" : "@ RM0.30/kWh"}
+                      @ RM{currentProfile.rate.toFixed(2)}/kWh
                     </span>
                   </span>
                 </div>

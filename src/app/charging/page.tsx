@@ -57,6 +57,16 @@ export default function ChargingPage() {
             ))}
           </div>
         </section>
+
+        {/* ─── Disclaimer ──────────── */}
+        <section>
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+            <p className="text-xs text-amber-700 leading-relaxed">
+              <strong className="font-semibold">Note:</strong>{" "}
+              {charging.disclaimer}
+            </p>
+          </div>
+        </section>
       </main>
 
       <footer className="border-t border-neutral-200/60 bg-white mt-6">
