@@ -1,5 +1,49 @@
 [
   {
+    "version": "V4.3",
+    "date": "2026-07-08",
+    "changes": [
+      "Dedicated promotions.json — single source of truth for monthly-changing rebates, CSP/GSP/SSP & freebies",
+      "July 2026 promo live: Atto 2 RM11k, Atto 3 RM10k (+6yr service pkg), Seal RM3k, Sealion 7 RM7k, M6 RM4k, Seal 6 RM1k",
+      "Promotion system: all components read from promotions.json instead of vehicles.json for rebates",
+      "CSP replacement support — Atto 3 gets 6-Year Service Package (RM3,888) instead of cash rebate",
+      "Published on /data page as machine-readable JSON for external agents",
+      "Clean SEB references from rebate data (rebates are dealer discounts, not electricity subsidies)"
+    ]
+  },
+  {
+    "version": "V4.2",
+    "date": "2026-07-05",
+    "changes": [
+      "EV Market Malaysia hub launched — live news feed for EV industry updates, pricing & rebate changes",
+      "EV comparison tool — side-by-side BYD vs competitor comparison with auto-suggest",
+      "7 competitor brands added: Proton e.MAS, Chery, MG, Leapmotor, Jaecoo, Jetour, Tesla (36 variants total)",
+      "All competitor specs researched and verified from Paul Tan, SoyaCincau, AutoBuzz & official sources",
+      "NEDC ranges added for all BYD models (official BYD Malaysia data)",
+      "East Malaysia pricing markup tracked (Proton +RM3k confirmed, Jaecoo +RM2,750 confirmed, Tesla national pricing)",
+      "Monthly payment estimator with 2.30% flat rate, 9yr, 10% down — includes EM markup & insurance estimate",
+      "Insurance estimate tiers: RM2.3k (<RM100k), RM3k (RM100-150k), RM3.5k (RM150-200k), RM4k (>RM200k)",
+      "BYD advantages section — Blade Battery, 6+8 yr warranty, V2L standard, World #1 EV maker",
+      "Live-data badge, category filters, market highlights, and mobile-optimised layout",
+      "Font optimised for screen readability (system-ui stack, subpixel antialiasing, max contrast)",
+      "24 EV news items with source links from Malaysia's top automotive publications"
+    ]
+  },
+  {
+    "version": "V4.1",
+    "date": "2026-06-24",
+    "changes": [
+      "RJEOS editorial campaign engine launched with constitution, design directions, creative package builder",
+      "Dashboard restructuring — Finance Calc, Charging, Warranty moved to standalone pages",
+      "Vehicle DB mobile compact view with search filter and expandable specs",
+      "Finance Calculator compact redesign for iPhone 16 (tighter padding, toggle switches)",
+      "Dark/light mode support added to RJEOS page via semantic CSS variables",
+      "Added OEM Social design direction in RJEOS (clean, bright, family-oriented artwork)",
+      "Fixed Seal rebate to RM2,000 and Seal 6 rebate to RM1,800",
+      "Navbar simplified — core navigation only (Dashboard, Vehicles, AI Prompt Studio, RJEOS, Changelog)"
+    ]
+  },
+  {
     "version": "V4.0",
     "date": "2026-06-17",
     "changes": [
