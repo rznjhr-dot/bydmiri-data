@@ -1,5 +1,15 @@
 [
   {
+    "version": "V1.5",
+    "date": "2026-07-15",
+    "changes": [
+      "Pricing model verified — all monthly calculations confirmed on /vehicles page using promotions.json (rebate only, no CSP/GSP)",
+      "Monthly display: 0% Down + 10% Down for every variant, flat rate 2.30%, 9 years",
+      "Rebate-only pricing confirmed across all 6 models (10 variants)",
+      "Data pipeline documented: edit promotions.json → build → deploy → main website auto-updates"
+    ]
+  },
+  {
     "version": "V1.4",
     "date": "2026-07-09",
     "changes": [
