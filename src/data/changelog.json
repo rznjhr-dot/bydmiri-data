@@ -1,5 +1,18 @@
 [
   {
+    "version": "V1.6",
+    "date": "2026-07-15",
+    "changes": [
+      "vehicles.json rebate field synced to promotions.json as single source of truth",
+      "Monthly estimates now show both 10% down (emerald) and 0% down (amber) on main website",
+      "Full Lineup table column order: Model → Range → OTR Price → Rebate → 10% → 0%",
+      "OTR header renamed to 'OTR Price' for clarity",
+      "(2026) suffix removed from Atto 3 variant names",
+      "Pricelist page: Price Breakdown colspan corrected, overflow-x-auto for scrollable table",
+      "Responsive alignment fixes for mobile: whitespace-nowrap on all monetary values"
+    ]
+  },
+  {
     "version": "V1.5",
     "date": "2026-07-15",
     "changes": [

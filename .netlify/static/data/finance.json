@@ -1,0 +1,18 @@
+{
+  "interestRate": 2.30,
+  "interestRateUnit": "%",
+  "loanMargin": 90,
+  "loanMarginUnit": "%",
+  "defaultTenure": 9,
+  "defaultTenureUnit": "years",
+  "availableTenures": [2, 3, 4, 5, 6, 7, 8, 9],
+  "tenureUnit": "years",
+  "additionalRebate": {
+    "default": 2000,
+    "overrides": {
+      "Sealion 7": 4000
+    },
+    "label": "CSP/GSP/SSP"
+  },
+  "disclaimer": "Interest rate and loan margin are subject to bank approval. Terms may vary based on individual credit assessment."
+}
