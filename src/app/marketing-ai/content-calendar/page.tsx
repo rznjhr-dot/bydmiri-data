@@ -32,17 +32,17 @@ export default function ContentCalendarPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/marketing-ai"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Marketing AI
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">Content Calendar AI</h1>
-          <p className="text-sm text-neutral-400 mt-1">Auto-detect celebrations, holidays, and monthly campaign opportunities</p>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Content Calendar AI</h1>
+          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Auto-detect celebrations, holidays, and monthly campaign opportunities</p>
         </div>
       </section>
 
@@ -75,13 +75,13 @@ export default function ContentCalendarPage() {
 
         {/* Today's Opportunities */}
         <div className="card border-l-4 border-l-accent bg-accent/5">
-          <h2 className="font-bold text-neutral-800 text-sm mb-1">Today is {today}</h2>
-          <p className="text-xs text-neutral-500 mb-2">
+          <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-1">Today is {today}</h2>
+          <p className="text-xs text-[var(--color-text-tertiary)] mb-2">
             {filteredEvents.filter((e) => e.date >= today).length} upcoming events match your filter.
           </p>
           <div className="flex flex-wrap gap-1">
             {filteredEvents.slice(0, 5).map((e) => (
-              <span key={e.name} className="text-[0.6rem] text-neutral-500 bg-white border border-neutral-200/60 px-1.5 py-0.5 rounded">
+              <span key={e.name} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-white border border-[var(--color-border-primary)]/60 px-1.5 py-0.5 rounded">
                 {e.name} — {e.date}
               </span>
             ))}
@@ -102,14 +102,14 @@ export default function ContentCalendarPage() {
                 }`}
               >
                 <div className="flex items-start justify-between mb-1">
-                  <h3 className="font-semibold text-neutral-800 text-sm">{event.name}</h3>
-                  <span className="text-[0.55rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded font-medium">{event.category}</span>
+                  <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{event.name}</h3>
+                  <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded font-medium">{event.category}</span>
                 </div>
-                <p className="text-xs text-neutral-500 mb-1">{event.opportunity}</p>
+                <p className="text-xs text-[var(--color-text-tertiary)] mb-1">{event.opportunity}</p>
                 <div className="flex items-center gap-2">
-                  <span className="text-[0.6rem] text-neutral-400">{event.date}</span>
-                  <span className="text-neutral-300">·</span>
-                  <span className="text-[0.6rem] text-neutral-400">Lead: {event.leadTime}</span>
+                  <span className="text-[0.6rem] text-[var(--color-text-tertiary)]">{event.date}</span>
+                  <span className="text-[var(--color-text-tertiary)]">·</span>
+                  <span className="text-[0.6rem] text-[var(--color-text-tertiary)]">Lead: {event.leadTime}</span>
                   {event.date >= today && event.date <= getDateDaysAhead(14) && (
                     <span className="text-[0.55rem] text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded font-semibold">URGENT</span>
                   )}
@@ -125,20 +125,20 @@ export default function ContentCalendarPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {typedSchedules.platforms.map((platform) => (
               <div key={platform.id} className="card">
-                <h3 className="font-semibold text-neutral-800 text-sm mb-1">{platform.name}</h3>
-                <p className="text-xs text-neutral-500 mb-2">{platform.recommendedFrequency}</p>
+                <h3 className="font-semibold text-[var(--color-text-primary)] text-sm mb-1">{platform.name}</h3>
+                <p className="text-xs text-[var(--color-text-tertiary)] mb-2">{platform.recommendedFrequency}</p>
                 <div className="space-y-1 mb-2">
                   {platform.bestTimes.map((time) => (
-                    <div key={time} className="text-[0.6rem] text-neutral-400">⏰ {time}</div>
+                    <div key={time} className="text-[0.6rem] text-[var(--color-text-tertiary)]">⏰ {time}</div>
                   ))}
                 </div>
-                <div className="pt-2 border-t border-neutral-100">
-                  <h4 className="text-[0.6rem] font-semibold text-neutral-500 uppercase tracking-wider mb-1">Content Mix</h4>
+                <div className="pt-2 border-t border-[var(--color-border-primary)]">
+                  <h4 className="text-[0.6rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1">Content Mix</h4>
                   <div className="space-y-0.5">
                     {platform.contentMix.map((mix) => (
                       <div key={mix.type} className="flex items-center justify-between text-[0.6rem]">
-                        <span className="text-neutral-500 capitalize">{mix.type.replace(/_/g, " ")}</span>
-                        <span className="font-medium text-neutral-600">{mix.percentage}%</span>
+                        <span className="text-[var(--color-text-tertiary)] capitalize">{mix.type.replace(/_/g, " ")}</span>
+                        <span className="font-medium text-[var(--color-text-secondary)]">{mix.percentage}%</span>
                       </div>
                     ))}
                   </div>
@@ -150,9 +150,9 @@ export default function ContentCalendarPage() {
 
         {/* Prompt Reference */}
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
-          <h2 className="font-bold text-neutral-800 text-sm mb-2">AI Prompt: Content Calendar</h2>
-          <p className="text-xs text-neutral-500 leading-relaxed">
-            Uses <code className="bg-neutral-100 px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/content-calendar.md</code> to detect date-based opportunities
+          <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Content Calendar</h2>
+          <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
+            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/content-calendar.md</code> to detect date-based opportunities
             and recommend campaigns automatically based on today's date.
           </p>
         </section>

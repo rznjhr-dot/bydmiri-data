@@ -1,0 +1,55 @@
+{
+  "categories": [
+    {
+      "title": "Vehicle Warranty",
+      "years": "6",
+      "mileage": "150,000km",
+      "items": ["Vehicle"]
+    },
+    {
+      "title": "High Voltage Blade Battery",
+      "years": "8",
+      "mileage": "160,000km",
+      "items": ["High Voltage Blade Battery"]
+    },
+    {
+      "title": "Drive Unit",
+      "years": "8",
+      "mileage": "150,000km",
+      "items": [
+        "Motor",
+        "Motor Controller",
+        "DC Assembly",
+        "High Voltage",
+        "Electric Control Assembly"
+      ]
+    },
+    {
+      "title": "Selected Parts",
+      "years": "3",
+      "mileage": "60,000km",
+      "items": [
+        "Multimedia System",
+        "Shock Absorber",
+        "Dust Cover",
+        "Bushing or Gasket",
+        "Wheel Bearing",
+        "PM2.5 Measuring Instrument",
+        "AC/DC Charging Port Assembly",
+        "USB Charging Port Connector"
+      ]
+    },
+    {
+      "title": "Lighting & Suspension",
+      "years": "4",
+      "mileage": "100,000km",
+      "items": [
+        "Whole Vehicle Lights",
+        "Tyre Pressure Monitoring Module",
+        "Suspension",
+        "Ball Joint"
+      ]
+    }
+  ],
+  "disclaimer": "*whichever comes first"
+}

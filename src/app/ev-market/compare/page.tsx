@@ -121,35 +121,35 @@ export default function ComparePage() {
       style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" }}
     >
       <div className="mb-6 sm:mb-8">
-        <Link href="/ev-market" className="inline-flex items-center gap-1 text-xs sm:text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] dark:hover:text-[var(--color-text-primary)] mb-2 transition-colors font-bold">
+        <Link href="/ev-market" className="inline-flex items-center gap-1 text-xs sm:text-sm text-[var(--color-text-secondary)]  hover:text-[var(--color-text-primary)]  mb-2 transition-colors font-bold">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
           Back
         </Link>
-        <h1 className="text-2xl sm:text-4xl font-black text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)] mb-1">Compare EVs</h1>
-        <p className="text-sm sm:text-base font-medium text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)] leading-relaxed">
-          BYD ranges in <strong className="text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]">NEDC</strong>.
-          <span className="block text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)]">* Indicative estimates only. BYD: EM w/ ins. Competitors: WM + EM markup + est. ins in monthly. Rebates as of Jul 2026, T&Cs apply. Actual prices may vary — verify with dealer.</span>
+        <h1 className="text-2xl sm:text-4xl font-black text-[var(--color-text-primary)]  mb-1">Compare EVs</h1>
+        <p className="text-sm sm:text-base font-medium text-[var(--color-text-primary)]  leading-relaxed">
+          BYD ranges in <strong className="text-[var(--color-text-primary)] ">NEDC</strong>.
+          <span className="block text-xs text-[var(--color-text-secondary)] ">* Indicative estimates only. BYD: EM w/ ins. Competitors: WM + EM markup + est. ins in monthly. Rebates as of Jul 2026, T&Cs apply. Actual prices may vary — verify with dealer.</span>
         </p>
       </div>
 
       {/* Selectors */}
       <div className="flex flex-col sm:grid sm:grid-cols-2 gap-3 sm:gap-6 mb-6 sm:mb-10">
-        <div className="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-tertiary)] rounded-xl shadow-sm border border-[var(--color-border-primary)] p-3.5 sm:p-6">
+        <div className="bg-[var(--color-bg-secondary)]  rounded-xl shadow-sm border border-[var(--color-border-primary)] p-3.5 sm:p-6">
           <div className="flex items-center gap-2 mb-3">
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-accent flex items-center justify-center">
               <span className="text-[0.5rem] sm:text-[0.6rem] font-black text-white">BYD</span>
             </div>
-            <h2 className="text-sm sm:text-base font-black text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]">BYD Model</h2>
+            <h2 className="text-sm sm:text-base font-black text-[var(--color-text-primary)] ">BYD Model</h2>
           </div>
           <div className="space-y-2.5">
             <div>
-              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] mb-1">Model</label>
+              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)]  mb-1">Model</label>
               <select value={selectedBYDModel} onChange={(e) => { const m = bydModels.find((m) => m.model === e.target.value); setSelectedBYDModel(e.target.value); setSelectedBYDVariant(m?.variants[0]?.name || ""); }} className="select !text-sm !py-2.5">
                 {bydModels.map((m) => (<option key={m.model} value={m.model}>{m.model}</option>))}
               </select>
             </div>
             <div>
-              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] mb-1">Variant</label>
+              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)]  mb-1">Variant</label>
               <select value={selectedBYDVariant} onChange={(e) => setSelectedBYDVariant(e.target.value)} className="select !text-sm !py-2.5">
                 {bydVariants.map((v) => (<option key={v.name} value={v.name}>{v.name}</option>))}
               </select>
@@ -157,49 +157,49 @@ export default function ComparePage() {
           </div>
         </div>
 
-        <div className="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-tertiary)] rounded-xl shadow-sm border border-[var(--color-border-primary)] p-3.5 sm:p-6">
+        <div className="bg-[var(--color-bg-secondary)]  rounded-xl shadow-sm border border-[var(--color-border-primary)] p-3.5 sm:p-6">
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[var(--color-bg-tertiary)] dark:bg-[var(--color-bg-hover)] flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[var(--color-bg-tertiary)]  flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-primary)] ">
                 <rect x="2" y="3" width="6" height="18" rx="1"/><rect x="16" y="3" width="6" height="18" rx="1"/><line x1="8" y1="12" x2="16" y2="12"/>
               </svg>
             </div>
-            <h2 className="text-sm sm:text-base font-black text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]">Competitor</h2>
+            <h2 className="text-sm sm:text-base font-black text-[var(--color-text-primary)] ">Competitor</h2>
             {suggestions.length > 0 && <span className="text-[0.5rem] sm:text-[0.6rem] font-bold bg-amber-500 text-white px-1.5 py-0.5 rounded-full ml-auto">Auto</span>}
           </div>
           <div className="space-y-2.5">
             <div>
-              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] mb-1">Brand</label>
+              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)]  mb-1">Brand</label>
               <select value={selectedBrand} onChange={(e) => { setSelectedBrand(e.target.value); setSelectedCompModel(""); setSelectedCompVariant(""); }} className="select !text-sm !py-2.5">
                 {compData.brands.map((b) => (<option key={b.id} value={b.id}>{b.name}</option>))}
               </select>
             </div>
             <div>
-              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] mb-1">Model</label>
+              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)]  mb-1">Model</label>
               <select value={selectedCompModel} onChange={(e) => { const m = availableModels.find((m) => m.model === e.target.value); setSelectedCompModel(e.target.value); setSelectedCompVariant(m?.variants[0]?.name || ""); }} className="select !text-sm !py-2.5" disabled={availableModels.length === 0}>
                 <option value="">Select</option>
                 {availableModels.map((m) => (<option key={m.model} value={m.model}>{m.model}</option>))}
               </select>
             </div>
             <div>
-              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] mb-1">Variant</label>
+              <label className="block text-xs sm:text-sm font-bold text-[var(--color-text-secondary)]  mb-1">Variant</label>
               <select value={selectedCompVariant} onChange={(e) => setSelectedCompVariant(e.target.value)} className="select !text-sm !py-2.5" disabled={compVariants.length === 0}>
                 {compVariants.length === 0 && <option value="">Select</option>}
                 {compVariants.map((v) => (<option key={v.name} value={v.name}>{v.name}</option>))}
               </select>
             </div>
           </div>
-          {compVariant?.notes && <p className="mt-2 text-xs sm:text-sm font-medium text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)] leading-relaxed">{compVariant.notes}</p>}
-          {selectedBrandData?.emNote && <p className="mt-1.5 text-[0.6rem] sm:text-xs font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)]">EM: {selectedBrandData.emNote}</p>}
+          {compVariant?.notes && <p className="mt-2 text-xs sm:text-sm font-medium text-[var(--color-text-primary)]  leading-relaxed">{compVariant.notes}</p>}
+          {selectedBrandData?.emNote && <p className="mt-1.5 text-[0.6rem] sm:text-xs font-bold text-[var(--color-text-secondary)] ">EM: {selectedBrandData.emNote}</p>}
           {suggestions.length > 1 && (
-            <div className="mt-2.5 pt-2.5 border-t border-[var(--color-border-primary)] dark:border-[var(--color-border-hover)]">
-              <p className="text-[0.55rem] sm:text-[0.65rem] font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] mb-1 uppercase">Others</p>
+            <div className="mt-2.5 pt-2.5 border-t border-[var(--color-border-primary)] ">
+              <p className="text-[0.55rem] sm:text-[0.65rem] font-bold text-[var(--color-text-secondary)]  mb-1 uppercase">Others</p>
               <div className="flex flex-wrap gap-1.5">
                 {suggestions.slice(1).map((s) => {
                   const brand = compData.brands.find((b) => b.id === s.brandId);
                   return (
                     <button key={`${s.brandId}-${s.modelName}`} onClick={() => { setSelectedBrand(s.brandId); setSelectedCompModel(s.modelName); const m = compData.brands.find((b) => b.id === s.brandId)?.models.find((m) => m.model === s.modelName); setSelectedCompVariant(m?.variants[0]?.name || ""); }}
-                      className="text-[0.6rem] sm:text-xs font-bold px-2 py-1.5 rounded-lg bg-[var(--color-bg-tertiary)] dark:bg-[var(--color-bg-hover)] text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] dark:hover:bg-[var(--color-text-tertiary)] transition-colors cursor-pointer min-h-[36px]">
+                      className="text-[0.6rem] sm:text-xs font-bold px-2 py-1.5 rounded-lg bg-[var(--color-bg-tertiary)]  text-[var(--color-text-primary)]  hover:bg-[var(--color-bg-hover)]  transition-colors cursor-pointer min-h-[36px]">
                       {brand?.name} {s.modelName}
                     </button>
                   );
@@ -221,37 +221,37 @@ export default function ComparePage() {
             { icon: "🔌", title: "V2L Standard", desc: "3.3 kW Vehicle-to-Load on all models — power devices anywhere" },
             { icon: "🌏", title: "World #1 EV Maker", desc: "Largest EV manufacturer globally — proven technology at scale" },
           ].map((adv) => (
-            <div key={adv.title} className="bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-900/20 dark:to-blue-800/10 rounded-xl border border-blue-200 dark:border-blue-800/40 p-2.5 sm:p-4">
+            <div key={adv.title} className="bg-gradient-to-br from-blue-50 to-blue-100/50   rounded-xl border border-blue-200  p-2.5 sm:p-4">
               <p className="text-lg sm:text-xl mb-0.5">{adv.icon}</p>
-              <p className="text-[0.65rem] sm:text-sm font-black text-blue-800 dark:text-blue-200">{adv.title}</p>
-              <p className="text-[0.55rem] sm:text-xs font-medium text-blue-600 dark:text-blue-300 leading-relaxed mt-0.5">{adv.desc}</p>
+              <p className="text-[0.65rem] sm:text-sm font-black text-blue-800 ">{adv.title}</p>
+              <p className="text-[0.55rem] sm:text-xs font-medium text-blue-600  leading-relaxed mt-0.5">{adv.desc}</p>
             </div>
           ))}
         </div>
-        <div className="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-tertiary)] rounded-xl shadow-sm border border-[var(--color-border-primary)] overflow-hidden">
+        <div className="bg-[var(--color-bg-secondary)]  rounded-xl shadow-sm border border-[var(--color-border-primary)] overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b-2 border-[var(--color-border-primary)] dark:border-[var(--color-border-hover)] bg-[var(--color-bg-tertiary)] dark:bg-[var(--color-bg-hover)]">
-                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] uppercase tracking-wider w-[130px] sm:w-[220px]">Spec</th>
+                <tr className="border-b-2 border-[var(--color-border-primary)]  bg-[var(--color-bg-tertiary)] ">
+                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-secondary)]  uppercase tracking-wider w-[130px] sm:w-[220px]">Spec</th>
                   <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.65rem] sm:text-sm font-bold text-accent uppercase tracking-wider">BYD</th>
-                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)] uppercase tracking-wider">{selectedBrandData?.name}</th>
+                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-primary)]  uppercase tracking-wider">{selectedBrandData?.name}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[var(--color-border-secondary)] dark:divide-[var(--color-border-primary)]">
+              <tbody className="divide-y divide-[var(--color-border-secondary)] ">
                 {comparisonRows.map((row, i) => (
-                  <tr key={i} className="hover:bg-[var(--color-bg-tertiary)] dark:hover:bg-[var(--color-bg-hover)]/50 transition-colors">
-                    <td className="px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] whitespace-nowrap">{row.label}</td>
-                    <td className={`px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold whitespace-nowrap ${row.byd !== "—" && row.comp !== "—" && compareValues(row.label, row.byd, row.comp) === "byd" ? "text-accent" : "text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]"}`}>{row.byd}</td>
-                    <td className={`px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold whitespace-nowrap ${row.byd !== "—" && row.comp !== "—" && compareValues(row.label, row.byd, row.comp) === "comp" ? "text-orange-600 dark:text-orange-400" : "text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]"}`}>{row.comp}</td>
+                  <tr key={i} className="hover:bg-[var(--color-bg-tertiary)]  transition-colors">
+                    <td className="px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-secondary)]  whitespace-nowrap">{row.label}</td>
+                    <td className={`px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold whitespace-nowrap ${row.byd !== "—" && row.comp !== "—" && compareValues(row.label, row.byd, row.comp) === "byd" ? "text-accent" : "text-[var(--color-text-primary)] "}`}>{row.byd}</td>
+                    <td className={`px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold whitespace-nowrap ${row.byd !== "—" && row.comp !== "—" && compareValues(row.label, row.byd, row.comp) === "comp" ? "text-orange-600 " : "text-[var(--color-text-primary)] "}`}>{row.comp}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           {selectedBrandData?.emMarkup !== 0 && comparisonRows.length > 0 && (
-            <div className="px-3 sm:px-5 py-2.5 sm:py-3 bg-[var(--color-bg-tertiary)] dark:bg-[var(--color-bg-hover)] border-t border-[var(--color-border-primary)] dark:border-[var(--color-border-hover)]">
-              <p className="text-[0.55rem] sm:text-xs font-bold text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] leading-relaxed">
+            <div className="px-3 sm:px-5 py-2.5 sm:py-3 bg-[var(--color-bg-tertiary)]  border-t border-[var(--color-border-primary)] ">
+              <p className="text-[0.55rem] sm:text-xs font-bold text-[var(--color-text-secondary)]  leading-relaxed">
                 * Indicative estimates for reference only. EM markup: +RM{selectedBrandData?.emMarkup?.toLocaleString()} (confirmed or est.). Insurance est: RM2,300/yr (&lt;RM100k), RM3,000/yr (RM100k-150k), RM3,500/yr (RM150k-200k), RM4,000/yr (&gt;RM200k). Rebates as of Jul 2026, T&Cs apply. Actual OTR, rebates & monthly may differ — verify with respective dealers. BYD pricing is East Malaysia with insurance included.
               </p>
             </div>
@@ -259,32 +259,32 @@ export default function ComparePage() {
         </div>
         </>
       ) : (
-        <div className="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-tertiary)] rounded-xl shadow-sm border border-[var(--color-border-primary)] p-8 sm:p-12 text-center">
-          <p className="text-sm sm:text-base font-black text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]">Select models to compare</p>
-          <p className="text-xs sm:text-sm font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-tertiary)] mt-1">Auto-suggests best competitor match.</p>
+        <div className="bg-[var(--color-bg-secondary)]  rounded-xl shadow-sm border border-[var(--color-border-primary)] p-8 sm:p-12 text-center">
+          <p className="text-sm sm:text-base font-black text-[var(--color-text-primary)] ">Select models to compare</p>
+          <p className="text-xs sm:text-sm font-medium text-[var(--color-text-secondary)]  mt-1">Auto-suggests best competitor match.</p>
         </div>
       )}
 
       {/* Talking Points */}
       {comparisonRows.length > 0 && (
-        <div className="mt-4 sm:mt-6 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-300 dark:border-amber-700 p-3.5 sm:p-6">
-          <h3 className="text-sm sm:text-base font-black text-amber-900 dark:text-amber-200 mb-2 flex items-center gap-1.5">
+        <div className="mt-4 sm:mt-6 bg-amber-50  rounded-xl border border-amber-300  p-3.5 sm:p-6">
+          <h3 className="text-sm sm:text-base font-black text-amber-900  mb-2 flex items-center gap-1.5">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
             Talking Points
           </h3>
           <ul className="space-y-1.5">
             {selectedBYDVariant && compVariant && (
               <>
-                <li className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex gap-1.5 leading-relaxed font-medium">
+                <li className="text-xs sm:text-sm text-amber-900  flex gap-1.5 leading-relaxed font-medium">
                   <span className="font-black shrink-0">💰</span>
                   <span>BYD {formatCurrency(bydVariant!.otr - (getRebate(bydModel!.model, bydVariant!.name) ?? bydVariant!.rebate))}{compVariant.otrAfterRebate ? ` vs ${selectedBrandData?.name} ${formatCurrency(compVariant.otrAfterRebate)}` : ` vs ${selectedBrandData?.name} ${formatCurrency(compVariant.otr)}`}</span>
                 </li>
-                <li className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex gap-1.5 leading-relaxed font-medium">
+                <li className="text-xs sm:text-sm text-amber-900  flex gap-1.5 leading-relaxed font-medium">
                   <span className="font-black shrink-0">🔋</span>
                   <span>BYD {bydVariant!.rangeNedc} km | {selectedBrandData?.name} {compVariant.rangeNedc || compVariant.range} km</span>
                 </li>
                 {bydVariant!.zeroToHundred && (
-                  <li className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex gap-1.5 leading-relaxed font-medium">
+                  <li className="text-xs sm:text-sm text-amber-900  flex gap-1.5 leading-relaxed font-medium">
                     <span className="font-black shrink-0">⚡</span>
                     <span>0-100: BYD {bydVariant!.zeroToHundred}s{compVariant.zeroToHundred ? ` | ${selectedBrandData?.name} ${compVariant.zeroToHundred}s` : ""}</span>
                   </li>

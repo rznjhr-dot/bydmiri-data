@@ -59,17 +59,17 @@ export default function SeasonalOpportunitiesPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/marketing-ai"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Marketing AI
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">Seasonal Opportunity Engine</h1>
-          <p className="text-sm text-neutral-400 mt-1">Monitor economic, weather, travel, and seasonal signals for marketing campaigns</p>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Seasonal Opportunity Engine</h1>
+          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Monitor economic, weather, travel, and seasonal signals for marketing campaigns</p>
         </div>
       </section>
 
@@ -83,7 +83,7 @@ export default function SeasonalOpportunitiesPage() {
 
         {/* Signal Selector */}
         <div>
-          <label className="text-sm font-semibold text-neutral-700 mb-1.5 block">Seasonal Signals</label>
+          <label className="text-sm font-semibold text-[var(--color-text-secondary)] mb-1.5 block">Seasonal Signals</label>
           <div className="flex flex-wrap gap-1.5">
             {seasonalSignals.map((s) => (
               <button
@@ -99,19 +99,19 @@ export default function SeasonalOpportunitiesPage() {
 
         {signal && (
           <div className="card border-l-4 border-l-accent">
-            <h2 className="font-bold text-neutral-800 text-sm mb-1">{signal.title}</h2>
-            <p className="text-xs text-neutral-500 mb-3">{signal.description}</p>
+            <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-1">{signal.title}</h2>
+            <p className="text-xs text-[var(--color-text-tertiary)] mb-3">{signal.description}</p>
 
             <div className="card bg-accent/5 border border-accent/10 mb-3">
-              <h3 className="text-xs font-semibold text-neutral-600 mb-1">Suggested Campaign</h3>
+              <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1">Suggested Campaign</h3>
               <p className="text-sm font-medium text-accent">{signal.campaignIdea}</p>
             </div>
 
             <div>
-              <h3 className="text-xs font-semibold text-neutral-600 mb-1.5 uppercase tracking-wider">Triggers to Monitor</h3>
+              <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-wider">Triggers to Monitor</h3>
               <div className="flex flex-wrap gap-1">
                 {signal.triggers.map((tr) => (
-                  <span key={tr} className="text-[0.6rem] text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded">{tr}</span>
+                  <span key={tr} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{tr}</span>
                 ))}
               </div>
             </div>
@@ -124,14 +124,14 @@ export default function SeasonalOpportunitiesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {typedEvents.categories.map((cat) => (
               <div key={cat.id} className="card">
-                <h3 className="font-semibold text-neutral-800 text-sm mb-1">{cat.label}</h3>
-                <p className="text-xs text-neutral-400 mb-1.5">{cat.events.length} events</p>
+                <h3 className="font-semibold text-[var(--color-text-primary)] text-sm mb-1">{cat.label}</h3>
+                <p className="text-xs text-[var(--color-text-tertiary)] mb-1.5">{cat.events.length} events</p>
                 <div className="flex flex-wrap gap-1">
                   {cat.events.slice(0, 4).map((e) => (
-                    <span key={e.name} className="text-[0.55rem] text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded">{e.name}</span>
+                    <span key={e.name} className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{e.name}</span>
                   ))}
                   {cat.events.length > 4 && (
-                    <span className="text-[0.55rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">+{cat.events.length - 4}</span>
+                    <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">+{cat.events.length - 4}</span>
                   )}
                 </div>
               </div>
@@ -141,9 +141,9 @@ export default function SeasonalOpportunitiesPage() {
 
         {/* Prompt Reference */}
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
-          <h2 className="font-bold text-neutral-800 text-sm mb-2">AI Prompt: Seasonal Opportunities</h2>
-          <p className="text-xs text-neutral-500 leading-relaxed">
-            Uses <code className="bg-neutral-100 px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/seasonal-opportunities.md</code> to monitor economic,
+          <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Seasonal Opportunities</h2>
+          <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
+            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/seasonal-opportunities.md</code> to monitor economic,
             seasonal, industry, and cultural signals — automatically suggesting marketing campaigns.
           </p>
         </section>

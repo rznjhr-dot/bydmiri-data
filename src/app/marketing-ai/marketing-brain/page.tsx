@@ -70,17 +70,17 @@ export default function MarketingBrainPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/marketing-ai"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Marketing AI
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">Marketing Brain</h1>
-          <p className="text-sm text-neutral-400 mt-1">Chief Marketing Officer — orchestrates all modules, decides strategy, delegates work</p>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Marketing Brain</h1>
+          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Chief Marketing Officer — orchestrates all modules, decides strategy, delegates work</p>
         </div>
       </section>
 
@@ -98,12 +98,12 @@ export default function MarketingBrainPage() {
                 }`}
               >
                 <div className={`w-8 h-8 rounded-lg mx-auto mb-1 flex items-center justify-center ${
-                  activeStep === i ? "bg-accent text-white" : "bg-neutral-100 text-neutral-500"
+                  activeStep === i ? "bg-accent text-white" : "bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)]"
                 }`}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d={df.icon} /></svg>
                 </div>
-                <h3 className="font-semibold text-neutral-800 text-xs">{df.step}</h3>
-                <p className="text-[0.55rem] text-neutral-400 mt-0.5">{df.label}</p>
+                <h3 className="font-semibold text-[var(--color-text-primary)] text-xs">{df.step}</h3>
+                <p className="text-[0.55rem] text-[var(--color-text-tertiary)] mt-0.5">{df.label}</p>
               </button>
             ))}
           </div>
@@ -112,10 +112,10 @@ export default function MarketingBrainPage() {
             <div className="card border-l-4 border-l-accent mt-2">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs font-bold text-accent">{decisionFramework[activeStep].step}</span>
-                <span className="text-xs text-neutral-400">—</span>
-                <span className="text-sm font-medium text-neutral-700">{decisionFramework[activeStep].label}</span>
+                <span className="text-xs text-[var(--color-text-tertiary)]">—</span>
+                <span className="text-sm font-medium text-[var(--color-text-secondary)]">{decisionFramework[activeStep].label}</span>
               </div>
-              <p className="text-xs text-neutral-500">
+              <p className="text-xs text-[var(--color-text-tertiary)]">
                 The Marketing Brain evaluates this dimension when making strategic decisions. All modules align to this framework.
               </p>
             </div>
@@ -125,7 +125,7 @@ export default function MarketingBrainPage() {
         {/* Module Orchestration */}
         <section>
           <h2 className="section-title">Module Orchestration</h2>
-          <p className="text-xs text-neutral-500 mb-2">
+          <p className="text-xs text-[var(--color-text-tertiary)] mb-2">
             The Marketing Brain never generates content directly. It delegates to the appropriate module:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -136,8 +136,8 @@ export default function MarketingBrainPage() {
                 className="card card-interactive flex items-center justify-between py-2.5"
               >
                 <div>
-                  <h3 className="font-semibold text-neutral-800 text-sm">{mod.name}</h3>
-                  <p className="text-xs text-neutral-400">{mod.description}</p>
+                  <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{mod.name}</h3>
+                  <p className="text-xs text-[var(--color-text-tertiary)]">{mod.description}</p>
                 </div>
                 <span className="text-xs text-accent font-medium">&rarr;</span>
               </Link>
@@ -147,8 +147,8 @@ export default function MarketingBrainPage() {
 
         {/* Architecture Overview */}
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
-          <h2 className="font-bold text-neutral-800 text-sm mb-2">System Architecture</h2>
-          <div className="text-xs text-neutral-500 leading-relaxed space-y-2">
+          <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">System Architecture</h2>
+          <div className="text-xs text-[var(--color-text-tertiary)] leading-relaxed space-y-2">
             <p>
               The Marketing Brain is the CMO-level orchestrator. It <strong>analyses</strong> market conditions,
               <strong> decides</strong> campaign strategy, <strong>prioritises</strong> opportunities,
@@ -159,10 +159,10 @@ export default function MarketingBrainPage() {
               strategic coherence across all marketing activities.
             </p>
           </div>
-          <div className="mt-3 pt-3 border-t border-neutral-100">
-            <h3 className="text-xs font-semibold text-neutral-600 mb-1">AI Prompt</h3>
-            <p className="text-xs text-neutral-500">
-              Uses <code className="bg-neutral-100 px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/marketing-brain.md</code> for CMO-level orchestration.
+          <div className="mt-3 pt-3 border-t border-[var(--color-border-primary)]">
+            <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1">AI Prompt</h3>
+            <p className="text-xs text-[var(--color-text-tertiary)]">
+              Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/marketing-brain.md</code> for CMO-level orchestration.
             </p>
           </div>
         </section>

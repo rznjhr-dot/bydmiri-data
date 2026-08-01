@@ -17,19 +17,19 @@ const datasets = [
 export default function DataIndex() {
   return (
     <div className="min-h-screen">
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
             /data &mdash; Machine Readable
           </h1>
-          <p className="text-sm text-neutral-400 mt-1">
+          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
             All datasets exposed as raw JSON for AI agents and automated systems.
           </p>
         </div>
@@ -48,11 +48,11 @@ export default function DataIndex() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                 </div>
                 <div>
-                  <p className="font-mono text-sm font-medium text-neutral-800">
+                  <p className="font-mono text-sm font-medium text-[var(--color-text-primary)]">
                     {ds.name}
                   </p>
                   {ds.schema && (
-                    <span className="text-[0.55rem] text-neutral-400 font-mono">
+                    <span className="text-[0.55rem] text-[var(--color-text-tertiary)] font-mono">
                       schema: {ds.schema}.schema.json
                     </span>
                   )}
@@ -78,10 +78,10 @@ export default function DataIndex() {
           <div className="flex items-start gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
             <div>
-              <p className="text-sm text-neutral-700 font-medium mb-1">JSON Schema Reference</p>
-              <p className="text-sm text-neutral-500 leading-relaxed">
+              <p className="text-sm text-[var(--color-text-secondary)] font-medium mb-1">JSON Schema Reference</p>
+              <p className="text-sm text-[var(--color-text-tertiary)] leading-relaxed">
                 JSON Schema definitions are available for each dataset at{" "}
-                <code className="bg-neutral-100 px-1.5 py-0.5 rounded text-xs font-mono">/schemas/&lt;name&gt;.schema.json</code>.
+                <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-xs font-mono">/schemas/&lt;name&gt;.schema.json</code>.
                 These schemas define the structure, types, and descriptions for every field,
                 enabling AI agents to understand and validate the data programmatically.
               </p>
@@ -90,9 +90,9 @@ export default function DataIndex() {
         </div>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-8">
+      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 text-center">
-          <p className="text-xs text-neutral-400">
+          <p className="text-xs text-[var(--color-text-tertiary)]">
             &copy; {new Date().getFullYear()} Ridzuan Jahari
           </p>
         </div>

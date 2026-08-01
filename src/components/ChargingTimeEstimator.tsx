@@ -154,7 +154,7 @@ export default function ChargingTimeEstimator() {
           <div className="lg:col-span-3 p-4 sm:p-5 space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1">
                   Model
                 </label>
                 <select
@@ -175,7 +175,7 @@ export default function ChargingTimeEstimator() {
 
               {currentVehicle.variants.length > 1 && (
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1">
                     Variant
                   </label>
                   <select
@@ -195,7 +195,7 @@ export default function ChargingTimeEstimator() {
 
             {/* Charger Type */}
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1.5">
                 Charger Type
               </label>
               <div className="grid grid-cols-2 sm:flex sm:flex-row gap-1.5">
@@ -207,7 +207,7 @@ export default function ChargingTimeEstimator() {
                     className={`pill text-center ${chargerIdx === i ? "pill-active" : ""}`}
                   >
                     <span className="text-[0.6rem] sm:text-xs font-semibold">{ct.label}</span>
-                    <span className="text-[0.55rem] sm:text-[0.6rem] text-neutral-400 ml-0.5">| {ct.power}kW</span>
+                    <span className="text-[0.55rem] sm:text-[0.6rem] text-[var(--color-text-tertiary)] ml-0.5">| {ct.power}kW</span>
                   </button>
                 ))}
               </div>
@@ -215,12 +215,12 @@ export default function ChargingTimeEstimator() {
 
             {/* Charge Range */}
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1.5">
                 Charge Range
               </label>
               <div className="flex items-center gap-3">
                 <div className="flex-1">
-                  <div className="flex justify-between text-xs text-neutral-400 mb-1">
+                  <div className="flex justify-between text-xs text-[var(--color-text-tertiary)] mb-1">
                     <span>From: {fromPct}%</span>
                     <span>To: {toPct}%</span>
                   </div>
@@ -231,7 +231,7 @@ export default function ChargingTimeEstimator() {
                     onPointerUp={handlePointerUp}
                     onPointerLeave={handlePointerUp}
                   >
-                    <div className="absolute w-full h-1.5 bg-neutral-200 rounded-full pointer-events-none" />
+                    <div className="absolute w-full h-1.5 bg-[var(--color-border-primary)] rounded-full pointer-events-none" />
                     <div
                       className="absolute h-1.5 bg-accent rounded-full pointer-events-none"
                       style={{
@@ -244,7 +244,7 @@ export default function ChargingTimeEstimator() {
                       className={`absolute w-5 h-5 -translate-x-1/2 rounded-full shadow-sm cursor-grab active:cursor-grabbing z-10 transition-all ${
                         draggingRef.current === "from"
                           ? "bg-white border-2 border-accent scale-125 shadow-md"
-                          : "bg-white border-2 border-neutral-300 hover:border-accent"
+                          : "bg-white border-2 border-[var(--color-border-primary)] hover:border-accent"
                       }`}
                       style={{ left: `${fromPct}%` }}
                       onPointerDown={handlePointerDown("from")}
@@ -258,7 +258,7 @@ export default function ChargingTimeEstimator() {
                       className={`absolute w-5 h-5 -translate-x-1/2 rounded-full shadow-sm cursor-grab active:cursor-grabbing z-10 transition-all ${
                         draggingRef.current === "to"
                           ? "bg-white border-2 border-accent scale-125 shadow-md"
-                          : "bg-white border-2 border-neutral-300 hover:border-accent"
+                          : "bg-white border-2 border-[var(--color-border-primary)] hover:border-accent"
                       }`}
                       style={{ left: `${toPct}%` }}
                       onPointerDown={handlePointerDown("to")}
@@ -268,7 +268,7 @@ export default function ChargingTimeEstimator() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-between text-[0.6rem] text-neutral-300 mt-1">
+                  <div className="flex justify-between text-[0.6rem] text-[var(--color-text-tertiary)] mt-1">
                     <span>0%</span>
                     <span>50%</span>
                     <span>100%</span>
@@ -284,7 +284,7 @@ export default function ChargingTimeEstimator() {
             )}
 
             {/* Disclaimer */}
-            <p className="text-[0.6rem] text-neutral-400 italic leading-tight">
+            <p className="text-[0.6rem] text-[var(--color-text-tertiary)] italic leading-tight">
               {currentProfile.estimated
                 ? `* ${currentProfile.description} Actual charging fees vary by operator and location.`
                 : `* ${currentProfile.description}`}
@@ -294,7 +294,7 @@ export default function ChargingTimeEstimator() {
           {/* Results */}
           <div className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-[var(--color-bg-secondary)] border-t lg:border-t-0 lg:border-l border-[var(--color-border-primary)]/60 p-4 sm:p-5 flex flex-col justify-between">
             <div>
-              <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">
+              <h3 className="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest mb-3">
                 Estimated Charging Time
               </h3>
 
@@ -339,7 +339,7 @@ export default function ChargingTimeEstimator() {
                     {chargeCost > 0
                       ? `RM${chargeCost.toFixed(2)}`
                       : "—"}
-                    <span className="text-[0.55rem] text-neutral-400 ml-1">
+                    <span className="text-[0.55rem] text-[var(--color-text-tertiary)] ml-1">
                       @ RM{currentProfile.rate.toFixed(2)}/kWh
                     </span>
                   </span>
@@ -350,10 +350,10 @@ export default function ChargingTimeEstimator() {
             <div className="mt-4 pt-3 border-t-2 border-accent/20">
               <div className="flex items-end justify-between">
                 <div>
-                  <p className="text-xs text-neutral-400 font-medium">
+                  <p className="text-xs text-[var(--color-text-tertiary)] font-medium">
                     Charging Time
                   </p>
-                  <p className="text-xs text-neutral-300 mt-0.5">
+                  <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">
                     {fromPct}% → {toPct}% · {effectivePower}kW effective
                   </p>
                 </div>

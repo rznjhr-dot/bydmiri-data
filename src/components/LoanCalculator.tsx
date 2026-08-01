@@ -184,7 +184,7 @@ export default function LoanCalculator() {
             {/* Model + Variant row */}
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+                <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                   Model
                 </label>
                 <select
@@ -205,7 +205,7 @@ export default function LoanCalculator() {
               </div>
               {currentVehicle.variants.length > 1 && (
                 <div>
-                  <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+                  <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                     Variant
                   </label>
                   <select
@@ -229,11 +229,11 @@ export default function LoanCalculator() {
             {/* Rebate control — promo selector (multi-option models) OR simple toggle */}
             <div className="grid grid-cols-2 gap-2">
               {promoOptions && promoOptions.length > 1 ? (
-                <div className={`bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80 ${cspReplacement ? "col-span-2" : ""}`}>
-                  <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-1">
+                <div className={`bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)] ${cspReplacement ? "col-span-2" : ""}`}>
+                  <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1">
                     Promotion
                   </label>
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1.5">
                     {promoOptions.map((opt) => {
                       const active = promoRebateVal === opt.rebate;
                       return (
@@ -246,10 +246,10 @@ export default function LoanCalculator() {
                             setPromoChoice(opt.rebate);
                             setIncludeRebate(true);
                           }}
-                          className={`inline-flex items-center gap-1 rounded-md border font-semibold transition-colors cursor-pointer text-[0.6rem] px-1.5 py-1 ${
+                          className={`inline-flex items-center gap-1 rounded-full border font-semibold transition-all cursor-pointer text-[0.6rem] px-2 py-1 ${
                             active
-                              ? "bg-accent text-white border-accent shadow-sm"
-                              : "bg-white border-neutral-200 text-neutral-600 hover:border-accent/40 hover:text-neutral-800"
+                              ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)] shadow-[0_2px_8px_rgba(29,78,216,0.35)]"
+                              : "bg-white border-[var(--color-border-primary)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)]/50 hover:text-[var(--color-text-primary)]"
                           }`}
                         >
                           {active && (
@@ -262,12 +262,12 @@ export default function LoanCalculator() {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center justify-between bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80">
+                <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
                   <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeRebate(!includeRebate)}>
                     <div className={`w-7 h-4 rounded-full transition-colors relative ${includeRebate ? "bg-accent" : "bg-neutral-300"}`}>
                       <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
                     </div>
-                    <span className="text-[0.6rem] font-medium text-neutral-600">Rebate</span>
+                    <span className="text-[0.6rem] font-medium text-[var(--color-text-secondary)]">Rebate</span>
                   </label>
                   {promoRebateVal > 0 && (
                     <span className="text-[0.6rem] font-semibold text-green-600">{formatCurrency(promoRebateVal)}</span>
@@ -275,12 +275,12 @@ export default function LoanCalculator() {
                 </div>
               )}
               {!(promoOptions && promoOptions.length > 1 && cspReplacement) && (
-              <div className="flex items-center justify-between bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80">
+              <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
                 <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeCspRebate(!includeCspRebate)}>
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
                     <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
-                  <span className="text-[0.6rem] font-medium text-neutral-600 truncate">{cspReplacement || finance.additionalRebate.label.split(" ")[0]}</span>
+                  <span className="text-[0.6rem] font-medium text-[var(--color-text-secondary)] truncate">{cspReplacement || finance.additionalRebate.label.split(" ")[0]}</span>
                 </label>
                 {cspReplacement ? (
                   <span className="text-[0.55rem] font-semibold text-purple-600 text-right leading-tight max-w-[50%]">{cspReplacement.replace(" (worth RM3,888)", "")}</span>
@@ -293,7 +293,7 @@ export default function LoanCalculator() {
 
             {/* Downpayment */}
             <div>
-              <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                 Downpayment
               </label>
               <div className="flex gap-1 mb-1">
@@ -333,7 +333,7 @@ export default function LoanCalculator() {
             {/* Tenure + Interest row */}
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+                <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                   Tenure
                 </label>
                 <div className="flex gap-1 flex-wrap">
@@ -350,7 +350,7 @@ export default function LoanCalculator() {
                 </div>
               </div>
               <div>
-                <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+                <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                   Interest Rate
                 </label>
                 <div className="input-group">
@@ -372,15 +372,15 @@ export default function LoanCalculator() {
           </div>
 
           {/* Results */}
-          <div className="p-2.5 bg-gradient-to-r from-accent/5 to-[var(--color-bg-secondary)]">
+          <div className="p-2.5 bg-gradient-to-r from-[var(--color-accent-light)]/70 to-[var(--color-bg-secondary)]">
             <div className="flex items-center justify-between mb-1.5">
-              <h3 className="text-[0.6rem] font-semibold text-neutral-400 uppercase tracking-widest">
+              <h3 className="text-[0.6rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest">
                 Payment Summary
               </h3>
               <button
                 type="button"
                 onClick={handleCopyQuotation}
-                className="p-1 rounded-md text-neutral-300 hover:text-accent hover:bg-accent/5 transition-all cursor-pointer flex items-center gap-1 text-[0.55rem] font-medium"
+                className="p-1 rounded-md text-[var(--color-text-tertiary)] hover:text-accent hover:bg-accent/5 transition-all cursor-pointer flex items-center gap-1 text-[0.55rem] font-medium"
                 aria-label="Copy quotation"
               >
                 {copied ? (
@@ -399,26 +399,26 @@ export default function LoanCalculator() {
 
             <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[0.6rem]">
               <div className="flex justify-between">
-                <span className="text-neutral-400">OTR w/o Ins.</span>
-                <span className="font-medium text-neutral-800">{formatCurrency(currentVariant.otrWithoutInsurance)}</span>
+                <span className="text-[var(--color-text-tertiary)]">OTR w/o Ins.</span>
+                <span className="font-medium text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otrWithoutInsurance)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-400">Insurance</span>
-                <span className="font-medium text-neutral-800">{formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance)}</span>
+                <span className="text-[var(--color-text-tertiary)]">Insurance</span>
+                <span className="font-medium text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance)}</span>
               </div>
-              <div className="flex justify-between col-span-2 border-t border-neutral-100/50 pt-0.5">
-                <span className="text-neutral-800 font-semibold">OTR Price</span>
-                <span className="font-bold text-neutral-800">{formatCurrency(currentVariant.otr)}</span>
+              <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">
+                <span className="text-[var(--color-text-primary)] font-semibold">OTR Price</span>
+                <span className="font-bold text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otr)}</span>
               </div>
               {includeRebate && promoRebateVal > 0 && (
                 <div className="flex justify-between col-span-2">
-                  <span className="text-neutral-400">Rebate</span>
+                  <span className="text-[var(--color-text-tertiary)]">Rebate</span>
                   <span className="font-semibold text-green-600">-{formatCurrency(promoRebateVal)}</span>
                 </div>
               )}
               {includeCspRebate && (cspReplacement || cspRebateAmount > 0) && (
                 <div className="flex justify-between col-span-2">
-                  <span className="text-neutral-400">{cspReplacement || finance.additionalRebate.label}</span>
+                  <span className="text-[var(--color-text-tertiary)]">{cspReplacement || finance.additionalRebate.label}</span>
                   {cspReplacement ? (
                     <span className="font-semibold text-purple-600 text-right text-[0.55rem] max-w-[50%] leading-tight">{cspReplacement}</span>
                   ) : (
@@ -426,28 +426,28 @@ export default function LoanCalculator() {
                   )}
                 </div>
               )}
-              <div className="flex justify-between col-span-2 border-t border-neutral-100/50 pt-0.5">
-                <span className="text-neutral-400">After Rebate</span>
+              <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">
+                <span className="text-[var(--color-text-tertiary)]">After Rebate</span>
                 <span className="font-semibold">{formatCurrency(priceAfterRebate)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-400">Downpayment</span>
+                <span className="text-[var(--color-text-tertiary)]">Downpayment</span>
                 <span className="font-medium">{downpaymentAmount > 0 ? formatCurrency(downpaymentAmount) : "RM0"}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-400">{parsedInterestRate}% × {tenure}y</span>
+                <span className="text-[var(--color-text-tertiary)]">{parsedInterestRate}% × {tenure}y</span>
                 <span className="font-medium">{formatCurrency(loanAmount)}</span>
               </div>
             </div>
 
             <div className="mt-2 pt-1.5 border-t-2 border-accent/20 flex items-center justify-between">
               <div>
-                <p className="text-[0.55rem] text-neutral-400 font-medium">Monthly</p>
-                <p className="text-[0.45rem] text-neutral-300">{parsedInterestRate}% × {tenure}y</p>
+                <p className="text-[0.55rem] text-[var(--color-text-tertiary)] font-medium">Monthly</p>
+                <p className="text-[0.45rem] text-[var(--color-text-tertiary)]">{parsedInterestRate}% × {tenure}y</p>
               </div>
               <p className="text-lg sm:text-xl font-extrabold text-accent tracking-tight">
                 {formatCurrency(monthlyPayment)}
-                <span className="text-[0.6rem] font-normal text-neutral-400">/mo</span>
+                <span className="text-[0.6rem] font-normal text-[var(--color-text-tertiary)]">/mo</span>
               </p>
             </div>
           </div>

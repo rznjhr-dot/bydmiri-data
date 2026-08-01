@@ -27,8 +27,8 @@ function RulesSection({ category }: { category: RuleCategory }) {
             </svg>
           </div>
           <div>
-            <h2 className="font-bold text-neutral-800 text-base">{category.name}</h2>
-            <p className="text-xs text-neutral-500 mt-0.5">{category.description}</p>
+            <h2 className="font-bold text-[var(--color-text-primary)] text-base">{category.name}</h2>
+            <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">{category.description}</p>
           </div>
         </div>
         <svg
@@ -41,14 +41,14 @@ function RulesSection({ category }: { category: RuleCategory }) {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={`text-neutral-400 transition-transform shrink-0 ${expanded ? "rotate-180" : ""}`}
+          className={`text-[var(--color-text-tertiary)] transition-transform shrink-0 ${expanded ? "rotate-180" : ""}`}
         >
           <polyline points="6 9 12 15 18 9"/>
         </svg>
       </button>
 
       {expanded && (
-        <div className="mt-4 pt-4 border-t border-neutral-100 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="mt-4 pt-4 border-t border-[var(--color-border-primary)] grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Dos */}
           <div>
             <h3 className="text-xs font-semibold text-green-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
@@ -57,7 +57,7 @@ function RulesSection({ category }: { category: RuleCategory }) {
             </h3>
             <ul className="space-y-2">
               {category.dos.map((d, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-neutral-600">
+                <li key={i} className="flex items-start gap-2 text-xs text-[var(--color-text-secondary)]">
                   <span className="w-1 h-1 rounded-full bg-green-400 mt-1.5 shrink-0" />
                   {d}
                 </li>
@@ -72,7 +72,7 @@ function RulesSection({ category }: { category: RuleCategory }) {
             </h3>
             <ul className="space-y-2">
               {category.donts.map((d, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-neutral-600">
+                <li key={i} className="flex items-start gap-2 text-xs text-[var(--color-text-secondary)]">
                   <span className="w-1 h-1 rounded-full bg-red-400 mt-1.5 shrink-0" />
                   {d}
                 </li>
@@ -88,11 +88,11 @@ function RulesSection({ category }: { category: RuleCategory }) {
 export default function RulesPage() {
   return (
     <div className="min-h-screen">
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/ai-prompt-studio"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             AI Prompt Studio
@@ -102,8 +102,8 @@ export default function RulesPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 4-2 4h-4s-2-2-2-4a4 4 0 0 1 4-4z"/><path d="M12 8v6"/><path d="M12 16v2"/><path d="M8 22h8"/><path d="M12 22v-4"/></svg>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">Rules &amp; Reference</h1>
-              <p className="text-sm text-neutral-400 mt-0.5">Brand guidelines, composition rules, and best practices for prompt engineering</p>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Rules &amp; Reference</h1>
+              <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">Brand guidelines, composition rules, and best practices for prompt engineering</p>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function RulesPage() {
             <a
               key={cat.id}
               href={`#${cat.id}`}
-              className="px-2.5 py-1.5 rounded-lg text-xs font-medium text-neutral-500 bg-neutral-100 hover:bg-neutral-200 hover:text-neutral-700 transition-all"
+              className="px-2.5 py-1.5 rounded-lg text-xs font-medium text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] hover:bg-[var(--color-border-primary)] hover:text-[var(--color-text-secondary)] transition-all"
             >
               {cat.name}
             </a>
@@ -129,9 +129,9 @@ export default function RulesPage() {
         ))}
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-8">
+      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-neutral-400">&copy; {new Date().getFullYear()} Ridzuan Jahari — AI Prompt Studio</p>
+          <p className="text-xs text-[var(--color-text-tertiary)]">&copy; {new Date().getFullYear()} Ridzuan Jahari — AI Prompt Studio</p>
         </div>
       </footer>
     </div>

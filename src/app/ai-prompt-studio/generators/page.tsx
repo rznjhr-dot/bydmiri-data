@@ -152,15 +152,15 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-semibold text-neutral-800 text-sm">{template.name}</h3>
-          <p className="text-xs text-neutral-500 mt-0.5">{template.description}</p>
+          <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{template.name}</h3>
+          <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">{template.description}</p>
           <div className="flex items-center gap-2 mt-2">
-            <span className="text-[0.55rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">{template.platform}</span>
-            <span className="text-[0.55rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">{template.aspectRatio}</span>
+            <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{template.platform}</span>
+            <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{template.aspectRatio}</span>
           </div>
           <div className="flex flex-wrap gap-1 mt-1.5">
             {template.bestFor.slice(0, 2).map((item) => (
-              <span key={item} className="text-[0.5rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">{item}</span>
+              <span key={item} className="text-[0.5rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item}</span>
             ))}
           </div>
         </div>
@@ -168,8 +168,8 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
 
       {/* Tagline checkboxes (Delivery only) */}
       {isDelivery && template.taglines && template.taglines.length > 0 && (
-        <div className="mt-3 pt-3 border-t border-neutral-100">
-          <p className="text-[0.65rem] font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">Taglines / Captions</p>
+        <div className="mt-3 pt-3 border-t border-[var(--color-border-primary)]">
+          <p className="text-[0.65rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1.5">Taglines / Captions</p>
           <div className="space-y-1">
             {template.taglines.map((tagline) => (
               <label key={tagline.id} className="flex items-start gap-2 cursor-pointer group">
@@ -177,9 +177,9 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
                   type="checkbox"
                   checked={selectedTaglines.has(tagline.id)}
                   onChange={() => toggleTagline(tagline.id)}
-                  className="mt-0.5 rounded border-neutral-300 text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5 shrink-0"
+                  className="mt-0.5 rounded border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5 shrink-0"
                 />
-                <span className="text-[0.6rem] text-neutral-600 group-hover:text-neutral-800 transition-colors leading-snug">
+                <span className="text-[0.6rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors leading-snug">
                   {tagline.text.replace(/\{model\}/g, vehicleModel)}
                 </span>
               </label>
@@ -187,8 +187,8 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
           </div>
 
           {/* Ratio selection */}
-          <div className="mt-3 pt-2.5 border-t border-neutral-100">
-            <p className="text-[0.65rem] font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">Aspect Ratio</p>
+          <div className="mt-3 pt-2.5 border-t border-[var(--color-border-primary)]">
+            <p className="text-[0.65rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1.5">Aspect Ratio</p>
             <div className="flex gap-3">
               <label className="flex items-center gap-2 cursor-pointer group">
                 <input
@@ -196,9 +196,9 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
                   name={`ratio-${template.id}`}
                   checked={ratio === "1:1"}
                   onChange={() => setRatio("1:1")}
-                  className="rounded-full border-neutral-300 text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5"
+                  className="rounded-full border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5"
                 />
-                <span className="text-[0.6rem] text-neutral-600 group-hover:text-neutral-800 transition-colors">1:1 Square</span>
+                <span className="text-[0.6rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors">1:1 Square</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer group">
                 <input
@@ -206,9 +206,9 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
                   name={`ratio-${template.id}`}
                   checked={ratio === "4:5"}
                   onChange={() => setRatio("4:5")}
-                  className="rounded-full border-neutral-300 text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5"
+                  className="rounded-full border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5"
                 />
-                <span className="text-[0.6rem] text-neutral-600 group-hover:text-neutral-800 transition-colors">4:5 Portrait</span>
+                <span className="text-[0.6rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors">4:5 Portrait</span>
               </label>
             </div>
           </div>
@@ -218,12 +218,12 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
       {/* Block Configuration Summary (non-delivery only) */}
       {!isDelivery && (
         <details className="mt-2 group">
-          <summary className="text-xs text-neutral-500 cursor-pointer hover:text-neutral-700 transition-colors">Configured blocks ({template.blocks.length})</summary>
+          <summary className="text-xs text-[var(--color-text-tertiary)] cursor-pointer hover:text-[var(--color-text-secondary)] transition-colors">Configured blocks ({template.blocks.length})</summary>
           <div className="mt-2 space-y-1 pl-1">
             {template.blocks.map((sel) => (
               <div key={sel.blockId} className="flex items-center justify-between text-[0.6rem]">
-                <span className="text-neutral-400">{blockName(sel.blockId)}</span>
-                <span className="text-neutral-600 font-medium">{optionName(sel.blockId, selections[sel.blockId] || sel.selectedOptionId)}</span>
+                <span className="text-[var(--color-text-tertiary)]">{blockName(sel.blockId)}</span>
+                <span className="text-[var(--color-text-secondary)] font-medium">{optionName(sel.blockId, selections[sel.blockId] || sel.selectedOptionId)}</span>
               </div>
             ))}
           </div>
@@ -235,17 +235,17 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
         {prompt ? (
           prompt.slice(0, 500) + (prompt.length > 500 ? "..." : "")
         ) : (
-          <span className="text-neutral-500 italic">No prompt content</span>
+          <span className="text-[var(--color-text-tertiary)] italic">No prompt content</span>
         )}
       </div>
 
       {/* Actions */}
-      <div className="mt-3 pt-2.5 border-t border-neutral-100 flex items-center gap-2">
+      <div className="mt-3 pt-2.5 border-t border-[var(--color-border-primary)] flex items-center gap-2">
         {/* Randomize Styles (non-delivery only) */}
         {!isDelivery && (
           <button
             onClick={randomizeStyles}
-            className="py-2 px-3 rounded-lg bg-white border border-neutral-200 hover:bg-neutral-50 text-neutral-500 font-medium text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            className="py-2 px-3 rounded-lg bg-white border border-[var(--color-border-primary)] hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)] font-medium text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
             title="Randomize style blocks"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
@@ -270,7 +270,7 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
         </button>
         <Link
           href={`/ai-prompt-studio/builder`}
-          className="flex-1 py-2 rounded-lg bg-white border border-neutral-200 hover:bg-neutral-50 text-neutral-600 font-medium text-xs transition-all flex items-center justify-center gap-1.5"
+          className="flex-1 py-2 rounded-lg bg-white border border-[var(--color-border-primary)] hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] font-medium text-xs transition-all flex items-center justify-center gap-1.5"
         >
           Open Builder
         </Link>
@@ -302,11 +302,11 @@ function GeneratorsContent() {
 
   return (
     <div className="min-h-screen">
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/ai-prompt-studio"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             AI Prompt Studio
@@ -316,8 +316,8 @@ function GeneratorsContent() {
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">Generators</h1>
-              <p className="text-sm text-neutral-400 mt-0.5">{templates.length} specialised prompt generators for every content format</p>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Generators</h1>
+              <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">{templates.length} specialised prompt generators for every content format</p>
             </div>
           </div>
         </div>
@@ -326,14 +326,14 @@ function GeneratorsContent() {
       <main id="main-content" className="page-enter max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-4">
         {/* Vehicle Context Selector */}
         <section className="card card-elevated p-3 sm:p-4">
-          <h3 className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">Vehicle Context</h3>
+          <h3 className="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">Vehicle Context</h3>
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div>
-              <label className="text-[0.65rem] text-neutral-400 block mb-0.5">Model</label>
+              <label className="text-[0.65rem] text-[var(--color-text-tertiary)] block mb-0.5">Model</label>
               <select
                 value={modelIdx}
                 onChange={(e) => setModelIdx(Number(e.target.value))}
-                className="w-full px-2.5 py-1.5 rounded-lg border border-neutral-200 bg-white text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all"
+                className="w-full px-2.5 py-1.5 rounded-lg border border-[var(--color-border-primary)] bg-white text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-subtle)] focus:border-[var(--color-accent)] transition-all"
               >
                 {vehicles.map((v, i) => (
                   <option key={v.model} value={i}>{v.model}</option>
@@ -341,11 +341,11 @@ function GeneratorsContent() {
               </select>
             </div>
             <div>
-              <label className="text-[0.65rem] text-neutral-400 block mb-0.5">Variant</label>
+              <label className="text-[0.65rem] text-[var(--color-text-tertiary)] block mb-0.5">Variant</label>
               <select
                 value={variantIdx}
                 onChange={(e) => setVariantIdx(Number(e.target.value))}
-                className="w-full px-2.5 py-1.5 rounded-lg border border-neutral-200 bg-white text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all"
+                className="w-full px-2.5 py-1.5 rounded-lg border border-[var(--color-border-primary)] bg-white text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-subtle)] focus:border-[var(--color-accent)] transition-all"
               >
                 {currentVehicle.variants.map((v, i) => (
                   <option key={v.name} value={i}>{v.name}</option>
@@ -353,42 +353,42 @@ function GeneratorsContent() {
               </select>
             </div>
             <div>
-              <label className="text-[0.65rem] text-neutral-400 block mb-0.5">Monthly Rebate ({company.rebatePeriod})</label>
+              <label className="text-[0.65rem] text-[var(--color-text-tertiary)] block mb-0.5">Monthly Rebate ({company.rebatePeriod})</label>
               <p className="text-sm font-bold text-green-700">-RM{(getRebate(currentVehicle.model, currentVariant.name) ?? currentVariant.rebate).toLocaleString("en-MY")}</p>
             </div>
             <div className="col-span-2 sm:col-span-1">
-              <label className="text-[0.65rem] text-neutral-400 block mb-0.5">Range / Battery</label>
-              <p className="text-sm font-semibold text-neutral-800">{currentVariant.range} km / {currentVariant.battery} kWh</p>
+              <label className="text-[0.65rem] text-[var(--color-text-tertiary)] block mb-0.5">Range / Battery</label>
+              <p className="text-sm font-semibold text-[var(--color-text-primary)]">{currentVariant.range} km / {currentVariant.battery} kWh</p>
             </div>
           </div>
           {/* Own Photos Toggle */}
-          <label className="flex items-center gap-2 mt-3 pt-3 border-t border-neutral-100 cursor-pointer">
+          <label className="flex items-center gap-2 mt-3 pt-3 border-t border-[var(--color-border-primary)] cursor-pointer">
             <input
               type="checkbox"
               checked={useOwnPhotos}
               onChange={(e) => setUseOwnPhotos(e.target.checked)}
-              className="rounded border-neutral-300 text-purple-600 focus:ring-purple-500/30 h-4 w-4"
+              className="rounded border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-4 w-4"
             />
-            <span className="text-xs text-neutral-600">I will provide my own vehicle photos</span>
-            <span className="text-[0.55rem] text-neutral-400 ml-auto">{useOwnPhotos ? "Actual photos required" : "AI generates vehicle image"}</span>
+            <span className="text-xs text-[var(--color-text-secondary)]">I will provide my own vehicle photos</span>
+            <span className="text-[0.55rem] text-[var(--color-text-tertiary)] ml-auto">{useOwnPhotos ? "Actual photos required" : "AI generates vehicle image"}</span>
           </label>
         </section>
 
         {/* Search */}
         <div className="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-tertiary)] pointer-events-none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           <input
             type="text"
             placeholder="Search generators..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200/60 bg-white text-sm text-neutral-700 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[var(--color-border-primary)] bg-white text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)] focus:outline-none focus:ring-4 focus:ring-purple-500/15 focus:border-[var(--color-accent)] transition-all shadow-[var(--shadow-subtle)]"
           />
         </div>
 
         {/* Generator Info */}
         <div className="card border-l-4 border-l-purple-500 bg-purple-50/50">
-          <p className="text-xs text-neutral-600 leading-relaxed">
+          <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
             Each generator comes with a pre-configured set of block selections optimised for its specific format.
             Click <strong>Copy Prompt</strong> to copy directly, or <strong>Open Builder</strong> to customise further.
             Vehicle data context (pricing, rebates, specs) is pulled directly from the knowledge base — no made-up numbers.
@@ -401,14 +401,14 @@ function GeneratorsContent() {
             <GeneratorCard key={template.id} template={template} vehicleModel={currentVehicle.model} vehicleVariant={currentVariant} useOwnPhotos={useOwnPhotos} />
           ))}
           {filtered.length === 0 && (
-            <div className="col-span-full text-sm text-neutral-400 text-center py-8">No generators found</div>
+            <div className="col-span-full text-sm text-[var(--color-text-tertiary)] text-center py-8">No generators found</div>
           )}
         </div>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-8">
+      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-neutral-400">&copy; {new Date().getFullYear()} Ridzuan Jahari — AI Prompt Studio</p>
+          <p className="text-xs text-[var(--color-text-tertiary)]">&copy; {new Date().getFullYear()} Ridzuan Jahari — AI Prompt Studio</p>
         </div>
       </footer>
     </div>
@@ -419,7 +419,7 @@ export default function GeneratorsPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-neutral-400 text-sm">Loading...</div>
+        <div className="text-[var(--color-text-tertiary)] text-sm">Loading...</div>
       </div>
     }>
       <GeneratorsContent />

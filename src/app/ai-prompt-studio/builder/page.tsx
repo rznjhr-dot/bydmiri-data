@@ -138,7 +138,7 @@ export default function PromptBuilderPage() {
   if (!selections || Object.keys(selections).length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-neutral-400 text-sm">Loading...</div>
+        <div className="text-[var(--color-text-tertiary)] text-sm">Loading...</div>
       </div>
     );
   }
@@ -146,11 +146,11 @@ export default function PromptBuilderPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/ai-prompt-studio"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             AI Prompt Studio
@@ -160,10 +160,10 @@ export default function PromptBuilderPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
                 Prompt Builder
               </h1>
-              <p className="text-sm text-neutral-400 mt-0.5">
+              <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">
                 Visually assemble production-grade prompts from modular building blocks
               </p>
             </div>
@@ -179,11 +179,11 @@ export default function PromptBuilderPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {/* Model */}
               <div>
-                <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wider block mb-1">Model</label>
+                <label className="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider block mb-1">Model</label>
                 <select
                   value={modelIdx}
                   onChange={(e) => setModelIdx(Number(e.target.value))}
-                  className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-white text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--color-border-primary)] bg-white text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-subtle)] focus:border-[var(--color-accent)] transition-all"
                 >
                   {vehicles.map((v, i) => (
                     <option key={v.model} value={i}>{v.model}</option>
@@ -192,11 +192,11 @@ export default function PromptBuilderPage() {
               </div>
               {/* Variant */}
               <div>
-                <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wider block mb-1">Variant</label>
+                <label className="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider block mb-1">Variant</label>
                 <select
                   value={variantIdx}
                   onChange={(e) => setVariantIdx(Number(e.target.value))}
-                  className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-white text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--color-border-primary)] bg-white text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-subtle)] focus:border-[var(--color-accent)] transition-all"
                 >
                   {currentVehicle.variants.map((v, i) => (
                     <option key={v.name} value={i}>{v.name}</option>
@@ -205,34 +205,34 @@ export default function PromptBuilderPage() {
               </div>
             </div>
             {/* Data Summary */}
-            <div className="mt-3 pt-3 border-t border-neutral-100 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <div className="mt-3 pt-3 border-t border-[var(--color-border-primary)] grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
               <div>
-                <span className="text-neutral-400 block">OTR Price</span>
-                <span className="font-semibold text-neutral-800">RM{currentVariant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2 })}</span>
+                <span className="text-[var(--color-text-tertiary)] block">OTR Price</span>
+                <span className="font-semibold text-[var(--color-text-primary)]">RM{currentVariant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2 })}</span>
               </div>
               <div>
-                <span className="text-neutral-400 block">Monthly Rebate ({company.rebatePeriod})</span>
+                <span className="text-[var(--color-text-tertiary)] block">Monthly Rebate ({company.rebatePeriod})</span>
                 <span className="font-semibold text-green-700 text-sm">-RM{(getRebate(currentVehicle.model, currentVariant.name) ?? currentVariant.rebate).toLocaleString("en-MY")}</span>
               </div>
               <div>
-                <span className="text-neutral-400 block">Range</span>
-                <span className="font-semibold text-neutral-800">{currentVariant.range} km</span>
+                <span className="text-[var(--color-text-tertiary)] block">Range</span>
+                <span className="font-semibold text-[var(--color-text-primary)]">{currentVariant.range} km</span>
               </div>
               <div>
-                <span className="text-neutral-400 block">Battery</span>
-                <span className="font-semibold text-neutral-800">{currentVariant.battery} kWh</span>
+                <span className="text-[var(--color-text-tertiary)] block">Battery</span>
+                <span className="font-semibold text-[var(--color-text-primary)]">{currentVariant.battery} kWh</span>
               </div>
             </div>
             {/* Own Photos Toggle */}
-            <label className="flex items-center gap-2 mt-3 pt-3 border-t border-neutral-100 cursor-pointer">
+            <label className="flex items-center gap-2 mt-3 pt-3 border-t border-[var(--color-border-primary)] cursor-pointer">
               <input
                 type="checkbox"
                 checked={useOwnPhotos}
                 onChange={(e) => setUseOwnPhotos(e.target.checked)}
-                className="rounded border-neutral-300 text-purple-600 focus:ring-purple-500/30 h-4 w-4"
+                className="rounded border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-4 w-4"
               />
-              <span className="text-xs text-neutral-600">I will provide my own vehicle photos</span>
-              <span className="text-[0.55rem] text-neutral-400 ml-auto">{useOwnPhotos ? "Actual photos required" : "AI generates vehicle image"}</span>
+              <span className="text-xs text-[var(--color-text-secondary)]">I will provide my own vehicle photos</span>
+              <span className="text-[0.55rem] text-[var(--color-text-tertiary)] ml-auto">{useOwnPhotos ? "Actual photos required" : "AI generates vehicle image"}</span>
             </label>
           </div>
         </section>
@@ -243,8 +243,8 @@ export default function PromptBuilderPage() {
             <div className="flex items-center justify-between">
               <h2 className="section-title mb-0">Building Blocks</h2>
               <div className="flex items-center gap-2">
-                <span className="text-[0.6rem] text-neutral-400 font-medium">{totalSelected}/{blocks.length} selected</span>
-                <button onClick={handleReset} className="text-xs text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer">Reset</button>
+                <span className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium">{totalSelected}/{blocks.length} selected</span>
+                <button onClick={handleReset} className="text-xs text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors cursor-pointer">Reset</button>
               </div>
             </div>
 
@@ -262,8 +262,8 @@ export default function PromptBuilderPage() {
                         <span className="text-[0.6rem] font-bold text-purple-600">{block.order}</span>
                       </div>
                       <div className="min-w-0 flex-1">
-                        <h3 className="font-semibold text-neutral-800 text-sm">{block.name}</h3>
-                        <p className="text-[0.6rem] text-neutral-400 truncate">{selected?.name || "Select an option"}</p>
+                        <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{block.name}</h3>
+                        <p className="text-[0.6rem] text-[var(--color-text-tertiary)] truncate">{selected?.name || "Select an option"}</p>
                       </div>
                     </div>
                     <svg
@@ -276,14 +276,14 @@ export default function PromptBuilderPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className={`text-neutral-400 transition-transform shrink-0 ${isExpanded ? "rotate-180" : ""}`}
+                      className={`text-[var(--color-text-tertiary)] transition-transform shrink-0 ${isExpanded ? "rotate-180" : ""}`}
                     >
                       <polyline points="6 9 12 15 18 9"/>
                     </svg>
                   </button>
 
                   {isExpanded && (
-                    <div className="mt-3 pt-3 border-t border-neutral-100 space-y-1.5">
+                    <div className="mt-3 pt-3 border-t border-[var(--color-border-primary)] space-y-1.5">
                       {block.options.map((option) => {
                         const isActive = selections[block.id] === option.id;
                         return (
@@ -293,7 +293,7 @@ export default function PromptBuilderPage() {
                             className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
                               isActive
                                 ? "bg-purple-100 border border-purple-200 text-purple-700 font-medium"
-                                : "bg-neutral-50 border border-neutral-100 text-neutral-600 hover:bg-neutral-100 hover:border-neutral-200"
+                                : "bg-[var(--color-bg-tertiary)] border border-[var(--color-border-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] hover:border-[var(--color-border-primary)]"
                             }`}
                           >
                             <span className="font-medium">{option.name}</span>
@@ -322,7 +322,7 @@ export default function PromptBuilderPage() {
             <div className="card p-0 overflow-hidden">
               <div className="bg-neutral-900 text-neutral-100 p-4 sm:p-5 font-mono text-[0.7rem] leading-relaxed whitespace-pre-wrap max-h-[60vh] overflow-y-auto">
                 {assembledPrompt || (
-                  <span className="text-neutral-500 italic">Select blocks on the left to build your prompt...</span>
+                  <span className="text-[var(--color-text-tertiary)] italic">Select blocks on the left to build your prompt...</span>
                 )}
               </div>
             </div>
@@ -332,7 +332,7 @@ export default function PromptBuilderPage() {
               <button
                 onClick={handleCopy}
                 disabled={!assembledPrompt}
-                className="w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:bg-neutral-200 disabled:text-neutral-400 disabled:cursor-not-allowed text-white font-bold text-sm transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:bg-[var(--color-border-primary)] disabled:text-[var(--color-text-tertiary)] disabled:cursor-not-allowed text-white font-bold text-sm transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 {copied ? (
                   <>
@@ -351,7 +351,7 @@ export default function PromptBuilderPage() {
                 <button
                   onClick={handleSave}
                   disabled={!assembledPrompt}
-                  className="py-2.5 rounded-xl bg-white border border-neutral-200 hover:bg-neutral-50 disabled:bg-neutral-100 disabled:text-neutral-300 disabled:cursor-not-allowed text-neutral-600 font-medium text-xs transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                  className="py-2.5 rounded-xl bg-white border border-[var(--color-border-primary)] hover:bg-[var(--color-bg-tertiary)] disabled:bg-[var(--color-bg-tertiary)] disabled:text-[var(--color-text-tertiary)] disabled:cursor-not-allowed text-[var(--color-text-secondary)] font-medium text-xs transition-all cursor-pointer flex items-center justify-center gap-1.5"
                 >
                   {saved ? (
                     <>Saved</>
@@ -364,7 +364,7 @@ export default function PromptBuilderPage() {
                 </button>
                 <Link
                   href={`/ai-prompt-studio/saved`}
-                  className="py-2.5 rounded-xl bg-white border border-neutral-200 hover:bg-neutral-50 text-neutral-600 font-medium text-xs transition-all flex items-center justify-center gap-1.5"
+                  className="py-2.5 rounded-xl bg-white border border-[var(--color-border-primary)] hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] font-medium text-xs transition-all flex items-center justify-center gap-1.5"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
                   Saved Prompts
@@ -374,14 +374,14 @@ export default function PromptBuilderPage() {
 
             {/* Selected Summary */}
             <div className="card">
-              <h3 className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">Current Configuration</h3>
+              <h3 className="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">Current Configuration</h3>
               <div className="space-y-1">
                 {blocks.map((block) => {
                   const selected = getSelectedOption(block, selections);
                   return (
                     <div key={block.id} className="flex items-center justify-between text-xs">
-                      <span className="text-neutral-400">{block.name}</span>
-                      <span className="text-neutral-700 font-medium truncate ml-2 text-right max-w-[60%]">{selected?.name || "—"}</span>
+                      <span className="text-[var(--color-text-tertiary)]">{block.name}</span>
+                      <span className="text-[var(--color-text-secondary)] font-medium truncate ml-2 text-right max-w-[60%]">{selected?.name || "—"}</span>
                     </div>
                   );
                 })}
@@ -391,9 +391,9 @@ export default function PromptBuilderPage() {
         </div>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-8">
+      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-neutral-400">
+          <p className="text-xs text-[var(--color-text-tertiary)]">
             &copy; {new Date().getFullYear()} Ridzuan Jahari — AI Prompt Studio
           </p>
         </div>

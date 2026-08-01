@@ -82,11 +82,11 @@ export default function AIPromptStudioPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
@@ -96,10 +96,10 @@ export default function AIPromptStudioPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
                 AI Prompt Studio
               </h1>
-              <p className="text-sm text-neutral-400 mt-0.5">
+              <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">
                 Production-grade prompt engineering platform — build, manage, and export master prompts for ChatGPT GPT Image
               </p>
             </div>
@@ -129,10 +129,10 @@ export default function AIPromptStudioPage() {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-0.5">
-                <h2 className="font-bold text-neutral-800 text-sm">RJEOS™ — Editorial Campaign Engine</h2>
+                <h2 className="font-bold text-[var(--color-text-primary)] text-sm">RJEOS™ — Editorial Campaign Engine</h2>
                 <span className="badge badge-amber text-[0.5rem] py-0 px-1.5">Separate System</span>
               </div>
-              <p className="text-xs text-neutral-500 leading-relaxed">
+              <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
                 A completely separate prompt engine for premium automotive editorial campaign artwork.
                 Locked-down constitutional system — typography, hierarchy, and composition rules are immutable.
                 <span className="text-amber-600 font-medium ml-1 group-hover:underline">Open RJEOS &rarr;</span>
@@ -148,8 +148,8 @@ export default function AIPromptStudioPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-600"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 4-2 4h-4s-2-2-2-4a4 4 0 0 1 4-4z"/><path d="M12 8v6"/><path d="M12 16v2"/><path d="M8 22h8"/><path d="M12 22v-4"/></svg>
             </div>
             <div>
-              <h2 className="font-bold text-neutral-800 text-sm mb-2">Prompt Engineering Platform</h2>
-              <p className="text-sm text-neutral-500 leading-relaxed">
+              <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">Prompt Engineering Platform</h2>
+              <p className="text-sm text-[var(--color-text-tertiary)] leading-relaxed">
                 This system generates production-grade master prompts optimised for ChatGPT GPT Image.
                 No external APIs, no AI subscriptions, no backend inference — just modular, reusable,
                 copyable prompts built from 16 modular block types.
@@ -166,13 +166,13 @@ export default function AIPromptStudioPage() {
 
         {/* Search */}
         <div className="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-tertiary)] pointer-events-none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           <input
             type="text"
             placeholder="Search generators, tools, rules..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200/60 bg-white text-sm text-neutral-700 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[var(--color-border-primary)] bg-white text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)] focus:outline-none focus:ring-4 focus:ring-purple-500/15 focus:border-purple-400 transition-all shadow-[var(--shadow-subtle)]"
           />
         </div>
 
@@ -189,20 +189,20 @@ export default function AIPromptStudioPage() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <h3 className="font-semibold text-neutral-800 text-sm truncate">{item.name}</h3>
+                        <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{item.name}</h3>
                         <span className={`badge ${getBadgeClass(item.badge)} text-[0.55rem] py-0 px-1.5`}>{item.badge}</span>
                       </div>
-                      <p className="text-xs text-neutral-500 line-clamp-2">{item.description}</p>
+                      <p className="text-xs text-[var(--color-text-tertiary)] line-clamp-2">{item.description}</p>
                     </div>
                   </div>
-                  <div className="pt-2 border-t border-neutral-100 flex items-center justify-between">
+                  <div className="pt-2 border-t border-[var(--color-border-primary)] flex items-center justify-between">
                     <span className="text-xs font-medium text-purple-600 group-hover:text-purple-700 transition-colors">Open &rarr;</span>
                   </div>
                 </Link>
               ))}
             </div>
             {filtered.length === 0 && (
-              <p className="text-sm text-neutral-400 text-center py-8">No results found for &ldquo;{search}&rdquo;</p>
+              <p className="text-sm text-[var(--color-text-tertiary)] text-center py-8">No results found for &ldquo;{search}&rdquo;</p>
             )}
           </section>
         ) : (
@@ -210,7 +210,7 @@ export default function AIPromptStudioPage() {
             <section key={section.title}>
               <div className="flex items-center justify-between mb-2">
                 <h2 className="section-title mb-0">{section.title}</h2>
-                <span className="text-[0.6rem] text-neutral-400 font-medium">{section.items.length} items</span>
+                <span className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium">{section.items.length} items</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {section.items.map((item) => (
@@ -221,19 +221,19 @@ export default function AIPromptStudioPage() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 mb-0.5">
-                          <h3 className="font-semibold text-neutral-800 text-sm truncate">{item.name}</h3>
+                          <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{item.name}</h3>
                           <span className={`badge ${getBadgeClass(item.badge)} text-[0.55rem] py-0 px-1.5`}>{item.badge}</span>
                         </div>
-                        <p className="text-xs text-neutral-500 line-clamp-2">{item.description}</p>
+                        <p className="text-xs text-[var(--color-text-tertiary)] line-clamp-2">{item.description}</p>
                         {(item.platform || item.aspectRatio) && (
                           <div className="flex items-center gap-2 mt-1.5">
-                            {item.platform && <span className="text-[0.55rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">{item.platform}</span>}
-                            {item.aspectRatio && <span className="text-[0.55rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">{item.aspectRatio}</span>}
+                            {item.platform && <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item.platform}</span>}
+                            {item.aspectRatio && <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item.aspectRatio}</span>}
                           </div>
                         )}
                       </div>
                     </div>
-                    <div className="pt-2 border-t border-neutral-100 flex items-center justify-between">
+                    <div className="pt-2 border-t border-[var(--color-border-primary)] flex items-center justify-between">
                       <span className="text-xs font-medium text-purple-600 group-hover:text-purple-700 transition-colors">Open &rarr;</span>
                       {item.badge !== "Generator" && item.badge !== "Rules" && (
                         <span className="badge badge-green text-[0.5rem] py-0 px-1">Future Ready</span>
@@ -247,9 +247,9 @@ export default function AIPromptStudioPage() {
         )}
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-8">
+      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-neutral-400">
+          <p className="text-xs text-[var(--color-text-tertiary)]">
             &copy; {new Date().getFullYear()} Ridzuan Jahari — AI Prompt Studio
           </p>
         </div>

@@ -98,11 +98,11 @@ export default function MarketingAIPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
@@ -112,10 +112,10 @@ export default function MarketingAIPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
                 Marketing AI
               </h1>
-              <p className="text-sm text-neutral-400 mt-0.5">
+              <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">
                 AI-powered marketing operating system for BYD Miri
               </p>
             </div>
@@ -141,8 +141,8 @@ export default function MarketingAIPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 4-2 4h-4s-2-2-2-4a4 4 0 0 1 4-4z"/><path d="M12 8v6"/><path d="M12 16v2"/><path d="M8 22h8"/><path d="M12 22v-4"/></svg>
             </div>
             <div>
-              <h2 className="font-bold text-neutral-800 text-sm mb-2">Marketing AI Operating System</h2>
-              <p className="text-sm text-neutral-500 leading-relaxed">
+              <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">Marketing AI Operating System</h2>
+              <p className="text-sm text-[var(--color-text-tertiary)] leading-relaxed">
                 {modules.length} integrated modules working together as a complete marketing operating system.
                 Each module has a clear responsibility, structured data, and dedicated AI prompts.
               </p>
@@ -159,7 +159,7 @@ export default function MarketingAIPage() {
         <section>
           <div className="flex items-center justify-between mb-3">
             <h2 className="section-title mb-0">Modules</h2>
-            <span className="text-[0.6rem] text-neutral-400 font-medium">
+            <span className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium">
               {modules.filter((m) => m.status === "active").length} active
             </span>
           </div>
@@ -174,20 +174,20 @@ export default function MarketingAIPage() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <h3 className="font-semibold text-neutral-800 text-sm truncate">{mod.title}</h3>
+                      <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{mod.title}</h3>
                       {mod.status === "coming_soon" && (
                         <span className="badge badge-amber text-[0.55rem] py-0 px-1.5">Soon</span>
                       )}
                     </div>
-                    <p className="text-xs text-neutral-500 leading-relaxed line-clamp-2">{mod.description}</p>
+                    <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed line-clamp-2">{mod.description}</p>
                     <div className="mt-2 flex flex-wrap gap-1">
                       {mod.capabilities.slice(0, 3).map((cap) => (
-                        <span key={cap} className="text-[0.6rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">{cap}</span>
+                        <span key={cap} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{cap}</span>
                       ))}
                     </div>
                   </div>
                 </div>
-                <div className="mt-3 pt-2.5 border-t border-neutral-100 flex items-center justify-between">
+                <div className="mt-3 pt-2.5 border-t border-[var(--color-border-primary)] flex items-center justify-between">
                   <span className="text-xs font-medium text-accent group-hover:text-accent-hover transition-colors">
                     Open Module &rarr;
                   </span>
@@ -199,9 +199,9 @@ export default function MarketingAIPage() {
         </section>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-8">
+      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-neutral-400">
+          <p className="text-xs text-[var(--color-text-tertiary)]">
             &copy; {new Date().getFullYear()} Ridzuan Jahari — Marketing AI Operating System
           </p>
         </div>

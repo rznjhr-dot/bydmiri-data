@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import company from "@/data/company.json";
 import { useEffect, useState } from "react";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Dashboard" },
@@ -12,6 +11,7 @@ const navLinks = [
   { href: "/ev-market", label: "EV Market" },
   { href: "/ai-prompt-studio", label: "AI Prompt Studio" },
   { href: "/rjeos", label: "RJEOS" },
+  { href: "/admin", label: "Database Admin" },
   { href: "/changelog", label: "Changelog" },
 ];
 
@@ -36,10 +36,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-200 ${
+      className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[var(--color-bg-secondary)]/90 backdrop-blur-xl border-b border-[var(--color-border-primary)]/80 shadow-sm"
-          : "bg-[var(--color-bg-secondary)] border-b border-[var(--color-border-primary)]/50"
+          ? "bg-[var(--color-bg-secondary)]/85 backdrop-blur-xl border-b border-[var(--color-border-primary)] shadow-[0_4px_24px_rgba(15,23,42,0.06)]"
+          : "bg-[var(--color-bg-secondary)]/70 backdrop-blur-md border-b border-[var(--color-border-primary)]/60"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,14 +49,14 @@ export default function Navbar() {
             href="/"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-accent)] to-[#0f2f7d] flex items-center justify-center shadow-[0_2px_8px_rgba(29,78,216,0.35)] group-hover:shadow-[0_4px_14px_rgba(29,78,216,0.45)] transition-shadow">
               <span className="text-white text-[0.625rem] font-extrabold tracking-tight">RJ</span>
             </div>
             <div className="hidden sm:block">
-              <p className="text-sm font-bold text-neutral-800 tracking-tight leading-tight">
+              <p className="text-sm font-bold text-[var(--color-text-primary)] tracking-tight leading-tight">
                 BYD Miri Knowledge Base Masterbook
               </p>
-              <p className="text-[0.6rem] text-neutral-400 font-medium leading-tight -mt-0.5">
+              <p className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium leading-tight -mt-0.5">
                 {company.company}
               </p>
             </div>
@@ -73,11 +73,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                    isActive
-                      ? "bg-accent/10 text-accent font-semibold"
-                      : "text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100"
-                  }`}
+                  className={`nav-pill ${isActive ? "nav-pill-active" : ""}`}
                 >
                   {link.label}
                 </Link>
@@ -87,11 +83,10 @@ export default function Navbar() {
 
           {/* Right section */}
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <button
               onClick={openPalette}
               aria-label="Open command palette"
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-neutral-400 bg-neutral-50 border border-neutral-200/60 hover:border-neutral-300 hover:text-neutral-500 transition-all w-48 cursor-pointer"
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-sm text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)]/60 border border-[var(--color-border-primary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-secondary)] transition-all w-48 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               <span className="flex-1 text-left">Search...</span>
@@ -101,7 +96,7 @@ export default function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 transition-colors cursor-pointer touch-target"
+              className="md:hidden p-2 rounded-lg text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer touch-target"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
             >
@@ -125,7 +120,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <nav className="md:hidden pb-4 border-t border-neutral-100 pt-3 space-y-1">
+          <nav className="md:hidden pb-4 border-t border-[var(--color-border-primary)] pt-3 space-y-1">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -135,10 +130,10 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`block px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-accent/10 text-accent font-semibold"
-                      : "text-neutral-500 hover:text-neutral-700 hover:bg-neutral-50"
+                      ? "bg-[var(--color-accent-light)] text-[var(--color-accent)] font-semibold"
+                      : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)]"
                   }`}
                 >
                   {link.label}
@@ -147,7 +142,7 @@ export default function Navbar() {
             })}
             <button
               onClick={openPalette}
-              className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-neutral-400 hover:text-neutral-600 hover:bg-neutral-50 transition-colors cursor-pointer touch-target"
+              className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer touch-target"
               aria-label="Search"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>

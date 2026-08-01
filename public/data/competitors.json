@@ -1,0 +1,773 @@
+{
+  "lastUpdated": "2026-07-05",
+  "brands": [
+    {
+      "id": "proton",
+      "name": "Proton",
+      "country": "Malaysia",
+      "website": "https://emas.proton.com",
+      "logo": "Proton",
+      "emNote": "+RM3,000 East Malaysia",
+      "emMarkup": 3000,
+      "models": [
+        {
+          "model": "e.MAS 5",
+          "type": "BEV",
+          "segment": "B-Segment Hatchback",
+          "variants": [
+            {
+              "name": "Prime",
+              "battery": 30.12,
+              "range": 225,
+              "motorPower": 58,
+              "torque": 130,
+              "otr": 59800,
+              "otrAfterRebate": 56800,
+              "rebate": 3000,
+              "rebateNote": "Launch rebate + Power Pack worth up to RM8,000",
+              "acCharging": "6.6 kW (1-phase)",
+              "dcCharging": "53 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr unlimited mileage + 8 yr / 160,000 km battery",
+              "drive": "RWD",
+              "topSpeed": 130,
+              "notes": "Launched Oct 2025. RM3k launch rebate still active. 0-50 km/h 4.4s."
+            },
+            {
+              "name": "Premium",
+              "battery": 40.16,
+              "range": 325,
+              "motorPower": 85,
+              "torque": 150,
+              "otr": 72800,
+              "otrAfterRebate": 69800,
+              "rebate": 3000,
+              "rebateNote": "Launch rebate + Power Pack",
+              "acCharging": "6.6 kW (1-phase)",
+              "dcCharging": "71 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr unlimited mileage + 8 yr / 160,000 km battery",
+              "drive": "RWD",
+              "topSpeed": 130,
+              "notes": "0-50 km/h in 3.9s"
+            }
+          ]
+        },
+        {
+          "model": "e.MAS 7",
+          "type": "BEV",
+          "segment": "C-Segment SUV",
+          "variants": [
+            {
+              "name": "Prime",
+              "battery": 49.52,
+              "range": 345,
+              "rangeNedc": 410,
+              "motorPower": 160,
+              "torque": 320,
+              "otr": 103800,
+              "otrAfterRebate": 96800,
+              "rebate": 7000,
+              "rebateNote": "Launch rebate + Power Pack+",
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "80 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr unlimited mileage + 8 yr / 160,000 km battery",
+              "drive": "FWD",
+              "zeroToHundred": "6.9",
+              "topSpeed": 175,
+              "notes": "Launched Dec 2024. CKD from mid-2026."
+            },
+            {
+              "name": "Premium",
+              "battery": 60.22,
+              "range": 410,
+              "rangeNedc": 470,
+              "motorPower": 160,
+              "torque": 320,
+              "otr": 119800,
+              "otrAfterRebate": 112800,
+              "rebate": 7000,
+              "rebateNote": "Launch rebate + Power Pack+",
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "100 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr unlimited mileage + 8 yr / 160,000 km battery",
+              "drive": "FWD",
+              "zeroToHundred": "7.1",
+              "topSpeed": 175
+            },
+            {
+              "name": "Premium Plus",
+              "battery": 68.39,
+              "range": 450,
+              "motorPower": 160,
+              "torque": 320,
+              "otr": 125800,
+              "otrAfterRebate": 118800,
+              "rebate": 7000,
+              "rebateNote": "Launch rebate",
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "115 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr unlimited mileage + 8 yr / 160,000 km battery",
+              "drive": "FWD",
+              "zeroToHundred": "7.4",
+              "topSpeed": 175,
+              "notes": "Launched June 2026 at KLIMS. Adds massage seats, front passenger leg rest."
+            }
+          ]
+        },
+        {
+          "model": "e.MAS 7 PHEV",
+          "type": "PHEV",
+          "segment": "C-Segment SUV",
+          "variants": [
+            {
+              "name": "Prime",
+              "battery": 18.4,
+              "range": 83,
+              "motorPower": 193,
+              "torque": 262,
+              "otr": 105800,
+              "acCharging": "6.6 kW",
+              "dcCharging": "30 kW",
+              "warranty": "6 yr unlimited mileage + 8 yr / 160,000 km battery",
+              "drive": "FWD",
+              "zeroToHundred": "8.0",
+              "notes": "Combined range 943 km WLTP. 1.5L NA Atkinson engine + electric motor."
+            },
+            {
+              "name": "Premium",
+              "battery": 18.4,
+              "range": 83,
+              "motorPower": 193,
+              "torque": 262,
+              "otr": 119800,
+              "acCharging": "6.6 kW",
+              "dcCharging": "30 kW",
+              "warranty": "6 yr unlimited mileage + 8 yr / 160,000 km battery",
+              "drive": "FWD",
+              "zeroToHundred": "8.0",
+              "notes": "Combined range 943 km WLTP."
+            },
+            {
+              "name": "Premium Plus",
+              "battery": 29.8,
+              "range": 146,
+              "motorPower": 193,
+              "torque": 262,
+              "otr": 125800,
+              "acCharging": "6.6 kW",
+              "dcCharging": "60 kW",
+              "warranty": "6 yr unlimited mileage + 8 yr / 160,000 km battery",
+              "drive": "FWD",
+              "zeroToHundred": "8.2",
+              "notes": "Combined range 996 km WLTP. 29.8 kWh AEGIS Short Blade LFP battery."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chery",
+      "name": "Chery",
+      "country": "China",
+      "website": "https://www.chery.my",
+      "logo": "Chery",
+      "emNote": "+RM3,000 East Malaysia (est.)",
+      "emMarkup": 3000,
+      "models": [
+        {
+          "model": "OMODA E5",
+          "type": "BEV",
+          "segment": "C-Segment SUV",
+          "variants": [
+            {
+              "name": "Standard",
+              "battery": 61,
+              "range": 430,
+              "motorPower": 150,
+              "torque": 340,
+              "otr": 146800,
+              "otrAfterRebate": 99800,
+              "rebate": 47000,
+              "rebateNote": "Year of Make 2025 stock promo — limited units",
+              "acCharging": "9.9 kW (3-phase)",
+              "dcCharging": "80 kW",
+              "v2l": "3.3 kW",
+              "warranty": "7 yr / 150,000 km vehicle + 8 yr / 160,000 km battery",
+              "drive": "FWD",
+              "zeroToHundred": "7.6",
+              "topSpeed": 172,
+              "notes": "Snapdragon 8155 chip, Sony 8-speaker, wireless Apple CarPlay/Android Auto. Free AC home wallbox charger included."
+            }
+          ]
+        },
+        {
+          "model": "Tiggo 7 PHEV",
+          "type": "PHEV",
+          "segment": "C-Segment SUV",
+          "variants": [
+            {
+              "name": "Standard",
+              "battery": 18.3,
+              "range": 90,
+              "motorPower": 150,
+              "torque": 310,
+              "otr": 129800,
+              "otrAfterRebate": 109800,
+              "rebate": 5000,
+              "rebateNote": "Year of Make 2025 promo; up to RM5k rebate on 2026 stock",
+              "acCharging": "6.6 kW",
+              "dcCharging": "40 kW",
+              "v2l": "3.3 kW",
+              "warranty": "7 yr / 150,000 km vehicle + 10 yr / 200,000 km PHEV system",
+              "drive": "FWD",
+              "zeroToHundred": "8.5",
+              "notes": "1.5L TGDI engine + DHT. Combined range 1,200 km NEDC. Sony 8-speaker."
+            }
+          ]
+        },
+        {
+          "model": "Tiggo 8 PHEV",
+          "type": "PHEV",
+          "segment": "D-Segment SUV (7-Seater)",
+          "variants": [
+            {
+              "name": "Standard",
+              "battery": 18.3,
+              "range": 90,
+              "motorPower": 150,
+              "torque": 310,
+              "otr": 159800,
+              "otrAfterRebate": 138800,
+              "rebate": 1888,
+              "rebateNote": "Year of Make 2025 promo",
+              "acCharging": "6.6 kW",
+              "dcCharging": "40 kW",
+              "v2l": "3.3 kW",
+              "warranty": "7 yr / 150,000 km vehicle + 10 yr / 200,000 km PHEV system",
+              "drive": "FWD",
+              "notes": "1.5L TGDI engine + DHT. 7-seater. Combined range 1,200 km NEDC. Sony 10-speaker."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mg",
+      "name": "MG Motor",
+      "country": "China (SAIC)",
+      "website": "https://www.mg-motors.my",
+      "logo": "MG",
+      "emNote": "+RM3,000 East Malaysia (est.)",
+      "emMarkup": 3000,
+      "models": [
+        {
+          "model": "MG4 EV",
+          "type": "BEV",
+          "segment": "C-Segment Hatchback",
+          "variants": [
+            {
+              "name": "Standard",
+              "battery": 51,
+              "range": 350,
+              "motorPower": 125,
+              "torque": 250,
+              "otr": 104629,
+              "acCharging": "7 kW (1-phase)",
+              "dcCharging": "117 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "7.5",
+              "notes": "LFP battery. Not included in Oct 2025 price revision — effectively discontinued / limited stock."
+            },
+            {
+              "name": "Lux",
+              "battery": 64,
+              "range": 435,
+              "motorPower": 150,
+              "torque": 250,
+              "otr": 100888,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "135 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "7.7",
+              "notes": "NMC battery. Price reduced from RM129,629 (Oct 2025). Best value variant."
+            },
+            {
+              "name": "Lux Extended Range",
+              "battery": 77,
+              "range": 520,
+              "motorPower": 180,
+              "torque": 350,
+              "otr": 128888,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "135 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "6.1",
+              "notes": "Price reduced from RM149,629 (Oct 2025)."
+            },
+            {
+              "name": "XPower",
+              "battery": 64,
+              "range": 385,
+              "motorPower": 320,
+              "torque": 600,
+              "otr": 138888,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "135 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery",
+              "drive": "AWD",
+              "zeroToHundred": "3.8",
+              "topSpeed": 200,
+              "notes": "Dual motor AWD. 435 PS. Price reduced from RM159,629."
+            }
+          ]
+        },
+        {
+          "model": "MG S5 EV",
+          "type": "BEV",
+          "segment": "C-Segment SUV",
+          "variants": [
+            {
+              "name": "Com",
+              "battery": 49,
+              "range": 340,
+              "motorPower": 125,
+              "torque": 250,
+              "otr": 108548,
+              "acCharging": "7 kW",
+              "dcCharging": "120 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery + 8 yr / 160,000 km motor",
+              "drive": "RWD",
+              "zeroToHundred": "8.0",
+              "notes": "CBU (discontinued — replaced by CKD). LFP battery. Price reduced from RM116,548 (Oct 2025)."
+            },
+            {
+              "name": "Com Long Range",
+              "battery": 62,
+              "range": 430,
+              "motorPower": 125,
+              "torque": 250,
+              "otr": 118548,
+              "acCharging": "7 kW",
+              "dcCharging": "150 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery + 8 yr / 160,000 km motor",
+              "drive": "RWD",
+              "zeroToHundred": "8.2",
+              "notes": "CBU (discontinued — replaced by CKD). LFP battery. Price reduced from RM126,548 (Oct 2025)."
+            },
+            {
+              "name": "Lux Long Range (CBU)",
+              "battery": 62,
+              "range": 425,
+              "motorPower": 125,
+              "torque": 250,
+              "otr": 128548,
+              "acCharging": "7 kW",
+              "dcCharging": "150 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery + 8 yr / 160,000 km motor",
+              "drive": "RWD",
+              "zeroToHundred": "8.6",
+              "notes": "CBU (discontinued — replaced by CKD). Upgraded CKD variant has 205 PS motor."
+            },
+            {
+              "name": "Lux (CKD)",
+              "battery": 62,
+              "range": 446,
+              "motorPower": 151,
+              "torque": 350,
+              "otr": 117528,
+              "acCharging": "7 kW",
+              "dcCharging": "150 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery + 8 yr / 160,000 km motor",
+              "drive": "RWD",
+              "zeroToHundred": "7.9",
+              "notes": "CKD assembled in Melaka. Upgraded motor (+35 PS / +100 Nm). Full leatherette seats, power passenger seat, hands-free tailgate."
+            }
+          ]
+        },
+        {
+          "model": "Cyberster",
+          "type": "BEV",
+          "segment": "2-Seat Roadster",
+          "variants": [
+            {
+              "name": "RWD",
+              "battery": 77,
+              "range": 508,
+              "motorPower": 250,
+              "torque": 475,
+              "otr": 300748,
+              "acCharging": "7 kW",
+              "dcCharging": "150 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "5.0",
+              "topSpeed": 195,
+              "notes": "Scissor doors, fabric soft top, Nappa leather, Bose 8-speaker. 19\" wheels."
+            },
+            {
+              "name": "AWD",
+              "battery": 77,
+              "range": 444,
+              "motorPower": 400,
+              "torque": 725,
+              "otr": 320548,
+              "acCharging": "7 kW",
+              "dcCharging": "150 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr / 180,000 km battery",
+              "drive": "AWD",
+              "zeroToHundred": "3.2",
+              "topSpeed": 208,
+              "notes": "544 PS dual motor. 20\" wheels. Malaysia is top market for Cyberster in Asia Oceania."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "leapmotor",
+      "name": "Leapmotor",
+      "country": "China (Stellantis)",
+      "website": "https://www.leapmotor.com.my",
+      "logo": "Leapmotor",
+      "emNote": "+RM3,000 East Malaysia (est.)",
+      "emMarkup": 3000,
+      "models": [
+        {
+          "model": "C10",
+          "type": "BEV",
+          "segment": "D-Segment SUV",
+          "variants": [
+            {
+              "name": "Standard",
+              "battery": 69.9,
+              "range": 424,
+              "rangeNedc": 477,
+              "motorPower": 160,
+              "torque": 320,
+              "otr": 125000,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "84 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr / 150,000 km + 8 yr / 160,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "7.5",
+              "topSpeed": 170,
+              "notes": "Price reduced from RM159,000 (Jun 2025). No Apple CarPlay/Android Auto. NFC card key. CKD at Gurun, Kedah."
+            }
+          ]
+        },
+        {
+          "model": "C10 Plus",
+          "type": "BEV",
+          "segment": "D-Segment SUV",
+          "variants": [
+            {
+              "name": "Standard",
+              "battery": 81.9,
+              "range": 510,
+              "motorPower": 220,
+              "torque": 360,
+              "otr": 148000,
+              "otrAfterRebate": 139000,
+              "rebate": 9000,
+              "rebateNote": "Plus RM4,000 insurance subsidy = RM13,000 total savings",
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "180 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr / 150,000 km + 8 yr / 160,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "6.2",
+              "topSpeed": 190,
+              "notes": "800V architecture. Launched Feb 2026."
+            },
+            {
+              "name": "Night Edition",
+              "battery": 81.9,
+              "range": 510,
+              "motorPower": 220,
+              "torque": 360,
+              "otr": 156000,
+              "otrAfterRebate": 147000,
+              "rebate": 9000,
+              "rebateNote": "Plus RM4,000 insurance subsidy",
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "180 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr / 150,000 km + 8 yr / 160,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "6.2",
+              "topSpeed": 190,
+              "notes": "Two-tone black roof, bodykit, matte black 20\" Trident alloys."
+            }
+          ]
+        },
+        {
+          "model": "B10",
+          "type": "BEV",
+          "segment": "C-Segment SUV",
+          "variants": [
+            {
+              "name": "Life",
+              "battery": 56.2,
+              "range": 361,
+              "motorPower": 160,
+              "torque": 240,
+              "otr": 107800,
+              "otrAfterRebate": 99800,
+              "rebate": 8000,
+              "rebateNote": "Launch rebate (first 200 customers). Display units at RM89,800 (RM18k off, limited 30 units).",
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "140 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr / 150,000 km + 8 yr / 160,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "8.0",
+              "topSpeed": 170,
+              "notes": "Launched Dec 2025. 8.8\" cluster + 14.6\" 2.5K screen. Apple CarPlay/Android Auto via OTA pending."
+            },
+            {
+              "name": "Design",
+              "battery": 67.1,
+              "range": 434,
+              "motorPower": 160,
+              "torque": 240,
+              "otr": 118800,
+              "otrAfterRebate": 109800,
+              "rebate": 9000,
+              "rebateNote": "Valid till June 30, 2026. May be extended.",
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "168 kW",
+              "v2l": "3.3 kW",
+              "warranty": "6 yr / 150,000 km + 8 yr / 160,000 km battery",
+              "drive": "RWD",
+              "zeroToHundred": "8.0",
+              "notes": "ECO leather interior. Shadow grey or dark grey interior option."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jaecoo",
+      "name": "Jaecoo",
+      "country": "China (Chery)",
+      "website": "https://www.jaecoo.com.my",
+      "logo": "Jaecoo",
+      "emNote": "+RM2,750 East Malaysia",
+      "emMarkup": 2750,
+      "models": [
+        {
+          "model": "J7 PHEV",
+          "type": "PHEV",
+          "segment": "C-Segment SUV",
+          "variants": [
+            {
+              "name": "2WD",
+              "battery": 18.3,
+              "range": 106,
+              "motorPower": 255,
+              "torque": 525,
+              "otr": 158800,
+              "otrEM": 161550,
+              "otrAfterRebate": 148800,
+              "rebate": 10000,
+              "rebateNote": "July 2026 Mega Promo — RM10k cash rebate",
+              "acCharging": "6.6 kW",
+              "dcCharging": "40 kW",
+              "v2l": "3.3 kW",
+              "warranty": "7 yr / 150,000 km + 8 yr battery",
+              "drive": "2WD",
+              "zeroToHundred": "8.5",
+              "notes": "1.5L TGDI + electric motor. BYD Blade LFP battery. Combined range 1,300 km NEDC. DHT transmission."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jetour",
+      "name": "Jetour",
+      "country": "China (Chery)",
+      "website": "https://www.jetour.com.my",
+      "logo": "Jetour",
+      "emNote": "TBC — est. +RM3,000 East Malaysia",
+      "emMarkup": 3000,
+      "models": [
+        {
+          "model": "T2 i-DM",
+          "type": "PHEV",
+          "segment": "D-Segment SUV (Off-Road)",
+          "variants": [
+            {
+              "name": "Standard",
+              "battery": 19.4,
+              "range": 100,
+              "motorPower": 265,
+              "torque": 610,
+              "otr": 168888,
+              "rebateNote": "Open for booking since KLIMS June 2026. Official pricing & specs TBC.",
+              "acCharging": "6.6 kW",
+              "dcCharging": "N/A",
+              "v2l": "3.3 kW",
+              "warranty": "7 yr / 150,000 km + 10 yr / 1,000,000 km engine (TBC for PHEV)",
+              "drive": "XWD AWD",
+              "notes": "1.5T + 2 electric motors + 3-speed DHT. Combined range 1,200+ km. 360 PS / 610 Nm. Open for booking — not yet launched."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tesla",
+      "name": "Tesla",
+      "country": "USA",
+      "website": "https://www.tesla.com/en_my",
+      "logo": "Tesla",
+      "emNote": "National pricing (same EM & WM)",
+      "emMarkup": 0,
+      "models": [
+        {
+          "model": "Model 3",
+          "type": "BEV",
+          "segment": "D-Segment Sedan",
+          "variants": [
+            {
+              "name": "Standard RWD",
+              "battery": 62.5,
+              "range": 534,
+              "motorPower": 194,
+              "torque": 240,
+              "otr": 147600,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "170 kW",
+              "warranty": "4 yr / 80,000 km vehicle + 8 yr / 160,000 km battery & drive unit",
+              "drive": "RWD",
+              "zeroToHundred": "6.2",
+              "topSpeed": 201,
+              "notes": "LFP battery (CATL). Launched Jan 2026. EV Switcher Programme up to RM7,500."
+            },
+            {
+              "name": "Premium RWD",
+              "battery": 62.5,
+              "range": 534,
+              "motorPower": 194,
+              "torque": 240,
+              "otr": 169000,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "170 kW",
+              "warranty": "4 yr / 80,000 km vehicle + 8 yr / 160,000 km battery & drive unit",
+              "drive": "RWD",
+              "zeroToHundred": "6.1",
+              "topSpeed": 201,
+              "notes": "Premium interior, 17-speaker audio, ambient lighting."
+            },
+            {
+              "name": "Premium Long Range RWD",
+              "battery": 78.4,
+              "range": 750,
+              "motorPower": 225,
+              "torque": 340,
+              "otr": 185000,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "250 kW",
+              "warranty": "4 yr / 80,000 km vehicle + 8 yr / 160,000 km battery & drive unit",
+              "drive": "RWD",
+              "zeroToHundred": "5.2",
+              "topSpeed": 201,
+              "notes": "NMC battery (LG). 750 km WLTP range. 250 kW Supercharger support."
+            },
+            {
+              "name": "Premium Long Range AWD",
+              "battery": 78.4,
+              "range": 715,
+              "motorPower": 366,
+              "torque": 510,
+              "otr": 199000,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "250 kW",
+              "warranty": "4 yr / 80,000 km vehicle + 8 yr / 160,000 km battery & drive unit",
+              "drive": "AWD",
+              "zeroToHundred": "4.4",
+              "topSpeed": 201,
+              "notes": "Dual motor AWD. Premium audio, ventilated seats."
+            },
+            {
+              "name": "Performance AWD",
+              "battery": 79,
+              "range": 571,
+              "motorPower": 343,
+              "torque": 723,
+              "otr": 229000,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "250 kW",
+              "warranty": "4 yr / 80,000 km vehicle + 8 yr / 160,000 km battery & drive unit",
+              "drive": "AWD",
+              "zeroToHundred": "3.1",
+              "topSpeed": 261,
+              "notes": "460 hp, track mode, adaptive damping, 20\" wheels, carbon fibre spoiler."
+            }
+          ]
+        },
+        {
+          "model": "Model Y",
+          "type": "BEV",
+          "segment": "D-Segment SUV",
+          "variants": [
+            {
+              "name": "RWD",
+              "battery": 62.5,
+              "range": 488,
+              "motorPower": 194,
+              "torque": 340,
+              "otr": 195450,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "175 kW",
+              "warranty": "4 yr / 80,000 km vehicle + 8 yr / 160,000 km battery & drive unit",
+              "drive": "RWD",
+              "zeroToHundred": "5.9",
+              "topSpeed": 201,
+              "notes": "Juniper facelift. 5-seater. Tesla Supercharger access."
+            },
+            {
+              "name": "Long Range RWD",
+              "battery": 75,
+              "range": 691,
+              "motorPower": 220,
+              "torque": 340,
+              "otr": 216450,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "175 kW",
+              "warranty": "4 yr / 80,000 km vehicle + 8 yr / 160,000 km battery & drive unit",
+              "drive": "RWD",
+              "zeroToHundred": "5.6",
+              "topSpeed": 201,
+              "notes": "Launched Jan 2026. 691 km WLTP range."
+            },
+            {
+              "name": "Long Range AWD",
+              "battery": 75,
+              "range": 629,
+              "motorPower": 331,
+              "torque": 559,
+              "otr": 242450,
+              "acCharging": "11 kW (3-phase)",
+              "dcCharging": "250 kW",
+              "warranty": "4 yr / 80,000 km vehicle + 8 yr / 160,000 km battery & drive unit",
+              "drive": "AWD",
+              "zeroToHundred": "4.3",
+              "topSpeed": 201,
+              "notes": "Dual motor AWD. 629 km range. Acceleration Boost capable."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

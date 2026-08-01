@@ -1,5 +1,18 @@
 [
   {
+    "version": "V4.1",
+    "date": "2026-08-01",
+    "changes": [
+      "Complete design system revamp — premium redesign across all 33 pages: refined palette (deeper blue accent #1d4ed8, emerald success), navy-tinted layered shadows, enlarged radii",
+      "New component classes: .page-header radial-gradient headers, .tool-card quick actions with tinted icons, .chip value badges, .nav-pill pill-shaped nav links, .divider-gradient hairlines",
+      "Dashboard rebuilt — radial-glow hero with live stats strip (Models / Variants / OTR Range / Interest), 6-card tool grid, premium AI Agent section",
+      "Navbar revamped — gradient logo with glow, pill nav states, blurred backdrop + layered shadow on scroll",
+      "Vehicle DB & Finance Calculator upgraded — rounded-full search with focus ring, elevated variant cards with segment chips, gradient monthly panels, promo selector pills with accent glow",
+      "Warranty coverage & Command Palette (⌘K) migrated to new design tokens",
+      "Site-wide tokenization — 500+ legacy neutral color classes replaced with semantic design tokens for consistent theming"
+    ]
+  },
+  {
     "version": "V4.0",
     "date": "2026-07-31",
     "changes": [

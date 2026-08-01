@@ -247,7 +247,7 @@ export default function PromptGenerator() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5">
           {/* Vehicle 1 */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+            <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
               {template === "compare" ? "Vehicle 1" : "Vehicle"}
             </label>
             <select
@@ -282,7 +282,7 @@ export default function PromptGenerator() {
           {/* Vehicle 2 (comparison only) */}
           {template === "compare" && (
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+              <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                 Vehicle 2
               </label>
               <select
@@ -319,7 +319,7 @@ export default function PromptGenerator() {
         {/* Scene selector for Image mode */}
         {template === "image" ? (
           <div>
-            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+            <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
               Scene
             </label>
             <div className="flex gap-1">
@@ -338,7 +338,7 @@ export default function PromptGenerator() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+              <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                 Target Audience
               </label>
               <div className="flex flex-wrap gap-1">
@@ -357,7 +357,7 @@ export default function PromptGenerator() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-0.5">
+              <label className="block text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                 Tone
               </label>
               <div className="flex flex-wrap gap-1">
@@ -381,7 +381,7 @@ export default function PromptGenerator() {
         {/* Generated Prompt */}
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">
+            <label className="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">
               Generated Prompt
             </label>
             <button

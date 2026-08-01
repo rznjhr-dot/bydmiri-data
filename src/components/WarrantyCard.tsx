@@ -30,7 +30,7 @@ export default function WarrantyCard() {
         <button
           type="button"
           onClick={handleScreenshot}
-          className="p-1.5 rounded-md text-neutral-300 hover:text-teal-600 hover:bg-teal-50 dark:hover:text-teal-400 dark:hover:bg-teal-900/30 transition-all cursor-pointer touch-target"
+          className="p-1.5 rounded-md text-[var(--color-text-tertiary)] hover:text-[var(--color-success)] hover:bg-[var(--color-success-subtle)] transition-all cursor-pointer touch-target"
           aria-label="Screenshot warranty"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -46,15 +46,15 @@ export default function WarrantyCard() {
         {warranty.categories.map((cat) => (
           <div
             key={cat.title}
-            className="card !p-2.5 border-l-[3px] border-teal-500 flex flex-col"
+            className="card !p-2.5 border-l-[3px] border-[var(--color-success)] flex flex-col"
           >
             <div className="flex items-start justify-between gap-1 mb-1">
-              <h3 className="font-bold text-neutral-800 text-[0.7rem] sm:text-xs leading-tight">
+              <h3 className="font-bold text-[var(--color-text-primary)] text-[0.7rem] sm:text-xs leading-tight">
                 {cat.title}
               </h3>
               <div className="text-right shrink-0 leading-none">
-                <p className="text-sm sm:text-base font-black text-teal-700 leading-tight">{cat.years}<span className="text-[0.5rem] sm:text-[0.6rem] font-bold ml-0.5">years</span></p>
-                <p className="text-[0.55rem] sm:text-[0.65rem] font-semibold text-teal-500 leading-tight mt-0.5">or {cat.mileage}*</p>
+                <p className="text-sm sm:text-base font-black text-[var(--color-success)] leading-tight">{cat.years}<span className="text-[0.5rem] sm:text-[0.6rem] font-bold ml-0.5">years</span></p>
+                <p className="text-[0.55rem] sm:text-[0.65rem] font-semibold text-[var(--color-success)]/70 leading-tight mt-0.5">or {cat.mileage}*</p>
               </div>
             </div>
             {cat.items.length > 0 && (
@@ -62,9 +62,9 @@ export default function WarrantyCard() {
                 {cat.items.map((item) => (
                   <li
                     key={item}
-                    className="flex items-center gap-1 text-[0.65rem] sm:text-xs text-neutral-500"
+                    className="flex items-center gap-1 text-[0.65rem] sm:text-xs text-[var(--color-text-secondary)]"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-teal-400 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-success)]/60 shrink-0">
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                     <span className="truncate">{item}</span>
@@ -75,7 +75,7 @@ export default function WarrantyCard() {
           </div>
         ))}
       </div>
-      <p className="text-[0.55rem] text-neutral-400 mt-1 text-right">
+      <p className="text-[0.55rem] text-[var(--color-text-tertiary)] mt-1 text-right">
         {warranty.disclaimer}
       </p>
     </section>

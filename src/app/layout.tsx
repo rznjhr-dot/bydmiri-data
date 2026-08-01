@@ -4,7 +4,6 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import CommandPalette from "@/components/CommandPalette";
-import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "RJ Master Databook | BYD Miri",
@@ -43,15 +42,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen antialiased">
+      <body className="min-h-screen antialiased bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
-        <ThemeProvider>
-          <Navbar />
-          <CommandPalette />
-          {children}
-        </ThemeProvider>
+        <Navbar />
+        <CommandPalette />
+        {children}
       </body>
     </html>
   );

@@ -60,11 +60,11 @@ export default function LibraryPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="border-b border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/50">
+      <section className="page-header">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/ai-prompt-studio"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-3"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             AI Prompt Studio
@@ -74,8 +74,8 @@ export default function LibraryPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 tracking-tight">Prompt Library</h1>
-              <p className="text-sm text-neutral-400 mt-0.5">Browse pre-built prompt templates organised by category</p>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Prompt Library</h1>
+              <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">Browse pre-built prompt templates organised by category</p>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function LibraryPage() {
             <button
               onClick={() => { setActiveFolder(null); setSearch(""); }}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                !activeFolder ? "bg-purple-100 text-purple-700 font-medium" : "text-neutral-500 hover:bg-neutral-100"
+                !activeFolder ? "bg-purple-100 text-purple-700 font-medium" : "text-[var(--color-text-tertiary)] hover:bg-[var(--color-bg-tertiary)]"
               }`}
             >
               All Prompts
@@ -98,12 +98,12 @@ export default function LibraryPage() {
                 key={folder.id}
                 onClick={() => setActiveFolder(folder.id)}
                 className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all cursor-pointer flex items-center gap-2 ${
-                  activeFolder === folder.id ? "bg-purple-100 text-purple-700 font-medium" : "text-neutral-500 hover:bg-neutral-100"
+                  activeFolder === folder.id ? "bg-purple-100 text-purple-700 font-medium" : "text-[var(--color-text-tertiary)] hover:bg-[var(--color-bg-tertiary)]"
                 }`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d={getFolderIcon(folder.id)}/></svg>
                 <span className="truncate">{folder.name}</span>
-                <span className="ml-auto text-[0.55rem] text-neutral-400">{data.entries.filter(e => e.folder === folder.id).length}</span>
+                <span className="ml-auto text-[0.55rem] text-[var(--color-text-tertiary)]">{data.entries.filter(e => e.folder === folder.id).length}</span>
               </button>
             ))}
           </aside>
@@ -115,7 +115,7 @@ export default function LibraryPage() {
               <select
                 value={activeFolder || ""}
                 onChange={(e) => setActiveFolder(e.target.value || null)}
-                className="w-full px-3 py-2 rounded-lg border border-neutral-200/60 text-sm text-neutral-700 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                className="w-full px-3 py-2 rounded-lg border border-[var(--color-border-primary)] text-sm text-[var(--color-text-primary)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-subtle)]"
               >
                 <option value="">All Prompts</option>
                 {data.folders.map((f) => (
@@ -126,13 +126,13 @@ export default function LibraryPage() {
 
             {/* Search */}
             <div className="relative">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-tertiary)] pointer-events-none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               <input
                 type="text"
                 placeholder="Search prompts..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-xl border border-neutral-200/60 bg-white text-sm text-neutral-700 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all"
+                className="w-full pl-10 pr-4 py-2 rounded-xl border border-[var(--color-border-primary)] bg-white text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)] focus:outline-none focus:ring-4 focus:ring-purple-500/15 focus:border-[var(--color-accent)] transition-all shadow-[var(--shadow-subtle)]"
               />
             </div>
 
@@ -146,21 +146,21 @@ export default function LibraryPage() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <h3 className="font-semibold text-neutral-800 text-sm truncate">{entry.name}</h3>
+                        <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{entry.name}</h3>
                         <span className={`badge text-[0.5rem] py-0 px-1 ${
                           entry.status === "published" ? "badge-green" : entry.status === "draft" ? "badge-amber" : "badge-gray"
                         }`}>{entry.status}</span>
                       </div>
-                      <p className="text-xs text-neutral-500">{entry.description}</p>
+                      <p className="text-xs text-[var(--color-text-tertiary)]">{entry.description}</p>
                       <div className="flex flex-wrap gap-1 mt-1.5">
                         {entry.tags.slice(0, 3).map((tag) => (
-                          <span key={tag} className="text-[0.5rem] text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">{tag}</span>
+                          <span key={tag} className="text-[0.5rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{tag}</span>
                         ))}
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between pt-2 border-t border-neutral-100">
-                    <span className="text-[0.55rem] text-neutral-400">v{entry.version} · {entry.folder}</span>
+                  <div className="flex items-center justify-between pt-2 border-t border-[var(--color-border-primary)]">
+                    <span className="text-[0.55rem] text-[var(--color-text-tertiary)]">v{entry.version} · {entry.folder}</span>
                     <button
                       onClick={() => handleCopy(entry.prompt)}
                       className="text-xs font-medium text-amber-600 hover:text-amber-700 transition-colors cursor-pointer flex items-center gap-1"
@@ -172,16 +172,16 @@ export default function LibraryPage() {
                 </div>
               ))}
               {filtered.length === 0 && (
-                <div className="col-span-full text-sm text-neutral-400 text-center py-8">No prompts found</div>
+                <div className="col-span-full text-sm text-[var(--color-text-tertiary)] text-center py-8">No prompts found</div>
               )}
             </div>
           </div>
         </div>
       </main>
 
-      <footer className="border-t border-neutral-200/60 bg-white mt-8">
+      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-neutral-400">&copy; {new Date().getFullYear()} Ridzuan Jahari — AI Prompt Studio</p>
+          <p className="text-xs text-[var(--color-text-tertiary)]">&copy; {new Date().getFullYear()} Ridzuan Jahari — AI Prompt Studio</p>
         </div>
       </footer>
     </div>
