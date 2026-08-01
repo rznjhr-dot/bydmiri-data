@@ -3,7 +3,14 @@
 import { useState, useMemo, useCallback } from "react";
 import vehicles from "@/data/vehicles.json";
 import finance from "@/data/finance.json";
-import { getRebate, getCspRebate, getCspReplacement } from "@/utils/promotions";
+import {
+  getRebate,
+  getCspRebate,
+  getCspReplacement,
+  getPromotionOptions,
+  getDefaultPromotion,
+  type PromotionOption,
+} from "@/utils/promotions";
 
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-MY", {
@@ -25,6 +32,12 @@ type Variant = {
   chargeCost?: number;
 };
 
+function promoShortLabel(opt: PromotionOption): string {
+  if (!opt.free_gift) return `-RM${opt.rebate.toLocaleString("en-MY")}`;
+  const gift = opt.free_gift.match(/^(\d+)\s*Years?/i);
+  return `-RM${opt.rebate.toLocaleString("en-MY")} + ${gift ? `${gift[1]}Yr Service` : "Free Gift"}`;
+}
+
 export default function LoanCalculator() {
   const [selectedModel, setSelectedModel] = useState(vehicles[0].model);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
@@ -34,15 +47,26 @@ export default function LoanCalculator() {
   const [downpaymentCustom, setDownpaymentCustom] = useState("");
   const [includeCspRebate, setIncludeCspRebate] = useState(true);
   const [customInterestRate, setCustomInterestRate] = useState(String(finance.interestRate));
+  const [promoChoice, setPromoChoice] = useState<number | null>(null);
 
   const currentVehicle = vehicles.find((v) => v.model === selectedModel)!;
   const currentVariant: Variant = currentVehicle.variants[selectedVariantIdx];
 
   const cspReplacement = getCspReplacement(selectedModel);
 
+  const promoOptions = useMemo(
+    () => getPromotionOptions(selectedModel, currentVariant.name),
+    [selectedModel, currentVariant.name]
+  );
+
   const promoRebateVal = useMemo(() => {
-    return getRebate(selectedModel, currentVariant.name) ?? currentVariant.rebate;
-  }, [selectedModel, currentVariant.name, currentVariant.rebate]);
+    if (promoChoice !== null) return promoChoice;
+    return (
+      getDefaultPromotion(selectedModel, currentVariant.name)?.rebate ??
+      getRebate(selectedModel, currentVariant.name) ??
+      currentVariant.rebate
+    );
+  }, [selectedModel, currentVariant.name, currentVariant.rebate, promoChoice]);
 
   const cspRebateAmount = useMemo(() => {
     if (!includeCspRebate) return 0;
@@ -55,10 +79,9 @@ export default function LoanCalculator() {
   }, [customInterestRate]);
 
   const priceAfterRebate = useMemo(() => {
-    const promoRebate = getRebate(selectedModel, currentVariant.name) ?? currentVariant.rebate;
-    const rebate = includeRebate ? promoRebate : 0;
+    const rebate = includeRebate ? promoRebateVal : 0;
     return Math.max(0, currentVariant.otr - rebate - cspRebateAmount);
-  }, [currentVariant, includeRebate, cspRebateAmount, selectedModel]);
+  }, [currentVariant, includeRebate, cspRebateAmount, promoRebateVal]);
 
   const loanAmount = useMemo(() => {
     if (downpaymentCustom) {
@@ -169,6 +192,7 @@ export default function LoanCalculator() {
                   onChange={(e) => {
                     setSelectedModel(e.target.value);
                     setSelectedVariantIdx(0);
+                    setPromoChoice(null);
                   }}
                   className="select !text-xs !py-1.5"
                 >
@@ -186,7 +210,10 @@ export default function LoanCalculator() {
                   </label>
                   <select
                     value={selectedVariantIdx}
-                    onChange={(e) => setSelectedVariantIdx(Number(e.target.value))}
+                    onChange={(e) => {
+                      setSelectedVariantIdx(Number(e.target.value));
+                      setPromoChoice(null);
+                    }}
                     className="select !text-xs !py-1.5"
                   >
                     {currentVehicle.variants.map((v, i) => (
@@ -199,19 +226,55 @@ export default function LoanCalculator() {
               )}
             </div>
 
-            {/* Rebate toggles row */}
+            {/* Rebate control — promo selector (multi-option models) OR simple toggle */}
             <div className="grid grid-cols-2 gap-2">
-              <div className="flex items-center justify-between bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80">
-                <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeRebate(!includeRebate)}>
-                  <div className={`w-7 h-4 rounded-full transition-colors relative ${includeRebate ? "bg-accent" : "bg-neutral-300"}`}>
-                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
+              {promoOptions && promoOptions.length > 1 ? (
+                <div className={`bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80 ${cspReplacement ? "col-span-2" : ""}`}>
+                  <label className="block text-[0.55rem] font-semibold text-neutral-400 uppercase tracking-wider mb-1">
+                    Promotion
+                  </label>
+                  <div className="flex flex-wrap gap-1">
+                    {promoOptions.map((opt) => {
+                      const active = promoRebateVal === opt.rebate;
+                      return (
+                        <button
+                          key={opt.rebate}
+                          type="button"
+                          role="radio"
+                          aria-checked={active}
+                          onClick={() => {
+                            setPromoChoice(opt.rebate);
+                            setIncludeRebate(true);
+                          }}
+                          className={`inline-flex items-center gap-1 rounded-md border font-semibold transition-colors cursor-pointer text-[0.6rem] px-1.5 py-1 ${
+                            active
+                              ? "bg-accent text-white border-accent shadow-sm"
+                              : "bg-white border-neutral-200 text-neutral-600 hover:border-accent/40 hover:text-neutral-800"
+                          }`}
+                        >
+                          {active && (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          )}
+                          {promoShortLabel(opt)}
+                        </button>
+                      );
+                    })}
                   </div>
-                  <span className="text-[0.6rem] font-medium text-neutral-600">Rebate</span>
-                </label>
-                {promoRebateVal > 0 && (
-                  <span className="text-[0.6rem] font-semibold text-green-600">{formatCurrency(promoRebateVal)}</span>
-                )}
-              </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80">
+                  <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeRebate(!includeRebate)}>
+                    <div className={`w-7 h-4 rounded-full transition-colors relative ${includeRebate ? "bg-accent" : "bg-neutral-300"}`}>
+                      <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
+                    </div>
+                    <span className="text-[0.6rem] font-medium text-neutral-600">Rebate</span>
+                  </label>
+                  {promoRebateVal > 0 && (
+                    <span className="text-[0.6rem] font-semibold text-green-600">{formatCurrency(promoRebateVal)}</span>
+                  )}
+                </div>
+              )}
+              {!(promoOptions && promoOptions.length > 1 && cspReplacement) && (
               <div className="flex items-center justify-between bg-neutral-50 rounded-lg px-2 py-1.5 border border-neutral-100/80">
                 <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeCspRebate(!includeCspRebate)}>
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
@@ -225,6 +288,7 @@ export default function LoanCalculator() {
                   <span className="text-[0.6rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount)}</span>
                 )}
               </div>
+              )}
             </div>
 
             {/* Downpayment */}

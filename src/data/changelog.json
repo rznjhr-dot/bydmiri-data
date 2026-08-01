@@ -1,5 +1,19 @@
 [
   {
+    "version": "V4.0",
+    "date": "2026-07-31",
+    "changes": [
+      "Sealion 7 lineup updated — new Dynamic variant (RWD, 170 kW, 520 km NEDC) joins all-new Premium & Performance (91.39 kWh battery, 650/600 km NEDC)",
+      "Active lineup now 6 model families, 10 variants",
+      "August 2026 promotion live — Atto 2 RM9k, Atto 3 RM14k default (or RM10k + 6yr service pkg), Sealion 7 RM4k/RM3,888/RM2,888, Seal RM3k, Seal 6 RM1k, M6 RM4k",
+      "Promotion engine now supports multiple options per variant (title, rebate, default, free_gift) — default option auto-displayed across all surfaces, alternatives on vehicle detail",
+      "Atto 3 promotion selector live on /vehicles & /finance — pick RM14k cash (no service pkg) OR RM10k + FREE 6yr service pkg; selector replaces the old rebate toggle, no duplicate controls",
+      "Sealion 7 CSP/GSP/SSP set to RM0 (matches Atto 3); service-package toggle hidden on /finance for Atto 3 — service pkg governed by promotion choice only",
+      "OTR prices updated per KPA Miri Pricelist (31 Jul 2026), Sealion 7 OTR-without-insurance updated (insurance = OTR − OTR w/o ins)",
+      "Database metadata bumped to V4.0.0, campaign version 2026-08"
+    ]
+  },
+  {
     "version": "V1.6",
     "date": "2026-07-15",
     "changes": [

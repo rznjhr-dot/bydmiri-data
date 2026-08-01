@@ -10,7 +10,7 @@
   "additionalRebate": {
     "default": 2000,
     "overrides": {
-      "Sealion 7": 4000
+      "Sealion 7": 0
     },
     "label": "CSP/GSP/SSP"
   },

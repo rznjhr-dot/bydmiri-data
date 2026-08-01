@@ -1,12 +1,70 @@
 {
-  "period": "July 2026",
-  "validFrom": "2026-07-01",
-  "validTo": "2026-07-31",
-  "lastUpdated": "2026-07-08",
+  "campaign": "August 2026 Promotion",
+  "status": "Active",
+  "period": "August 2026",
+  "validFrom": "2026-08-01",
+  "validTo": "2026-08-31",
+  "lastUpdated": "2026-07-31",
+  "promotionOptions": {
+    "Atto 2": {
+      "Premium": [
+        { "title": "RM9,000 Cash Rebate", "rebate": 9000, "default": true }
+      ]
+    },
+    "Atto 3": {
+      "Ultra": [
+        { "title": "RM14,000 Cash Rebate", "rebate": 14000, "default": true },
+        {
+          "title": "RM10,000 Cash Rebate + FREE 6 Years Standard Service Package",
+          "rebate": 10000,
+          "default": false,
+          "free_gift": "6 Years Standard Service Package"
+        }
+      ],
+      "Premium": [
+        { "title": "RM14,000 Cash Rebate", "rebate": 14000, "default": true },
+        {
+          "title": "RM10,000 Cash Rebate + FREE 6 Years Standard Service Package",
+          "rebate": 10000,
+          "default": false,
+          "free_gift": "6 Years Standard Service Package"
+        }
+      ]
+    },
+    "Sealion 7": {
+      "Dynamic": [
+        { "title": "RM4,000 Cash Rebate", "rebate": 4000, "default": true }
+      ],
+      "Premium": [
+        { "title": "RM3,888 Cash Rebate", "rebate": 3888, "default": true }
+      ],
+      "Performance": [
+        { "title": "RM2,888 Cash Rebate", "rebate": 2888, "default": true }
+      ]
+    },
+    "Seal": {
+      "Premium": [
+        { "title": "RM3,000 Cash Rebate", "rebate": 3000, "default": true }
+      ],
+      "Performance": [
+        { "title": "RM3,000 Cash Rebate", "rebate": 3000, "default": true }
+      ]
+    },
+    "Seal 6": {
+      "Premium": [
+        { "title": "RM1,000 Cash Rebate", "rebate": 1000, "default": true }
+      ]
+    },
+    "M6": {
+      "Extended": [
+        { "title": "RM4,000 Cash Rebate", "rebate": 4000, "default": true }
+      ]
+    }
+  },
   "rebates": {
-    "Atto 2": { "Premium": 11000 },
-    "Atto 3": { "Ultra": 10000, "Premium": 10000 },
-    "Sealion 7": { "Premium": 7000, "Performance": 7000 },
+    "Atto 2": { "Premium": 9000 },
+    "Atto 3": { "Ultra": 14000, "Premium": 14000 },
+    "Sealion 7": { "Dynamic": 4000, "Premium": 3888, "Performance": 2888 },
     "Seal": { "Premium": 3000, "Performance": 3000 },
     "Seal 6": { "Premium": 1000 },
     "M6": { "Extended": 4000 }
@@ -14,7 +72,7 @@
   "cspRebate": {
     "default": 2000,
     "overrides": {
-      "Sealion 7": 4000,
+      "Sealion 7": 0,
       "Atto 3": 0
     },
     "label": "CSP/GSP/SSP"
@@ -24,5 +82,5 @@
   },
   "freebies": [],
   "interestRate": 2.30,
-  "notes": "Prices are East Malaysia OTR with insurance. Promotion valid for July 2026 only. T&Cs apply."
+  "notes": "Prices are East Malaysia OTR with insurance. Promotion valid for August 2026 only. T&Cs apply."
 }

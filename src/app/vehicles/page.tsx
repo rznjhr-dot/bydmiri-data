@@ -5,7 +5,12 @@ import Link from "next/link";
 import company from "@/data/company.json";
 import vehicles from "@/data/vehicles.json";
 import finance from "@/data/finance.json";
-import { getRebate } from "@/utils/promotions";
+import {
+  getRebate,
+  getPromotionOptions,
+  getDefaultPromotion,
+  type PromotionOption,
+} from "@/utils/promotions";
 
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-MY", {
@@ -25,9 +30,93 @@ function calcMonthly(price: number, downPct: number): number {
   return totalPayable / (tenure * 12);
 }
 
+function promoKey(model: string, variantName: string): string {
+  return `${model}::${variantName}`;
+}
+
+function promoShortLabel(opt: PromotionOption): string {
+  if (!opt.free_gift) return `-RM${opt.rebate.toLocaleString("en-MY")}`;
+  const gift = opt.free_gift.match(/^(\d+)\s*Years?/i);
+  return `-RM${opt.rebate.toLocaleString("en-MY")} + ${gift ? `${gift[1]}Yr Service` : "Free Gift"}`;
+}
+
+function PromoSelector({
+  model,
+  variantName,
+  choice,
+  onChoose,
+  compact = false,
+}: {
+  model: string;
+  variantName: string;
+  choice: Record<string, number>;
+  onChoose: (key: string, rebate: number) => void;
+  compact?: boolean;
+}) {
+  const options = getPromotionOptions(model, variantName);
+  if (!options || options.length < 2) return null;
+  const key = promoKey(model, variantName);
+  const selected = choice[key] ?? getDefaultPromotion(model, variantName)?.rebate;
+  const activeOpt = options.find((o) => o.rebate === selected);
+  return (
+    <div className={compact ? "mb-1 px-2" : "mb-2"}>
+      <p
+        className={`font-semibold text-neutral-400 uppercase tracking-wider ${
+          compact ? "text-[0.55rem] mb-0.5" : "text-[0.6rem] mb-1"
+        }`}
+      >
+        Promotion
+      </p>
+      <div className="flex flex-wrap gap-1">
+        {options.map((opt) => {
+          const active = selected === opt.rebate;
+          return (
+            <button
+              key={opt.rebate}
+              type="button"
+              role="radio"
+              aria-checked={active}
+              onClick={() => onChoose(key, opt.rebate)}
+              className={`inline-flex items-center gap-1 rounded-md border font-semibold transition-colors cursor-pointer ${
+                compact ? "text-[0.6rem] px-1.5 py-0.5" : "text-[0.65rem] px-2 py-1"
+              } ${
+                active
+                  ? "bg-accent text-white border-accent shadow-sm"
+                  : "bg-white border-neutral-200 text-neutral-600 hover:border-accent/40 hover:text-neutral-800"
+              }`}
+            >
+              {active && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              )}
+              {promoShortLabel(opt)}
+            </button>
+          );
+        })}
+      </div>
+      {activeOpt?.free_gift && (
+        <p className="text-[0.55rem] text-blue-500 mt-0.5">Includes {activeOpt.free_gift}</p>
+      )}
+    </div>
+  );
+}
+
 export default function VehiclesPage() {
   const [search, setSearch] = useState("");
   const [expandedModel, setExpandedModel] = useState<string | null>(null);
+  const [promoChoice, setPromoChoice] = useState<Record<string, number>>({});
+
+  const handlePromoChoice = (key: string, rebate: number) =>
+    setPromoChoice((prev) => ({ ...prev, [key]: rebate }));
+
+  const effectiveRebate = (model: string, variantName: string): number => {
+    const key = promoKey(model, variantName);
+    if (promoChoice[key] !== undefined) return promoChoice[key];
+    return (
+      getDefaultPromotion(model, variantName)?.rebate ??
+      getRebate(model, variantName) ??
+      0
+    );
+  };
 
   const filteredVehicles = useMemo(() => {
     if (!search.trim()) return vehicles;
@@ -131,44 +220,50 @@ export default function VehiclesPage() {
                   <span className="text-[0.45rem] font-semibold text-neutral-400 uppercase tracking-wider text-right">10%/mo</span>
                 </div>
                 {vehicle.variants.map((variant) => {
-                  const rebate = getRebate(vehicle.model, variant.name) ?? (variant.rebate || 0);
+                  const rebate = effectiveRebate(vehicle.model, variant.name);
                   const effectivePrice = variant.otr - rebate;
                   return (
-                    <div
-                      key={variant.name}
-                      className="grid grid-cols-[70px_1fr_1fr_auto_80px_72px] gap-1.5 items-center py-1.5 px-2 rounded-lg mb-0.5 bg-white border border-neutral-200"
-                    >
-                      {/* Variant name */}
-                      <span className="text-[0.65rem] font-bold text-neutral-800 truncate leading-tight">
-                        {variant.name}
-                      </span>
-                      {/* Battery */}
-                      <span className="flex items-center gap-1 text-[0.55rem] text-neutral-500 leading-tight">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg>
-                        {variant.battery ? `${variant.battery}kWh` : "—"}
-                      </span>
-                      {/* Range */}
-                      <span className="flex items-center gap-1 text-[0.55rem] text-neutral-500 leading-tight">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        {variant.range}km
-                      </span>
-                      {/* Rebate */}
-                      {rebate && rebate > 0 ? (
-                        <span className="text-[0.55rem] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded leading-tight justify-self-start">
-                          -RM{rebate.toLocaleString("en-MY")}
+                    <div key={variant.name} className="mb-0.5">
+                      <div className="grid grid-cols-[70px_1fr_1fr_auto_80px_72px] gap-1.5 items-center py-1.5 px-2 rounded-lg bg-white border border-neutral-200">
+                        {/* Variant name */}
+                        <span className="text-[0.65rem] font-bold text-neutral-800 truncate leading-tight">
+                          {variant.name}
                         </span>
-                      ) : (
-                        <span className="text-[0.5rem] text-neutral-300 leading-tight">—</span>
-                      )}
-                      {/* OTR with insurance */}
-                      <span className="text-[0.6rem] font-bold text-neutral-800 text-right leading-tight">
-                        {formatCurrency(variant.otr)}
-                      </span>
-                      {/* Monthly 10% down + rebate */}
-                      <span className="text-[0.6rem] font-semibold text-accent text-right leading-tight">
-                        {formatCurrency(calcMonthly(effectivePrice, 10))}
-                        <span className="text-[0.4rem] font-normal text-neutral-400">/mo</span>
-                      </span>
+                        {/* Battery */}
+                        <span className="flex items-center gap-1 text-[0.55rem] text-neutral-500 leading-tight">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg>
+                          {variant.battery ? `${variant.battery}kWh` : "—"}
+                        </span>
+                        {/* Range */}
+                        <span className="flex items-center gap-1 text-[0.55rem] text-neutral-500 leading-tight">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                          {variant.range}km
+                        </span>
+                        {/* Rebate */}
+                        {rebate && rebate > 0 ? (
+                          <span className="text-[0.55rem] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded leading-tight justify-self-start">
+                            -RM{rebate.toLocaleString("en-MY")}
+                          </span>
+                        ) : (
+                          <span className="text-[0.5rem] text-neutral-300 leading-tight">—</span>
+                        )}
+                        {/* OTR with insurance */}
+                        <span className="text-[0.6rem] font-bold text-neutral-800 text-right leading-tight">
+                          {formatCurrency(variant.otr)}
+                        </span>
+                        {/* Monthly 10% down + rebate */}
+                        <span className="text-[0.6rem] font-semibold text-accent text-right leading-tight">
+                          {formatCurrency(calcMonthly(effectivePrice, 10))}
+                          <span className="text-[0.4rem] font-normal text-neutral-400">/mo</span>
+                        </span>
+                      </div>
+                      <PromoSelector
+                        model={vehicle.model}
+                        variantName={variant.name}
+                        choice={promoChoice}
+                        onChoose={handlePromoChoice}
+                        compact
+                      />
                     </div>
                   );
                 })}
@@ -177,11 +272,17 @@ export default function VehiclesPage() {
                 {expandedModel === vehicle.model && (
                   <div className="mt-2 space-y-2">
                     {vehicle.variants.map((variant) => {
-                      const rebate = getRebate(vehicle.model, variant.name) ?? (variant.rebate || 0);
+                      const rebate = effectiveRebate(vehicle.model, variant.name);
                       const effectivePrice = variant.otr - rebate;
                       return (
                         <div key={variant.name} className="rounded-lg border border-neutral-200 bg-neutral-50/50 p-2.5">
                           <p className="text-[0.65rem] font-bold text-neutral-800 mb-1.5">{vehicle.model} {variant.name}</p>
+                          <PromoSelector
+                            model={vehicle.model}
+                            variantName={variant.name}
+                            choice={promoChoice}
+                            onChoose={handlePromoChoice}
+                          />
                           <div className="space-y-1">
                             <div className="data-row">
                               <span className="data-row-label text-[0.55rem]">OTR without Insurance</span>
@@ -245,7 +346,7 @@ export default function VehiclesPage() {
                 <h2 className="section-title text-base">{vehicle.model}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                   {vehicle.variants.map((variant) => {
-                    const rebate = getRebate(vehicle.model, variant.name) ?? (variant.rebate || 0);
+                    const rebate = effectiveRebate(vehicle.model, variant.name);
                     const effectivePrice = variant.otr - rebate;
                     return (
                       <div key={variant.name} className="card card-elevated">
@@ -263,6 +364,13 @@ export default function VehiclesPage() {
                             </span>
                           ) : null}
                         </div>
+
+                        <PromoSelector
+                          model={vehicle.model}
+                          variantName={variant.name}
+                          choice={promoChoice}
+                          onChoose={handlePromoChoice}
+                        />
 
                         {/* Prices */}
                         <div className="space-y-1 mb-1.5">

@@ -47,3 +47,38 @@ export function getFreebies(): string[] {
 export function getPromotionPeriod(): string {
   return promotions.period;
 }
+
+export type PromotionOption = {
+  title: string;
+  rebate: number;
+  default: boolean;
+  free_gift?: string;
+  description?: string;
+};
+
+type PromotionOptionsMap = {
+  [model: string]: {
+    [variant: string]: PromotionOption[];
+  };
+};
+
+const promotionOptions = promotions.promotionOptions as unknown as PromotionOptionsMap | undefined;
+
+export function getPromotionOptions(model: string, variantName: string): PromotionOption[] | null {
+  if (!promotionOptions) return null;
+  const modelOptions = promotionOptions[model];
+  if (modelOptions) {
+    const options = modelOptions[variantName];
+    if (options && options.length > 0) return options;
+  }
+  return null;
+}
+
+export function getDefaultPromotion(model: string, variantName: string): PromotionOption | null {
+  const options = getPromotionOptions(model, variantName);
+  if (!options) return null;
+  const defaultOption = options.find((o) => o.default);
+  if (defaultOption) return defaultOption;
+  // No default specified — auto-select the option with the highest cash rebate
+  return [...options].sort((a, b) => b.rebate - a.rebate)[0] ?? null;
+}

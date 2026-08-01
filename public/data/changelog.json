@@ -1,6 +1,56 @@
 [
   {
-    "version": "V4.3",
+    "version": "V4.0",
+    "date": "2026-07-31",
+    "changes": [
+      "Sealion 7 lineup updated — new Dynamic variant (RWD, 170 kW, 520 km NEDC) joins all-new Premium & Performance (91.39 kWh battery, 650/600 km NEDC)",
+      "Active lineup now 6 model families, 10 variants",
+      "August 2026 promotion live — Atto 2 RM9k, Atto 3 RM14k default (or RM10k + 6yr service pkg), Sealion 7 RM4k/RM3,888/RM2,888, Seal RM3k, Seal 6 RM1k, M6 RM4k",
+      "Promotion engine now supports multiple options per variant (title, rebate, default, free_gift) — default option auto-displayed across all surfaces, alternatives on vehicle detail",
+      "Atto 3 promotion selector live on /vehicles & /finance — pick RM14k cash (no service pkg) OR RM10k + FREE 6yr service pkg; selector replaces the old rebate toggle, no duplicate controls",
+      "Sealion 7 CSP/GSP/SSP set to RM0 (matches Atto 3); service-package toggle hidden on /finance for Atto 3 — service pkg governed by promotion choice only",
+      "OTR prices updated per KPA Miri Pricelist (31 Jul 2026), Sealion 7 OTR-without-insurance updated (insurance = OTR − OTR w/o ins)",
+      "Database metadata bumped to V4.0.0, campaign version 2026-08"
+    ]
+  },
+  {
+    "version": "V1.6",
+    "date": "2026-07-15",
+    "changes": [
+      "vehicles.json rebate field synced to promotions.json as single source of truth",
+      "Monthly estimates now show both 10% down (emerald) and 0% down (amber) on main website",
+      "Full Lineup table column order: Model → Range → OTR Price → Rebate → 10% → 0%",
+      "OTR header renamed to 'OTR Price' for clarity",
+      "(2026) suffix removed from Atto 3 variant names",
+      "Pricelist page: Price Breakdown colspan corrected, overflow-x-auto for scrollable table",
+      "Responsive alignment fixes for mobile: whitespace-nowrap on all monetary values"
+    ]
+  },
+  {
+    "version": "V1.5",
+    "date": "2026-07-15",
+    "changes": [
+      "Pricing model verified — all monthly calculations confirmed on /vehicles page using promotions.json (rebate only, no CSP/GSP)",
+      "Monthly display: 0% Down + 10% Down for every variant, flat rate 2.30%, 9 years",
+      "Rebate-only pricing confirmed across all 6 models (10 variants)",
+      "Data pipeline documented: edit promotions.json → build → deploy → main website auto-updates"
+    ]
+  },
+  {
+    "version": "V1.4",
+    "date": "2026-07-09",
+    "changes": [
+      "Charging rate database restructured with configurable charging profiles — rates no longer hardcoded in components",
+      "8 charging profiles added: Home (RM0.30/kWh), Public DC Fast Charging (RM1.40/kWh default), plus future-ready operator slots",
+      "Charging Time Estimator now reads all rates from charging.json — AC uses home profile, DC uses public_default (RM1.40/kWh)",
+      "DC charging cost simplified to single rate (RM1.40/kWh) — no range display or operator dropdown",
+      "Prompt Generator reads home charging rate from profile instead of hardcoded RM0.30",
+      "Disclaimer added to /charging page: 'Public charging fees vary between charging networks and locations'",
+      "Charging schema updated to validate new chargingProfiles structure"
+    ]
+  },
+  {
+    "version": "V1.3",
     "date": "2026-07-08",
     "changes": [
       "Dedicated promotions.json — single source of truth for monthly-changing rebates, CSP/GSP/SSP & freebies",
@@ -12,7 +62,7 @@
     ]
   },
   {
-    "version": "V4.2",
+    "version": "V1.2",
     "date": "2026-07-05",
     "changes": [
       "EV Market Malaysia hub launched — live news feed for EV industry updates, pricing & rebate changes",
@@ -30,7 +80,7 @@
     ]
   },
   {
-    "version": "V4.1",
+    "version": "V1.1",
     "date": "2026-06-24",
     "changes": [
       "RJEOS editorial campaign engine launched with constitution, design directions, creative package builder",
@@ -44,7 +94,7 @@
     ]
   },
   {
-    "version": "V4.0",
+    "version": "V1.0",
     "date": "2026-06-17",
     "changes": [
       "Initial launch of BYD Miri Knowledge Base",
