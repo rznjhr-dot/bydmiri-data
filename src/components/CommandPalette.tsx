@@ -24,6 +24,7 @@ export default function CommandPalette() {
     { label: "Handbook", description: "Master handbook", href: "/handbook", category: "Page" },
     { label: "API / Data", description: "Machine-readable JSON endpoints", href: "/data", category: "Page" },
     { label: "Changelog", description: "Version history", href: "/changelog", category: "Page" },
+    { label: "Price Breakdown", description: "Selling price & balance payable", href: "/top-up", category: "Page" },
     ...vehicles.flatMap((v) =>
       v.variants.map((var_, i) => ({
         label: `${v.model} ${var_.name}`,

@@ -102,6 +102,15 @@ export default function Home() {
                 <div className="tool-card-desc">Monthly payment estimator</div>
               </div>
             </a>
+            <a href="/top-up" className="tool-card">
+              <div className="tool-card-icon bg-[var(--color-warning-light)] text-[var(--color-warning)]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+              </div>
+              <div>
+                <div className="tool-card-title">Price Breakdown</div>
+                <div className="tool-card-desc">Selling price &amp; balance payable</div>
+              </div>
+            </a>
             <a href="/charging" className="tool-card">
               <div className="tool-card-icon bg-[var(--color-accent-light)] text-[var(--color-accent)]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
