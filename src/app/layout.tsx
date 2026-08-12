@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   title: "RJ Master Databook | BYD Miri",
   description:
     "The official Single Source of Truth for all BYD Miri operations. Pricing, rebates, financing, vehicle hierarchy, charging network and sales rules.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const jsonLd = {
