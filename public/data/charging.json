@@ -1,15 +1,15 @@
 {
-  "lastUpdated": "2026-07-09",
+  "lastUpdated": "2026-12-08",
   "disclaimer": "Public charging fees vary between charging networks and locations. RM1.40/kWh is used as the default estimate for cost calculations.",
   "chargingProfiles": [
     {
       "id": "home",
       "name": "Home Charging",
-      "rate": 0.30,
+      "rate": 0.33,
       "unit": "kWh",
       "type": "ac",
       "estimated": true,
-      "description": "Estimated Malaysian residential electricity tariff."
+      "description": "Estimated Malaysian residential electricity tariff (RM0.33/kWh)."
     },
     {
       "id": "public_default",
