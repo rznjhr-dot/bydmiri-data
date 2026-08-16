@@ -1,23 +1,14 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import vehicles from "@/data/vehicles.json";
-import finance from "@/data/finance.json";
+import { vehicles, finance } from "@/data";
+import { formatCurrency } from "@/utils/finance";
 import {
   getRebate,
   getCspRebate,
   getCspReplacement,
   getDefaultPromotion,
 } from "@/utils/promotions";
-
-function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat("en-MY", {
-    style: "currency",
-    currency: "MYR",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(amount);
-}
 
 type Variant = {
   name: string;
@@ -49,7 +40,7 @@ export default function TopUpCalculator() {
   const [bookingFeeInput, setBookingFeeInput] = useState("");
   const [copied, setCopied] = useState(false);
 
-  const currentVehicle = vehicles.find((v) => v.model === selectedModel)!;
+  const currentVehicle = vehicles.find((v) => v.model === selectedModel) ?? vehicles[0];
   const currentVariant: Variant = currentVehicle.variants[selectedVariantIdx];
 
   const estInsurance = currentVariant.otr - currentVariant.otrWithoutInsurance;
@@ -172,7 +163,7 @@ export default function TopUpCalculator() {
           <div className="p-2.5 space-y-2">
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                   Model
                 </label>
                 <select
@@ -189,7 +180,7 @@ export default function TopUpCalculator() {
               </div>
               {currentVehicle.variants.length > 1 && (
                 <div>
-                  <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+                  <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                     Variant
                   </label>
                   <select
@@ -214,10 +205,10 @@ export default function TopUpCalculator() {
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeRebate ? "bg-accent" : "bg-neutral-300"}`}>
                     <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
                   </div>
-                  <span className="text-[0.6rem] font-medium text-[var(--color-text-secondary)]">Rebate</span>
+                  <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)]">Rebate</span>
                 </label>
                 {rebate > 0 && (
-                  <span className="text-[0.6rem] font-semibold text-green-600">{formatCurrency(rebate)}</span>
+                  <span className="text-[0.7rem] font-semibold text-green-600">{formatCurrency(rebate)}</span>
                 )}
               </div>
               <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
@@ -225,19 +216,19 @@ export default function TopUpCalculator() {
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
                     <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
-                  <span className="text-[0.6rem] font-medium text-[var(--color-text-secondary)] truncate">{cspReplacement || finance.additionalRebate.label.split(" ")[0]}</span>
+                  <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)] truncate">{cspReplacement || finance.additionalRebate.label.split(" ")[0]}</span>
                 </label>
                 {cspReplacement ? (
-                  <span className="text-[0.55rem] font-semibold text-purple-600 text-right leading-tight max-w-[50%]">{cspReplacement.replace(" (worth RM3,888)", "")}</span>
+                  <span className="text-[0.7rem] font-semibold text-purple-600 text-right leading-tight max-w-[50%]">{cspReplacement.replace(" (worth RM3,888)", "")}</span>
                 ) : (
-                  <span className="text-[0.6rem] font-semibold text-blue-600">{formatCurrency(cspAmount)}</span>
+                  <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspAmount)}</span>
                 )}
               </div>
             </div>
 
             {/* Downpayment */}
             <div>
-              <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                 Downpayment (auto financing)
               </label>
               <div className="flex gap-1">
@@ -246,7 +237,7 @@ export default function TopUpCalculator() {
                     key={pct}
                     type="button"
                     onClick={() => setDownpaymentPct(pct)}
-                    className={`pill !text-[0.65rem] !py-1 flex-1 ${downpaymentPct === pct ? "pill-active" : ""}`}
+                    className={`pill !text-xs !py-2 flex-1 ${downpaymentPct === pct ? "pill-active" : ""}`}
                   >
                     {pct}%
                   </button>
@@ -256,11 +247,11 @@ export default function TopUpCalculator() {
 
             {/* Actual insurance */}
             <div>
-              <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                 Actual Insurance
               </label>
               <div className="input-group">
-                <span className="input-prefix !text-[0.65rem]">RM</span>
+                <span className="input-prefix !text-[0.7rem]">RM</span>
                 <input
                   type="text"
                   inputMode="decimal"
@@ -270,18 +261,18 @@ export default function TopUpCalculator() {
                   className="input !text-xs !py-1.5"
                 />
               </div>
-              <p className="text-[0.5rem] text-[var(--color-text-tertiary)] mt-0.5">
+              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-0.5">
                 Pre-determined: {formatCurrency(estInsurance)} · Sum Insured: {currentVariant.sumInsured ? formatCurrency(currentVariant.sumInsured) : "—"} · kosong = guna pre-determined
               </p>
             </div>
 
             {/* Approved loan */}
             <div>
-              <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                 Financing Amount (kosong = auto {downpaymentPct}% down)
               </label>
               <div className="input-group">
-                <span className="input-prefix !text-[0.65rem]">RM</span>
+                <span className="input-prefix !text-[0.7rem]">RM</span>
                 <input
                   type="text"
                   inputMode="decimal"
@@ -295,11 +286,11 @@ export default function TopUpCalculator() {
 
             {/* Booking Fee */}
             <div>
-              <label className="block text-[0.55rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
                 Booking Fee
               </label>
               <div className="input-group">
-                <span className="input-prefix !text-[0.65rem]">RM</span>
+                <span className="input-prefix !text-[0.7rem]">RM</span>
                 <input
                   type="text"
                   inputMode="decimal"
@@ -309,7 +300,7 @@ export default function TopUpCalculator() {
                   className="input !text-xs !py-1.5"
                 />
               </div>
-              <p className="text-[0.5rem] text-[var(--color-text-tertiary)] mt-0.5">
+              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-0.5">
                 Default: {formatCurrency(currentVariant.bookingFee ?? 1000)} · kosong = guna default
               </p>
             </div>
@@ -318,13 +309,13 @@ export default function TopUpCalculator() {
           {/* Results */}
           <div className="p-2.5 bg-gradient-to-r from-[var(--color-accent-light)]/70 to-[var(--color-bg-secondary)]">
             <div className="flex items-center justify-between mb-1.5">
-              <h3 className="text-[0.6rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest">
+              <h3 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest">
                 Price Breakdown Summary
               </h3>
               <button
                 type="button"
                 onClick={handleCopy}
-                className="p-1 rounded-md text-[var(--color-text-tertiary)] hover:text-accent hover:bg-accent/5 transition-all cursor-pointer flex items-center gap-1 text-[0.55rem] font-medium"
+                className="p-1 rounded-md text-[var(--color-text-tertiary)] hover:text-accent hover:bg-accent/5 transition-all cursor-pointer flex items-center gap-1 text-[0.7rem] font-medium"
                 aria-label="Copy price breakdown"
               >
                 {copied ? (
@@ -341,12 +332,12 @@ export default function TopUpCalculator() {
               </button>
             </div>
 
-            <p className="text-[0.6rem] font-bold text-[var(--color-text-primary)] mb-1.5">
+            <p className="text-[0.7rem] font-bold text-[var(--color-text-primary)] mb-1.5">
               {currentVehicle.model} {currentVariant.name}
             </p>
 
-            <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[0.6rem]">
-              <div className="col-span-2 text-[0.55rem] font-bold text-[var(--color-text-tertiary)] uppercase tracking-widest border-t border-[var(--color-border-primary)]/50 pt-1">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[0.7rem]">
+              <div className="col-span-2 text-[0.7rem] font-bold text-[var(--color-text-tertiary)] uppercase tracking-widest border-t border-[var(--color-border-primary)]/50 pt-1">
                 Selling Price Breakdown
               </div>
               <div className="flex justify-between col-span-2">
@@ -378,7 +369,7 @@ export default function TopUpCalculator() {
                 <span className="font-bold">{formatCurrency(subtotalA)}</span>
               </div>
 
-              <div className="col-span-2 text-[0.55rem] font-bold text-[var(--color-text-tertiary)] uppercase tracking-widest border-t border-[var(--color-border-primary)]/50 pt-1">
+              <div className="col-span-2 text-[0.7rem] font-bold text-[var(--color-text-tertiary)] uppercase tracking-widest border-t border-[var(--color-border-primary)]/50 pt-1">
                 Deductions
               </div>
               <div className="flex justify-between col-span-2">
@@ -405,7 +396,7 @@ export default function TopUpCalculator() {
             </div>
 
             <div className={`mt-2 rounded-lg px-2.5 py-2 border-t-2 ${balance > 0 ? "border-red-200 bg-red-50" : "border-green-200 bg-green-50"}`}>
-              <p className="text-[0.55rem] font-medium text-[var(--color-text-tertiary)]">
+              <p className="text-[0.7rem] font-medium text-[var(--color-text-tertiary)]">
                 {balance > 0 ? "Customer kena bayar (balance payable)" : "Tiada baki diperlukan"}
               </p>
               <p className={`text-lg sm:text-xl font-extrabold tracking-tight ${balance > 0 ? "text-red-600" : "text-green-600"}`}>

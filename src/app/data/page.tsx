@@ -52,7 +52,7 @@ export default function DataIndex() {
                     {ds.name}
                   </p>
                   {ds.schema && (
-                    <span className="text-[0.55rem] text-[var(--color-text-tertiary)] font-mono">
+                    <span className="text-[0.7rem] text-[var(--color-text-tertiary)] font-mono">
                       schema: {ds.schema}.schema.json
                     </span>
                   )}

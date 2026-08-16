@@ -1,23 +1,14 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import vehicles from "@/data/vehicles.json";
-import finance from "@/data/finance.json";
-import salesRules from "@/data/sales_rules.json";
-import charging from "@/data/charging.json";
-
-const homeProfileRate = (charging.chargingProfiles as Array<{ id: string; rate: number }>).find((p) => p.id === "home")?.rate ?? 0.30;
-import company from "@/data/company.json";
+import { vehicles, finance, salesRules, charging, company } from "@/data";
+import type { VehicleVariant } from "@/data";
 import { getRebate } from "@/utils/promotions";
 
-type Variant = {
-  name: string;
-  otr: number;
-  rebate: number;
-  range: number;
-  battery: number | null;
-  chargeCost?: number;
-};
+const homeProfileRate =
+  charging.chargingProfiles.find((p) => p.id === "home")?.rate ?? 0.33;
+
+type Variant = VehicleVariant;
 
 const templates = [
   { id: "product", label: "Product Description", icon: "📋" },
@@ -57,9 +48,9 @@ export default function PromptGenerator() {
   const [scene, setScene] = useState(scenes[0].id);
   const [copied, setCopied] = useState(false);
 
-  const vehicle1 = vehicles.find((v) => v.model === model1)!;
+  const vehicle1 = vehicles.find((v) => v.model === model1) ?? vehicles[0];
   const variant1: Variant = vehicle1.variants[variant1Idx];
-  const vehicle2 = vehicles.find((v) => v.model === model2)!;
+  const vehicle2 = vehicles.find((v) => v.model === model2) ?? vehicle1;
   const variant2: Variant = vehicle2.variants[variant2Idx];
 
   const rebateLine = (model: string, v: Variant) =>

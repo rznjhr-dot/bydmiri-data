@@ -2,12 +2,8 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
-import rjeosData from "@/data/rjeos.json";
-import vehiclesData from "@/data/vehicles.json";
-import type { RJEOSData, RJEOSSelections, RJEOSOutputSize, RJEOSDesignDirection, RJEOSScene, RJEOSSalesAdvisor } from "@/types/rjeos";
-
-const rjeos = rjeosData as RJEOSData;
-const vehicles = vehiclesData as Array<{ model: string; variants: Array<{ name: string; otr: number; otrWithoutInsurance: number; rebate: number; range: number; battery: number; chargeCost: number; maxChargePower: string }> }>;
+import { rjeos, vehicles } from "@/data";
+import type { RJEOSSelections, RJEOSOutputSize, RJEOSDesignDirection, RJEOSScene, RJEOSSalesAdvisor } from "@/types/rjeos";
 
 const defaultSelections: RJEOSSelections = {
   outputSize: "4:5",
@@ -217,7 +213,7 @@ function ScenarioCard({
       }`}
     >
       <span className="font-medium block">{label}</span>
-      <span className={`text-[0.6rem] ${selected ? "text-warning" : "text-text-tertiary"} block mt-0.5 leading-tight`}>
+      <span className={`text-[0.7rem] ${selected ? "text-warning" : "text-text-tertiary"} block mt-0.5 leading-tight`}>
         {description}
       </span>
     </button>
@@ -335,10 +331,10 @@ export default function RJEOSPage() {
                 <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-text-primary">
                   RJEOS<span className="text-warning">™</span>
                 </h1>
-                <span className="bg-warning-subtle text-warning text-[0.55rem] font-semibold px-2 py-0.5 rounded border border-warning/30">
+                <span className="bg-warning-subtle text-warning text-[0.7rem] font-semibold px-2 py-0.5 rounded border border-warning/30">
                   v{rjeos.version}
                 </span>
-                <span className="bg-bg-tertiary text-text-tertiary text-[0.55rem] font-semibold px-2 py-0.5 rounded border border-border-primary">
+                <span className="bg-bg-tertiary text-text-tertiary text-[0.7rem] font-semibold px-2 py-0.5 rounded border border-border-primary">
                   CONSTITUTION LOCKED
                 </span>
               </div>
@@ -363,7 +359,7 @@ export default function RJEOSPage() {
               </div>
               <div className="text-left">
                 <h2 className="font-bold text-text-primary text-sm">RJEOS Master Constitution</h2>
-                <p className="text-[0.6rem] text-text-tertiary">{totalArticles} Articles · Version {rjeos.constitution.version} · Status: {rjeos.constitution.status}</p>
+                <p className="text-[0.7rem] text-text-tertiary">{totalArticles} Articles · Version {rjeos.constitution.version} · Status: {rjeos.constitution.status}</p>
               </div>
             </div>
             <svg
@@ -402,7 +398,7 @@ export default function RJEOSPage() {
           <div className="lg:col-span-3 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-bold text-text-primary uppercase tracking-wider">Campaign Controls</h2>
-              <span className="text-[0.55rem] text-text-tertiary font-medium">User may ONLY modify these</span>
+              <span className="text-[0.7rem] text-text-tertiary font-medium">User may ONLY modify these</span>
             </div>
 
             {/* Output Size */}
@@ -429,7 +425,7 @@ export default function RJEOSPage() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-text-tertiary text-[0.6rem] block mb-0.5">Model</label>
+                  <label className="text-text-tertiary text-[0.7rem] block mb-0.5">Model</label>
                   <select
                     value={selections.modelIdx}
                     onChange={(e) => update("modelIdx", Number(e.target.value))}
@@ -441,7 +437,7 @@ export default function RJEOSPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-text-tertiary text-[0.6rem] block mb-0.5">Variant</label>
+                  <label className="text-text-tertiary text-[0.7rem] block mb-0.5">Variant</label>
                   <select
                     value={selections.variantIdx}
                     onChange={(e) => update("variantIdx", Number(e.target.value))}
@@ -454,7 +450,7 @@ export default function RJEOSPage() {
                 </div>
               </div>
               {/* Quick specs */}
-              <div className="mt-2 grid grid-cols-3 gap-2 text-[0.6rem]">
+              <div className="mt-2 grid grid-cols-3 gap-2 text-[0.7rem]">
                 <div><span className="text-text-tertiary">OTR:</span> <span className="text-text-primary font-medium">RM{currentVariant.otr.toLocaleString("en-MY")}</span></div>
                 <div><span className="text-text-tertiary">Range:</span> <span className="text-text-primary font-medium">{currentVariant.range} km</span></div>
                 <div><span className="text-text-tertiary">Battery:</span> <span className="text-text-primary font-medium">{currentVariant.battery} kWh</span></div>
@@ -509,7 +505,7 @@ export default function RJEOSPage() {
                 placeholder="Enter campaign headline..."
                 className="w-full px-3 py-2 rounded-lg bg-bg-tertiary border border-border-primary text-sm text-text-primary placeholder-text-disabled focus:outline-none focus:ring-2 focus:ring-warning/20 focus:border-warning/40 transition-all"
               />
-              <p className="text-[0.55rem] text-text-tertiary mt-1">Satoshi Medium · Tracking +20 · Sentence Case</p>
+              <p className="text-[0.7rem] text-text-tertiary mt-1">Satoshi Medium · Tracking +20 · Sentence Case</p>
             </div>
 
             {/* Talking Point */}
@@ -524,7 +520,7 @@ export default function RJEOSPage() {
                 placeholder="e.g. 0-100km/h in 3.8s"
                 className="w-full px-3 py-2 rounded-lg bg-bg-tertiary border border-border-primary text-sm text-text-primary placeholder-text-disabled focus:outline-none focus:ring-2 focus:ring-warning/20 focus:border-warning/40 transition-all"
               />
-              <p className="text-[0.55rem] text-text-tertiary mt-1">Appears as subtitle below model name in hero title</p>
+              <p className="text-[0.7rem] text-text-tertiary mt-1">Appears as subtitle below model name in hero title</p>
             </div>
 
             {/* Show/Hide */}
@@ -563,12 +559,12 @@ export default function RJEOSPage() {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-bold text-text-primary uppercase tracking-wider">Creative Package</h2>
-              <span className="text-[0.55rem] text-warning/60 font-medium">Constitution injected</span>
+              <span className="text-[0.7rem] text-warning/60 font-medium">Constitution injected</span>
             </div>
 
             {/* Creative Package Preview */}
             <div className="rounded-xl border border-border-primary bg-bg-secondary overflow-hidden">
-              <div className="bg-bg-tertiary text-text-primary p-4 sm:p-5 font-mono text-[0.65rem] leading-relaxed whitespace-pre-wrap max-h-[70vh] overflow-y-auto">
+              <div className="bg-bg-tertiary text-text-primary p-4 sm:p-5 font-mono text-[0.7rem] leading-relaxed whitespace-pre-wrap max-h-[70vh] overflow-y-auto">
                 {creativePackage || (
                   <span className="text-text-tertiary italic">Select campaign parameters to generate creative package...</span>
                 )}
@@ -610,7 +606,7 @@ export default function RJEOSPage() {
                   { label: "Features", value: selections.showFeatures ? "Visible" : "Hidden" },
                   { label: "CTA", value: selections.showCTA ? "Visible" : "Hidden" },
                 ].map((item) => (
-                  <div key={item.label} className="flex items-center justify-between text-[0.6rem]">
+                  <div key={item.label} className="flex items-center justify-between text-[0.7rem]">
                     <span className="text-text-tertiary">{item.label}</span>
                     <span className="text-text-primary font-medium truncate ml-2 text-right max-w-[60%]">{item.value}</span>
                   </div>

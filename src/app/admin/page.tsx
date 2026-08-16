@@ -2,23 +2,15 @@
 
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import vehiclesRaw from "@/data/vehicles.json";
-import promotionsRaw from "@/data/promotions.json";
-import finance from "@/data/finance.json";
+import { vehicles as vehiclesTyped, promotions as promotionsTyped } from "@/data";
+import { calcMonthlyAtDefaults, formatCurrency } from "@/utils/finance";
 
 /* ─── Types ─────────────────────────────────────────────────── */
 
 type FieldKey = "otr" | "rebate" | "promotion";
 
-type VehicleVariant = Record<string, unknown> & { name?: string };
-type VehicleModel = { model: string; segment?: string; variants: VehicleVariant[] };
-type VehiclesFile = VehicleModel[];
-
-type PromotionsFile = {
-  [key: string]: unknown;
-  rebates?: Record<string, Record<string, number>>;
-  variantPromotions?: Record<string, Record<string, string[]>>;
-};
+type VehicleModelFile = (typeof vehiclesTyped)[number];
+type PromotionsFile = (typeof promotionsTyped);
 
 interface RowState {
   model: string;
@@ -46,24 +38,11 @@ interface ChangeItem {
 
 /* ─── Helpers ───────────────────────────────────────────────── */
 
-const vehicles = vehiclesRaw as unknown as VehiclesFile;
-const promotions = promotionsRaw as unknown as PromotionsFile;
+const vehicles = vehiclesTyped;
+const promotions = promotionsTyped;
 
 function fmt(amount: number): string {
-  return new Intl.NumberFormat("en-MY", {
-    style: "currency",
-    currency: "MYR",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
-
-function calcMonthly(effectivePrice: number): number {
-  const rate = finance.interestRate / 100;
-  const tenure = finance.defaultTenure;
-  const loan = effectivePrice * (finance.loanMargin / 100);
-  const totalInterest = loan * rate * tenure;
-  return (loan + totalInterest) / (tenure * 12);
+  return formatCurrency(amount);
 }
 
 function parseNum(s: string): number | null {
@@ -94,10 +73,7 @@ function fieldKey(model: string, variant: string, field: FieldKey): string {
 }
 
 function buildRows(): RowState[] {
-  const vp = (promotions.variantPromotions ?? {}) as Record<
-    string,
-    Record<string, string[]>
-  >;
+  const vp = promotions.variantPromotions ?? {};
   const rows: RowState[] = [];
   for (const m of vehicles) {
     for (const v of m.variants) {
@@ -284,12 +260,12 @@ function NoChangeToggle({
     >
       {checked ? (
         <>
-          <span className="w-3 h-3 rounded-full bg-neutral-400 text-white flex items-center justify-center text-[0.5rem] leading-none">✓</span>
+          <span className="w-3 h-3 rounded-full bg-neutral-400 text-white flex items-center justify-center text-[0.7rem] leading-none">✓</span>
           No Changes
         </>
       ) : (
         <>
-          <span className="w-3 h-3 rounded-full bg-amber-500 text-white flex items-center justify-center text-[0.5rem] leading-none">✎</span>
+          <span className="w-3 h-3 rounded-full bg-amber-500 text-white flex items-center justify-center text-[0.7rem] leading-none">✎</span>
           Editing
         </>
       )}
@@ -344,13 +320,13 @@ function FieldRow({
           {label}
         </p>
         {changed && (
-          <span className="badge badge-amber !text-[0.55rem] !px-1.5 !py-0">
+          <span className="badge badge-amber !text-[0.7rem] !px-1.5 !py-0">
             CHANGED
           </span>
         )}
       </div>
       <div className="flex items-center gap-2 min-w-0">
-        <p className={`text-[0.65rem] shrink-0 ${disabled ? "text-[var(--color-text-tertiary)]" : "text-[var(--color-text-tertiary)]"}`}>
+        <p className={`text-[0.7rem] shrink-0 ${disabled ? "text-[var(--color-text-tertiary)]" : "text-[var(--color-text-tertiary)]"}`}>
           Current
         </p>
         <CurrentChip value={current} muted={disabled} />
@@ -402,13 +378,13 @@ function PromoRow({
           Promotion
         </p>
         {changed && (
-          <span className="badge badge-amber !text-[0.55rem] !px-1.5 !py-0">
+          <span className="badge badge-amber !text-[0.7rem] !px-1.5 !py-0">
             CHANGED
           </span>
         )}
       </div>
       <div className={disabled ? "opacity-60" : ""}>
-        <p className="text-[0.65rem] text-[var(--color-text-tertiary)] mb-0.5">Current</p>
+        <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mb-0.5">Current</p>
         {currentLines.length > 0 ? (
           <ul className="space-y-0.5">
             {currentLines.map((p) => (
@@ -479,8 +455,8 @@ export default function AdminPage() {
       showToast("No changes detected", "error");
       return;
     }
-    const vFile = JSON.parse(JSON.stringify(vehiclesRaw)) as VehiclesFile;
-    const pFile = JSON.parse(JSON.stringify(promotionsRaw)) as PromotionsFile;
+    const vFile = JSON.parse(JSON.stringify(vehiclesTyped)) as VehicleModelFile[];
+    const pFile = JSON.parse(JSON.stringify(promotionsTyped)) as PromotionsFile;
     const existing = pFile.variantPromotions;
     const variantPromotions: Record<string, Record<string, string[]>> = existing
       ? (JSON.parse(JSON.stringify(existing)) as Record<string, Record<string, string[]>>)
@@ -640,7 +616,7 @@ export default function AdminPage() {
                 <span className="w-1 h-4 rounded-full bg-accent" />
                 <h2 className="section-title text-base !mb-0">{m.model}</h2>
                 {modelChangeCount > 0 && (
-                  <span className="badge badge-amber !text-[0.6rem] !px-2 !py-0">
+                  <span className="badge badge-amber !text-[0.7rem] !px-2 !py-0">
                     {modelChangeCount} change{modelChangeCount > 1 ? "s" : ""}
                   </span>
                 )}
@@ -654,7 +630,7 @@ export default function AdminPage() {
                     (otrParsed ?? r.otr) - (rebateParsed ?? r.rebate),
                     0
                   );
-                  const monthlyNew = calcMonthly(effNew);
+                  const monthlyNew = calcMonthlyAtDefaults(effNew);
                   const rowChanges = changes.filter(
                     (c) => c.model === r.model && c.variant === r.variant
                   );
@@ -671,7 +647,7 @@ export default function AdminPage() {
                     >
                       <div className="flex items-center justify-between gap-2 px-4 py-2.5 bg-gradient-to-r from-[var(--color-bg-tertiary)] to-white border-b border-[var(--color-border-primary)]">
                         <div className="min-w-0">
-                          <p className="text-[0.6rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest leading-none mb-0.5">
+                          <p className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest leading-none mb-0.5">
                             {m.segment ?? ""}
                           </p>
                           <h3 className="text-sm font-bold text-[var(--color-text-primary)] uppercase tracking-wide truncate">
@@ -728,17 +704,17 @@ export default function AdminPage() {
                             </p>
                             <p className="text-xs text-[var(--color-text-tertiary)]">
                               Current{" "}
-                              <CurrentChip value={fmt(calcMonthly(r.otr - r.rebate))} muted />
+                              <CurrentChip value={fmt(calcMonthlyAtDefaults(r.otr - r.rebate))} muted />
                             </p>
                             <p className="text-xs text-[var(--color-text-tertiary)] font-mono sm:text-right">
                               New: <strong className="text-accent">{fmt(monthlyNew)}</strong>
                               {monthlyChanged && (
-                                <span className="badge badge-blue !text-[0.55rem] !px-1.5 !py-0 ml-1.5">
+                                <span className="badge badge-blue !text-[0.7rem] !px-1.5 !py-0 ml-1.5">
                                   AUTO
                                 </span>
                               )}
                             </p>
-                            <span className="badge badge-gray !text-[0.55rem] !px-2 !py-0 justify-self-start sm:justify-self-end">
+                            <span className="badge badge-gray !text-[0.7rem] !px-2 !py-0 justify-self-start sm:justify-self-end">
                               derived
                             </span>
                           </div>

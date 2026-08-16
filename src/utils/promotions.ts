@@ -1,25 +1,9 @@
-import promotions from "@/data/promotions.json";
+import { promotions, type PromotionOption } from "@/data";
 
-type RebatesMap = {
-  [model: string]: {
-    [variant: string]: number;
-  };
-};
-
-type CspOverridesMap = {
-  [model: string]: number;
-};
-
-type CspReplacementsMap = {
-  [model: string]: string;
-};
-
-const rebates = promotions.rebates as unknown as RebatesMap;
-const cspOverrides = promotions.cspRebate.overrides as unknown as CspOverridesMap;
-const cspReplacements = promotions.cspReplacements as unknown as CspReplacementsMap | undefined;
+export type { PromotionOption };
 
 export function getRebate(model: string, variantName: string): number | null {
-  const modelRebates = rebates[model];
+  const modelRebates = promotions.rebates[model];
   if (modelRebates) {
     const rebate = modelRebates[variantName];
     if (rebate !== undefined) return rebate;
@@ -28,12 +12,12 @@ export function getRebate(model: string, variantName: string): number | null {
 }
 
 export function getCspRebate(model: string): number {
-  return cspOverrides[model] ?? promotions.cspRebate.default;
+  return promotions.cspRebate.overrides[model] ?? promotions.cspRebate.default;
 }
 
 export function getCspReplacement(model: string): string | null {
-  if (!cspReplacements) return null;
-  return cspReplacements[model] ?? null;
+  if (!promotions.cspReplacements) return null;
+  return promotions.cspReplacements[model] ?? null;
 }
 
 export function getInterestRate(): number {
@@ -48,29 +32,9 @@ export function getPromotionPeriod(): string {
   return promotions.period;
 }
 
-export type PromotionOption = {
-  title: string;
-  rebate: number;
-  default: boolean;
-  free_gift?: string;
-  description?: string;
-};
-
-type PromotionOptionsMap = {
-  [model: string]: {
-    [variant: string]: PromotionOption[];
-  };
-};
-
-const promotionOptions = promotions.promotionOptions as unknown as PromotionOptionsMap | undefined;
-
 export function getPromotionOptions(model: string, variantName: string): PromotionOption[] | null {
-  if (!promotionOptions) return null;
-  const modelOptions = promotionOptions[model];
-  if (modelOptions) {
-    const options = modelOptions[variantName];
-    if (options && options.length > 0) return options;
-  }
+  const options = promotions.promotionOptions?.[model]?.[variantName];
+  if (options && options.length > 0) return options;
   return null;
 }
 

@@ -2,15 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import prompts from "@/data/marketing/prompts.json";
-import type { PromptsData } from "@/types/marketing";
-
-const typedPrompts = prompts as unknown as PromptsData;
+import { marketingPrompts } from "@/data";
 
 export default function PromptBuilderPage() {
-  const [selectedTool, setSelectedTool] = useState(typedPrompts.tools[0]?.id ?? "");
+  const [selectedTool, setSelectedTool] = useState(marketingPrompts.tools[0]?.id ?? "");
 
-  const tool = typedPrompts.tools.find((t) => t.id === selectedTool);
+  const tool = marketingPrompts.tools.find((t) => t.id === selectedTool);
 
   return (
     <div className="min-h-screen">
@@ -31,8 +28,8 @@ export default function PromptBuilderPage() {
       <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3">
-          <div className="stat"><div className="stat-value">{typedPrompts.tools.length}</div><div className="stat-label">AI Tools</div></div>
-          <div className="stat"><div className="stat-value">{typedPrompts.promptEnhancers.length}</div><div className="stat-label">Enhancer Types</div></div>
+          <div className="stat"><div className="stat-value">{marketingPrompts.tools.length}</div><div className="stat-label">AI Tools</div></div>
+          <div className="stat"><div className="stat-value">{marketingPrompts.promptEnhancers.length}</div><div className="stat-label">Enhancer Types</div></div>
           <div className="stat"><div className="stat-value">Modular</div><div className="stat-label">Architecture</div></div>
         </div>
 
@@ -40,7 +37,7 @@ export default function PromptBuilderPage() {
         <div>
           <label className="text-sm font-semibold text-[var(--color-text-secondary)] mb-1.5 block">AI Tool</label>
           <div className="flex flex-wrap gap-1.5">
-            {typedPrompts.tools.map((t) => (
+            {marketingPrompts.tools.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setSelectedTool(t.id)}
@@ -61,7 +58,7 @@ export default function PromptBuilderPage() {
                   <h2 className="font-bold text-[var(--color-text-primary)] text-sm">{tool.name}</h2>
                   <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">{tool.description}</p>
                 </div>
-                <span className="badge badge-gray text-[0.55rem]">{tool.model}</span>
+                <span className="badge badge-gray text-[0.7rem]">{tool.model}</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -69,7 +66,7 @@ export default function PromptBuilderPage() {
                   <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1 uppercase tracking-wider">Best For</h3>
                   <div className="flex flex-wrap gap-1">
                     {tool.bestFor.map((b) => (
-                      <span key={b} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{b}</span>
+                      <span key={b} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{b}</span>
                     ))}
                   </div>
                 </div>
@@ -77,7 +74,7 @@ export default function PromptBuilderPage() {
                   <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1 uppercase tracking-wider">Parameters</h3>
                   <div className="flex flex-wrap gap-1">
                     {tool.parameters.map((p) => (
-                      <span key={p} className="text-[0.6rem] text-accent bg-accent/5 border border-accent/20 px-1.5 py-0.5 rounded">{p.replace(/_/g, " ")}</span>
+                      <span key={p} className="text-[0.7rem] text-accent bg-accent/5 border border-accent/20 px-1.5 py-0.5 rounded">{p.replace(/_/g, " ")}</span>
                     ))}
                   </div>
                 </div>
@@ -95,12 +92,12 @@ export default function PromptBuilderPage() {
             <section>
               <h2 className="section-title">Prompt Enhancers</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {typedPrompts.promptEnhancers.map((enhancer) => (
+                {marketingPrompts.promptEnhancers.map((enhancer) => (
                   <div key={enhancer.id} className="card">
                     <h3 className="font-semibold text-[var(--color-text-primary)] text-xs mb-1.5 uppercase tracking-wider">{enhancer.label}</h3>
                     <div className="flex flex-wrap gap-1">
                       {enhancer.options.map((opt) => (
-                        <span key={opt} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{opt}</span>
+                        <span key={opt} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{opt}</span>
                       ))}
                     </div>
                   </div>
@@ -114,8 +111,8 @@ export default function PromptBuilderPage() {
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Prompt Builder</h2>
           <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
-            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/prompt-builder.md</code> to generate optimised prompts.
-            Architecture supports adding new AI tools without refactoring — just add to <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">prompts.json</code>.
+            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/prompt-builder.md</code> to generate optimised prompts.
+            Architecture supports adding new AI tools without refactoring — just add to <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">prompts.json</code>.
           </p>
         </section>
       </main>

@@ -3,34 +3,28 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Suspense, useState, useEffect, useCallback, useMemo } from "react";
-import templatesData from "@/data/prompt-studio/templates.json";
-import blocksData from "@/data/prompt-studio/blocks.json";
-import rulesData from "@/data/prompt-studio/rules.json";
-import vehiclesData from "@/data/vehicles.json";
-import companyData from "@/data/company.json";
+import { psTemplates, psBlocks, psRules, vehicles, company } from "@/data";
 import { getRebate } from "@/utils/promotions";
-import type { GeneratorTemplate, BlocksData, RulesData } from "@/types/prompt-studio";
+import type { GeneratorTemplate } from "@/types/prompt-studio";
 
-const templates = (templatesData as { templates: GeneratorTemplate[] }).templates;
-const blocks = (blocksData as BlocksData).blocks;
-const promptStructure = (blocksData as BlocksData).promptStructure;
-const strictRules = (rulesData as RulesData).categories.find((c) => c.id === "strict_output");
-const vehicles = vehiclesData as Array<{ model: string; variants: Array<{ name: string; otr: number; otrWithoutInsurance: number; rebate: number; range: number; battery: number; chargeCost: number; maxChargePower: string }> }>;
-const company = companyData as { rebatePeriod: string };
+const templates = psTemplates.templates;
+const blocks = psBlocks.blocks;
+const promptStructure = psBlocks.promptStructure;
+const strictRules = psRules.categories.find((c) => c.id === "strict_output");
 
-function buildDynamicVehicleBlock(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }): string {
+function buildDynamicVehicleBlock(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number | null; maxChargePower?: string }): string {
   const rebate = getRebate(model, variant.name) ?? variant.rebate;
-  return `Vehicle: BYD ${model} ${variant.name}. OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2 })}. Range: ${variant.range} km. Battery: ${variant.battery} kWh. Max Charge: ${variant.maxChargePower}. Monthly Rebate (${company.rebatePeriod}): -RM${rebate.toLocaleString("en-MY")}.`;
+  return `Vehicle: BYD ${model} ${variant.name}. OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2 })}. Range: ${variant.range} km. Battery: ${variant.battery ?? "—"} kWh. Max Charge: ${variant.maxChargePower ?? "—"}. Monthly Rebate (${company.rebatePeriod}): -RM${rebate.toLocaleString("en-MY")}.`;
 }
 
-function buildVehicleContext(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }): string {
+function buildVehicleContext(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number | null; maxChargePower?: string }): string {
   const rebate = getRebate(model, variant.name) ?? variant.rebate;
   return `═══ VEHICLE DATA CONTEXT ═══
 Model: BYD ${model} ${variant.name}
 OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
 Monthly Rebate (${company.rebatePeriod}): -RM${rebate.toLocaleString("en-MY")}
 Range: ${variant.range} km
-Battery: ${variant.battery} kWh`;
+Battery: ${variant.battery ?? "—"} kWh`;
 }
 
 function buildStrictRulesHeader(useOwnPhotos: boolean): string {
@@ -47,7 +41,7 @@ function optionName(blockId: string, optionId: string): string {
   return block?.options.find((o) => o.id === optionId)?.name || optionId;
 }
 
-function getSelectedContent(selections: Record<string, string>, vehicleModel: string, vehicleVariant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }): string {
+function getSelectedContent(selections: Record<string, string>, vehicleModel: string, vehicleVariant: { name: string; otr: number; rebate: number; range: number; battery: number | null; maxChargePower?: string }): string {
   return promptStructure
     .map((blockId) => {
       if (blockId === "vehicle") return buildDynamicVehicleBlock(vehicleModel, vehicleVariant);
@@ -75,7 +69,7 @@ function getInitialSelections(template: GeneratorTemplate): Record<string, strin
   return s;
 }
 
-function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }: { template: GeneratorTemplate; vehicleModel: string; vehicleVariant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }; useOwnPhotos: boolean }) {
+function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }: { template: GeneratorTemplate; vehicleModel: string; vehicleVariant: { name: string; otr: number; rebate: number; range: number; battery: number | null; maxChargePower?: string }; useOwnPhotos: boolean }) {
   const [copied, setCopied] = useState(false);
   const [selections, setSelections] = useState<Record<string, string>>(() => getInitialSelections(template));
 
@@ -155,12 +149,12 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
           <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{template.name}</h3>
           <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">{template.description}</p>
           <div className="flex items-center gap-2 mt-2">
-            <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{template.platform}</span>
-            <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{template.aspectRatio}</span>
+            <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{template.platform}</span>
+            <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{template.aspectRatio}</span>
           </div>
           <div className="flex flex-wrap gap-1 mt-1.5">
             {template.bestFor.slice(0, 2).map((item) => (
-              <span key={item} className="text-[0.5rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item}</span>
+              <span key={item} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item}</span>
             ))}
           </div>
         </div>
@@ -169,7 +163,7 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
       {/* Tagline checkboxes (Delivery only) */}
       {isDelivery && template.taglines && template.taglines.length > 0 && (
         <div className="mt-3 pt-3 border-t border-[var(--color-border-primary)]">
-          <p className="text-[0.65rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1.5">Taglines / Captions</p>
+          <p className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1.5">Taglines / Captions</p>
           <div className="space-y-1">
             {template.taglines.map((tagline) => (
               <label key={tagline.id} className="flex items-start gap-2 cursor-pointer group">
@@ -179,7 +173,7 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
                   onChange={() => toggleTagline(tagline.id)}
                   className="mt-0.5 rounded border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5 shrink-0"
                 />
-                <span className="text-[0.6rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors leading-snug">
+                <span className="text-[0.7rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors leading-snug">
                   {tagline.text.replace(/\{model\}/g, vehicleModel)}
                 </span>
               </label>
@@ -188,7 +182,7 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
 
           {/* Ratio selection */}
           <div className="mt-3 pt-2.5 border-t border-[var(--color-border-primary)]">
-            <p className="text-[0.65rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1.5">Aspect Ratio</p>
+            <p className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1.5">Aspect Ratio</p>
             <div className="flex gap-3">
               <label className="flex items-center gap-2 cursor-pointer group">
                 <input
@@ -198,7 +192,7 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
                   onChange={() => setRatio("1:1")}
                   className="rounded-full border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5"
                 />
-                <span className="text-[0.6rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors">1:1 Square</span>
+                <span className="text-[0.7rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors">1:1 Square</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer group">
                 <input
@@ -208,7 +202,7 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
                   onChange={() => setRatio("4:5")}
                   className="rounded-full border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-3.5 w-3.5"
                 />
-                <span className="text-[0.6rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors">4:5 Portrait</span>
+                <span className="text-[0.7rem] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors">4:5 Portrait</span>
               </label>
             </div>
           </div>
@@ -221,7 +215,7 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
           <summary className="text-xs text-[var(--color-text-tertiary)] cursor-pointer hover:text-[var(--color-text-secondary)] transition-colors">Configured blocks ({template.blocks.length})</summary>
           <div className="mt-2 space-y-1 pl-1">
             {template.blocks.map((sel) => (
-              <div key={sel.blockId} className="flex items-center justify-between text-[0.6rem]">
+              <div key={sel.blockId} className="flex items-center justify-between text-[0.7rem]">
                 <span className="text-[var(--color-text-tertiary)]">{blockName(sel.blockId)}</span>
                 <span className="text-[var(--color-text-secondary)] font-medium">{optionName(sel.blockId, selections[sel.blockId] || sel.selectedOptionId)}</span>
               </div>
@@ -231,7 +225,7 @@ function GeneratorCard({ template, vehicleModel, vehicleVariant, useOwnPhotos }:
       )}
 
       {/* Prompt Preview */}
-      <div className="mt-3 bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-[0.6rem] leading-relaxed max-h-32 overflow-y-auto">
+      <div className="mt-3 bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-[0.7rem] leading-relaxed max-h-32 overflow-y-auto">
         {prompt ? (
           prompt.slice(0, 500) + (prompt.length > 500 ? "..." : "")
         ) : (
@@ -329,7 +323,7 @@ function GeneratorsContent() {
           <h3 className="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-2">Vehicle Context</h3>
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div>
-              <label className="text-[0.65rem] text-[var(--color-text-tertiary)] block mb-0.5">Model</label>
+              <label className="text-[0.7rem] text-[var(--color-text-tertiary)] block mb-0.5">Model</label>
               <select
                 value={modelIdx}
                 onChange={(e) => setModelIdx(Number(e.target.value))}
@@ -341,7 +335,7 @@ function GeneratorsContent() {
               </select>
             </div>
             <div>
-              <label className="text-[0.65rem] text-[var(--color-text-tertiary)] block mb-0.5">Variant</label>
+              <label className="text-[0.7rem] text-[var(--color-text-tertiary)] block mb-0.5">Variant</label>
               <select
                 value={variantIdx}
                 onChange={(e) => setVariantIdx(Number(e.target.value))}
@@ -353,11 +347,11 @@ function GeneratorsContent() {
               </select>
             </div>
             <div>
-              <label className="text-[0.65rem] text-[var(--color-text-tertiary)] block mb-0.5">Monthly Rebate ({company.rebatePeriod})</label>
+              <label className="text-[0.7rem] text-[var(--color-text-tertiary)] block mb-0.5">Monthly Rebate ({company.rebatePeriod})</label>
               <p className="text-sm font-bold text-green-700">-RM{(getRebate(currentVehicle.model, currentVariant.name) ?? currentVariant.rebate).toLocaleString("en-MY")}</p>
             </div>
             <div className="col-span-2 sm:col-span-1">
-              <label className="text-[0.65rem] text-[var(--color-text-tertiary)] block mb-0.5">Range / Battery</label>
+              <label className="text-[0.7rem] text-[var(--color-text-tertiary)] block mb-0.5">Range / Battery</label>
               <p className="text-sm font-semibold text-[var(--color-text-primary)]">{currentVariant.range} km / {currentVariant.battery} kWh</p>
             </div>
           </div>
@@ -370,7 +364,7 @@ function GeneratorsContent() {
               className="rounded border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-4 w-4"
             />
             <span className="text-xs text-[var(--color-text-secondary)]">I will provide my own vehicle photos</span>
-            <span className="text-[0.55rem] text-[var(--color-text-tertiary)] ml-auto">{useOwnPhotos ? "Actual photos required" : "AI generates vehicle image"}</span>
+            <span className="text-[0.7rem] text-[var(--color-text-tertiary)] ml-auto">{useOwnPhotos ? "Actual photos required" : "AI generates vehicle image"}</span>
           </label>
         </section>
 

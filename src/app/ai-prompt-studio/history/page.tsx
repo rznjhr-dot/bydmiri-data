@@ -6,10 +6,23 @@ import type { PromptHistoryItem } from "@/types/prompt-studio";
 
 const STORAGE_KEY = "ps_history";
 
+function isHistoryItem(v: unknown): v is PromptHistoryItem {
+  if (typeof v !== "object" || v === null) return false;
+  const item = v as Record<string, unknown>;
+  return (
+    typeof item.id === "string" &&
+    typeof item.name === "string" &&
+    typeof item.prompt === "string" &&
+    typeof item.created === "string"
+  );
+}
+
 function loadHistory(): PromptHistoryItem[] {
   if (typeof window === "undefined") return [];
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(isHistoryItem);
   } catch {
     return [];
   }
@@ -145,11 +158,11 @@ export default function HistoryPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
                       <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{item.name}</h3>
-                      <span className="badge-gray text-[0.5rem] py-0 px-1">{item.action}</span>
-                      {item.favorite && <span className="text-[0.6rem] text-amber-500">★</span>}
+                      <span className="badge-gray text-[0.7rem] py-0 px-1">{item.action}</span>
+                      {item.favorite && <span className="text-[0.7rem] text-amber-500">★</span>}
                     </div>
                     <p className="text-xs text-[var(--color-text-tertiary)] line-clamp-2 mb-1 font-mono">{item.prompt.slice(0, 200)}...</p>
-                    <div className="flex items-center gap-3 text-[0.55rem] text-[var(--color-text-tertiary)]">
+                    <div className="flex items-center gap-3 text-[0.7rem] text-[var(--color-text-tertiary)]">
                       <span>{item.generator}</span>
                       <span>{new Date(item.created).toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
                     </div>

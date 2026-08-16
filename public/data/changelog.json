@@ -1,5 +1,31 @@
 [
   {
+    "version": "V4.3",
+    "date": "2026-08-16",
+    "changes": [
+      "Mobile-first redesign — bottom tab navigation (Home / Finance / Price / Charge) with safe-area support on phones",
+      "Homepage streamlined — Finance Calc, Price Breakdown & Charging Estimator now primary cards; Vehicle DB, Warranty, Handbook, EV Market, Prompt Studio, RJEOS, Marketing AI, Agent Hub & Admin moved to a compact scroll rail",
+      "Latest Updates section compressed to 2 bullets with link to full changelog; AI Agent notice, Finance Rules & Sales Rules collapsed into tappable accordions",
+      "Typography floor raised site-wide — all text now ≥ 11.2px (254 micro-labels upgraded from 7–10px)",
+      "Touch targets enlarged — tenure pills regridded at full height, downpayment/promo pills 44px effective, charging slider handles 28px visual / 44px track",
+      "Fluid hero type scale, tabular-nums on prices & stats, reduced-motion support, scroll-snap tool rail"
+    ]
+  },
+  {
+    "version": "V4.2",
+    "date": "2026-08-16",
+    "changes": [
+      "Sealion 7 rebates updated — Dynamic RM4,000 (unchanged), Premium RM3,888 → RM7,000, Performance RM2,888 → RM6,000; Atto 3 confirmed at RM14,000 (Ultra & Premium)",
+      "public/data now auto-syncs from src/data on every build (scripts/sync-public-data.mjs) — single source of truth; build fails on malformed or orphaned JSON",
+      "New typed data layer (src/data/index.ts) with load-time shape validation — all 'as unknown as' JSON casts removed across pages and components",
+      "Shared loan math extracted to utils/finance.ts — /vehicles, /finance, /ev-market/compare and /admin now use one calculator",
+      "Rules page active-section highlight now live-updates on hashchange (was computed once during render)",
+      "Safe fallbacks replace non-null assertions in calculators — a renamed model in JSON no longer crashes the page",
+      "Prompt history & saved prompts validate entries on load — corrupt localStorage no longer breaks the page",
+      "ESLint config moved to eslint.config.mjs (silences ESM reparse warning)"
+    ]
+  },
+  {
     "version": "V4.1",
     "date": "2026-08-01",
     "changes": [

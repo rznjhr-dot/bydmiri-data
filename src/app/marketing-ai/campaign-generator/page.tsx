@@ -2,17 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import campaigns from "@/data/marketing/campaigns.json";
-import timeline from "@/data/marketing/timeline.json";
-import type { CampaignsData, TimelineData } from "@/types/marketing";
-
-const typedCampaigns = campaigns as unknown as CampaignsData;
-const typedTimeline = timeline as unknown as TimelineData;
+import { marketingCampaigns, marketingTimeline } from "@/data";
 
 export default function CampaignGeneratorPage() {
-  const [selectedType, setSelectedType] = useState(typedCampaigns.campaignTypes[0]?.id ?? "");
+  const [selectedType, setSelectedType] = useState(marketingCampaigns.campaignTypes[0]?.id ?? "");
 
-  const campaign = typedCampaigns.campaignTypes.find((c) => c.id === selectedType);
+  const campaign = marketingCampaigns.campaignTypes.find((c) => c.id === selectedType);
 
   return (
     <div className="min-h-screen">
@@ -33,16 +28,16 @@ export default function CampaignGeneratorPage() {
       <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3">
-          <div className="stat"><div className="stat-value">{typedCampaigns.campaignTypes.length}</div><div className="stat-label">Campaign Types</div></div>
-          <div className="stat"><div className="stat-value">{Object.keys(typedCampaigns.assetFormats).length}</div><div className="stat-label">Asset Formats</div></div>
-          <div className="stat"><div className="stat-value">{typedTimeline.timelines.length}</div><div className="stat-label">Timelines</div></div>
+          <div className="stat"><div className="stat-value">{marketingCampaigns.campaignTypes.length}</div><div className="stat-label">Campaign Types</div></div>
+          <div className="stat"><div className="stat-value">{Object.keys(marketingCampaigns.assetFormats).length}</div><div className="stat-label">Asset Formats</div></div>
+          <div className="stat"><div className="stat-value">{marketingTimeline.timelines.length}</div><div className="stat-label">Timelines</div></div>
         </div>
 
         {/* Campaign Type Selector */}
         <div>
           <label className="text-sm font-semibold text-[var(--color-text-secondary)] mb-1.5 block">Campaign Type</label>
           <div className="flex flex-wrap gap-1.5">
-            {typedCampaigns.campaignTypes.map((ct) => (
+            {marketingCampaigns.campaignTypes.map((ct) => (
               <button
                 key={ct.id}
                 onClick={() => setSelectedType(ct.id)}
@@ -66,7 +61,7 @@ export default function CampaignGeneratorPage() {
                   <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-wider">Assets ({campaign.assets.length})</h3>
                   <div className="flex flex-wrap gap-1">
                     {campaign.assets.map((asset) => (
-                      <span key={asset} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{asset}</span>
+                      <span key={asset} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{asset}</span>
                     ))}
                   </div>
                 </div>
@@ -74,7 +69,7 @@ export default function CampaignGeneratorPage() {
                   <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-wider">Objectives</h3>
                   <div className="flex flex-wrap gap-1">
                     {campaign.objectives.map((obj) => (
-                      <span key={obj} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{obj.replace(/_/g, " ")}</span>
+                      <span key={obj} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{obj.replace(/_/g, " ")}</span>
                     ))}
                   </div>
                 </div>
@@ -84,7 +79,7 @@ export default function CampaignGeneratorPage() {
                 <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-wider">Suggested CTAs</h3>
                 <div className="flex flex-wrap gap-1">
                   {campaign.suggestedCTA.map((cta) => (
-                    <span key={cta} className="text-[0.6rem] text-accent bg-accent/5 border border-accent/20 px-1.5 py-0.5 rounded font-medium">{cta}</span>
+                    <span key={cta} className="text-[0.7rem] text-accent bg-accent/5 border border-accent/20 px-1.5 py-0.5 rounded font-medium">{cta}</span>
                   ))}
                 </div>
               </div>
@@ -102,13 +97,13 @@ export default function CampaignGeneratorPage() {
               <h2 className="section-title">Asset Specifications</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {campaign.assets.map((assetKey) => {
-                  const fmt = typedCampaigns.assetFormats[assetKey];
+                  const fmt = marketingCampaigns.assetFormats[assetKey];
                   if (!fmt) return null;
                   return (
                     <div key={assetKey} className="card">
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className="font-semibold text-[var(--color-text-primary)] text-sm capitalize">{assetKey}</h3>
-                        <span className="badge badge-gray text-[0.55rem]">{fmt.format ?? fmt.type}</span>
+                        <span className="badge badge-gray text-[0.7rem]">{fmt.format ?? fmt.type}</span>
                       </div>
                       {fmt.dimensions && (
                         <p className="text-xs text-[var(--color-text-tertiary)]">{fmt.dimensions} · {fmt.platforms.join(", ")}</p>
@@ -123,7 +118,7 @@ export default function CampaignGeneratorPage() {
             <section>
               <h2 className="section-title">Campaign Timelines</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {typedTimeline.timelines.map((tl) => (
+                {marketingTimeline.timelines.map((tl) => (
                   <div key={tl.id} className="card">
                     <h3 className="font-semibold text-[var(--color-text-primary)] text-sm mb-1">{tl.name}</h3>
                     <p className="text-xs text-[var(--color-text-tertiary)] mb-2">{tl.description}</p>
@@ -133,7 +128,7 @@ export default function CampaignGeneratorPage() {
                           <span className="font-semibold text-accent shrink-0 w-16">Week {phase.week}</span>
                           <div>
                             <span className="font-medium text-[var(--color-text-secondary)]">{phase.phase}</span>
-                            <p className="text-[var(--color-text-tertiary)] text-[0.6rem]">{phase.activities.join(" · ")}</p>
+                            <p className="text-[var(--color-text-tertiary)] text-[0.7rem]">{phase.activities.join(" · ")}</p>
                           </div>
                         </div>
                       ))}
@@ -149,7 +144,7 @@ export default function CampaignGeneratorPage() {
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Campaign Generator</h2>
           <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
-            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/campaign-generator.md</code> to generate full campaign packages
+            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/campaign-generator.md</code> to generate full campaign packages
             with 18 assets including poster, carousel, story, social posts, scripts, emails, and creative briefs.
           </p>
         </section>

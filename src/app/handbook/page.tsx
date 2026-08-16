@@ -1,5 +1,5 @@
 import Link from "next/link";
-import company from "@/data/company.json";
+import { company } from "@/data";
 
 const appData = {
   company: { href: "/data/company.json", label: "Company Info" },

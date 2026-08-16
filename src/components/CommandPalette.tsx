@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import vehicles from "@/data/vehicles.json";
+import { vehicles } from "@/data";
 
 type SearchItem = {
   label: string;
@@ -121,7 +121,7 @@ export default function CommandPalette() {
             onKeyDown={onKeyDown}
             className="flex-1 py-3.5 text-sm bg-transparent outline-none text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)]"
           />
-          <kbd className="text-[0.6rem]">ESC</kbd>
+          <kbd className="text-[0.7rem]">ESC</kbd>
         </div>
 
         {filtered.length === 0 ? (
@@ -142,7 +142,7 @@ export default function CommandPalette() {
                 }`}
               >
                 <span
-                  className={`text-[0.6rem] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 ${
+                  className={`text-[0.7rem] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 ${
                     item.category === "Vehicle"
                       ? "bg-[var(--color-accent-light)] text-[var(--color-accent)]"
                       : "bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)]"

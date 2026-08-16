@@ -2,9 +2,8 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import company from "@/data/company.json";
-import vehicles from "@/data/vehicles.json";
-import finance from "@/data/finance.json";
+import { company, vehicles } from "@/data";
+import { formatCurrency, calcMonthlyFromPrice } from "@/utils/finance";
 import {
   getRebate,
   getPromotionOptions,
@@ -12,22 +11,8 @@ import {
   type PromotionOption,
 } from "@/utils/promotions";
 
-function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat("en-MY", {
-    style: "currency",
-    currency: "MYR",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
-
 function calcMonthly(price: number, downPct: number): number {
-  const rate = finance.interestRate / 100;
-  const tenure = finance.defaultTenure;
-  const loan = price * (1 - downPct / 100);
-  const totalInterest = loan * rate * tenure;
-  const totalPayable = loan + totalInterest;
-  return totalPayable / (tenure * 12);
+  return calcMonthlyFromPrice(price, downPct);
 }
 
 function promoKey(model: string, variantName: string): string {
@@ -62,7 +47,7 @@ function PromoSelector({
     <div className={compact ? "mb-1 px-2" : "mb-3"}>
       <p
         className={`font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider ${
-          compact ? "text-[0.55rem] mb-0.5" : "text-[0.6rem] mb-1"
+          compact ? "text-[0.7rem] mb-0.5" : "text-[0.7rem] mb-1"
         }`}
       >
         Promotion
@@ -78,7 +63,7 @@ function PromoSelector({
               aria-checked={active}
               onClick={() => onChoose(key, opt.rebate)}
               className={`inline-flex items-center gap-1 rounded-full border font-semibold transition-all cursor-pointer ${
-                compact ? "text-[0.6rem] px-2 py-0.5" : "text-[0.65rem] px-2.5 py-1"
+                compact ? "text-[0.7rem] px-2 py-0.5" : "text-[0.7rem] px-2.5 py-1"
               } ${
                 active
                   ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)] shadow-[0_2px_8px_rgba(29,78,216,0.35)]"
@@ -94,7 +79,7 @@ function PromoSelector({
         })}
       </div>
       {activeOpt?.free_gift && (
-        <p className="text-[0.55rem] text-[var(--color-accent)] mt-1">Includes {activeOpt.free_gift}</p>
+        <p className="text-[0.7rem] text-[var(--color-accent)] mt-1">Includes {activeOpt.free_gift}</p>
       )}
     </div>
   );
@@ -212,12 +197,12 @@ export default function VehiclesPage() {
                 </button>
                 {/* Column headers */}
                 <div className="grid grid-cols-[70px_1fr_1fr_auto_80px_72px] gap-1.5 px-2 mb-0.5">
-                  <span className="text-[0.45rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">Variant</span>
-                  <span className="text-[0.45rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">Batt</span>
-                  <span className="text-[0.45rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">Range</span>
-                  <span className="text-[0.45rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">Rebate</span>
-                  <span className="text-[0.45rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider text-right">OTR</span>
-                  <span className="text-[0.45rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider text-right">10%/mo</span>
+                  <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">Variant</span>
+                  <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">Batt</span>
+                  <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">Range</span>
+                  <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">Rebate</span>
+                  <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider text-right">OTR</span>
+                  <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider text-right">10%/mo</span>
                 </div>
                 {vehicle.variants.map((variant) => {
                   const rebate = effectiveRebate(vehicle.model, variant.name);
@@ -226,35 +211,35 @@ export default function VehiclesPage() {
                     <div key={variant.name} className="mb-0.5">
                       <div className="grid grid-cols-[70px_1fr_1fr_auto_80px_72px] gap-1.5 items-center py-1.5 px-2 rounded-lg bg-white border border-[var(--color-border-primary)]">
                         {/* Variant name */}
-                        <span className="text-[0.65rem] font-bold text-[var(--color-text-primary)] truncate leading-tight">
+                        <span className="text-[0.7rem] font-bold text-[var(--color-text-primary)] truncate leading-tight">
                           {variant.name}
                         </span>
                         {/* Battery */}
-                        <span className="flex items-center gap-1 text-[0.55rem] text-[var(--color-text-tertiary)] leading-tight">
+                        <span className="flex items-center gap-1 text-[0.7rem] text-[var(--color-text-tertiary)] leading-tight">
                           <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg>
                           {variant.battery ? `${variant.battery}kWh` : "—"}
                         </span>
                         {/* Range */}
-                        <span className="flex items-center gap-1 text-[0.55rem] text-[var(--color-text-tertiary)] leading-tight">
+                        <span className="flex items-center gap-1 text-[0.7rem] text-[var(--color-text-tertiary)] leading-tight">
                           <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                           {variant.range}km
                         </span>
                         {/* Rebate */}
                         {rebate && rebate > 0 ? (
-                          <span className="text-[0.55rem] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded leading-tight justify-self-start">
+                          <span className="text-[0.7rem] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded leading-tight justify-self-start">
                             -RM{rebate.toLocaleString("en-MY")}
                           </span>
                         ) : (
-                          <span className="text-[0.5rem] text-[var(--color-text-tertiary)] leading-tight">—</span>
+                          <span className="text-[0.7rem] text-[var(--color-text-tertiary)] leading-tight">—</span>
                         )}
                         {/* OTR with insurance */}
-                        <span className="text-[0.6rem] font-bold text-[var(--color-text-primary)] text-right leading-tight">
+                        <span className="text-[0.7rem] font-bold text-[var(--color-text-primary)] text-right leading-tight">
                           {formatCurrency(variant.otr)}
                         </span>
                         {/* Monthly 10% down + rebate */}
-                        <span className="text-[0.6rem] font-semibold text-accent text-right leading-tight">
+                        <span className="text-[0.7rem] font-semibold text-accent text-right leading-tight">
                           {formatCurrency(calcMonthly(effectivePrice, 10))}
-                          <span className="text-[0.4rem] font-normal text-[var(--color-text-tertiary)]">/mo</span>
+                          <span className="text-[0.7rem] font-normal text-[var(--color-text-tertiary)]">/mo</span>
                         </span>
                       </div>
                       <PromoSelector
@@ -276,7 +261,7 @@ export default function VehiclesPage() {
                       const effectivePrice = variant.otr - rebate;
                       return (
                         <div key={variant.name} className="rounded-lg border border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)]/50 p-2.5">
-                          <p className="text-[0.65rem] font-bold text-[var(--color-text-primary)] mb-1.5">{vehicle.model} {variant.name}</p>
+                          <p className="text-[0.7rem] font-bold text-[var(--color-text-primary)] mb-1.5">{vehicle.model} {variant.name}</p>
                           <PromoSelector
                             model={vehicle.model}
                             variantName={variant.name}
@@ -285,52 +270,52 @@ export default function VehiclesPage() {
                           />
                           <div className="space-y-1">
                             <div className="data-row">
-                              <span className="data-row-label text-[0.55rem]">OTR without Insurance</span>
-                              <span className="data-row-value text-[0.55rem]">{formatCurrency(variant.otrWithoutInsurance)}</span>
+                              <span className="data-row-label text-[0.7rem]">OTR without Insurance</span>
+                              <span className="data-row-value text-[0.7rem]">{formatCurrency(variant.otrWithoutInsurance)}</span>
                             </div>
                             <div className="data-row">
-                              <span className="data-row-label text-[0.55rem]">Insurance</span>
-                              <span className="data-row-value text-[0.55rem]">{formatCurrency(variant.otr - variant.otrWithoutInsurance)}</span>
+                              <span className="data-row-label text-[0.7rem]">Insurance</span>
+                              <span className="data-row-value text-[0.7rem]">{formatCurrency(variant.otr - variant.otrWithoutInsurance)}</span>
                             </div>
                             <div className="divider-gradient my-1" />
                             <div className="data-row">
-                              <span className="data-row-label text-[0.55rem]">OTR Price</span>
-                              <span className="data-row-value text-[0.55rem] font-bold">{formatCurrency(variant.otr)}</span>
+                              <span className="data-row-label text-[0.7rem]">OTR Price</span>
+                              <span className="data-row-value text-[0.7rem] font-bold">{formatCurrency(variant.otr)}</span>
                             </div>
                             {rebate && rebate > 0 && (
                               <div className="data-row">
-                                <span className="data-row-label text-[0.55rem]">Rebate</span>
-                                <span className="data-row-value text-[0.55rem] text-green-600 font-bold">-{formatCurrency(rebate)}</span>
+                                <span className="data-row-label text-[0.7rem]">Rebate</span>
+                                <span className="data-row-value text-[0.7rem] text-green-600 font-bold">-{formatCurrency(rebate)}</span>
                               </div>
                             )}
                             <div className="data-row">
-                              <span className="data-row-label text-[0.55rem]">Effective Price</span>
-                              <span className="data-row-value text-[0.55rem] text-accent font-bold">{formatCurrency(effectivePrice)}</span>
+                              <span className="data-row-label text-[0.7rem]">Effective Price</span>
+                              <span className="data-row-value text-[0.7rem] text-accent font-bold">{formatCurrency(effectivePrice)}</span>
                             </div>
                             <div className="divider-gradient my-1" />
                             <div className="data-row">
-                              <span className="data-row-label text-[0.55rem]">Monthly 0%</span>
-                              <span className="data-row-value text-[0.55rem]">{formatCurrency(calcMonthly(effectivePrice, 0))}/mo</span>
+                              <span className="data-row-label text-[0.7rem]">Monthly 0%</span>
+                              <span className="data-row-value text-[0.7rem]">{formatCurrency(calcMonthly(effectivePrice, 0))}/mo</span>
                             </div>
                             <div className="data-row">
-                              <span className="data-row-label text-[0.55rem]">Monthly 10%</span>
-                              <span className="data-row-value text-[0.55rem] font-semibold">{formatCurrency(calcMonthly(effectivePrice, 10))}/mo</span>
+                              <span className="data-row-label text-[0.7rem]">Monthly 10%</span>
+                              <span className="data-row-value text-[0.7rem] font-semibold">{formatCurrency(calcMonthly(effectivePrice, 10))}/mo</span>
                             </div>
                             <div className="divider-gradient my-1" />
                             <div className="data-row">
-                              <span className="data-row-label text-[0.55rem]">Range</span>
-                              <span className="data-row-value text-[0.55rem]">{variant.range} km</span>
+                              <span className="data-row-label text-[0.7rem]">Range</span>
+                              <span className="data-row-value text-[0.7rem]">{variant.range} km</span>
                             </div>
                             {variant.battery && (
                               <div className="data-row">
-                                <span className="data-row-label text-[0.55rem]">Battery</span>
-                                <span className="data-row-value text-[0.55rem]">{variant.battery} kWh</span>
+                                <span className="data-row-label text-[0.7rem]">Battery</span>
+                                <span className="data-row-value text-[0.7rem]">{variant.battery} kWh</span>
                               </div>
                             )}
                             {variant.maxChargePower && (
                               <div className="data-row">
-                                <span className="data-row-label text-[0.55rem]">Max Charge</span>
-                                <span className="data-row-value text-[0.55rem]">{variant.maxChargePower}</span>
+                                <span className="data-row-label text-[0.7rem]">Max Charge</span>
+                                <span className="data-row-value text-[0.7rem]">{variant.maxChargePower}</span>
                               </div>
                             )}
                           </div>
@@ -345,7 +330,7 @@ export default function VehiclesPage() {
               <div className="hidden sm:block">
                 <h2 className="section-title text-base flex items-center gap-2">
                   {vehicle.model}
-                  <span className="chip !text-[0.6rem] !font-semibold uppercase tracking-wider">
+                  <span className="chip !text-[0.7rem] !font-semibold uppercase tracking-wider">
                     {vehicle.segment ?? "EV"}
                   </span>
                 </h2>
@@ -389,7 +374,7 @@ export default function VehiclesPage() {
                             <span className="data-row-label">
                               Est. Insurance
                               {variant.sumInsured && (
-                                <span className="text-[0.55rem] text-blue-400 ml-1 font-normal">
+                                <span className="text-[0.7rem] text-blue-400 ml-1 font-normal">
                                   (Sum Insured RM {variant.sumInsured.toLocaleString("en-MY")})
                                 </span>
                               )}
@@ -426,7 +411,7 @@ export default function VehiclesPage() {
 
                         {/* Monthly */}
                         <div className="rounded-xl bg-gradient-to-br from-[var(--color-accent-light)] to-white border border-[var(--color-accent)]/15 p-3 space-y-1">
-                          <p className="text-[0.6rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">
+                          <p className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider">
                             Monthly Instalment
                           </p>
                           <div className="flex justify-between items-baseline">

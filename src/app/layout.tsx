@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
 import CommandPalette from "@/components/CommandPalette";
 
 export const metadata: Metadata = {
@@ -14,6 +15,13 @@ export const metadata: Metadata = {
     follow: false,
   },
 };
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#ffffff",
+};;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -53,6 +61,7 @@ export default function RootLayout({
         <Navbar />
         <CommandPalette />
         {children}
+        <BottomNav />
       </body>
     </html>
   );

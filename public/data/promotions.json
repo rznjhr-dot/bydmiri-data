@@ -4,7 +4,7 @@
   "period": "August 2026",
   "validFrom": "2026-08-01",
   "validTo": "2026-08-31",
-  "lastUpdated": "2026-07-31",
+  "lastUpdated": "2026-08-16",
   "promotionOptions": {
     "Atto 2": {
       "Premium": [
@@ -36,10 +36,10 @@
         { "title": "RM4,000 Cash Rebate", "rebate": 4000, "default": true }
       ],
       "Premium": [
-        { "title": "RM3,888 Cash Rebate", "rebate": 3888, "default": true }
+        { "title": "RM7,000 Cash Rebate", "rebate": 7000, "default": true }
       ],
       "Performance": [
-        { "title": "RM2,888 Cash Rebate", "rebate": 2888, "default": true }
+        { "title": "RM6,000 Cash Rebate", "rebate": 6000, "default": true }
       ]
     },
     "Seal": {
@@ -64,7 +64,7 @@
   "rebates": {
     "Atto 2": { "Premium": 9000 },
     "Atto 3": { "Ultra": 14000, "Premium": 14000 },
-    "Sealion 7": { "Dynamic": 4000, "Premium": 3888, "Performance": 2888 },
+    "Sealion 7": { "Dynamic": 4000, "Premium": 7000, "Performance": 6000 },
     "Seal": { "Premium": 3000, "Performance": 3000 },
     "Seal 6": { "Premium": 1000 },
     "M6": { "Extended": 4000 }

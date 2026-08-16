@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import ChargingTimeEstimator from "@/components/ChargingTimeEstimator";
-import charging from "@/data/charging.json";
+import { charging } from "@/data";
 
 export default function ChargingPage() {
   return (
@@ -43,7 +43,7 @@ export default function ChargingPage() {
                   {city.stations.map((station, i) => (
                     <div key={i} className="bg-[var(--color-bg-tertiary)] rounded p-1.5 text-xs">
                       <p className="font-medium text-[var(--color-text-secondary)] truncate text-xs">{station.location}</p>
-                      <div className="flex justify-between mt-0.5 text-[0.65rem] text-[var(--color-text-tertiary)]">
+                      <div className="flex justify-between mt-0.5 text-[0.7rem] text-[var(--color-text-tertiary)]">
                         <span>{station.power}</span>
                         <span>{station.provider}</span>
                       </div>

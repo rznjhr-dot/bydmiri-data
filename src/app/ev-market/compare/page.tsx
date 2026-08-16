@@ -2,19 +2,17 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import vehicles from "@/data/vehicles.json";
-import competitors from "@/data/competitors.json";
+import { vehicles, competitors } from "@/data";
 import { getRebate } from "@/utils/promotions";
-import type { CompetitorBrand } from "@/types/ev-market";
+import { calcMonthlyFromPrice } from "@/utils/finance";
 
 interface BYDVariant {
-  name: string; otr: number; rebate: number; range: number; rangeNedc: number; battery: number;
-  motorPower: number; torque?: number; zeroToHundred?: string; drive?: string; acCharging?: string; maxChargePower: string;
+  name: string; otr: number; rebate: number; range: number; rangeNedc?: number; battery: number | null;
+  motorPower?: number; torque?: number; zeroToHundred?: string; drive?: string; acCharging?: string; maxChargePower?: string;
 }
 interface BYDModel { model: string; segment?: string; variants: BYDVariant[]; }
 
-const bydModels = vehicles as BYDModel[];
-type CompBrandData = CompetitorBrand;
+const bydModels: BYDModel[] = vehicles;
 
 const competitorMap: Record<string, { brandId: string; modelName: string }[]> = {
   "Atto 2": [{ brandId: "proton", modelName: "e.MAS 5" }],
@@ -41,11 +39,7 @@ function formatEMarkup(amount: number): string {
 }
 
 function calcMonthly(price: number): string {
-  const downpayment = price * 0.1;
-  const loanAmount = price - downpayment;
-  const totalInterest = loanAmount * 0.023 * 9;
-  const monthly = (loanAmount + totalInterest) / 108;
-  return formatCurrency(monthly) + "/mo";
+  return formatCurrency(calcMonthlyFromPrice(price, 10)) + "/mo";
 }
 
 function estInsurance(price: number): number {
@@ -62,7 +56,7 @@ export default function ComparePage() {
   const [selectedCompModel, setSelectedCompModel] = useState<string>("");
   const [selectedCompVariant, setSelectedCompVariant] = useState<string>("");
 
-  const compData = competitors as { brands: CompBrandData[] };
+  const compData = competitors;
   const bydModel = bydModels.find((m) => m.model === selectedBYDModel);
   const bydVariant = bydModel?.variants.find((v) => v.name === selectedBYDVariant);
   const selectedBrandData = compData.brands.find((b) => b.id === selectedBrand);
@@ -94,12 +88,12 @@ export default function ComparePage() {
       { label: "OTR Price", byd: formatCurrency(bydVariant.otr), comp: `${formatCurrency(compVariant.otr)}${formatEMarkup(selectedBrandData?.emMarkup || 0)}` },
       ...(() => { const r = getRebate(bydModel!.model, bydVariant.name) ?? bydVariant.rebate; return [{ label: "After Rebate", byd: `${formatCurrency(bydVariant.otr - r)} (promo -RM${r.toLocaleString()})`, comp: `${formatCurrency(compVariant.otrAfterRebate || compVariant.otr)}${formatEMarkup(selectedBrandData?.emMarkup || 0)}` }]; })(),
       { label: "Monthly (9yr, 10% down)", byd: (() => { const r = getRebate(bydModel!.model, bydVariant.name) ?? bydVariant.rebate; return calcMonthly(bydVariant.otr - r); })(), comp: (() => { const base = compVariant.otrAfterRebate || compVariant.otr; const total = base + (selectedBrandData?.emMarkup || 0) + estInsurance(base); return `${calcMonthly(total)} (incl. EM + ins)`; })() },
-      { label: "Range", byd: `${bydVariant.rangeNedc} km (NEDC)`, comp: compVariant.rangeNedc ? `${compVariant.rangeNedc} km (NEDC)` : `${compVariant.range} km` },
+      { label: "Range", byd: `${bydVariant.rangeNedc ?? bydVariant.range} km${bydVariant.rangeNedc !== undefined ? " (NEDC)" : ""}`, comp: compVariant.rangeNedc ? `${compVariant.rangeNedc} km (NEDC)` : `${compVariant.range} km` },
       { label: "Battery", byd: `${bydVariant.battery} kWh LFP`, comp: `${compVariant.battery} kWh` },
       { label: "Motor", byd: `${bydVariant.motorPower} kW`, comp: `${compVariant.motorPower} kW` },
       { label: "Torque", byd: bydVariant.torque ? `${bydVariant.torque} Nm` : "—", comp: compVariant.torque ? `${compVariant.torque} Nm` : "—" },
       { label: "AC Charging", byd: bydVariant.acCharging || "7 kW", comp: compVariant.acCharging },
-      { label: "DC Charging", byd: bydVariant.maxChargePower, comp: compVariant.dcCharging },
+      { label: "DC Charging", byd: bydVariant.maxChargePower ?? "—", comp: compVariant.dcCharging },
       ...(compVariant.v2l ? [{ label: "V2L", byd: "3.3 kW ✓", comp: compVariant.v2l }] : [{ label: "V2L", byd: "3.3 kW ✓", comp: "—" }]),
       { label: "Drive", byd: bydVariant.drive || "—", comp: compVariant.drive || "—" },
       ...(bydVariant.zeroToHundred || compVariant.zeroToHundred ? [{ label: "0-100 km/h", byd: bydVariant.zeroToHundred ? `${bydVariant.zeroToHundred}s` : "—", comp: compVariant.zeroToHundred ? `${compVariant.zeroToHundred}s` : "—" }] : []),
@@ -130,7 +124,7 @@ export default function ComparePage() {
         <div className="bg-[var(--color-bg-secondary)]  rounded-xl shadow-sm border border-[var(--color-border-primary)] p-3.5 sm:p-6">
           <div className="flex items-center gap-2 mb-3">
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-accent flex items-center justify-center">
-              <span className="text-[0.5rem] sm:text-[0.6rem] font-black text-white">BYD</span>
+              <span className="text-[0.7rem] sm:text-[0.7rem] font-black text-white">BYD</span>
             </div>
             <h2 className="text-sm sm:text-base font-black text-[var(--color-text-primary)] ">BYD Model</h2>
           </div>
@@ -158,7 +152,7 @@ export default function ComparePage() {
               </svg>
             </div>
             <h2 className="text-sm sm:text-base font-black text-[var(--color-text-primary)] ">Competitor</h2>
-            {suggestions.length > 0 && <span className="text-[0.5rem] sm:text-[0.6rem] font-bold bg-amber-500 text-white px-1.5 py-0.5 rounded-full ml-auto">Auto</span>}
+            {suggestions.length > 0 && <span className="text-[0.7rem] sm:text-[0.7rem] font-bold bg-amber-500 text-white px-1.5 py-0.5 rounded-full ml-auto">Auto</span>}
           </div>
           <div className="space-y-2.5">
             <div>
@@ -183,16 +177,16 @@ export default function ComparePage() {
             </div>
           </div>
           {compVariant?.notes && <p className="mt-2 text-xs sm:text-sm font-medium text-[var(--color-text-primary)]  leading-relaxed">{compVariant.notes}</p>}
-          {selectedBrandData?.emNote && <p className="mt-1.5 text-[0.6rem] sm:text-xs font-bold text-[var(--color-text-secondary)] ">EM: {selectedBrandData.emNote}</p>}
+          {selectedBrandData?.emNote && <p className="mt-1.5 text-[0.7rem] sm:text-xs font-bold text-[var(--color-text-secondary)] ">EM: {selectedBrandData.emNote}</p>}
           {suggestions.length > 1 && (
             <div className="mt-2.5 pt-2.5 border-t border-[var(--color-border-primary)] ">
-              <p className="text-[0.55rem] sm:text-[0.65rem] font-bold text-[var(--color-text-secondary)]  mb-1 uppercase">Others</p>
+              <p className="text-[0.7rem] sm:text-[0.7rem] font-bold text-[var(--color-text-secondary)]  mb-1 uppercase">Others</p>
               <div className="flex flex-wrap gap-1.5">
                 {suggestions.slice(1).map((s) => {
                   const brand = compData.brands.find((b) => b.id === s.brandId);
                   return (
                     <button key={`${s.brandId}-${s.modelName}`} onClick={() => { setSelectedBrand(s.brandId); setSelectedCompModel(s.modelName); const m = compData.brands.find((b) => b.id === s.brandId)?.models.find((m) => m.model === s.modelName); setSelectedCompVariant(m?.variants[0]?.name || ""); }}
-                      className="text-[0.6rem] sm:text-xs font-bold px-2 py-1.5 rounded-lg bg-[var(--color-bg-tertiary)]  text-[var(--color-text-primary)]  hover:bg-[var(--color-bg-hover)]  transition-colors cursor-pointer min-h-[36px]">
+                      className="text-[0.7rem] sm:text-xs font-bold px-2 py-1.5 rounded-lg bg-[var(--color-bg-tertiary)]  text-[var(--color-text-primary)]  hover:bg-[var(--color-bg-hover)]  transition-colors cursor-pointer min-h-[36px]">
                       {brand?.name} {s.modelName}
                     </button>
                   );
@@ -216,8 +210,8 @@ export default function ComparePage() {
           ].map((adv) => (
             <div key={adv.title} className="bg-gradient-to-br from-blue-50 to-blue-100/50   rounded-xl border border-blue-200  p-2.5 sm:p-4">
               <p className="text-lg sm:text-xl mb-0.5">{adv.icon}</p>
-              <p className="text-[0.65rem] sm:text-sm font-black text-blue-800 ">{adv.title}</p>
-              <p className="text-[0.55rem] sm:text-xs font-medium text-blue-600  leading-relaxed mt-0.5">{adv.desc}</p>
+              <p className="text-[0.7rem] sm:text-sm font-black text-blue-800 ">{adv.title}</p>
+              <p className="text-[0.7rem] sm:text-xs font-medium text-blue-600  leading-relaxed mt-0.5">{adv.desc}</p>
             </div>
           ))}
         </div>
@@ -226,17 +220,17 @@ export default function ComparePage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b-2 border-[var(--color-border-primary)]  bg-[var(--color-bg-tertiary)] ">
-                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-secondary)]  uppercase tracking-wider w-[130px] sm:w-[220px]">Spec</th>
-                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.65rem] sm:text-sm font-bold text-accent uppercase tracking-wider">BYD</th>
-                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-primary)]  uppercase tracking-wider">{selectedBrandData?.name}</th>
+                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.7rem] sm:text-sm font-bold text-[var(--color-text-secondary)]  uppercase tracking-wider w-[130px] sm:w-[220px]">Spec</th>
+                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.7rem] sm:text-sm font-bold text-accent uppercase tracking-wider">BYD</th>
+                  <th className="text-left px-3 sm:px-5 py-2.5 sm:py-3.5 text-[0.7rem] sm:text-sm font-bold text-[var(--color-text-primary)]  uppercase tracking-wider">{selectedBrandData?.name}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--color-border-secondary)] ">
                 {comparisonRows.map((row, i) => (
                   <tr key={i} className="hover:bg-[var(--color-bg-tertiary)]  transition-colors">
-                    <td className="px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold text-[var(--color-text-secondary)]  whitespace-nowrap">{row.label}</td>
-                    <td className={`px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold whitespace-nowrap ${row.byd !== "—" && row.comp !== "—" && compareValues(row.label, row.byd, row.comp) === "byd" ? "text-accent" : "text-[var(--color-text-primary)] "}`}>{row.byd}</td>
-                    <td className={`px-3 sm:px-5 py-2 sm:py-3 text-[0.65rem] sm:text-sm font-bold whitespace-nowrap ${row.byd !== "—" && row.comp !== "—" && compareValues(row.label, row.byd, row.comp) === "comp" ? "text-orange-600 " : "text-[var(--color-text-primary)] "}`}>{row.comp}</td>
+                    <td className="px-3 sm:px-5 py-2 sm:py-3 text-[0.7rem] sm:text-sm font-bold text-[var(--color-text-secondary)]  whitespace-nowrap">{row.label}</td>
+                    <td className={`px-3 sm:px-5 py-2 sm:py-3 text-[0.7rem] sm:text-sm font-bold whitespace-nowrap ${row.byd !== "—" && row.comp !== "—" && compareValues(row.label, row.byd, row.comp) === "byd" ? "text-accent" : "text-[var(--color-text-primary)] "}`}>{row.byd}</td>
+                    <td className={`px-3 sm:px-5 py-2 sm:py-3 text-[0.7rem] sm:text-sm font-bold whitespace-nowrap ${row.byd !== "—" && row.comp !== "—" && compareValues(row.label, row.byd, row.comp) === "comp" ? "text-orange-600 " : "text-[var(--color-text-primary)] "}`}>{row.comp}</td>
                   </tr>
                 ))}
               </tbody>
@@ -244,7 +238,7 @@ export default function ComparePage() {
           </div>
           {selectedBrandData?.emMarkup !== 0 && comparisonRows.length > 0 && (
             <div className="px-3 sm:px-5 py-2.5 sm:py-3 bg-[var(--color-bg-tertiary)]  border-t border-[var(--color-border-primary)] ">
-              <p className="text-[0.55rem] sm:text-xs font-bold text-[var(--color-text-secondary)]  leading-relaxed">
+              <p className="text-[0.7rem] sm:text-xs font-bold text-[var(--color-text-secondary)]  leading-relaxed">
                 * Indicative estimates for reference only. EM markup: +RM{selectedBrandData?.emMarkup?.toLocaleString()} (confirmed or est.). Insurance est: RM2,300/yr (&lt;RM100k), RM3,000/yr (RM100k-150k), RM3,500/yr (RM150k-200k), RM4,000/yr (&gt;RM200k). Rebates as of Jul 2026, T&Cs apply. Actual OTR, rebates & monthly may differ — verify with respective dealers. BYD pricing is East Malaysia with insurance included.
               </p>
             </div>
@@ -274,7 +268,7 @@ export default function ComparePage() {
                 </li>
                 <li className="text-xs sm:text-sm text-amber-900  flex gap-1.5 leading-relaxed font-medium">
                   <span className="font-black shrink-0">🔋</span>
-                  <span>BYD {bydVariant!.rangeNedc} km | {selectedBrandData?.name} {compVariant.rangeNedc || compVariant.range} km</span>
+                  <span>BYD {bydVariant?.rangeNedc ?? bydVariant?.range ?? "—"} km | {selectedBrandData?.name} {compVariant.rangeNedc || compVariant.range} km</span>
                 </li>
                 {bydVariant!.zeroToHundred && (
                   <li className="text-xs sm:text-sm text-amber-900  flex gap-1.5 leading-relaxed font-medium">

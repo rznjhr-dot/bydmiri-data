@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import company from "@/data/company.json";
+import { company } from "@/data";
 import type { ModuleInfo } from "@/types/marketing";
 
 const modules: ModuleInfo[] = [
@@ -147,9 +147,9 @@ export default function MarketingAIPage() {
                 Each module has a clear responsibility, structured data, and dedicated AI prompts.
               </p>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                <span className="badge badge-blue text-[0.6rem]">{company.version}</span>
-                <span className="badge badge-green text-[0.6rem]">AI-Powered</span>
-                <span className="badge badge-gray text-[0.6rem]">{modules.length} Modules</span>
+                <span className="badge badge-blue text-[0.7rem]">{company.version}</span>
+                <span className="badge badge-green text-[0.7rem]">AI-Powered</span>
+                <span className="badge badge-gray text-[0.7rem]">{modules.length} Modules</span>
               </div>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function MarketingAIPage() {
         <section>
           <div className="flex items-center justify-between mb-3">
             <h2 className="section-title mb-0">Modules</h2>
-            <span className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium">
+            <span className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium">
               {modules.filter((m) => m.status === "active").length} active
             </span>
           </div>
@@ -176,13 +176,13 @@ export default function MarketingAIPage() {
                     <div className="flex items-center gap-2 mb-0.5">
                       <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{mod.title}</h3>
                       {mod.status === "coming_soon" && (
-                        <span className="badge badge-amber text-[0.55rem] py-0 px-1.5">Soon</span>
+                        <span className="badge badge-amber text-[0.7rem] py-0 px-1.5">Soon</span>
                       )}
                     </div>
                     <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed line-clamp-2">{mod.description}</p>
                     <div className="mt-2 flex flex-wrap gap-1">
                       {mod.capabilities.slice(0, 3).map((cap) => (
-                        <span key={cap} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{cap}</span>
+                        <span key={cap} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{cap}</span>
                       ))}
                     </div>
                   </div>

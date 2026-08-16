@@ -2,22 +2,16 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import blocksData from "@/data/prompt-studio/blocks.json";
-import rulesData from "@/data/prompt-studio/rules.json";
-import vehiclesData from "@/data/vehicles.json";
-import companyData from "@/data/company.json";
+import { psBlocks, psRules, vehicles, company } from "@/data";
 import { getRebate } from "@/utils/promotions";
-import type { PromptBlock, BlockOption, BlocksData, RulesData } from "@/types/prompt-studio";
+import type { PromptBlock, BlockOption } from "@/types/prompt-studio";
 
-const data = blocksData as BlocksData;
-const { blocks, promptStructure } = data;
-const rules = (rulesData as RulesData).categories.find((c) => c.id === "strict_output");
-const vehicles = vehiclesData as Array<{ model: string; variants: Array<{ name: string; otr: number; otrWithoutInsurance: number; rebate: number; range: number; battery: number; chargeCost: number; maxChargePower: string }> }>;
-const company = companyData as { rebatePeriod: string };
+const { blocks, promptStructure } = psBlocks;
+const rules = psRules.categories.find((c) => c.id === "strict_output");
 
-function buildDynamicVehicleBlock(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }): string {
+function buildDynamicVehicleBlock(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number | null; maxChargePower?: string }): string {
   const rebate = getRebate(model, variant.name) ?? variant.rebate;
-  return `Vehicle: BYD ${model} ${variant.name}. OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2 })}. Range: ${variant.range} km. Battery: ${variant.battery} kWh. Max Charge: ${variant.maxChargePower}. Monthly Rebate (${company.rebatePeriod}): -RM${rebate.toLocaleString("en-MY")}.`;
+  return `Vehicle: BYD ${model} ${variant.name}. OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2 })}. Range: ${variant.range} km. Battery: ${variant.battery ?? "—"} kWh. Max Charge: ${variant.maxChargePower ?? "—"}. Monthly Rebate (${company.rebatePeriod}): -RM${rebate.toLocaleString("en-MY")}.`;
 }
 
 function buildStrictRulesHeader(useOwnPhotos: boolean): string {
@@ -26,18 +20,18 @@ function buildStrictRulesHeader(useOwnPhotos: boolean): string {
   return `═══ STRICT RULES — MUST FOLLOW ═══\n${dos.map((d: string) => `• ${d}`).join("\n")}`;
 }
 
-function buildVehicleContext(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }): string {
+function buildVehicleContext(model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number | null; maxChargePower?: string }): string {
   const rebate = getRebate(model, variant.name) ?? variant.rebate;
   return `═══ VEHICLE DATA CONTEXT ═══
 Model: BYD ${model} ${variant.name}
 OTR Price: RM${variant.otr.toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
 Monthly Rebate (${company.rebatePeriod}): -RM${rebate.toLocaleString("en-MY")}
 Range: ${variant.range} km
-Battery: ${variant.battery} kWh
+Battery: ${variant.battery ?? "—"} kWh
 Max Charge: ${variant.maxChargePower}`;
 }
 
-function formatPrompt(selections: Record<string, string>, model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number; maxChargePower: string }, useOwnPhotos: boolean): string {
+function formatPrompt(selections: Record<string, string>, model: string, variant: { name: string; otr: number; rebate: number; range: number; battery: number | null; maxChargePower?: string }, useOwnPhotos: boolean): string {
   const body = promptStructure
     .map((blockId) => {
       if (blockId === "vehicle") return buildDynamicVehicleBlock(model, variant);
@@ -232,7 +226,7 @@ export default function PromptBuilderPage() {
                 className="rounded border-[var(--color-border-primary)] text-purple-600 focus:ring-purple-500/30 h-4 w-4"
               />
               <span className="text-xs text-[var(--color-text-secondary)]">I will provide my own vehicle photos</span>
-              <span className="text-[0.55rem] text-[var(--color-text-tertiary)] ml-auto">{useOwnPhotos ? "Actual photos required" : "AI generates vehicle image"}</span>
+              <span className="text-[0.7rem] text-[var(--color-text-tertiary)] ml-auto">{useOwnPhotos ? "Actual photos required" : "AI generates vehicle image"}</span>
             </label>
           </div>
         </section>
@@ -243,7 +237,7 @@ export default function PromptBuilderPage() {
             <div className="flex items-center justify-between">
               <h2 className="section-title mb-0">Building Blocks</h2>
               <div className="flex items-center gap-2">
-                <span className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium">{totalSelected}/{blocks.length} selected</span>
+                <span className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium">{totalSelected}/{blocks.length} selected</span>
                 <button onClick={handleReset} className="text-xs text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors cursor-pointer">Reset</button>
               </div>
             </div>
@@ -259,11 +253,11 @@ export default function PromptBuilderPage() {
                   >
                     <div className="flex items-center gap-3 min-w-0 flex-1">
                       <div className="w-7 h-7 rounded-lg bg-purple-100 flex items-center justify-center shrink-0">
-                        <span className="text-[0.6rem] font-bold text-purple-600">{block.order}</span>
+                        <span className="text-[0.7rem] font-bold text-purple-600">{block.order}</span>
                       </div>
                       <div className="min-w-0 flex-1">
                         <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{block.name}</h3>
-                        <p className="text-[0.6rem] text-[var(--color-text-tertiary)] truncate">{selected?.name || "Select an option"}</p>
+                        <p className="text-[0.7rem] text-[var(--color-text-tertiary)] truncate">{selected?.name || "Select an option"}</p>
                       </div>
                     </div>
                     <svg
@@ -311,7 +305,7 @@ export default function PromptBuilderPage() {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="section-title mb-0">Generated Prompt</h2>
-              <span className={`text-[0.55rem] font-semibold px-1.5 py-0.5 rounded ${
+              <span className={`text-[0.7rem] font-semibold px-1.5 py-0.5 rounded ${
                 allSelected ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"
               }`}>
                 {allSelected ? "Complete" : `${blocks.length - totalSelected} blocks remaining`}

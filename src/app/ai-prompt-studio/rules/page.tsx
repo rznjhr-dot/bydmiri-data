@@ -1,15 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import rulesData from "@/data/prompt-studio/rules.json";
-import type { RulesData, RuleCategory } from "@/types/prompt-studio";
+import { psRules } from "@/data";
+import type { RuleCategory } from "@/types/prompt-studio";
 
-const data = rulesData as RulesData;
+const data = psRules;
 
-function RulesSection({ category }: { category: RuleCategory }) {
+function useActiveHash(): string | null {
+  const [hash, setHash] = useState<string | null>(null);
+
+  useEffect(() => {
+    const read = () => setHash(window.location.hash || null);
+    read();
+    window.addEventListener("hashchange", read);
+    return () => window.removeEventListener("hashchange", read);
+  }, []);
+
+  return hash;
+}
+
+function RulesSection({ category, activeHash }: { category: RuleCategory; activeHash: string | null }) {
   const [expanded, setExpanded] = useState(false);
-  const isActive = typeof window !== "undefined" && window.location.hash === `#${category.id}`;
+  const isActive = activeHash === `#${category.id}`;
 
   return (
     <section
@@ -86,6 +99,8 @@ function RulesSection({ category }: { category: RuleCategory }) {
 }
 
 export default function RulesPage() {
+  const activeHash = useActiveHash();
+
   return (
     <div className="min-h-screen">
       <section className="page-header">
@@ -125,7 +140,7 @@ export default function RulesPage() {
 
         {/* Rules sections */}
         {data.categories.map((cat) => (
-          <RulesSection key={cat.id} category={cat} />
+          <RulesSection key={cat.id} category={cat} activeHash={activeHash} />
         ))}
       </main>
 

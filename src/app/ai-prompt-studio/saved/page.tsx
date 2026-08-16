@@ -6,10 +6,23 @@ import type { SavedPrompt } from "@/types/prompt-studio";
 
 const STORAGE_KEY = "ps_saved";
 
+function isSavedPrompt(v: unknown): v is SavedPrompt {
+  if (typeof v !== "object" || v === null) return false;
+  const item = v as Record<string, unknown>;
+  return (
+    typeof item.id === "string" &&
+    typeof item.name === "string" &&
+    typeof item.prompt === "string" &&
+    typeof item.status === "string"
+  );
+}
+
 function loadSaved(): SavedPrompt[] {
   if (typeof window === "undefined") return [];
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(isSavedPrompt);
   } catch {
     return [];
   }
@@ -165,20 +178,20 @@ export default function SavedPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
                       <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{item.name}</h3>
-                      <span className={`badge text-[0.5rem] py-0 px-1 ${
+                      <span className={`badge text-[0.7rem] py-0 px-1 ${
                         item.status === "active" ? "badge-green" : item.status === "draft" ? "badge-amber" : "badge-gray"
                       }`}>{item.status}</span>
-                      {item.favorite && <span className="text-[0.6rem] text-amber-500">★</span>}
+                      {item.favorite && <span className="text-[0.7rem] text-amber-500">★</span>}
                     </div>
                     <p className="text-xs text-[var(--color-text-tertiary)] line-clamp-2 mb-1">{item.notes || "No notes"}</p>
-                    <div className="flex items-center gap-3 text-[0.55rem] text-[var(--color-text-tertiary)]">
+                    <div className="flex items-center gap-3 text-[0.7rem] text-[var(--color-text-tertiary)]">
                       <span>{item.category}</span>
                       <span>v{item.version}</span>
                       <span>{new Date(item.created).toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric" })}</span>
                     </div>
                     <div className="flex flex-wrap gap-1 mt-1.5">
                       {item.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="text-[0.5rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{tag}</span>
+                        <span key={tag} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{tag}</span>
                       ))}
                     </div>
                   </div>

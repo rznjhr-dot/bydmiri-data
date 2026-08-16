@@ -1,6 +1,5 @@
 import Link from "next/link";
-import company from "@/data/company.json";
-import finance from "@/data/finance.json";
+import { company, finance } from "@/data";
 
 const promptTemplates = [
   { name: "Product Description", desc: "Generate EV product descriptions with SSOT data", count: 1 },
@@ -62,9 +61,9 @@ export default function AgentHubPage() {
                 </p>
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                <span className="badge badge-blue text-[0.6rem]">{company.version}</span>
-                <span className="badge badge-green text-[0.6rem]">{finance.interestRate}% Rate</span>
-                <span className="badge badge-gray text-[0.6rem]">JSON-First</span>
+                <span className="badge badge-blue text-[0.7rem]">{company.version}</span>
+                <span className="badge badge-green text-[0.7rem]">{finance.interestRate}% Rate</span>
+                <span className="badge badge-gray text-[0.7rem]">JSON-First</span>
               </div>
             </div>
           </div>
@@ -86,7 +85,7 @@ export default function AgentHubPage() {
               <div key={pt.name} className="card">
                 <div className="flex items-center justify-between mb-1">
                   <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{pt.name}</h3>
-                  <span className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{pt.count} template{pt.count > 1 ? "s" : ""}</span>
+                  <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{pt.count} template{pt.count > 1 ? "s" : ""}</span>
                 </div>
                 <p className="text-xs text-[var(--color-text-tertiary)]">{pt.desc}</p>
               </div>
@@ -102,7 +101,7 @@ export default function AgentHubPage() {
               <div key={sop.title} className="card card-interactive">
                 <div className="flex items-center justify-between mb-1">
                   <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{sop.title}</h3>
-                  <span className={`text-[0.6rem] font-semibold px-1.5 py-0.5 rounded ${
+                  <span className={`text-[0.7rem] font-semibold px-1.5 py-0.5 rounded ${
                     sop.status === "Active" 
                       ? "bg-green-50 text-green-700" 
                       : "bg-amber-50 text-amber-700"

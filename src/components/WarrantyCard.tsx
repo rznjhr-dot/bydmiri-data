@@ -2,7 +2,7 @@
 
 import { useRef, useCallback } from "react";
 import html2canvas from "html2canvas";
-import warranty from "@/data/warranty.json";
+import { warranty } from "@/data";
 
 export default function WarrantyCard() {
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -53,8 +53,8 @@ export default function WarrantyCard() {
                 {cat.title}
               </h3>
               <div className="text-right shrink-0 leading-none">
-                <p className="text-sm sm:text-base font-black text-[var(--color-success)] leading-tight">{cat.years}<span className="text-[0.5rem] sm:text-[0.6rem] font-bold ml-0.5">years</span></p>
-                <p className="text-[0.55rem] sm:text-[0.65rem] font-semibold text-[var(--color-success)]/70 leading-tight mt-0.5">or {cat.mileage}*</p>
+                <p className="text-sm sm:text-base font-black text-[var(--color-success)] leading-tight">{cat.years}<span className="text-[0.7rem] sm:text-[0.7rem] font-bold ml-0.5">years</span></p>
+                <p className="text-[0.7rem] sm:text-[0.7rem] font-semibold text-[var(--color-success)]/70 leading-tight mt-0.5">or {cat.mileage}*</p>
               </div>
             </div>
             {cat.items.length > 0 && (
@@ -62,7 +62,7 @@ export default function WarrantyCard() {
                 {cat.items.map((item) => (
                   <li
                     key={item}
-                    className="flex items-center gap-1 text-[0.65rem] sm:text-xs text-[var(--color-text-secondary)]"
+                    className="flex items-center gap-1 text-[0.7rem] sm:text-xs text-[var(--color-text-secondary)]"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-success)]/60 shrink-0">
                       <polyline points="20 6 9 17 4 12"/>
@@ -75,7 +75,7 @@ export default function WarrantyCard() {
           </div>
         ))}
       </div>
-      <p className="text-[0.55rem] text-[var(--color-text-tertiary)] mt-1 text-right">
+      <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-1 text-right">
         {warranty.disclaimer}
       </p>
     </section>

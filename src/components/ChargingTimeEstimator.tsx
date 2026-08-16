@@ -1,29 +1,10 @@
 "use client";
 
 import { useState, useMemo, useRef, useCallback } from "react";
-import vehicles from "@/data/vehicles.json";
-import charging from "@/data/charging.json";
+import { vehicles, charging } from "@/data";
+import type { VehicleVariant } from "@/data";
 
-type Variant = {
-  name: string;
-  otr: number;
-  rebate: number;
-  range: number;
-  battery: number | null;
-  chargeCost?: number;
-  acCharging?: string;
-  maxChargePower?: string;
-};
-
-type ChargingProfile = {
-  id: string;
-  name: string;
-  rate: number;
-  unit: string;
-  type: "ac" | "dc";
-  estimated: boolean;
-  description: string;
-};
+type Variant = VehicleVariant;
 
 const CHARGER_TYPES = [
   { label: "3-Pin Plug", power: 3, type: "ac", desc: "Standard outlet" },
@@ -34,8 +15,8 @@ const CHARGER_TYPES = [
 ];
 
 // Extract profiles from charging data
-const profiles = charging.chargingProfiles as ChargingProfile[];
-const homeProfile = profiles.find((p) => p.id === "home")!;
+const profiles = charging.chargingProfiles;
+const homeProfile = profiles.find((p) => p.id === "home") ?? profiles[0];
 const dcProfiles = profiles.filter((p) => p.type === "dc");
 const defaultDcProfile = dcProfiles.find((p) => p.id === "public_default") ?? dcProfiles[0];
 
@@ -72,7 +53,7 @@ export default function ChargingTimeEstimator() {
   const trackRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef<"from" | "to" | null>(null);
 
-  const currentVehicle = vehicles.find((v) => v.model === selectedModel)!;
+  const currentVehicle = vehicles.find((v) => v.model === selectedModel) ?? vehicles[0];
   const currentVariant: Variant = currentVehicle.variants[selectedVariantIdx];
   const battery = currentVariant.battery ?? 0;
   const charger = CHARGER_TYPES[chargerIdx];
@@ -206,8 +187,8 @@ export default function ChargingTimeEstimator() {
                     onClick={() => setChargerIdx(i)}
                     className={`pill text-center ${chargerIdx === i ? "pill-active" : ""}`}
                   >
-                    <span className="text-[0.6rem] sm:text-xs font-semibold">{ct.label}</span>
-                    <span className="text-[0.55rem] sm:text-[0.6rem] text-[var(--color-text-tertiary)] ml-0.5">| {ct.power}kW</span>
+                    <span className="text-[0.7rem] sm:text-xs font-semibold">{ct.label}</span>
+                    <span className="text-[0.7rem] sm:text-[0.7rem] text-[var(--color-text-tertiary)] ml-0.5">| {ct.power}kW</span>
                   </button>
                 ))}
               </div>
@@ -226,7 +207,7 @@ export default function ChargingTimeEstimator() {
                   </div>
                   <div
                     ref={trackRef}
-                    className="relative h-8 flex items-center select-none touch-none"
+                    className="relative h-11 flex items-center select-none touch-none"
                     onPointerMove={handlePointerMove}
                     onPointerUp={handlePointerUp}
                     onPointerLeave={handlePointerUp}
@@ -241,34 +222,34 @@ export default function ChargingTimeEstimator() {
                     />
                     {/* From handle */}
                     <div
-                      className={`absolute w-5 h-5 -translate-x-1/2 rounded-full shadow-sm cursor-grab active:cursor-grabbing z-10 transition-all ${
+                      className={`absolute w-7 h-7 -translate-x-1/2 rounded-full shadow-sm cursor-grab active:cursor-grabbing z-10 transition-all flex items-center justify-center ${
                         draggingRef.current === "from"
-                          ? "bg-white border-2 border-accent scale-125 shadow-md"
+                          ? "bg-white border-2 border-accent scale-110 shadow-md"
                           : "bg-white border-2 border-[var(--color-border-primary)] hover:border-accent"
                       }`}
                       style={{ left: `${fromPct}%` }}
                       onPointerDown={handlePointerDown("from")}
                     >
-                      <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-[0.55rem] font-semibold text-accent whitespace-nowrap pointer-events-none">
+                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-accent whitespace-nowrap pointer-events-none">
                         {draggingRef.current === "from" && `${fromPct}%`}
                       </div>
                     </div>
                     {/* To handle */}
                     <div
-                      className={`absolute w-5 h-5 -translate-x-1/2 rounded-full shadow-sm cursor-grab active:cursor-grabbing z-10 transition-all ${
+                      className={`absolute w-7 h-7 -translate-x-1/2 rounded-full shadow-sm cursor-grab active:cursor-grabbing z-10 transition-all flex items-center justify-center ${
                         draggingRef.current === "to"
-                          ? "bg-white border-2 border-accent scale-125 shadow-md"
+                          ? "bg-white border-2 border-accent scale-110 shadow-md"
                           : "bg-white border-2 border-[var(--color-border-primary)] hover:border-accent"
                       }`}
                       style={{ left: `${toPct}%` }}
                       onPointerDown={handlePointerDown("to")}
                     >
-                      <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-[0.55rem] font-semibold text-accent whitespace-nowrap pointer-events-none">
+                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-accent whitespace-nowrap pointer-events-none">
                         {draggingRef.current === "to" && `${toPct}%`}
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-between text-[0.6rem] text-[var(--color-text-tertiary)] mt-1">
+                  <div className="flex justify-between text-[0.7rem] text-[var(--color-text-tertiary)] mt-1">
                     <span>0%</span>
                     <span>50%</span>
                     <span>100%</span>
@@ -284,7 +265,7 @@ export default function ChargingTimeEstimator() {
             )}
 
             {/* Disclaimer */}
-            <p className="text-[0.6rem] text-[var(--color-text-tertiary)] italic leading-tight">
+            <p className="text-[0.7rem] text-[var(--color-text-tertiary)] italic leading-tight">
               {currentProfile.estimated
                 ? `* ${currentProfile.description} Actual charging fees vary by operator and location.`
                 : `* ${currentProfile.description}`}
@@ -339,7 +320,7 @@ export default function ChargingTimeEstimator() {
                     {chargeCost > 0
                       ? `RM${chargeCost.toFixed(2)}`
                       : "—"}
-                    <span className="text-[0.55rem] text-[var(--color-text-tertiary)] ml-1">
+                    <span className="text-[0.7rem] text-[var(--color-text-tertiary)] ml-1">
                       @ RM{currentProfile.rate.toFixed(2)}/kWh
                     </span>
                   </span>

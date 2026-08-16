@@ -1,5 +1,5 @@
 import Link from "next/link";
-import changelogEntries from "@/data/changelog.json";
+import { changelog as changelogEntries } from "@/data";
 
 export default function ChangelogPage() {
   return (

@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import events from "@/data/marketing/events.json";
-import type { EventsData } from "@/types/marketing";
-
-const typedEvents = events as unknown as EventsData;
+import { marketingEvents } from "@/data";
 
 const seasonalSignals = [
   {
@@ -111,7 +108,7 @@ export default function SeasonalOpportunitiesPage() {
               <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-wider">Triggers to Monitor</h3>
               <div className="flex flex-wrap gap-1">
                 {signal.triggers.map((tr) => (
-                  <span key={tr} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{tr}</span>
+                  <span key={tr} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{tr}</span>
                 ))}
               </div>
             </div>
@@ -122,16 +119,16 @@ export default function SeasonalOpportunitiesPage() {
         <section>
           <h2 className="section-title">Calendar Support</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {typedEvents.categories.map((cat) => (
+            {marketingEvents.categories.map((cat) => (
               <div key={cat.id} className="card">
                 <h3 className="font-semibold text-[var(--color-text-primary)] text-sm mb-1">{cat.label}</h3>
                 <p className="text-xs text-[var(--color-text-tertiary)] mb-1.5">{cat.events.length} events</p>
                 <div className="flex flex-wrap gap-1">
                   {cat.events.slice(0, 4).map((e) => (
-                    <span key={e.name} className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{e.name}</span>
+                    <span key={e.name} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{e.name}</span>
                   ))}
                   {cat.events.length > 4 && (
-                    <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">+{cat.events.length - 4}</span>
+                    <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">+{cat.events.length - 4}</span>
                   )}
                 </div>
               </div>
@@ -143,7 +140,7 @@ export default function SeasonalOpportunitiesPage() {
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Seasonal Opportunities</h2>
           <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
-            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/seasonal-opportunities.md</code> to monitor economic,
+            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/seasonal-opportunities.md</code> to monitor economic,
             seasonal, industry, and cultural signals — automatically suggesting marketing campaigns.
           </p>
         </section>

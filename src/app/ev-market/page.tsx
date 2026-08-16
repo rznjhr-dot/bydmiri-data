@@ -2,11 +2,8 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import competitors from "@/data/competitors.json";
-import evNews from "@/data/ev-news.json";
-import company from "@/data/company.json";
-import type { EVNewsItem, NewsCategory } from "@/types/ev-market";
-import type { CompetitorBrand } from "@/types/ev-market";
+import { competitors, evNews, company } from "@/data";
+import type { NewsCategory } from "@/types/ev-market";
 
 const categories: { key: NewsCategory | "all"; label: string }[] = [
   { key: "all", label: "All" },
@@ -46,7 +43,7 @@ export default function EVMarketPage() {
 
   const totalModels = useMemo(() => {
     let count = 0;
-    for (const brand of (competitors as { brands: CompetitorBrand[] }).brands) {
+    for (const brand of competitors.brands) {
       for (const model of brand.models) {
         count += model.variants.length;
       }
@@ -54,8 +51,8 @@ export default function EVMarketPage() {
     return count;
   }, []);
 
-  const totalBrands = (competitors as { brands: CompetitorBrand[] }).brands.length;
-  const newsItems = (evNews as { items: EVNewsItem[] }).items;
+  const totalBrands = competitors.brands.length;
+  const newsItems = evNews.items;
 
   const filteredNews = useMemo(() => {
     const items = activeCategory === "all" ? newsItems : newsItems.filter((n) => n.category === activeCategory);
@@ -95,7 +92,7 @@ export default function EVMarketPage() {
         ].map((stat) => (
           <div key={stat.label} className="bg-[var(--color-bg-secondary)]  rounded-xl shadow-sm border border-[var(--color-border-primary)] p-2.5 sm:p-6 text-center">
             <p className={`text-lg sm:text-4xl font-black leading-none ${stat.color}`}>{stat.value}</p>
-            <p className="text-[0.6rem] sm:text-sm font-bold text-[var(--color-text-secondary)]  mt-0.5 sm:mt-1">{stat.label}</p>
+            <p className="text-[0.7rem] sm:text-sm font-bold text-[var(--color-text-secondary)]  mt-0.5 sm:mt-1">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -126,8 +123,8 @@ export default function EVMarketPage() {
               <div key={item.id} className="bg-[var(--color-bg-secondary)]  rounded-xl shadow-sm border-l-4 border-amber-500  p-3.5 sm:p-5">
                 <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
                   <span className="text-xs sm:text-sm font-bold text-[var(--color-text-secondary)] ">{item.date}</span>
-                  <span className={`px-1.5 py-0.5 rounded text-[0.55rem] sm:text-xs font-bold uppercase tracking-wider ${categoryColors[item.category]}`}>{item.category}</span>
-                  {item.brand && <span className={`px-1.5 py-0.5 rounded text-[0.55rem] sm:text-xs font-bold ${brandColors[item.brand]}`}>{item.brand}</span>}
+                  <span className={`px-1.5 py-0.5 rounded text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider ${categoryColors[item.category]}`}>{item.category}</span>
+                  {item.brand && <span className={`px-1.5 py-0.5 rounded text-[0.7rem] sm:text-xs font-bold ${brandColors[item.brand]}`}>{item.brand}</span>}
                 </div>
                 <h3 className="text-sm sm:text-base font-black text-[var(--color-text-primary)]  mb-1">{item.title}</h3>
                 <p className="text-xs sm:text-sm font-medium text-[var(--color-text-primary)]  leading-relaxed">{item.summary}</p>
@@ -172,9 +169,9 @@ export default function EVMarketPage() {
             >
               <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
                 <span className="text-xs sm:text-sm font-bold text-[var(--color-text-secondary)] ">{item.date}</span>
-                <span className={`px-1.5 py-0.5 rounded text-[0.55rem] sm:text-xs font-bold uppercase tracking-wider ${categoryColors[item.category]}`}>{item.category}</span>
-                {item.brand && <span className={`px-1.5 py-0.5 rounded text-[0.55rem] sm:text-xs font-bold ${brandColors[item.brand]}`}>{item.brand}</span>}
-                {item.source && <span className="text-[0.55rem] sm:text-xs font-bold text-[var(--color-text-secondary)]  ml-auto">{item.source}</span>}
+                <span className={`px-1.5 py-0.5 rounded text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider ${categoryColors[item.category]}`}>{item.category}</span>
+                {item.brand && <span className={`px-1.5 py-0.5 rounded text-[0.7rem] sm:text-xs font-bold ${brandColors[item.brand]}`}>{item.brand}</span>}
+                {item.source && <span className="text-[0.7rem] sm:text-xs font-bold text-[var(--color-text-secondary)]  ml-auto">{item.source}</span>}
               </div>
               <h3 className="text-sm sm:text-base font-black text-[var(--color-text-primary)]  mb-0.5">{item.title}</h3>
               <p className="text-xs sm:text-sm font-medium text-[var(--color-text-primary)]  leading-relaxed">{item.summary}</p>

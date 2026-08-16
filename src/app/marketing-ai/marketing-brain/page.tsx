@@ -103,7 +103,7 @@ export default function MarketingBrainPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d={df.icon} /></svg>
                 </div>
                 <h3 className="font-semibold text-[var(--color-text-primary)] text-xs">{df.step}</h3>
-                <p className="text-[0.55rem] text-[var(--color-text-tertiary)] mt-0.5">{df.label}</p>
+                <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-0.5">{df.label}</p>
               </button>
             ))}
           </div>
@@ -162,7 +162,7 @@ export default function MarketingBrainPage() {
           <div className="mt-3 pt-3 border-t border-[var(--color-border-primary)]">
             <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1">AI Prompt</h3>
             <p className="text-xs text-[var(--color-text-tertiary)]">
-              Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/marketing-brain.md</code> for CMO-level orchestration.
+              Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/marketing-brain.md</code> for CMO-level orchestration.
             </p>
           </div>
         </section>

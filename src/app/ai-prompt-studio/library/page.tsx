@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import libraryData from "@/data/prompt-studio/library.json";
-import type { LibraryData } from "@/types/prompt-studio";
+import { psLibrary } from "@/data";
 
-const data = libraryData as LibraryData;
+const data = psLibrary;
 
 function getFolderIcon(folderId: string): string {
   const icons: Record<string, string> = {
@@ -103,7 +102,7 @@ export default function LibraryPage() {
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d={getFolderIcon(folder.id)}/></svg>
                 <span className="truncate">{folder.name}</span>
-                <span className="ml-auto text-[0.55rem] text-[var(--color-text-tertiary)]">{data.entries.filter(e => e.folder === folder.id).length}</span>
+                <span className="ml-auto text-[0.7rem] text-[var(--color-text-tertiary)]">{data.entries.filter(e => e.folder === folder.id).length}</span>
               </button>
             ))}
           </aside>
@@ -147,20 +146,20 @@ export default function LibraryPage() {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-0.5">
                         <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{entry.name}</h3>
-                        <span className={`badge text-[0.5rem] py-0 px-1 ${
+                        <span className={`badge text-[0.7rem] py-0 px-1 ${
                           entry.status === "published" ? "badge-green" : entry.status === "draft" ? "badge-amber" : "badge-gray"
                         }`}>{entry.status}</span>
                       </div>
                       <p className="text-xs text-[var(--color-text-tertiary)]">{entry.description}</p>
                       <div className="flex flex-wrap gap-1 mt-1.5">
                         {entry.tags.slice(0, 3).map((tag) => (
-                          <span key={tag} className="text-[0.5rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{tag}</span>
+                          <span key={tag} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{tag}</span>
                         ))}
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center justify-between pt-2 border-t border-[var(--color-border-primary)]">
-                    <span className="text-[0.55rem] text-[var(--color-text-tertiary)]">v{entry.version} · {entry.folder}</span>
+                    <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">v{entry.version} · {entry.folder}</span>
                     <button
                       onClick={() => handleCopy(entry.prompt)}
                       className="text-xs font-medium text-amber-600 hover:text-amber-700 transition-colors cursor-pointer flex items-center gap-1"

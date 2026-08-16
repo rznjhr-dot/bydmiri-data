@@ -2,15 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import scoring from "@/data/marketing/scoring.json";
-import type { ScoringData } from "@/types/marketing";
-
-const typedScoring = scoring as unknown as ScoringData;
+import { marketingScoring } from "@/data";
 
 export default function CreativeDirectorPage() {
   const [scores, setScores] = useState<Record<string, number>>(() => {
     const initial: Record<string, number> = {};
-    typedScoring.criteria.forEach((c) => {
+    marketingScoring.criteria.forEach((c) => {
       initial[c.id] = 3; // default to "Good"
     });
     return initial;
@@ -23,13 +20,13 @@ export default function CreativeDirectorPage() {
   const calculateTotal = (): { total: number; label: string; color: string } => {
     let weightedSum = 0;
     let totalWeight = 0;
-    typedScoring.criteria.forEach((c) => {
+    marketingScoring.criteria.forEach((c) => {
       const score = scores[c.id] ?? 3;
       weightedSum += score * c.weight;
       totalWeight += c.weight;
     });
     const total = totalWeight > 0 ? Math.round((weightedSum / totalWeight) * 20) : 0;
-    const range = typedScoring.scoringRanges.find((r) => total >= r.min && total <= r.max);
+    const range = marketingScoring.scoringRanges.find((r) => total >= r.min && total <= r.max);
     return {
       total,
       label: range?.label ?? "Unknown",
@@ -61,7 +58,7 @@ export default function CreativeDirectorPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="font-bold text-[var(--color-text-primary)] text-sm">Creative Score</h2>
-              <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">Weighted scoring across {typedScoring.criteria.length} criteria</p>
+              <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">Weighted scoring across {marketingScoring.criteria.length} criteria</p>
             </div>
             <div className="text-right">
               <div className="text-3xl font-extrabold text-accent">{result.total}<span className="text-lg font-semibold text-[var(--color-text-tertiary)]">/100</span></div>
@@ -80,7 +77,7 @@ export default function CreativeDirectorPage() {
         <section>
           <h2 className="section-title">Scoring Criteria</h2>
           <div className="space-y-2">
-            {typedScoring.criteria.map((criterion) => {
+            {marketingScoring.criteria.map((criterion) => {
               const currentScore = scores[criterion.id] ?? 3;
               const level = criterion.levels.find((l) => l.score === currentScore);
               return (
@@ -101,7 +98,7 @@ export default function CreativeDirectorPage() {
                         <button
                           key={s}
                           onClick={() => updateScore(criterion.id, s)}
-                          className={`flex-1 text-center px-2 py-1.5 rounded-lg text-[0.6rem] font-medium transition-all ${
+                          className={`flex-1 text-center px-2 py-1.5 rounded-lg text-[0.7rem] font-medium transition-all ${
                             currentScore === s
                               ? "bg-accent text-white shadow-sm"
                               : "bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)] hover:bg-[var(--color-border-primary)]"
@@ -114,7 +111,7 @@ export default function CreativeDirectorPage() {
                     })}
                   </div>
                   {level && (
-                    <p className="text-[0.6rem] text-[var(--color-text-tertiary)] mt-1 italic">{level.description}</p>
+                    <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-1 italic">{level.description}</p>
                   )}
                 </div>
               );
@@ -126,17 +123,17 @@ export default function CreativeDirectorPage() {
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">Scoring Ranges</h2>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
-            {typedScoring.scoringRanges.map((r) => (
+            {marketingScoring.scoringRanges.map((r) => (
               <div key={r.label} className="text-center p-2 rounded-lg bg-[var(--color-bg-tertiary)] border border-[var(--color-border-primary)]/60">
                 <div className="text-xs font-bold text-[var(--color-text-secondary)]">{r.min}-{r.max}</div>
-                <div className="text-[0.55rem] text-[var(--color-text-tertiary)]">{r.label}</div>
+                <div className="text-[0.7rem] text-[var(--color-text-tertiary)]">{r.label}</div>
               </div>
             ))}
           </div>
           <div className="mt-3 pt-3 border-t border-[var(--color-border-primary)]">
             <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1">AI Prompt</h3>
             <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
-              Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/creative-director.md</code> for AI-powered creative review and improvement suggestions.
+              Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/creative-director.md</code> for AI-powered creative review and improvement suggestions.
             </p>
           </div>
         </section>

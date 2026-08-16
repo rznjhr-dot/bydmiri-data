@@ -2,16 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import psychology from "@/data/marketing/psychology.json";
-import type { PsychologyData } from "@/types/marketing";
-
-const typedPsychology = psychology as unknown as PsychologyData;
+import { marketingPsychology } from "@/data";
 
 export default function SalesPsychologyPage() {
-  const [selectedPersona, setSelectedPersona] = useState(typedPsychology.personas[0]?.id ?? "");
+  const [selectedPersona, setSelectedPersona] = useState(marketingPsychology.personas[0]?.id ?? "");
 
-  const persona = typedPsychology.personas.find((p) => p.id === selectedPersona);
-  const matchedStrategies = typedPsychology.strategies.filter((s) =>
+  const persona = marketingPsychology.personas.find((p) => p.id === selectedPersona);
+  const matchedStrategies = marketingPsychology.strategies.filter((s) =>
     s.bestFor.includes(selectedPersona)
   );
 
@@ -34,8 +31,8 @@ export default function SalesPsychologyPage() {
       <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3">
-          <div className="stat"><div className="stat-value">{typedPsychology.personas.length}</div><div className="stat-label">Personas</div></div>
-          <div className="stat"><div className="stat-value">{typedPsychology.strategies.length}</div><div className="stat-label">Strategies</div></div>
+          <div className="stat"><div className="stat-value">{marketingPsychology.personas.length}</div><div className="stat-label">Personas</div></div>
+          <div className="stat"><div className="stat-value">{marketingPsychology.strategies.length}</div><div className="stat-label">Strategies</div></div>
           <div className="stat"><div className="stat-value">Psychology-Based</div><div className="stat-label">Approach</div></div>
         </div>
 
@@ -43,7 +40,7 @@ export default function SalesPsychologyPage() {
         <div>
           <label className="text-sm font-semibold text-[var(--color-text-secondary)] mb-1.5 block">Customer Persona</label>
           <div className="flex flex-wrap gap-1.5">
-            {typedPsychology.personas.map((p) => (
+            {marketingPsychology.personas.map((p) => (
               <button
                 key={p.id}
                 onClick={() => setSelectedPersona(p.id)}
@@ -64,7 +61,7 @@ export default function SalesPsychologyPage() {
                   <h2 className="font-bold text-[var(--color-text-primary)] text-lg">{persona.name}</h2>
                   <p className="text-sm text-[var(--color-text-tertiary)]">{persona.description}</p>
                 </div>
-                <span className="badge badge-blue text-[0.55rem]">{persona.tone.replace(/_/g, " ")}</span>
+                <span className="badge badge-blue text-[0.7rem]">{persona.tone.replace(/_/g, " ")}</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -72,7 +69,7 @@ export default function SalesPsychologyPage() {
                   <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-wider">Priorities</h3>
                   <div className="flex flex-wrap gap-1">
                     {persona.priorities.map((pr) => (
-                      <span key={pr} className="text-[0.6rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{pr.replace(/_/g, " ")}</span>
+                      <span key={pr} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{pr.replace(/_/g, " ")}</span>
                     ))}
                   </div>
                 </div>
@@ -80,7 +77,7 @@ export default function SalesPsychologyPage() {
                   <h3 className="text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-wider">Buying Triggers</h3>
                   <div className="flex flex-wrap gap-1">
                     {persona.buyingTriggers.map((tr) => (
-                      <span key={tr} className="text-[0.6rem] text-accent bg-accent/5 border border-accent/20 px-1.5 py-0.5 rounded">{tr}</span>
+                      <span key={tr} className="text-[0.7rem] text-accent bg-accent/5 border border-accent/20 px-1.5 py-0.5 rounded">{tr}</span>
                     ))}
                   </div>
                 </div>
@@ -123,7 +120,7 @@ export default function SalesPsychologyPage() {
         <section>
           <h2 className="section-title">All Personas</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            {typedPsychology.personas.map((p) => (
+            {marketingPsychology.personas.map((p) => (
               <button
                 key={p.id}
                 onClick={() => setSelectedPersona(p.id)}
@@ -132,7 +129,7 @@ export default function SalesPsychologyPage() {
                 }`}
               >
                 <h3 className="font-semibold text-[var(--color-text-primary)] text-sm mb-0.5">{p.name}</h3>
-                <p className="text-[0.6rem] text-[var(--color-text-tertiary)] line-clamp-2">{p.description}</p>
+                <p className="text-[0.7rem] text-[var(--color-text-tertiary)] line-clamp-2">{p.description}</p>
               </button>
             ))}
           </div>
@@ -142,7 +139,7 @@ export default function SalesPsychologyPage() {
         <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Sales Psychology</h2>
           <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
-            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.6rem] font-mono">src/data/prompts/sales-psychology.md</code> to match customer personas
+            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/sales-psychology.md</code> to match customer personas
             with marketing strategies, headlines, tones, and buying triggers.
           </p>
         </section>

@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import templatesData from "@/data/prompt-studio/templates.json";
-import rulesData from "@/data/prompt-studio/rules.json";
-import libraryData from "@/data/prompt-studio/library.json";
-import type { GeneratorTemplate } from "@/types/prompt-studio";
+import { psTemplates, psRules, psLibrary } from "@/data";
 
-const generatorsList = (templatesData as { templates: GeneratorTemplate[] }).templates;
+const generatorsList = psTemplates.templates;
 
 const sections = [
   {
@@ -36,7 +33,7 @@ const sections = [
   {
     title: "Rules & Reference",
     description: "Brand guidelines, technical rules, and best practices",
-    items: (rulesData as { categories: { id: string; name: string; description: string }[] }).categories.map((r) => ({
+    items: psRules.categories.map((r) => ({
       id: r.id,
       name: `${r.name} Rules`,
       description: r.description,
@@ -50,8 +47,8 @@ const sections = [
 
 const quickStats = [
   { label: "Generators", value: generatorsList.length.toString() },
-  { label: "Library Entries", value: (libraryData as { entries: unknown[] }).entries.length.toString() },
-  { label: "Rules", value: (rulesData as { categories: unknown[] }).categories.length.toString() },
+  { label: "Library Entries", value: psLibrary.entries.length.toString() },
+  { label: "Rules", value: psRules.categories.length.toString() },
   { label: "Status", value: "Active" },
 ];
 
@@ -125,12 +122,12 @@ export default function AIPromptStudioPage() {
         >
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shrink-0 shadow-sm">
-              <span className="text-white text-[0.55rem] font-black tracking-tight">RJ</span>
+              <span className="text-white text-[0.7rem] font-black tracking-tight">RJ</span>
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-0.5">
                 <h2 className="font-bold text-[var(--color-text-primary)] text-sm">RJEOS™ — Editorial Campaign Engine</h2>
-                <span className="badge badge-amber text-[0.5rem] py-0 px-1.5">Separate System</span>
+                <span className="badge badge-amber text-[0.7rem] py-0 px-1.5">Separate System</span>
               </div>
               <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
                 A completely separate prompt engine for premium automotive editorial campaign artwork.
@@ -155,10 +152,10 @@ export default function AIPromptStudioPage() {
                 copyable prompts built from 16 modular block types.
               </p>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                <span className="badge badge-purple text-[0.6rem]">v1.0.0</span>
-                <span className="badge badge-green text-[0.6rem]">GPT Image Only</span>
-                <span className="badge badge-blue text-[0.6rem]">16 Blocks</span>
-                <span className="badge badge-amber text-[0.6rem]">{generatorsList.length} Generators</span>
+                <span className="badge badge-purple text-[0.7rem]">v1.0.0</span>
+                <span className="badge badge-green text-[0.7rem]">GPT Image Only</span>
+                <span className="badge badge-blue text-[0.7rem]">16 Blocks</span>
+                <span className="badge badge-amber text-[0.7rem]">{generatorsList.length} Generators</span>
               </div>
             </div>
           </div>
@@ -190,7 +187,7 @@ export default function AIPromptStudioPage() {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-0.5">
                         <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{item.name}</h3>
-                        <span className={`badge ${getBadgeClass(item.badge)} text-[0.55rem] py-0 px-1.5`}>{item.badge}</span>
+                        <span className={`badge ${getBadgeClass(item.badge)} text-[0.7rem] py-0 px-1.5`}>{item.badge}</span>
                       </div>
                       <p className="text-xs text-[var(--color-text-tertiary)] line-clamp-2">{item.description}</p>
                     </div>
@@ -210,7 +207,7 @@ export default function AIPromptStudioPage() {
             <section key={section.title}>
               <div className="flex items-center justify-between mb-2">
                 <h2 className="section-title mb-0">{section.title}</h2>
-                <span className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium">{section.items.length} items</span>
+                <span className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium">{section.items.length} items</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {section.items.map((item) => (
@@ -222,13 +219,13 @@ export default function AIPromptStudioPage() {
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 mb-0.5">
                           <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{item.name}</h3>
-                          <span className={`badge ${getBadgeClass(item.badge)} text-[0.55rem] py-0 px-1.5`}>{item.badge}</span>
+                          <span className={`badge ${getBadgeClass(item.badge)} text-[0.7rem] py-0 px-1.5`}>{item.badge}</span>
                         </div>
                         <p className="text-xs text-[var(--color-text-tertiary)] line-clamp-2">{item.description}</p>
                         {(item.platform || item.aspectRatio) && (
                           <div className="flex items-center gap-2 mt-1.5">
-                            {item.platform && <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item.platform}</span>}
-                            {item.aspectRatio && <span className="text-[0.55rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item.aspectRatio}</span>}
+                            {item.platform && <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item.platform}</span>}
+                            {item.aspectRatio && <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{item.aspectRatio}</span>}
                           </div>
                         )}
                       </div>
@@ -236,7 +233,7 @@ export default function AIPromptStudioPage() {
                     <div className="pt-2 border-t border-[var(--color-border-primary)] flex items-center justify-between">
                       <span className="text-xs font-medium text-purple-600 group-hover:text-purple-700 transition-colors">Open &rarr;</span>
                       {item.badge !== "Generator" && item.badge !== "Rules" && (
-                        <span className="badge badge-green text-[0.5rem] py-0 px-1">Future Ready</span>
+                        <span className="badge badge-green text-[0.7rem] py-0 px-1">Future Ready</span>
                       )}
                     </div>
                   </Link>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import company from "@/data/company.json";
+import { company } from "@/data";
 import { useEffect, useState } from "react";
 
 const navLinks = [
@@ -50,13 +50,13 @@ export default function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-2.5 group shrink-0">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-accent)] to-[#0f2f7d] flex items-center justify-center shadow-[0_2px_8px_rgba(29,78,216,0.35)] group-hover:shadow-[0_4px_14px_rgba(29,78,216,0.45)] transition-shadow">
-              <span className="text-white text-[0.625rem] font-extrabold tracking-tight">RJ</span>
+              <span className="text-white text-[0.7rem] font-extrabold tracking-tight">RJ</span>
             </div>
             <div className="hidden sm:block">
               <p className="text-sm font-bold text-[var(--color-text-primary)] tracking-tight leading-tight">
                 BYD Miri Knowledge Base Masterbook
               </p>
-              <p className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium leading-tight -mt-0.5">
+              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium leading-tight -mt-0.5">
                 {company.company}
               </p>
             </div>
