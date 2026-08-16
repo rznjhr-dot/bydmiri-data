@@ -9,7 +9,7 @@ import rulesData from "@/data/prompt-studio/rules.json";
 import vehiclesData from "@/data/vehicles.json";
 import companyData from "@/data/company.json";
 import { getRebate } from "@/utils/promotions";
-import type { GeneratorTemplate, BlocksData, RulesData, TaglineOption } from "@/types/prompt-studio";
+import type { GeneratorTemplate, BlocksData, RulesData } from "@/types/prompt-studio";
 
 const templates = (templatesData as { templates: GeneratorTemplate[] }).templates;
 const blocks = (blocksData as BlocksData).blocks;

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import scoring from "@/data/marketing/scoring.json";
-import type { ScoringData, ScoringCriterion } from "@/types/marketing";
+import type { ScoringData } from "@/types/marketing";
 
 const typedScoring = scoring as unknown as ScoringData;
 

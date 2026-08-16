@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import prompts from "@/data/marketing/prompts.json";
-import type { PromptsData, PromptTool } from "@/types/marketing";
+import type { PromptsData } from "@/types/marketing";
 
 const typedPrompts = prompts as unknown as PromptsData;
 

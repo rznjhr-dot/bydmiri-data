@@ -5,7 +5,7 @@ import Link from "next/link";
 import vehicles from "@/data/vehicles.json";
 import competitors from "@/data/competitors.json";
 import { getRebate } from "@/utils/promotions";
-import type { CompetitorBrand, CompetitorModel, CompetitorVariant } from "@/types/ev-market";
+import type { CompetitorBrand } from "@/types/ev-market";
 
 interface BYDVariant {
   name: string; otr: number; rebate: number; range: number; rangeNedc: number; battery: number;
@@ -14,7 +14,7 @@ interface BYDVariant {
 interface BYDModel { model: string; segment?: string; variants: BYDVariant[]; }
 
 const bydModels = vehicles as BYDModel[];
-type CompBrandData = CompetitorBrand; type CompModelData = CompetitorModel; type CompVariantData = CompetitorVariant;
+type CompBrandData = CompetitorBrand;
 
 const competitorMap: Record<string, { brandId: string; modelName: string }[]> = {
   "Atto 2": [{ brandId: "proton", modelName: "e.MAS 5" }],
@@ -55,13 +55,6 @@ function estInsurance(price: number): number {
   return 4000;
 }
 
-function estInsuranceStr(price: number): string {
-  if (price < 100000) return "~RM2,300/yr";
-  if (price < 150000) return "~RM3,000/yr";
-  if (price <= 200000) return "~RM3,500/yr";
-  return "~RM4,000/yr";
-}
-
 export default function ComparePage() {
   const [selectedBYDModel, setSelectedBYDModel] = useState<string>("Atto 3");
   const [selectedBYDVariant, setSelectedBYDVariant] = useState<string>("Ultra");
@@ -99,7 +92,7 @@ export default function ComparePage() {
       { label: "Type", byd: "BEV", comp: compModel?.type === "BEV" ? "BEV" : compModel?.type || "—" },
       { label: "Variant", byd: bydVariant.name, comp: compVariant.name },
       { label: "OTR Price", byd: formatCurrency(bydVariant.otr), comp: `${formatCurrency(compVariant.otr)}${formatEMarkup(selectedBrandData?.emMarkup || 0)}` },
-      ...(compVariant.otrAfterRebate || true ? (() => { const r = getRebate(bydModel!.model, bydVariant.name) ?? bydVariant.rebate; return [{ label: "After Rebate", byd: `${formatCurrency(bydVariant.otr - r)} (promo -RM${r.toLocaleString()})`, comp: `${formatCurrency(compVariant.otrAfterRebate || compVariant.otr)}${formatEMarkup(selectedBrandData?.emMarkup || 0)}` }]; })() : []),
+      ...(() => { const r = getRebate(bydModel!.model, bydVariant.name) ?? bydVariant.rebate; return [{ label: "After Rebate", byd: `${formatCurrency(bydVariant.otr - r)} (promo -RM${r.toLocaleString()})`, comp: `${formatCurrency(compVariant.otrAfterRebate || compVariant.otr)}${formatEMarkup(selectedBrandData?.emMarkup || 0)}` }]; })(),
       { label: "Monthly (9yr, 10% down)", byd: (() => { const r = getRebate(bydModel!.model, bydVariant.name) ?? bydVariant.rebate; return calcMonthly(bydVariant.otr - r); })(), comp: (() => { const base = compVariant.otrAfterRebate || compVariant.otr; const total = base + (selectedBrandData?.emMarkup || 0) + estInsurance(base); return `${calcMonthly(total)} (incl. EM + ins)`; })() },
       { label: "Range", byd: `${bydVariant.rangeNedc} km (NEDC)`, comp: compVariant.rangeNedc ? `${compVariant.rangeNedc} km (NEDC)` : `${compVariant.range} km` },
       { label: "Battery", byd: `${bydVariant.battery} kWh LFP`, comp: `${compVariant.battery} kWh` },

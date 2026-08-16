@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import events from "@/data/marketing/events.json";
-import type { EventsData, EventCategory } from "@/types/marketing";
+import type { EventsData } from "@/types/marketing";
 
 const typedEvents = events as unknown as EventsData;
 

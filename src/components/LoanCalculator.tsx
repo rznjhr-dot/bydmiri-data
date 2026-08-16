@@ -107,15 +107,6 @@ export default function LoanCalculator() {
     return totalPayable / (tenure * 12);
   }, [loanAmount, tenure, parsedInterestRate]);
 
-  const totalInterest = useMemo(() => {
-    const rate = parsedInterestRate / 100;
-    return loanAmount * rate * tenure;
-  }, [loanAmount, tenure, parsedInterestRate]);
-
-  const totalPayable = useMemo(() => {
-    return loanAmount + totalInterest;
-  }, [loanAmount, totalInterest]);
-
   const [copied, setCopied] = useState(false);
 
   const buildQuotation = useCallback(() => {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import psychology from "@/data/marketing/psychology.json";
-import type { PsychologyData, PsychologyPersona } from "@/types/marketing";
+import type { PsychologyData } from "@/types/marketing";
 
 const typedPsychology = psychology as unknown as PsychologyData;
 
