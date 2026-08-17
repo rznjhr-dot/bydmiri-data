@@ -51,12 +51,45 @@ import type {
   RulesData,
   LibraryData,
 } from "@/types/prompt-studio";
-import type {
-  CompetitorsData,
-  EVNewsData,
-  CompetitorBrand,
-} from "@/types/ev-market";
 import type { RJEOSData } from "@/types/rjeos";
+
+export interface CompetitorVariant {
+  name: string;
+  otr: number;
+  otrAfterRebate?: number;
+  range?: number;
+  battery?: number | null;
+  power?: number;
+  [key: string]: unknown;
+}
+
+export interface CompetitorModel {
+  model: string;
+  variants: CompetitorVariant[];
+  [key: string]: unknown;
+}
+
+export interface CompetitorBrand {
+  name: string;
+  models: CompetitorModel[];
+  emMarkup?: number;
+  [key: string]: unknown;
+}
+
+export interface CompetitorsData {
+  brands: CompetitorBrand[];
+  [key: string]: unknown;
+}
+
+export interface EVNewsItem {
+  title: string;
+  [key: string]: unknown;
+}
+
+export interface EVNewsData {
+  items: EVNewsItem[];
+  [key: string]: unknown;
+}
 
 export interface VehicleVariant {
   name: string;
@@ -211,6 +244,13 @@ export interface RebatesMeta {
   disclaimer: string;
 }
 
+export interface PricingMeta {
+  currency: string;
+  electricityRate: number;
+  disclaimer: string;
+  notes: string[];
+}
+
 export interface ContentRulesData {
   [key: string]: unknown;
 }
@@ -335,7 +375,11 @@ export const rebatesMeta = assertShape<RebatesMeta>(
 );
 
 /* ─── Pricing metadata ─── */
-export const pricingMeta = pricingJson as ContentRulesData;
+export const pricingMeta = assertShape<PricingMeta>(
+  "pricing.json",
+  pricingJson,
+  (v) => isRecord(v) && typeof (v as unknown as PricingMeta).disclaimer === "string"
+);
 
 /* ─── Content / website rules ─── */
 export const contentRules = contentRulesJson as ContentRulesData;

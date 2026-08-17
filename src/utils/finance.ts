@@ -1,7 +1,7 @@
 /* ─── Shared finance math (single source of truth) ───
  *
  * Flat-rate loan calculation used by /vehicles, /finance,
- * /top-up, /ev-market/compare and /admin. Keep every surface in
+ * /top-up and /admin. Keep every surface in
  * sync by importing from here instead of re-implementing.
  */
 import { finance } from "@/data";

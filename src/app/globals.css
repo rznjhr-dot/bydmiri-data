@@ -67,16 +67,6 @@
   /* Spacing */
   --space-section: clamp(1.25rem, 3vw, 2rem);
   --space-card: clamp(1rem, 2.5vw, 1.25rem);
-
-  /* Legacy BYD colors (kept for backward compat) */
-  --color-byd-blue: #1d4ed8;
-  --color-byd-light: #eef2ff;
-  --color-byd-accent: #059669;
-  --color-byd-dark: #0b0d14;
-  --color-byd-gray: #f7f8fb;
-  --color-byd-text: #3d4257;
-  --color-byd-surface: #ffffff;
-  --color-byd-muted: #7c8299;
 }
 
 /* ─── Base ──────────────────────────────────────────────────── */
@@ -235,12 +225,6 @@
       linear-gradient(180deg, #ffffff 0%, var(--color-bg-primary) 100%);
   }
 
-  /* Header Gradient (legacy class, now premium light) */
-  .header-gradient {
-    background: linear-gradient(135deg, #0b0d14 0%, #1a1d2e 100%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
   /* Tool Card — premium quick-action cards */
   .tool-card {
     position: relative;
@@ -344,13 +328,6 @@
       var(--color-border-primary) 75%,
       transparent
     );
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, #ffffff 0%, #8b90a5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   /* Form Elements */
@@ -625,40 +602,6 @@
     border-radius: 9999px;
     background-color: var(--color-success);
   }
-  .status-dot-inactive {
-    background-color: var(--color-text-disabled);
-  }
-}
-
-/* ─── Skeleton Loading ────────────────────────────────────── */
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--color-neutral-100) 25%,
-    var(--color-neutral-50) 50%,
-    var(--color-neutral-100) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
-  border-radius: var(--radius-md);
-}
-
-.skeleton-text {
-  height: 0.875rem;
-  margin-bottom: 0.5rem;
-  width: 100%;
-}
-
-.skeleton-title {
-  height: 1.25rem;
-  width: 60%;
-  margin-bottom: 0.75rem;
 }
 
 /* ─── Toast / Notification ────────────────────────────────── */
@@ -779,13 +722,6 @@
   color: var(--color-accent);
 }
 
-/* ─── Animated Counters placeholder ───────────────────────── */
-
-.stat-value-animated {
-  display: inline-block;
-  transition: all 0.3s ease-out;
-}
-
 /* ─── Skip to Content (Accessibility) ─────────────────────── */
 
 .skip-to-content {
@@ -871,5 +807,122 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+/* ─── Pricelist: adaptive table density ────────────────────── */
+/* Editorial rhythm: 10px tracked-out labels, 13px tabular numerals
+   with tight leading, hairline dividers. Font size, line height &
+   cell padding scale down in subtle steps as optional columns are
+   toggled on. The page sets the custom properties. */
+.pl-table {
+  --pl-fs: 0.8125rem;
+  --pl-head-fs: 0.625rem;
+  --pl-py: 0.5625rem;
+  --pl-px: 0.625rem;
+  --pl-lh: 1.35;
+  font-size: var(--pl-fs);
+  line-height: var(--pl-lh);
+}
+.pl-table th {
+  font-size: var(--pl-head-fs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: var(--pl-py) var(--pl-px);
+}
+.pl-table td {
+  padding: var(--pl-py) var(--pl-px);
+}
+.pl-table th:first-child,
+.pl-table td:first-child {
+  padding-left: 0;
+}
+.pl-table th:last-child,
+.pl-table td:last-child {
+  padding-right: 0;
+}
+/* Numerals: optically tightened */
+.pl-table td.tabular-nums,
+.pl-table td .tabular-nums {
+  letter-spacing: -0.01em;
+}
+
+/* ─── Vehicles: dense table ────────────────────────────────── */
+.veh-table {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+.veh-table th {
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  padding: 0.5625rem 0.625rem;
+}
+.veh-table td {
+  padding: 0.5rem 0.625rem;
+}
+.veh-table th:first-child,
+.veh-table td:first-child {
+  padding-left: 0.875rem;
+}
+.veh-table th:last-child,
+.veh-table td:last-child {
+  padding-right: 0.625rem;
+}
+.veh-table td.tabular-nums {
+  letter-spacing: -0.01em;
+}
+@media (max-width: 640px) {
+  .veh-table {
+    font-size: 0.75rem;
+  }
+  .veh-table th,
+  .veh-table td {
+    padding-left: 0.4375rem;
+    padding-right: 0.4375rem;
+  }
+  .veh-table th:first-child,
+  .veh-table td:first-child {
+    padding-left: 0.625rem;
+  }
+}
+
+/* ─── Pricelist: print ─────────────────────────────────────── */
+
+@media print {
+  /* Strip app chrome — sheet only */
+  body > header,
+  .bottom-nav,
+  .page-header,
+  [data-print="hide"] {
+    display: none !important;
+  }
+  body {
+    padding-bottom: 0 !important;
+    background: #fff !important;
+  }
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+  .pl-card {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+  /* Keep brand colors in PDF */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  /* Avoid splitting rows across pages */
+  tr,
+  .pl-card header,
+  .pl-card footer {
+    break-inside: avoid;
+  }
+  @page {
+    size: A4;
+    margin: 12mm;
   }
 }

@@ -21,6 +21,7 @@ export default function CommandPalette() {
   const allItems: SearchItem[] = [
     { label: "Dashboard", description: "Home overview", href: "/", category: "Page" },
     { label: "Vehicles", description: "All vehicle models", href: "/vehicles", category: "Page" },
+    { label: "Pricelist", description: "Printable customer pricelist", href: "/pricelist", category: "Page" },
     { label: "Handbook", description: "Master handbook", href: "/handbook", category: "Page" },
     { label: "API / Data", description: "Machine-readable JSON endpoints", href: "/data", category: "Page" },
     { label: "Changelog", description: "Version history", href: "/changelog", category: "Page" },

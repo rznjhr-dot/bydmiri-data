@@ -2,14 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { company } from "@/data";
 import { useEffect, useState } from "react";
 
 const navLinks = [
   { href: "/", label: "Dashboard" },
   { href: "/vehicles", label: "Vehicles" },
-  { href: "/ev-market", label: "EV Market" },
-  { href: "/ai-prompt-studio", label: "AI Prompt Studio" },
+  { href: "/pricelist", label: "Pricelist" },
   { href: "/rjeos", label: "RJEOS" },
   { href: "/admin", label: "Database Admin" },
   { href: "/changelog", label: "Changelog" },
@@ -54,10 +52,10 @@ export default function Navbar() {
             </div>
             <div className="hidden sm:block">
               <p className="text-sm font-bold text-[var(--color-text-primary)] tracking-tight leading-tight">
-                BYD Miri Knowledge Base Masterbook
+                Ridzuan &middot; BYD Miri
               </p>
               <p className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium leading-tight -mt-0.5">
-                {company.company}
+                Personal Database
               </p>
             </div>
           </Link>

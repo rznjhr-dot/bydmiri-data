@@ -1,5 +1,18 @@
 [
   {
+    "version": "V4.4",
+    "date": "2026-08-17",
+    "changes": [
+      "New customer-facing /pricelist page — printable price sheet with OTR → Rebate → Effective → Monthly hierarchy, 0%/10% downpayment toggle, optional spec columns (range, power, road tax, insurance, battery), adaptive density that rescales type as columns are toggled, PNG export and clean print/PDF output",
+      "Homepage rebranded as personal database — 'Ridzuan Jahari · BYD Miri' identity with status pills and live stats; hero converted to unified light-mode design for site-wide visual consistency",
+      "Pricelist promoted to featured primary card on homepage; navbar and command palette updated",
+      "Vehicle Database redesigned as one dense table — 10 variants visible in a single screen (was ~400px-tall cards), expandable rows reveal price breakdown, specs and promotion options; sticky column headers; ~80% less scrolling",
+      "EV Market and AI Prompt Studio sections removed — pages, components and unused types cleaned up",
+      "Footer colophon — centered typographic lockup (consultant | dealer | bydmiri.com) on pricelist; pricing disclaimer corrected to 'OTR with ESTIMATED insurance' with warranty footnote",
+      "Code cleanup — dead CSS removed (header-gradient, text-gradient, skeleton loaders, legacy BYD color palette, unused utility classes); homepage reference sections deduplicated into a shared ReferenceSection component"
+    ]
+  },
+  {
     "version": "V4.3",
     "date": "2026-08-16",
     "changes": [
