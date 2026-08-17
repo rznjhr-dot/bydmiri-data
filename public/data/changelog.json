@@ -1,5 +1,16 @@
 [
   {
+    "version": "V4.5",
+    "date": "2026-08-17",
+    "changes": [
+      "Pricelist mobile layout — table transforms into labeled stacked cards below 640px (CSS data-label technique, no horizontal scrolling); Monthly promoted to a full-width accent hero row per card; works with any optional-column combination",
+      "PNG export upgraded to true 600 DPI — renders at 6.25× on a pinned 1280px desktop layout and embeds a spec-compliant pHYs chunk (CRC32-validated) so editors/printers read 600 DPI instead of default 72; filename now carries -600dpi suffix",
+      "Dual-quality export toggle — '600 DPI' (print-grade, fixed desktop layout) vs 'Web' (captures current viewport at min(2, dpr×1.5) for ~10–15× smaller files suited for WhatsApp/Instagram)",
+      "Down-payment segmented control now 3-state — 0%, 10% or Both side-by-side monthly columns; adaptive density compensates for the extra column",
+      "Export typography sharpened — text-rendering: geometricPrecision, kerning and common ligatures on the price table; antialiasing enforced in print CSS for vector-sharp PDF text"
+    ]
+  },
+  {
     "version": "V4.4",
     "date": "2026-08-17",
     "changes": [

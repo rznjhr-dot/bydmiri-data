@@ -56,20 +56,64 @@ function densityFor(totalCols: number) {
   return DENSITY_STEPS.find((step) => totalCols <= step.maxCols) ?? DENSITY_STEPS[DENSITY_STEPS.length - 1];
 }
 
+/* Embed a pHYs chunk into a PNG so editors/printers read the intended
+ * DPI. Without it PNGs carry no density info and default to 72 DPI.
+ * Chunk layout: length(4) + "pHYs"(4) + xPPM(4) + yPPM(4) + unit(1) + crc32(4).
+ * CRC32 validated against test vector "123456789" → 0xcbf43926. */
+async function pngWithDpi(blob: Blob, dpi: number): Promise<Blob> {
+  const src = new Uint8Array(await blob.arrayBuffer());
+  const ppm = Math.round(dpi / 0.0254); // pixels per metre
+  const chunk = new Uint8Array(21);
+  const view = new DataView(chunk.buffer);
+  view.setUint32(0, 9); // data length
+  chunk.set([0x70, 0x48, 0x59, 0x73], 4); // "pHYs"
+  view.setUint32(8, ppm);
+  view.setUint32(12, ppm);
+  chunk[16] = 1; // unit specifier: metre
+  // CRC over chunk type + data
+  const crcInput = chunk.subarray(4, 17);
+  let c = ~0;
+  for (let i = 0; i < crcInput.length; i++) {
+    c ^= crcInput[i];
+    for (let k = 0; k < 8; k++) c = (c >>> 1) ^ (0xedb88320 & -(c & 1));
+  }
+  view.setUint32(17, ~c >>> 0);
+  // Insert after IHDR (8-byte signature + 25-byte IHDR chunk = offset 33)
+  const out = new Uint8Array(src.length + chunk.length);
+  out.set(src.subarray(0, 33), 0);
+  out.set(chunk, 33);
+  out.set(src.subarray(33), 33 + chunk.length);
+  return new Blob([out], { type: "image/png" });
+}
+
+type DownPct = 0 | 10 | "both";
+
+const DOWN_OPTIONS: { key: DownPct; label: string }[] = [
+  { key: 0, label: "0% Down" },
+  { key: 10, label: "10% Down" },
+  { key: "both", label: "Both" },
+];
+
+type ExportQuality = "full" | "compact";
+
 export default function PricelistPage() {
   const sheetRef = useRef<HTMLDivElement>(null);
-  const [downPct, setDownPct] = useState(0);
+  const [downPct, setDownPct] = useState<DownPct>(0);
   const [promoChoice] = useState<Record<string, number>>({});
   const [saving, setSaving] = useState(false);
   const [optionalCols, setOptionalCols] = useState<ColumnKey[]>([]);
+  const [exportQuality, setExportQuality] = useState<ExportQuality>("full");
 
   const toggleColumn = (key: ColumnKey) =>
     setOptionalCols((prev) =>
       prev.includes(key) ? prev.filter((c) => c !== key) : [...prev, key]
     );
 
-  /* 5 fixed columns + enabled optional ones */
-  const totalCols = 5 + optionalCols.length;
+  const showBoth = downPct === "both";
+  const monthlyCols: number[] = showBoth ? [0, 10] : [downPct];
+
+  /* 4 fixed columns + enabled optional ones + extra monthly column when Both */
+  const totalCols = 4 + optionalCols.length + monthlyCols.length;
   const density = densityFor(totalCols);
 
   const effectiveRebate = (model: string, variantName: string, fallback: number): number => {
@@ -95,20 +139,36 @@ export default function PricelistPage() {
     if (!sheetRef.current) return;
     setSaving(true);
     try {
-      const canvas = await html2canvas(sheetRef.current, {
+      /* Full: 600 DPI (600/96 = 6.25×) on a pinned 1280px desktop layout —
+         identical output from any device, print-grade.
+         Compact: 2× the CURRENT viewport width — matches what the user
+         sees (mobile gets the stacked-card layout), much smaller file,
+         ideal for WhatsApp/Instagram. No DPI tag (screen asset). */
+      const isFull = exportQuality === "full";
+      const DPI = 600;
+      const scale = isFull ? DPI / 96 : Math.min(2, (window.devicePixelRatio || 1) * 1.5);
+      const opts: Parameters<typeof html2canvas>[1] = {
         backgroundColor: "#ffffff",
-        scale: 2,
-      });
+        scale,
+      };
+      if (isFull) opts.windowWidth = 1280;
+      const canvas = await html2canvas(sheetRef.current, opts);
+      const blob = await new Promise<Blob | null>((res) =>
+        canvas.toBlob(res, "image/png")
+      );
+      if (!blob) throw new Error("toBlob failed");
+      const finalBlob = isFull ? await pngWithDpi(blob, DPI) : blob;
       const link = document.createElement("a");
-      link.download = `byd-miri-pricelist-${company.campaignVersion}.png`;
-      link.href = canvas.toDataURL("image/png");
+      link.download = `byd-miri-pricelist-${company.campaignVersion}${isFull ? "-600dpi" : "-web"}.png`;
+      link.href = URL.createObjectURL(finalBlob);
       link.click();
+      URL.revokeObjectURL(link.href);
     } catch {
       // silently fail
     } finally {
       setSaving(false);
     }
-  }, []);
+  }, [exportQuality]);
 
   return (
     <div className="min-h-screen">
@@ -134,26 +194,26 @@ export default function PricelistPage() {
       <main id="main-content" className="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4">
         {/* Controls (screen only) */}
         <div data-print="hide" className="flex flex-wrap items-center gap-2">
-          {/* Down-payment segmented control */}
+          {/* Down-payment segmented control: 0% / 10% / Both */}
           <div
             role="radiogroup"
             aria-label="Down payment scenario"
             className="relative inline-flex items-center p-0.5 rounded-full bg-[var(--color-bg-tertiary)] border border-[var(--color-border-primary)]"
           >
-            {[0, 10].map((pct) => {
-              const active = downPct === pct;
+            {DOWN_OPTIONS.map((opt) => {
+              const active = downPct === opt.key;
               return (
                 <button
-                  key={pct}
+                  key={opt.key}
                   type="button"
                   role="radio"
                   aria-checked={active}
-                  onClick={() => setDownPct(pct)}
+                  onClick={() => setDownPct(opt.key)}
                   className={`relative z-10 px-4 py-1.5 rounded-full text-xs font-semibold transition-colors duration-200 cursor-pointer ${
                     active ? "text-white" : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)]"
                   }`}
                 >
-                  {pct}% Down
+                  {opt.label}
                 </button>
               );
             })}
@@ -161,8 +221,8 @@ export default function PricelistPage() {
               aria-hidden
               className="absolute top-0.5 bottom-0.5 left-0.5 rounded-full bg-[var(--color-accent)] shadow-[0_2px_8px_rgba(29,78,216,0.35)] transition-transform duration-[250ms] [transition-timing-function:cubic-bezier(.4,0,.2,1)]"
               style={{
-                width: "calc(50% - 0.25rem)",
-                transform: downPct === 0 ? "translateX(0)" : "translateX(calc(100% + 0.25rem))",
+                width: "calc((100% - 0.5rem) / 3)",
+                transform: `translateX(calc(${DOWN_OPTIONS.findIndex((o) => o.key === downPct)} * (100% + 0.25rem)))`,
               }}
             />
           </div>
@@ -193,6 +253,36 @@ export default function PricelistPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
               Print / PDF
             </button>
+            {/* Export quality: Full (600 DPI, fixed desktop layout) vs
+                Compact (current viewport, small file for social) */}
+            <div
+              role="radiogroup"
+              aria-label="Export quality"
+              className="inline-flex items-center p-0.5 rounded-full bg-[var(--color-bg-tertiary)] border border-[var(--color-border-primary)]"
+            >
+              {([
+                { key: "full", label: "600 DPI" },
+                { key: "compact", label: "Web" },
+              ] as { key: ExportQuality; label: string }[]).map((opt) => {
+                const active = exportQuality === opt.key;
+                return (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => setExportQuality(opt.key)}
+                    className={`px-3 py-1 rounded-full text-[0.7rem] font-semibold transition-colors cursor-pointer ${
+                      active
+                        ? "bg-[var(--color-accent)] text-white shadow-[0_2px_8px_rgba(29,78,216,0.35)]"
+                        : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)]"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                );
+              })}
+            </div>
             <button type="button" onClick={handleDownload} disabled={saving} className="btn btn-primary btn-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               {saving ? "Saving..." : "PNG"}
@@ -267,9 +357,14 @@ export default function PricelistPage() {
                   <th className="text-right font-bold uppercase tracking-wider text-[var(--color-text-tertiary)]">
                     Effective
                   </th>
-                  <th className="text-right font-bold uppercase tracking-wider text-[var(--color-accent)]">
-                    Monthly ({downPct}% DP)
-                  </th>
+                  {monthlyCols.map((pct) => (
+                    <th
+                      key={pct}
+                      className="text-right font-bold uppercase tracking-wider text-[var(--color-accent)]"
+                    >
+                      {pct}% DP
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -280,7 +375,7 @@ export default function PricelistPage() {
                       key={`${model}-${variant.name}`}
                       className="border-b border-[var(--color-border-secondary)] last:border-b-0 hover:bg-[var(--color-accent-light)]/40 transition-colors"
                     >
-                      <td className="pr-3">
+                      <td data-label="Model" className="pr-3">
                         <span className="font-bold tracking-[-0.01em] text-[var(--color-text-primary)]">{model}</span>{" "}
                         <span className="font-medium text-[var(--color-text-secondary)]">{variant.name}</span>
                         {segment && (
@@ -292,23 +387,30 @@ export default function PricelistPage() {
                       {optionalCols.map((key) => (
                         <td
                           key={key}
+                          data-label={OPTIONAL_COLUMNS.find((c) => c.key === key)?.label}
                           className="text-right font-normal text-[var(--color-text-tertiary)] tabular-nums whitespace-nowrap"
                         >
                           {optionalCellValue(key, variant)}
                         </td>
                       ))}
-                      <td className="text-right font-medium text-[var(--color-text-secondary)] tabular-nums whitespace-nowrap">
+                      <td data-label="OTR w/ Ins." className="text-right font-medium text-[var(--color-text-secondary)] tabular-nums whitespace-nowrap">
                         {formatCurrency(variant.otr)}
                       </td>
-                      <td className="text-right font-semibold text-[var(--color-success)] tabular-nums whitespace-nowrap">
+                      <td data-label="Rebate" className="text-right font-semibold text-[var(--color-success)] tabular-nums whitespace-nowrap">
                         {rebate > 0 ? `-${formatCurrency(rebate)}` : "—"}
                       </td>
-                      <td className="text-right font-bold tracking-[-0.01em] text-[var(--color-text-primary)] tabular-nums whitespace-nowrap">
+                      <td data-label="Effective" className="text-right font-bold tracking-[-0.01em] text-[var(--color-text-primary)] tabular-nums whitespace-nowrap">
                         {formatCurrency(effective)}
                       </td>
-                      <td className="text-right pl-3 font-extrabold tracking-[-0.01em] text-[var(--color-accent)] tabular-nums whitespace-nowrap">
-                        {formatCurrency(calcMonthlyFromPrice(effective, downPct))}/mo
-                      </td>
+                      {monthlyCols.map((pct, mi) => (
+                        <td
+                          key={pct}
+                          data-label={`Monthly (${pct}% DP)`}
+                          className={`pl-monthly text-right font-extrabold tracking-[-0.01em] text-[var(--color-accent)] tabular-nums whitespace-nowrap ${mi === 0 ? "pl-3" : ""}`}
+                        >
+                          {formatCurrency(calcMonthlyFromPrice(effective, pct))}/mo
+                        </td>
+                      ))}
                     </tr>
                   );
                 })}

@@ -823,6 +823,10 @@
   --pl-lh: 1.35;
   font-size: var(--pl-fs);
   line-height: var(--pl-lh);
+  /* Sharper glyph rasterization for html2canvas capture */
+  text-rendering: geometricPrecision;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
 }
 .pl-table th {
   font-size: var(--pl-head-fs);
@@ -845,6 +849,77 @@
 .pl-table td.tabular-nums,
 .pl-table td .tabular-nums {
   letter-spacing: -0.01em;
+}
+
+/* Mobile (<640px): stack rows into labeled cards — no horizontal scroll.
+   Each td displays its data-label as a left column; Monthly is promoted
+   to a full-width hero row at the bottom of each card. */
+@media (max-width: 639.98px) {
+  .pl-table thead {
+    display: none;
+  }
+  .pl-table,
+  .pl-table tbody,
+  .pl-table tr,
+  .pl-table td {
+    display: block;
+    width: 100%;
+  }
+  .pl-table tr {
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--radius-md);
+    margin-bottom: 0.5rem;
+    background: var(--color-bg-secondary);
+  }
+  .pl-table tr:last-child {
+    margin-bottom: 0;
+  }
+  .pl-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.1875rem 0;
+    text-align: right;
+    border: none;
+  }
+  .pl-table td[data-label]::before {
+    content: attr(data-label);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: left;
+    flex-shrink: 0;
+  }
+  /* Model cell — header of the card */
+  .pl-table td[data-label="Model"] {
+    padding-bottom: 0.375rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--color-border-secondary);
+    font-size: 0.875rem;
+  }
+  .pl-table td[data-label="Model"]::before {
+    display: none;
+  }
+  /* Monthly — hero row */
+  .pl-table td.pl-monthly {
+    margin-top: 0.375rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border-secondary);
+    background: linear-gradient(180deg, var(--color-accent-light), transparent);
+    margin-left: -0.875rem;
+    margin-right: -0.875rem;
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    font-size: 0.9375rem;
+  }
+  .pl-table td.pl-monthly::before {
+    color: var(--color-accent);
+  }
 }
 
 /* ─── Vehicles: dense table ────────────────────────────────── */
@@ -909,6 +984,12 @@
     box-shadow: none !important;
     border-radius: 0 !important;
     padding: 0 !important;
+  }
+  /* Vector-sharp text in PDF output */
+  .pl-card,
+  .pl-table {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   /* Keep brand colors in PDF */
   * {
