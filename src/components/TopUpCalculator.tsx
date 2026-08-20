@@ -34,7 +34,8 @@ export default function TopUpCalculator() {
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [includeRebate, setIncludeRebate] = useState(true);
   const [includeCspRebate, setIncludeCspRebate] = useState(true);
-  const [downpaymentPct, setDownpaymentPct] = useState<number>(10);
+  const [downpaymentPct, setDownpaymentPct] = useState<number | null>(10);
+  const [downpaymentCustom, setDownpaymentCustom] = useState("");
   const [actualInsurance, setActualInsurance] = useState("");
   const [approvedLoan, setApprovedLoan] = useState("");
   const [bookingFeeInput, setBookingFeeInput] = useState("");
@@ -76,12 +77,20 @@ export default function TopUpCalculator() {
 
   // Deductions (B)
   const rebateTotal = rebate + cspAmount;
-  const standardDown = (quotedAfterRebate * downpaymentPct) / 100;
+  const customDown = parseNum(downpaymentCustom);
+  const effectiveDownPct =
+    customDown !== null && quotedAfterRebate > 0
+      ? (customDown / quotedAfterRebate) * 100
+      : null;
+  const standardDown =
+    customDown !== null
+      ? customDown
+      : (quotedAfterRebate * (downpaymentPct ?? 10)) / 100;
   const approved = parseNum(approvedLoan);
   const financing =
     approved !== null
       ? approved
-      : subtotalA - standardDown - rebateTotal - bookingFee;
+      : Math.max(0, subtotalA - standardDown - rebateTotal - bookingFee);
   const subtotalB = financing + rebateTotal + bookingFee;
   const balance = subtotalA - subtotalB;
 
@@ -108,6 +117,7 @@ export default function TopUpCalculator() {
       "Subtotal Deductions (B): " + formatCurrency(subtotalB),
       "",
       "BALANCE PAYABLE (A - B): " + formatCurrency(balance),
+      "Customer Downpayment: " + formatCurrency(standardDown) + (customDown !== null && effectiveDownPct !== null ? " (custom ≈" + effectiveDownPct.toFixed(1) + "%)" : " (" + (downpaymentPct ?? 10) + "%)"),
       "",
       "━━━━━━━━━━━━━━━━━━",
       "PAYMENT INFORMATION",
@@ -137,7 +147,7 @@ export default function TopUpCalculator() {
       setCopied(true);
     }
     setTimeout(() => setCopied(false), 2000);
-  }, [currentVehicle, currentVariant, sellingPrice, roadTax, insurancePremium, registrationFee, b2InspectionFee, evPlateFee, subtotalA, financing, approved, rebateTotal, bookingFee, subtotalB, balance]);
+  }, [currentVehicle, currentVariant, sellingPrice, roadTax, insurancePremium, registrationFee, b2InspectionFee, evPlateFee, subtotalA, financing, approved, rebateTotal, bookingFee, subtotalB, balance, standardDown, customDown, downpaymentPct, effectiveDownPct]);
 
   const onModelChange = (model: string) => {
     setSelectedModel(model);
@@ -145,6 +155,7 @@ export default function TopUpCalculator() {
     setActualInsurance("");
     setApprovedLoan("");
     setBookingFeeInput("");
+    setDownpaymentCustom("");
   };
 
   const onVariantChange = (idx: number) => {
@@ -152,6 +163,7 @@ export default function TopUpCalculator() {
     setActualInsurance("");
     setApprovedLoan("");
     setBookingFeeInput("");
+    setDownpaymentCustom("");
   };
 
   return (
@@ -163,7 +175,7 @@ export default function TopUpCalculator() {
           <div className="p-2.5 space-y-2">
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                   Model
                 </label>
                 <select
@@ -180,7 +192,7 @@ export default function TopUpCalculator() {
               </div>
               {currentVehicle.variants.length > 1 && (
                 <div>
-                  <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+                  <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                     Variant
                   </label>
                   <select
@@ -228,26 +240,47 @@ export default function TopUpCalculator() {
 
             {/* Downpayment */}
             <div>
-              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                 Downpayment (auto financing)
               </label>
-              <div className="flex gap-1">
+              <div className="flex gap-1 mb-1">
                 {[0, 10, 15, 20].map((pct) => (
                   <button
                     key={pct}
                     type="button"
-                    onClick={() => setDownpaymentPct(pct)}
-                    className={`pill !text-xs !py-2 flex-1 ${downpaymentPct === pct ? "pill-active" : ""}`}
+                    onClick={() => {
+                      setDownpaymentPct(pct);
+                      setDownpaymentCustom("");
+                    }}
+                    className={`pill !text-xs !py-2 flex-1 ${downpaymentPct === pct && !downpaymentCustom ? "pill-active" : ""}`}
                   >
                     {pct}%
                   </button>
                 ))}
               </div>
+              <div className="input-group">
+                <span className="input-prefix !text-[0.7rem]">RM</span>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="Custom amount (override %)"
+                  value={downpaymentCustom}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^0-9,]/g, "");
+                    setDownpaymentCustom(val);
+                    if (val) setDownpaymentPct(null);
+                  }}
+                  className="input !text-xs !py-1.5"
+                />
+              </div>
+              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-0.5">
+                kosong = guna {downpaymentPct ?? 10}% auto · isi amount untuk override
+              </p>
             </div>
 
             {/* Actual insurance */}
             <div>
-              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                 Actual Insurance
               </label>
               <div className="input-group">
@@ -268,8 +301,8 @@ export default function TopUpCalculator() {
 
             {/* Approved loan */}
             <div>
-              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
-                Financing Amount (kosong = auto {downpaymentPct}% down)
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
+                Financing Amount (kosong = auto {downpaymentPct ?? 10}% down)
               </label>
               <div className="input-group">
                 <span className="input-prefix !text-[0.7rem]">RM</span>
@@ -286,7 +319,7 @@ export default function TopUpCalculator() {
 
             {/* Booking Fee */}
             <div>
-              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                 Booking Fee
               </label>
               <div className="input-group">
@@ -309,7 +342,7 @@ export default function TopUpCalculator() {
           {/* Results */}
           <div className="p-2.5 bg-gradient-to-r from-[var(--color-accent-light)]/70 to-[var(--color-bg-secondary)]">
             <div className="flex items-center justify-between mb-1.5">
-              <h3 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest">
+              <h3 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)]">
                 Price Breakdown Summary
               </h3>
               <button
@@ -337,7 +370,7 @@ export default function TopUpCalculator() {
             </p>
 
             <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[0.7rem]">
-              <div className="col-span-2 text-[0.7rem] font-bold text-[var(--color-text-tertiary)] uppercase tracking-widest border-t border-[var(--color-border-primary)]/50 pt-1">
+              <div className="col-span-2 text-[0.7rem] font-bold text-[var(--color-text-tertiary)] border-t border-[var(--color-border-primary)]/50 pt-1">
                 Selling Price Breakdown
               </div>
               <div className="flex justify-between col-span-2">
@@ -369,7 +402,7 @@ export default function TopUpCalculator() {
                 <span className="font-bold">{formatCurrency(subtotalA)}</span>
               </div>
 
-              <div className="col-span-2 text-[0.7rem] font-bold text-[var(--color-text-tertiary)] uppercase tracking-widest border-t border-[var(--color-border-primary)]/50 pt-1">
+              <div className="col-span-2 text-[0.7rem] font-bold text-[var(--color-text-tertiary)] border-t border-[var(--color-border-primary)]/50 pt-1">
                 Deductions
               </div>
               <div className="flex justify-between col-span-2">
@@ -393,13 +426,25 @@ export default function TopUpCalculator() {
                 <span className="text-[var(--color-text-primary)] font-bold">Balance Payable (A − B)</span>
                 <span className="font-extrabold">{formatCurrency(balance)}</span>
               </div>
+
+              <div className="flex justify-between col-span-2 border-t-2 border-amber-300/50 bg-amber-50/40 -mx-1 px-1 py-0.5 rounded">
+                <span className="text-[var(--color-text-primary)] font-bold">Customer Downpayment</span>
+                <span className="font-extrabold text-amber-600">
+                  {formatCurrency(standardDown)}
+                  <span className="text-[var(--color-text-tertiary)] font-normal text-[0.65rem] ml-1">
+                    {customDown !== null && effectiveDownPct !== null
+                      ? "(≈" + effectiveDownPct.toFixed(1) + "%)"
+                      : "(" + (downpaymentPct ?? 10) + "%)"}
+                  </span>
+                </span>
+              </div>
             </div>
 
             <div className={`mt-2 rounded-lg px-2.5 py-2 border-t-2 ${balance > 0 ? "border-red-200 bg-red-50" : "border-green-200 bg-green-50"}`}>
               <p className="text-[0.7rem] font-medium text-[var(--color-text-tertiary)]">
                 {balance > 0 ? "Customer kena bayar (balance payable)" : "Tiada baki diperlukan"}
               </p>
-              <p className={`text-lg sm:text-xl font-extrabold tracking-tight ${balance > 0 ? "text-red-600" : "text-green-600"}`}>
+              <p className={`text-lg sm:text-xl font-bold tracking-tight num ${balance > 0 ? "text-red-600" : "text-green-600"}`}>
                 {formatCurrency(balance)}
               </p>
             </div>

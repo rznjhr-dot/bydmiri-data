@@ -1,59 +1,78 @@
 @import "tailwindcss";
 
-/* ─── Design System ─────────────────────────────────────────── */
+/* ─── Design System — BYD Miri Sales Console ─────────────────────
+   Design read: internal sales-operations dashboard, single user,
+   mobile-heavy. Trust-first precision-instrument language.
+   Dials: VARIANCE 4 · MOTION 3 · DENSITY 6
+   Principles:
+   - Hairline dividers over boxed cards when hierarchy allows
+   - Geist Sans for text, Geist Mono for all numerals (tabular-nums)
+   - One accent (steel blue), desaturated, locked across the app
+   - Radius scale: sharp inner (4px), soft surfaces (10/14), pill interactive
+   - Tinted shadows (navy hue), no pure-black drop shadows
+   - No eyebrows above every section; sentence case over ALL-CAPS labels
+   - Motion: CSS-only, transform/opacity, 150-220ms, honors reduced-motion
+*/
 
 @theme {
-  /* Semantic Colors — Light (premium palette) */
-  --color-bg-primary: #f7f8fb;
-  --color-bg-secondary: #ffffff;
-  --color-bg-tertiary: #eef0f5;
-  --color-bg-hover: #e9ebf2;
+  /* Semantic Colors — Light (steel-blue tinted neutrals) */
+  --color-bg-primary: #f4f6fa;      /* app canvas — cool steel */
+  --color-bg-secondary: #ffffff;    /* elevated surface */
+  --color-bg-tertiary: #eaedf4;     /* recessed field */
+  --color-bg-hover: #e4e8f1;
 
-  --color-text-primary: #0a0c13;
-  --color-text-secondary: #3d4257;
-  --color-text-tertiary: #7c8299;
-  --color-text-disabled: #b6bac9;
+  --color-text-primary: #0d1019;    /* near-black, navy-warm */
+  --color-text-secondary: #3a3f55;
+  --color-text-tertiary: #6f7591;
+  --color-text-disabled: #a8aebf;
 
-  --color-border-primary: #dde0ea;
-  --color-border-secondary: #eef0f5;
-  --color-border-hover: #b6bac9;
+  --color-border-primary: #d9dde8;
+  --color-border-secondary: #eaedf4;
+  --color-border-hover: #a8aebf;
 
-  --color-accent: #1d4ed8;
-  --color-accent-hover: #1e40af;
-  --color-accent-light: #eef2ff;
-  --color-accent-subtle: rgba(29, 78, 216, 0.08);
+  /* Single accent: steel blue, saturation ~72% (under 80% per skill) */
+  --color-accent: #2356c8;
+  --color-accent-hover: #1a44a3;
+  --color-accent-light: #eaf0fb;
+  --color-accent-subtle: rgba(35, 86, 200, 0.07);
 
-  --color-success: #059669;
+  --color-success: #047857;
   --color-success-light: #d1fae5;
-  --color-success-subtle: rgba(5, 150, 105, 0.08);
+  --color-success-subtle: rgba(4, 120, 87, 0.07);
 
-  --color-warning: #d97706;
+  --color-warning: #b45309;
   --color-warning-light: #fef3c7;
-  --color-warning-subtle: rgba(217, 119, 6, 0.08);
+  --color-warning-subtle: rgba(180, 83, 9, 0.07);
 
-  --color-danger: #dc2626;
+  --color-danger: #b91c1c;
   --color-danger-light: #fee2e2;
-  --color-danger-subtle: rgba(220, 38, 38, 0.08);
+  --color-danger-subtle: rgba(185, 28, 28, 0.07);
 
-  --color-neutral-50: #f8f9fc;
-  --color-neutral-100: #f1f3f8;
-  --color-neutral-200: #e2e4ed;
-  --color-neutral-300: #c2c6d4;
-  --color-neutral-400: #8b90a5;
+  /* Neutrals — consistent cool-navy family, no warm/cool mixing */
+  --color-neutral-50: #f6f8fb;
+  --color-neutral-100: #eef1f6;
+  --color-neutral-200: #e0e4ee;
+  --color-neutral-300: #c0c5d6;
+  --color-neutral-400: #8a90a8;
   --color-neutral-500: #4a5069;
   --color-neutral-600: #2d3148;
   --color-neutral-700: #1a1d2e;
   --color-neutral-800: #0b0d14;
   --color-neutral-900: #06070b;
 
-  /* Shadows — layered with navy tint for depth */
-  --shadow-subtle: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.05);
-  --shadow-medium: 0 2px 4px rgba(15, 23, 42, 0.04), 0 10px 22px rgba(15, 23, 42, 0.06);
-  --shadow-elevated: 0 4px 8px rgba(15, 23, 42, 0.05), 0 20px 40px rgba(15, 23, 42, 0.09);
-  --shadow-dialog: 0 8px 16px rgba(15, 23, 42, 0.08), 0 36px 72px rgba(15, 23, 42, 0.14);
+  /* Shadows — layered, tinted with the navy hue of the palette */
+  --shadow-subtle: 0 1px 2px rgba(13, 16, 25, 0.05), 0 1px 3px rgba(13, 16, 25, 0.04);
+  --shadow-medium: 0 2px 4px rgba(13, 16, 25, 0.04), 0 8px 20px rgba(13, 16, 25, 0.06);
+  --shadow-elevated: 0 4px 8px rgba(13, 16, 25, 0.05), 0 18px 36px rgba(13, 16, 25, 0.08);
+  --shadow-dialog: 0 8px 16px rgba(13, 16, 25, 0.08), 0 32px 64px rgba(13, 16, 25, 0.12);
+  /* Accent-tinted shadows for branded interactive elements */
+  --shadow-accent: 0 2px 8px rgba(35, 86, 200, 0.32);
+  --shadow-accent-lg: 0 8px 24px rgba(35, 86, 200, 0.32);
+  --shadow-accent-glow: 0 4px 16px rgba(35, 86, 200, 0.42);
 
-  /* Radii — softer, premium corners */
-  --radius-sm: 8px;
+  /* Radius scale — documented rule:
+     inner chips 4px · surfaces 10/14px · interactive 9999px (pill) */
+  --radius-sm: 4px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 18px;
@@ -62,7 +81,7 @@
   --text-2xs: 0.7rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-hero: clamp(1.375rem, 1rem + 1.75vw, 1.875rem);
+  --text-hero: clamp(1.5rem, 1rem + 2vw, 2.25rem);
 
   /* Spacing */
   --space-section: clamp(1.25rem, 3vw, 2rem);
@@ -86,6 +105,17 @@
     line-height: 1.6;
   }
 
+  /* Subtle grain — on a fixed pseudo so it never repaints during scroll */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(13, 16, 25, 0.018) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -101,7 +131,8 @@
     color: var(--color-accent);
   }
 
-  /* Numeric alignment for prices & stats */
+  /* Numerals: every price, stat & spec reads in mono with tabular
+     figures — the instrument-panel signature of this design system */
   .stat-value,
   .stat-label,
   .chip,
@@ -130,44 +161,44 @@
 /* ─── Component Classes ─────────────────────────────────────── */
 
 @layer components {
-  /* Card System */
+  /* Card System — elevation only when hierarchy demands.
+     Default: hairline border + subtle shadow, no hover lift on
+     static cards. `.card-interactive` opts in to lift. */
   .card {
     background-color: var(--color-bg-secondary);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-subtle);
     padding: 1.25rem;
     border: 1px solid var(--color-border-primary);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-  }
-  .card:hover {
-    box-shadow: var(--shadow-medium);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
   }
   .card-elevated {
     box-shadow: var(--shadow-medium);
   }
-  .card-elevated:hover {
-    box-shadow: var(--shadow-elevated);
-    transform: translateY(-1px);
-  }
   .card-interactive {
     cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+  .card-interactive:hover {
+    box-shadow: var(--shadow-elevated);
+    border-color: color-mix(in srgb, var(--color-accent) 24%, var(--color-border-primary));
   }
   .card-interactive:active {
     transform: scale(0.99);
   }
   @media (max-width: 640px) {
     .card {
-      padding: 0.75rem;
+      padding: 0.875rem;
       border-radius: var(--radius-md);
     }
   }
 
-  /* Badge System */
+  /* Badge System — squircle (radius-sm), not pill. One weight. */
   .badge {
     display: inline-flex;
     align-items: center;
-    border-radius: 9999px;
-    padding: 0.125rem 0.625rem;
+    border-radius: var(--radius-sm);
+    padding: 0.125rem 0.5rem;
     font-size: 0.6875rem;
     font-weight: 600;
     line-height: 1.5;
@@ -177,12 +208,12 @@
   .badge-blue {
     background-color: var(--color-accent-light);
     color: var(--color-accent);
-    border: 1px solid var(--color-accent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 22%, transparent);
   }
   .badge-green {
     background-color: var(--color-success-light);
     color: var(--color-success);
-    border: 1px solid var(--color-success);
+    border: 1px solid color-mix(in srgb, var(--color-success) 22%, transparent);
   }
   .badge-gray {
     background-color: var(--color-neutral-100);
@@ -192,21 +223,17 @@
   .badge-amber {
     background-color: var(--color-warning-light);
     color: var(--color-warning);
-    border: 1px solid var(--color-warning);
+    border: 1px solid color-mix(in srgb, var(--color-warning) 22%, transparent);
   }
-  .badge-purple {
-    background-color: #f3e8ff;
-    color: #9333ea;
-    border: 1px solid #d8b4fe;
-  }
+  /* badge-purple removed — single-accent lock, no secondary purple */
 
-  /* Section Title */
+  /* Section Title — sentence case default, tighter, no eyebrow needed */
   .section-title {
     font-size: 0.9375rem;
     font-weight: 700;
     color: var(--color-text-primary);
     margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
   }
   @media (max-width: 640px) {
     .section-title {
@@ -215,17 +242,18 @@
     }
   }
 
-  /* Page Header — premium treatment for all inner-page headers */
+  /* Page Header — ambient steel-blue radial wash, not a flat band */
   .page-header {
     position: relative;
     border-bottom: 1px solid var(--color-border-primary);
     background:
-      radial-gradient(1200px 300px at 20% -50%, rgba(29, 78, 216, 0.06), transparent 60%),
-      radial-gradient(800px 260px at 85% -60%, rgba(5, 150, 105, 0.04), transparent 55%),
+      radial-gradient(1100px 280px at 18% -40%, rgba(35, 86, 200, 0.07), transparent 60%),
+      radial-gradient(700px 240px at 88% -50%, rgba(4, 120, 87, 0.035), transparent 55%),
       linear-gradient(180deg, #ffffff 0%, var(--color-bg-primary) 100%);
   }
 
-  /* Tool Card — premium quick-action cards */
+  /* Tool Card — premium quick-action cards.
+     No inner border on the icon tile; the accent wash IS the container. */
   .tool-card {
     position: relative;
     display: flex;
@@ -237,7 +265,7 @@
     background-color: var(--color-bg-secondary);
     border: 1px solid var(--color-border-primary);
     box-shadow: var(--shadow-subtle);
-    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
     text-decoration: none;
     color: var(--color-text-primary);
   }
@@ -256,7 +284,7 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: var(--radius-lg);
-    transition: transform 0.2s ease;
+    transition: transform 0.22s ease;
   }
   .tool-card:hover .tool-card-icon {
     transform: scale(1.08);
@@ -264,7 +292,7 @@
   .tool-card-title {
     font-size: 0.9375rem;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
     line-height: 1.3;
   }
   .tool-card-desc {
@@ -274,7 +302,7 @@
     margin-top: -0.375rem;
   }
 
-  /* Chip — mono value chip */
+  /* Chip — mono value chip, sharp corners */
   .chip {
     display: inline-flex;
     align-items: center;
@@ -290,7 +318,7 @@
     white-space: nowrap;
   }
 
-  /* Nav pill — navbar links */
+  /* Nav pill — navbar links. Active = accent wash, no hard border */
   .nav-pill {
     display: inline-flex;
     align-items: center;
@@ -309,7 +337,7 @@
   .nav-pill-active {
     color: var(--color-accent);
     background-color: var(--color-accent-light);
-    border-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
     font-weight: 600;
   }
   .nav-pill-active:hover {
@@ -330,11 +358,11 @@
     );
   }
 
-  /* Form Elements */
+  /* Form Elements — label above, helper below, focus ring uses accent */
   .input {
     width: 100%;
     border: 1px solid var(--color-border-primary);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     padding: 0.625rem 0.875rem;
     font-size: 0.875rem;
     background-color: var(--color-bg-secondary);
@@ -370,7 +398,7 @@
   .select {
     width: 100%;
     border: 1px solid var(--color-border-primary);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     padding: 0.625rem 0.875rem;
     font-size: 0.875rem;
     background-color: var(--color-bg-secondary);
@@ -378,7 +406,7 @@
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     outline: none;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b90a5' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236f7591' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     padding-right: 2.25rem;
@@ -388,7 +416,7 @@
     box-shadow: 0 0 0 3px var(--color-accent-subtle);
   }
 
-  /* Toggle Switch */
+  /* Toggle Switch — accent (not success) for consistency */
   .toggle {
     position: relative;
     display: inline-flex;
@@ -404,7 +432,7 @@
     position: relative;
   }
   .toggle.active .toggle-track {
-    background-color: var(--color-success);
+    background-color: var(--color-accent);
   }
   .toggle-thumb {
     position: absolute;
@@ -415,19 +443,19 @@
     border-radius: 9999px;
     background-color: white;
     transition: transform 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 3px rgba(13, 16, 25, 0.18);
   }
   .toggle.active .toggle-thumb {
     transform: translateX(1rem);
   }
 
-  /* Pill Button */
+  /* Pill Button — interactive radius 9999, touch target safe */
   .pill {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.375rem 0.75rem;
-    border-radius: var(--radius-lg);
+    border-radius: 9999px;
     font-size: 0.8125rem;
     font-weight: 500;
     transition: all 0.15s ease;
@@ -436,13 +464,13 @@
     background-color: var(--color-neutral-100);
     color: var(--color-text-secondary);
     white-space: nowrap;
-    min-height: 2.25rem; /* 36px — expandable hit area below */
+    min-height: 2.25rem;
     position: relative;
   }
   .pill::after {
     content: "";
     position: absolute;
-    inset: -0.375rem; /* ~44px effective touch target */
+    inset: -0.375rem;
   }
   .pill:hover {
     background-color: var(--color-bg-hover);
@@ -454,7 +482,7 @@
   .pill-active {
     background-color: var(--color-accent);
     color: white;
-    box-shadow: 0 1px 3px rgba(29, 78, 216, 0.3);
+    box-shadow: var(--shadow-accent);
   }
   .pill-active:hover {
     background-color: var(--color-accent-hover);
@@ -468,7 +496,7 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     font-size: 0.8125rem;
     font-weight: 600;
     transition: all 0.15s ease;
@@ -482,7 +510,7 @@
   }
   @media (pointer: coarse) {
     .btn {
-      min-height: 2.75rem; /* 44px touch */
+      min-height: 2.75rem;
     }
     .btn-sm {
       min-height: 2.5rem;
@@ -515,17 +543,16 @@
   .btn-sm {
     padding: 0.375rem 0.75rem;
     font-size: 0.75rem;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
   }
 
-  /* Stat Card */
+  /* Stat Card — recessed surface (tertiary bg) for instrument feel */
   .stat {
     text-align: center;
     padding: 0.875rem 0.75rem;
     border-radius: var(--radius-lg);
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-primary);
-    box-shadow: var(--shadow-subtle);
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border-secondary);
     position: relative;
     overflow: hidden;
   }
@@ -539,10 +566,11 @@
     background: linear-gradient(90deg, var(--color-accent), transparent);
   }
   .stat-value {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--color-accent);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     line-height: 1.2;
   }
   .stat-label {
@@ -550,6 +578,7 @@
     color: var(--color-text-tertiary);
     margin-top: 0.125rem;
     font-weight: 500;
+    /* sentence case, not ALL-CAPS — removed 0.12em tracking */
   }
   @media (max-width: 640px) {
     .stat-value {
@@ -560,7 +589,7 @@
     }
   }
 
-  /* Data Row */
+  /* Data Row — hairline pair, mono value */
   .data-row {
     display: flex;
     justify-content: space-between;
@@ -572,6 +601,7 @@
     font-size: 0.8125rem;
   }
   .data-row-value {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
     font-weight: 600;
     color: var(--color-text-primary);
     font-size: 0.875rem;
@@ -601,6 +631,7 @@
     height: 0.5rem;
     border-radius: 9999px;
     background-color: var(--color-success);
+    box-shadow: 0 0 0 3px var(--color-success-subtle);
   }
 }
 
@@ -807,6 +838,12 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  /* Instrument numerals: every currency/percent figure renders in mono */
+  .num {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
   }
 }
 

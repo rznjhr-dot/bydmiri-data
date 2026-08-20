@@ -3,3 +3,10 @@ node_modules/
 out/
 .DS_Store
 *.local
+
+# Build cache
+tsconfig.tsbuildinfo
+
+# Playwright MCP test artifacts
+.playwright-mcp/
+*.playwright-mcp/

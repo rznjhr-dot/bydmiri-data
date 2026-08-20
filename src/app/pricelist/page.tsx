@@ -219,7 +219,7 @@ export default function PricelistPage() {
             })}
             <span
               aria-hidden
-              className="absolute top-0.5 bottom-0.5 left-0.5 rounded-full bg-[var(--color-accent)] shadow-[0_2px_8px_rgba(29,78,216,0.35)] transition-transform duration-[250ms] [transition-timing-function:cubic-bezier(.4,0,.2,1)]"
+              className="absolute top-0.5 bottom-0.5 left-0.5 rounded-full bg-[var(--color-accent)] shadow-[var(--shadow-accent)] transition-transform duration-[250ms] [transition-timing-function:cubic-bezier(.4,0,.2,1)]"
               style={{
                 width: "calc((100% - 0.5rem) / 3)",
                 transform: `translateX(calc(${DOWN_OPTIONS.findIndex((o) => o.key === downPct)} * (100% + 0.25rem)))`,
@@ -274,7 +274,7 @@ export default function PricelistPage() {
                     onClick={() => setExportQuality(opt.key)}
                     className={`px-3 py-1 rounded-full text-[0.7rem] font-semibold transition-colors cursor-pointer ${
                       active
-                        ? "bg-[var(--color-accent)] text-white shadow-[0_2px_8px_rgba(29,78,216,0.35)]"
+                        ? "bg-[var(--color-accent)] text-white shadow-[var(--shadow-accent)]"
                         : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)]"
                     }`}
                   >

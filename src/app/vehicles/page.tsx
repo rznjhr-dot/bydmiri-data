@@ -54,7 +54,7 @@ function PromoSelector({
               onClick={() => onChoose(key, opt.rebate)}
               className={`inline-flex items-center gap-1 rounded-full border text-[0.7rem] px-2.5 py-1 font-semibold transition-all cursor-pointer ${
                 active
-                  ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)] shadow-[0_2px_8px_rgba(29,78,216,0.35)]"
+                  ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)] shadow-[var(--shadow-accent)]"
                   : "bg-white border-[var(--color-border-primary)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)]/50 hover:text-[var(--color-text-primary)]"
               }`}
             >

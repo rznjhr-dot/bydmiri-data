@@ -36,8 +36,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[var(--color-bg-secondary)]/85 backdrop-blur-xl border-b border-[var(--color-border-primary)] shadow-[0_4px_24px_rgba(15,23,42,0.06)]"
-          : "bg-[var(--color-bg-secondary)]/70 backdrop-blur-md border-b border-[var(--color-border-primary)]/60"
+          ? "bg-[var(--color-bg-secondary)]/88 backdrop-blur-xl border-b border-[var(--color-border-primary)] shadow-[var(--shadow-medium)]"
+          : "bg-[var(--color-bg-secondary)]/72 backdrop-blur-md border-b border-[var(--color-border-primary)]/60"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +47,7 @@ export default function Navbar() {
             href="/"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-accent)] to-[#0f2f7d] flex items-center justify-center shadow-[0_2px_8px_rgba(29,78,216,0.35)] group-hover:shadow-[0_4px_14px_rgba(29,78,216,0.45)] transition-shadow">
+            <div className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-[var(--color-accent)] to-[#123a8f] flex items-center justify-center shadow-[var(--shadow-accent)] group-hover:shadow-[var(--shadow-accent-glow)] transition-shadow">
               <span className="text-white text-[0.7rem] font-extrabold tracking-tight">RJ</span>
             </div>
             <div className="hidden sm:block">
@@ -86,7 +86,7 @@ export default function Navbar() {
               aria-label="Open command palette"
               className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-sm text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)]/60 border border-[var(--color-border-primary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-secondary)] transition-all w-48 cursor-pointer"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               <span className="flex-1 text-left">Search...</span>
               <kbd>⌘K</kbd>
             </button>
@@ -98,7 +98,7 @@ export default function Navbar() {
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                 {menuOpen ? (
                   <>
                     <line x1="18" y1="6" x2="6" y2="18"/>
@@ -143,7 +143,7 @@ export default function Navbar() {
               className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer touch-target"
               aria-label="Search"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               Search
             </button>
           </nav>

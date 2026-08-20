@@ -165,7 +165,7 @@ export default function LoanCalculator() {
             {/* Model + Variant row */}
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                   Model
                 </label>
                 <select
@@ -186,7 +186,7 @@ export default function LoanCalculator() {
               </div>
               {currentVehicle.variants.length > 1 && (
                 <div>
-                  <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+                  <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                     Variant
                   </label>
                   <select
@@ -211,7 +211,7 @@ export default function LoanCalculator() {
             <div className="grid grid-cols-2 gap-2">
               {promoOptions && promoOptions.length > 1 ? (
                 <div className={`bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)] ${cspReplacement ? "col-span-2" : ""}`}>
-                  <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1">
+                  <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-1">
                     Promotion
                   </label>
                   <div className="flex flex-wrap gap-1.5">
@@ -229,7 +229,7 @@ export default function LoanCalculator() {
                           }}
                           className={`inline-flex items-center gap-1 rounded-full border font-semibold transition-all cursor-pointer text-[0.7rem] px-2 py-1 ${
                             active
-                              ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)] shadow-[0_2px_8px_rgba(29,78,216,0.35)]"
+                              ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)] shadow-[var(--shadow-accent)]"
                               : "bg-white border-[var(--color-border-primary)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)]/50 hover:text-[var(--color-text-primary)]"
                           }`}
                         >
@@ -274,7 +274,7 @@ export default function LoanCalculator() {
 
             {/* Downpayment */}
             <div>
-              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                 Downpayment
               </label>
               <div className="flex gap-1 mb-1">
@@ -314,7 +314,7 @@ export default function LoanCalculator() {
             {/* Tenure + Interest row */}
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                   Tenure
                 </label>
                 <div className="grid grid-cols-4 gap-1.5">
@@ -331,7 +331,7 @@ export default function LoanCalculator() {
                 </div>
               </div>
               <div>
-                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-0.5">
+                <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                   Interest Rate
                 </label>
                 <div className="input-group">
@@ -355,7 +355,7 @@ export default function LoanCalculator() {
           {/* Results */}
           <div className="p-2.5 bg-gradient-to-r from-[var(--color-accent-light)]/70 to-[var(--color-bg-secondary)]">
             <div className="flex items-center justify-between mb-1.5">
-              <h3 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest">
+              <h3 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)]">
                 Payment Summary
               </h3>
               <button
@@ -424,9 +424,9 @@ export default function LoanCalculator() {
             <div className="mt-2 pt-1.5 border-t-2 border-accent/20 flex items-center justify-between">
               <div>
                 <p className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium">Monthly</p>
-                <p className="text-[0.7rem] text-[var(--color-text-tertiary)]">{parsedInterestRate}% × {tenure}y</p>
+                <p className="text-[0.7rem] text-[var(--color-text-tertiary)] num">{parsedInterestRate}% × {tenure}y</p>
               </div>
-              <p className="text-lg sm:text-xl font-extrabold text-accent tracking-tight">
+              <p className="text-lg sm:text-xl font-bold text-accent tracking-tight num">
                 {formatCurrency(monthlyPayment)}
                 <span className="text-[0.7rem] font-normal text-[var(--color-text-tertiary)]">/mo</span>
               </p>

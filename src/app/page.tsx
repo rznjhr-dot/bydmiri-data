@@ -83,18 +83,18 @@ export default function Home() {
       >
         {/* ─── Hero — personal command center ─────────────── */}
         <section className="page-header relative overflow-hidden rounded-2xl border border-[var(--color-border-primary)] shadow-[var(--shadow-subtle)]">
-          <div className="relative px-5 sm:px-7 py-6 sm:py-7">
+          <div className="relative px-5 sm:px-7 py-6 sm:py-8">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               {/* Identity */}
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-accent)] to-[#0f2f7d] flex items-center justify-center shadow-[0_8px_24px_rgba(29,78,216,0.35)] shrink-0">
+                <div className="w-14 h-14 rounded-[16px] bg-gradient-to-br from-[var(--color-accent)] to-[#123a8f] flex items-center justify-center shadow-[var(--shadow-accent-lg)] shrink-0">
                   <span className="text-white text-lg font-extrabold tracking-tight">RJ</span>
                 </div>
                 <div>
                   <h1 className="font-extrabold text-[var(--color-text-primary)] tracking-tight leading-none" style={{ fontSize: "var(--text-hero)" }}>
                     Ridzuan Jahari
                   </h1>
-                  <p className="text-sm text-[var(--color-text-tertiary)] mt-1.5 font-medium tracking-wide">
+                  <p className="text-sm text-[var(--color-text-tertiary)] mt-1.5 font-medium">
                     BYD Miri &middot; Personal Database
                   </p>
                 </div>
@@ -102,11 +102,11 @@ export default function Home() {
 
               {/* Live status */}
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--color-bg-tertiary)]/70 border border-[var(--color-border-primary)] text-[0.7rem] font-medium text-[var(--color-text-secondary)]">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--color-bg-secondary)]/80 border border-[var(--color-border-primary)] text-[0.7rem] font-medium text-[var(--color-text-secondary)]">
                   <span className="status-dot" />
                   Updated {company.lastUpdated}
                 </span>
-                <span className="px-2.5 py-1 rounded-full bg-[var(--color-bg-tertiary)]/70 border border-[var(--color-border-primary)] text-[0.7rem] font-medium text-[var(--color-text-secondary)]">
+                <span className="px-2.5 py-1 rounded-full bg-[var(--color-bg-secondary)]/80 border border-[var(--color-border-primary)] text-[0.7rem] font-medium text-[var(--color-text-secondary)]">
                   Campaign {company.campaignVersion}
                 </span>
                 <span className="px-2.5 py-1 rounded-full bg-[var(--color-success-light)]/70 border border-[var(--color-success)]/30 text-[0.7rem] font-semibold text-[var(--color-success)]">
@@ -115,51 +115,51 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-6">
+            {/* Stats — hairline pairs, mono numerals, no boxed grid */}
+            <dl className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 mt-7 pt-5 border-t border-[var(--color-border-primary)]/70">
               {[
-                { value: vehicles.length, label: "Models" },
-                { value: totalVariants, label: "Variants" },
-                { value: `RM${Math.round(priceMin / 1000)}k–${Math.round(priceMax / 1000)}k`, label: "OTR Range" },
-                { value: `${finance.interestRate}%`, label: "Flat Rate", accent: true },
+                { value: String(vehicles.length), label: "Models" },
+                { value: String(totalVariants), label: "Variants" },
+                { value: `RM${Math.round(priceMin / 1000)}k–${Math.round(priceMax / 1000)}k`, label: "OTR range" },
+                { value: `${finance.interestRate}%`, label: "Flat rate", accent: true },
               ].map((stat) => (
-                <div key={stat.label} className="rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] shadow-[var(--shadow-subtle)] px-4 py-3">
-                  <div className={`text-xl font-extrabold tabular-nums tracking-tight leading-none ${stat.accent ? "text-[var(--color-accent)]" : "text-[var(--color-text-primary)]"}`}>
+                <div key={stat.label} className="min-w-0">
+                  <dd className={`num text-2xl font-bold tracking-tight leading-none ${stat.accent ? "text-[var(--color-accent)]" : "text-[var(--color-text-primary)]"}`}>
                     {stat.value}
-                  </div>
-                  <div className="text-[0.65rem] uppercase tracking-[0.12em] text-[var(--color-text-tertiary)] font-semibold mt-1.5">{stat.label}</div>
+                  </dd>
+                  <dt className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium mt-1">{stat.label}</dt>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
         </section>
 
         {/* ─── Quick Actions — flagship cards ──────────────── */}
         <section>
           <div className="flex items-baseline justify-between mb-2.5">
-            <h2 className="section-title mb-0">Quick Actions</h2>
+            <h2 className="section-title mb-0">Quick actions</h2>
             <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">{primaryTools.length} tools</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {primaryTools.map((tool, i) => (
               <a key={tool.href} href={tool.href} className={`tool-card group relative ${i === 0 ? "border-[var(--color-accent)]/30" : ""}`}>
                 {i === 0 && (
-                  <span className="absolute top-3 right-3 badge badge-blue !text-[0.6rem] uppercase tracking-wider">Featured</span>
+                  <span className="absolute top-3 right-3 badge badge-blue !text-[0.6rem]">Featured</span>
                 )}
                 <div
                   className={`tool-card-icon ${
                     i === 0
-                      ? "bg-[var(--color-accent)] text-white shadow-[0_2px_10px_rgba(29,78,216,0.35)] group-hover:shadow-[0_4px_16px_rgba(29,78,216,0.45)]"
+                      ? "bg-[var(--color-accent)] text-white shadow-[var(--shadow-accent)] group-hover:shadow-[var(--shadow-accent-glow)]"
                       : "bg-[var(--color-accent-light)] text-[var(--color-accent)]"
                   }`}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={tool.icon} /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d={tool.icon} /></svg>
                 </div>
                 <div>
                   <div className="tool-card-title">{tool.title}</div>
                   <div className="tool-card-desc">{tool.desc}</div>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute bottom-4 right-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="absolute bottom-4 right-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             ))}
           </div>
@@ -175,7 +175,7 @@ export default function Home() {
                 href={tool.href}
                 className="flex flex-col items-center justify-center gap-1.5 w-[5.5rem] shrink-0 px-2 py-3 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] shadow-[var(--shadow-subtle)] hover:border-[var(--color-accent)]/40 hover:shadow-[var(--shadow-medium)] transition-all text-decoration-none"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={tool.icon} /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d={tool.icon} /></svg>
                 <span className="text-xs font-medium text-[var(--color-text-secondary)] text-center leading-tight">{tool.label}</span>
               </a>
             ))}
@@ -185,7 +185,7 @@ export default function Home() {
         {/* ─── Latest Update ───────────────────────────────── */}
         <section>
           <div className="flex items-center justify-between mb-1.5">
-            <h2 className="section-title mb-0">Latest Updates</h2>
+            <h2 className="section-title mb-0">Latest updates</h2>
             <Link
               href="/changelog"
               className="text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
