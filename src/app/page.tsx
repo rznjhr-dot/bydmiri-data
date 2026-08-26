@@ -140,26 +140,26 @@ export default function Home() {
             <h2 className="section-title mb-0">Quick actions</h2>
             <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">{primaryTools.length} tools</span>
           </div>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {primaryTools.map((tool, i) => (
-              <a key={tool.href} href={tool.href} className={`tool-card group relative ${i === 0 ? "border-[var(--color-accent)]/30" : ""}`}>
+              <a key={tool.href} href={tool.href} className={`tool-card group relative sm:!gap-2.5 sm:!p-5 sm:!rounded-[var(--radius-xl)] ${i === 0 ? "border-[var(--color-accent)]/30" : ""}`}>
                 {i === 0 && (
-                  <span className="absolute top-3 right-3 badge badge-blue !text-[0.6rem]">Featured</span>
+                  <span className="absolute top-1.5 right-1.5 sm:top-3 sm:right-3 badge badge-blue !text-[0.55rem] sm:!text-[0.6rem]">Featured</span>
                 )}
                 <div
-                  className={`tool-card-icon ${
+                  className={`tool-card-icon sm:!w-10 sm:!h-10 sm:!rounded-[var(--radius-lg)] ${
                     i === 0
                       ? "bg-[var(--color-accent)] text-white shadow-[var(--shadow-accent)] group-hover:shadow-[var(--shadow-accent-glow)]"
                       : "bg-[var(--color-accent-light)] text-[var(--color-accent)]"
                   }`}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d={tool.icon} /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[20px] sm:h-[20px]"><path d={tool.icon} /></svg>
                 </div>
                 <div>
-                  <div className="tool-card-title">{tool.title}</div>
-                  <div className="tool-card-desc">{tool.desc}</div>
+                  <div className="tool-card-title sm:!text-[0.9375rem]">{tool.title}</div>
+                  <div className="tool-card-desc sm:!text-[0.75rem]">{tool.desc}</div>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="absolute bottom-4 right-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             ))}
           </div>
@@ -168,15 +168,16 @@ export default function Home() {
         {/* ─── More Tools — scroll rail ────────────────────── */}
         <section>
           <h2 className="section-title mb-2">More</h2>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 sm:gap-2">
             {moreTools.map((tool) => (
               <a
                 key={tool.href}
                 href={tool.href}
-                className="flex-1 min-w-0 flex flex-col items-center justify-center gap-1 px-2 py-2.5 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] shadow-[var(--shadow-subtle)] hover:border-[var(--color-accent)]/40 hover:shadow-[var(--shadow-medium)] transition-all text-decoration-none"
+                title={tool.label}
+                className="flex-1 min-w-0 flex flex-col items-center justify-center gap-1 px-1 py-2 sm:px-2 sm:py-2.5 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] shadow-[var(--shadow-subtle)] hover:border-[var(--color-accent)]/40 hover:shadow-[var(--shadow-medium)] transition-all text-decoration-none"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[16px] sm:h-[16px] lg:w-[18px] lg:h-[18px]"><path d={tool.icon} /></svg>
-                <span className="text-[0.6rem] sm:text-[0.65rem] lg:text-[0.7rem] font-medium text-[var(--color-text-secondary)] text-center leading-tight">{tool.label}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="lg:w-[18px] lg:h-[18px]"><path d={tool.icon} /></svg>
+                <span className="hidden sm:block text-[0.65rem] lg:text-[0.7rem] font-medium text-[var(--color-text-secondary)] text-center leading-tight truncate w-full">{tool.label}</span>
               </a>
             ))}
           </div>
