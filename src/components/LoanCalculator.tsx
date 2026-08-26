@@ -109,20 +109,20 @@ export default function LoanCalculator() {
       "━━━━━━━━━━━━━━━━━━",
       "",
       "Price Breakdown",
-      "OTR without Insurance: " + formatCurrency(currentVariant.otrWithoutInsurance),
-      "Est. Insurance: " + formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance),
-      "OTR Price: " + formatCurrency(currentVariant.otr),
+      "OTR without Insurance: " + formatCurrency(currentVariant.otrWithoutInsurance, 2),
+      "Est. Insurance: " + formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance, 2),
+      "OTR Price: " + formatCurrency(currentVariant.otr, 2),
     ];
     if (includeRebate && promoRebateVal > 0) {
-      lines.push("Rebate: -" + formatCurrency(promoRebateVal));
+      lines.push("Rebate: -" + formatCurrency(promoRebateVal, 2));
     }
     if (includeCspRebate && (cspReplacement || cspRebateAmount > 0)) {
-      lines.push(cspReplacement || ("CSP/GSP/SSP Rebate: -" + formatCurrency(cspRebateAmount)));
+      lines.push(cspReplacement || ("CSP/GSP/SSP Rebate: -" + formatCurrency(cspRebateAmount, 2)));
     }
-    lines.push("After Rebate: " + formatCurrency(priceAfterRebate));
+    lines.push("After Rebate: " + formatCurrency(priceAfterRebate, 2));
     lines.push("");
     lines.push("Financing");
-    lines.push("Downpayment: " + formatCurrency(downpaymentAmount) + " " + downRemark);
+    lines.push("Downpayment: " + formatCurrency(downpaymentAmount, 2) + " " + downRemark);
     lines.push("Loan Amount: " + formatCurrency(loanAmount));
     lines.push("Est. Interest Rate: " + parsedInterestRate + "%");
     lines.push("Tenure: " + tenure + " Years");
@@ -251,7 +251,7 @@ export default function LoanCalculator() {
                     <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)]">Rebate</span>
                   </label>
                   {promoRebateVal > 0 && (
-                    <span className="text-[0.7rem] font-semibold text-green-600">{formatCurrency(promoRebateVal)}</span>
+                    <span className="text-[0.7rem] font-semibold text-green-600">{formatCurrency(promoRebateVal, 2)}</span>
                   )}
                 </div>
               )}
@@ -266,7 +266,7 @@ export default function LoanCalculator() {
                 {cspReplacement ? (
                   <span className="text-[0.7rem] font-semibold text-purple-600 text-right leading-tight max-w-[50%]">{cspReplacement.replace(" (worth RM3,888)", "")}</span>
                 ) : (
-                  <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount)}</span>
+                  <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount, 2)}</span>
                 )}
               </div>
               )}
@@ -317,7 +317,7 @@ export default function LoanCalculator() {
                 <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
                   Tenure
                 </label>
-                <div className="grid grid-cols-4 gap-1.5">
+                <div className="grid grid-cols-8 gap-1.5">
                   {finance.availableTenures.map((t) => (
                     <button
                       key={t}
@@ -381,20 +381,20 @@ export default function LoanCalculator() {
             <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[0.7rem]">
               <div className="flex justify-between">
                 <span className="text-[var(--color-text-tertiary)]">OTR w/o Ins.</span>
-                <span className="font-medium text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otrWithoutInsurance)}</span>
+                <span className="font-medium text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otrWithoutInsurance, 2)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-[var(--color-text-tertiary)]">Insurance</span>
-                <span className="font-medium text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance)}</span>
+                <span className="font-medium text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otr - currentVariant.otrWithoutInsurance, 2)}</span>
               </div>
               <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">
                 <span className="text-[var(--color-text-primary)] font-semibold">OTR Price</span>
-                <span className="font-bold text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otr)}</span>
+                <span className="font-bold text-[var(--color-text-primary)]">{formatCurrency(currentVariant.otr, 2)}</span>
               </div>
               {includeRebate && promoRebateVal > 0 && (
                 <div className="flex justify-between col-span-2">
                   <span className="text-[var(--color-text-tertiary)]">Rebate</span>
-                  <span className="font-semibold text-green-600">-{formatCurrency(promoRebateVal)}</span>
+                  <span className="font-semibold text-green-600">-{formatCurrency(promoRebateVal, 2)}</span>
                 </div>
               )}
               {includeCspRebate && (cspReplacement || cspRebateAmount > 0) && (
@@ -403,33 +403,33 @@ export default function LoanCalculator() {
                   {cspReplacement ? (
                     <span className="font-semibold text-purple-600 text-right text-[0.7rem] max-w-[50%] leading-tight">{cspReplacement}</span>
                   ) : (
-                    <span className="font-semibold text-blue-600">-{formatCurrency(cspRebateAmount)}</span>
+                    <span className="font-semibold text-blue-600">-{formatCurrency(cspRebateAmount, 2)}</span>
                   )}
                 </div>
               )}
               <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">
                 <span className="text-[var(--color-text-tertiary)]">After Rebate</span>
-                <span className="font-semibold">{formatCurrency(priceAfterRebate)}</span>
+                <span className="font-semibold">{formatCurrency(priceAfterRebate, 2)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-[var(--color-text-tertiary)]">Downpayment</span>
-                <span className="font-medium">{downpaymentAmount > 0 ? formatCurrency(downpaymentAmount) : "RM0"}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-tertiary)]">{parsedInterestRate}% × {tenure}y</span>
-                <span className="font-medium">{formatCurrency(loanAmount)}</span>
+                <span className="font-medium">{downpaymentAmount > 0 ? formatCurrency(downpaymentAmount, 2) : "RM0"}</span>
               </div>
             </div>
 
-            <div className="mt-2 pt-1.5 border-t-2 border-accent/20 flex items-center justify-between">
-              <div>
-                <p className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium">Monthly</p>
-                <p className="text-[0.7rem] text-[var(--color-text-tertiary)] num">{parsedInterestRate}% × {tenure}y</p>
+            <div className="mt-2 pt-1.5 border-t-2 border-accent/20 flex items-center justify-between gap-2">
+              <div className="text-left">
+                <p className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium">Loan Amount</p>
+                <p className="text-sm font-bold text-[var(--color-text-primary)] num">{formatCurrency(loanAmount)}</p>
               </div>
-              <p className="text-lg sm:text-xl font-bold text-accent tracking-tight num">
-                {formatCurrency(monthlyPayment)}
-                <span className="text-[0.7rem] font-normal text-[var(--color-text-tertiary)]">/mo</span>
-              </p>
+              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] num text-center">{parsedInterestRate}% × {tenure}y ({tenure * 12} months)</p>
+              <div className="text-right">
+                <p className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium">Monthly</p>
+                <p className="text-lg sm:text-xl font-bold text-accent tracking-tight num">
+                  {formatCurrency(monthlyPayment)}
+                  <span className="text-[0.7rem] font-normal text-[var(--color-text-tertiary)]">/mo</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

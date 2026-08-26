@@ -2,7 +2,9 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { vehicles, finance } from "@/data";
-import { formatCurrency } from "@/utils/finance";
+import { formatCurrency as _fc } from "@/utils/finance";
+// Top-up page = real customer figures — always show cents
+const formatCurrency = (amount: number) => _fc(amount, 2);
 import {
   getRebate,
   getCspRebate,
@@ -34,8 +36,6 @@ export default function TopUpCalculator() {
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [includeRebate, setIncludeRebate] = useState(true);
   const [includeCspRebate, setIncludeCspRebate] = useState(true);
-  const [downpaymentPct, setDownpaymentPct] = useState<number | null>(10);
-  const [downpaymentCustom, setDownpaymentCustom] = useState("");
   const [actualInsurance, setActualInsurance] = useState("");
   const [approvedLoan, setApprovedLoan] = useState("");
   const [bookingFeeInput, setBookingFeeInput] = useState("");
@@ -62,7 +62,6 @@ export default function TopUpCalculator() {
     [selectedModel, includeCspRebate]
   );
 
-  const quotedAfterRebate = Math.max(0, currentVariant.otr - rebate - cspAmount);
   const actualIns = parseNum(actualInsurance) ?? estInsurance;
 
   // Selling price breakdown (A)
@@ -75,22 +74,13 @@ export default function TopUpCalculator() {
   const subtotalA =
     sellingPrice + roadTax + insurancePremium + registrationFee + b2InspectionFee + evPlateFee;
 
-  // Deductions (B)
+  // Deductions (B) — full loan assumed; bank-approved amount if entered
   const rebateTotal = rebate + cspAmount;
-  const customDown = parseNum(downpaymentCustom);
-  const effectiveDownPct =
-    customDown !== null && quotedAfterRebate > 0
-      ? (customDown / quotedAfterRebate) * 100
-      : null;
-  const standardDown =
-    customDown !== null
-      ? customDown
-      : (quotedAfterRebate * (downpaymentPct ?? 10)) / 100;
   const approved = parseNum(approvedLoan);
   const financing =
     approved !== null
       ? approved
-      : Math.max(0, subtotalA - standardDown - rebateTotal - bookingFee);
+      : Math.max(0, subtotalA - rebateTotal - bookingFee);
   const subtotalB = financing + rebateTotal + bookingFee;
   const balance = subtotalA - subtotalB;
 
@@ -117,7 +107,6 @@ export default function TopUpCalculator() {
       "Subtotal Deductions (B): " + formatCurrency(subtotalB),
       "",
       "BALANCE PAYABLE (A - B): " + formatCurrency(balance),
-      "Customer Downpayment: " + formatCurrency(standardDown) + (customDown !== null && effectiveDownPct !== null ? " (custom ≈" + effectiveDownPct.toFixed(1) + "%)" : " (" + (downpaymentPct ?? 10) + "%)"),
       "",
       "━━━━━━━━━━━━━━━━━━",
       "PAYMENT INFORMATION",
@@ -147,7 +136,7 @@ export default function TopUpCalculator() {
       setCopied(true);
     }
     setTimeout(() => setCopied(false), 2000);
-  }, [currentVehicle, currentVariant, sellingPrice, roadTax, insurancePremium, registrationFee, b2InspectionFee, evPlateFee, subtotalA, financing, approved, rebateTotal, bookingFee, subtotalB, balance, standardDown, customDown, downpaymentPct, effectiveDownPct]);
+  }, [currentVehicle, currentVariant, sellingPrice, roadTax, insurancePremium, registrationFee, b2InspectionFee, evPlateFee, subtotalA, financing, approved, rebateTotal, bookingFee, subtotalB, balance]);
 
   const onModelChange = (model: string) => {
     setSelectedModel(model);
@@ -155,7 +144,6 @@ export default function TopUpCalculator() {
     setActualInsurance("");
     setApprovedLoan("");
     setBookingFeeInput("");
-    setDownpaymentCustom("");
   };
 
   const onVariantChange = (idx: number) => {
@@ -163,7 +151,6 @@ export default function TopUpCalculator() {
     setActualInsurance("");
     setApprovedLoan("");
     setBookingFeeInput("");
-    setDownpaymentCustom("");
   };
 
   return (
@@ -238,46 +225,6 @@ export default function TopUpCalculator() {
               </div>
             </div>
 
-            {/* Downpayment */}
-            <div>
-              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
-                Downpayment (auto financing)
-              </label>
-              <div className="flex gap-1 mb-1">
-                {[0, 10, 15, 20].map((pct) => (
-                  <button
-                    key={pct}
-                    type="button"
-                    onClick={() => {
-                      setDownpaymentPct(pct);
-                      setDownpaymentCustom("");
-                    }}
-                    className={`pill !text-xs !py-2 flex-1 ${downpaymentPct === pct && !downpaymentCustom ? "pill-active" : ""}`}
-                  >
-                    {pct}%
-                  </button>
-                ))}
-              </div>
-              <div className="input-group">
-                <span className="input-prefix !text-[0.7rem]">RM</span>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="Custom amount (override %)"
-                  value={downpaymentCustom}
-                  onChange={(e) => {
-                    const val = e.target.value.replace(/[^0-9,]/g, "");
-                    setDownpaymentCustom(val);
-                    if (val) setDownpaymentPct(null);
-                  }}
-                  className="input !text-xs !py-1.5"
-                />
-              </div>
-              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-0.5">
-                kosong = guna {downpaymentPct ?? 10}% auto · isi amount untuk override
-              </p>
-            </div>
-
             {/* Actual insurance */}
             <div>
               <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
@@ -302,7 +249,7 @@ export default function TopUpCalculator() {
             {/* Approved loan */}
             <div>
               <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
-                Financing Amount (kosong = auto {downpaymentPct ?? 10}% down)
+                Financing Amount (kosong = auto full loan)
               </label>
               <div className="input-group">
                 <span className="input-prefix !text-[0.7rem]">RM</span>
@@ -425,18 +372,6 @@ export default function TopUpCalculator() {
               <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">
                 <span className="text-[var(--color-text-primary)] font-bold">Balance Payable (A − B)</span>
                 <span className="font-extrabold">{formatCurrency(balance)}</span>
-              </div>
-
-              <div className="flex justify-between col-span-2 border-t-2 border-amber-300/50 bg-amber-50/40 -mx-1 px-1 py-0.5 rounded">
-                <span className="text-[var(--color-text-primary)] font-bold">Customer Downpayment</span>
-                <span className="font-extrabold text-amber-600">
-                  {formatCurrency(standardDown)}
-                  <span className="text-[var(--color-text-tertiary)] font-normal text-[0.65rem] ml-1">
-                    {customDown !== null && effectiveDownPct !== null
-                      ? "(≈" + effectiveDownPct.toFixed(1) + "%)"
-                      : "(" + (downpaymentPct ?? 10) + "%)"}
-                  </span>
-                </span>
               </div>
             </div>
 

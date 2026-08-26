@@ -8,8 +8,8 @@ const navLinks = [
   { href: "/", label: "Dashboard" },
   { href: "/vehicles", label: "Vehicles" },
   { href: "/pricelist", label: "Pricelist" },
+  { href: "/admin", label: "DB Admin" },
   { href: "/rjeos", label: "RJEOS" },
-  { href: "/admin", label: "Database Admin" },
   { href: "/changelog", label: "Changelog" },
 ];
 
@@ -41,27 +41,27 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16">
+        <div className="flex items-center justify-between h-10 sm:h-11">
           {/* Logo / Brand */}
           <Link
             href="/"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-[var(--color-accent)] to-[#123a8f] flex items-center justify-center shadow-[var(--shadow-accent)] group-hover:shadow-[var(--shadow-accent-glow)] transition-shadow">
-              <span className="text-white text-[0.7rem] font-extrabold tracking-tight">RJ</span>
+            <div className="w-6 h-6 rounded-[6px] bg-gradient-to-br from-[var(--color-accent)] to-[#123a8f] flex items-center justify-center shadow-[var(--shadow-accent)] group-hover:shadow-[var(--shadow-accent-glow)] transition-shadow">
+              <span className="text-white text-[0.6rem] font-extrabold tracking-tight">RJ</span>
             </div>
             <div className="hidden sm:block">
-              <p className="text-sm font-bold text-[var(--color-text-primary)] tracking-tight leading-tight">
+              <p className="text-[0.7rem] font-bold text-[var(--color-text-primary)] tracking-tight leading-tight">
                 Ridzuan &middot; BYD Miri
               </p>
-              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium leading-tight -mt-0.5">
+              <p className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium leading-tight -mt-0.5">
                 Personal Database
               </p>
             </div>
           </Link>
 
           {/* Nav Links (desktop) */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -71,7 +71,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`nav-pill ${isActive ? "nav-pill-active" : ""}`}
+                  className={`nav-pill !text-[0.65rem] !px-1.5 !py-0.5 ${isActive ? "nav-pill-active" : ""}`}
                 >
                   {link.label}
                 </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
             <button
               onClick={openPalette}
               aria-label="Open command palette"
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-sm text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)]/60 border border-[var(--color-border-primary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-secondary)] transition-all w-48 cursor-pointer"
+              className="hidden sm:flex items-center gap-2 px-2 py-0.5 rounded-full text-[0.65rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)]/60 border border-[var(--color-border-primary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-secondary)] transition-all w-36 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               <span className="flex-1 text-left">Search...</span>

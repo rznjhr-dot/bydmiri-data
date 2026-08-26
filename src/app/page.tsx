@@ -140,7 +140,7 @@ export default function Home() {
             <h2 className="section-title mb-0">Quick actions</h2>
             <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">{primaryTools.length} tools</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-4 gap-2">
             {primaryTools.map((tool, i) => (
               <a key={tool.href} href={tool.href} className={`tool-card group relative ${i === 0 ? "border-[var(--color-accent)]/30" : ""}`}>
                 {i === 0 && (
@@ -168,15 +168,15 @@ export default function Home() {
         {/* ─── More Tools — scroll rail ────────────────────── */}
         <section>
           <h2 className="section-title mb-2">More</h2>
-          <div className="snap-rail no-scrollbar">
+          <div className="flex gap-2">
             {moreTools.map((tool) => (
               <a
                 key={tool.href}
                 href={tool.href}
-                className="flex flex-col items-center justify-center gap-1.5 w-[5.5rem] shrink-0 px-2 py-3 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] shadow-[var(--shadow-subtle)] hover:border-[var(--color-accent)]/40 hover:shadow-[var(--shadow-medium)] transition-all text-decoration-none"
+                className="flex-1 min-w-0 flex flex-col items-center justify-center gap-1 px-2 py-2.5 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] shadow-[var(--shadow-subtle)] hover:border-[var(--color-accent)]/40 hover:shadow-[var(--shadow-medium)] transition-all text-decoration-none"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d={tool.icon} /></svg>
-                <span className="text-xs font-medium text-[var(--color-text-secondary)] text-center leading-tight">{tool.label}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[16px] sm:h-[16px] lg:w-[18px] lg:h-[18px]"><path d={tool.icon} /></svg>
+                <span className="text-[0.6rem] sm:text-[0.65rem] lg:text-[0.7rem] font-medium text-[var(--color-text-secondary)] text-center leading-tight">{tool.label}</span>
               </a>
             ))}
           </div>

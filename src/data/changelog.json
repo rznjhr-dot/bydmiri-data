@@ -1,5 +1,17 @@
 [
   {
+    "version": "V4.6",
+    "date": "2026-08-26",
+    "changes": [
+      "Price Breakdown (/top-up) simplified for post-loan-approval workflow — downpayment selector, custom input, and summary row removed; full loan assumed by default, balance = selling price − financing − rebate − booking",
+      "All amounts on Price Breakdown now display with cents (formatCurrency forced to 2 decimal places) — real customer-facing figures, no rounding",
+      "Finance Calculator (/finance) — tenure selector regridded from 4×2 to a single 8-column row; all prices (OTR, insurance, rebate, after-rebate, downpayment) now show cents except loan amount and monthly payment (bank uses whole numbers)",
+      "Finance Calculator bottom bar redesigned — Loan Amount (left) · rate × tenure in months (center) · Monthly payment (right) in one row",
+      "Navbar shrunk — height reduced to 10/11 (was 14/16), icon 6×6, text 0.6rem, pill text 0.65rem; nav order updated to Dashboard → Vehicles → Pricelist → DB Admin → RJEOS → Changelog",
+      "Homepage quick actions grid changed to fixed 4-column single row; 'More' tools converted from scroll rail to single-row flex with responsive icon/text scaling (14→18px, 0.6→0.7rem)"
+    ]
+  },
+  {
     "version": "V4.5",
     "date": "2026-08-17",
     "changes": [
