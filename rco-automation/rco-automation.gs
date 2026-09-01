@@ -435,7 +435,13 @@ function generatePDF(spreadsheet, sheet, customerName) {
     throw new Error("PDF failed: HTTP " + response.getResponseCode());
   }
   
-  var pdfBlob = response.getBlob().setName("RCO_" + (customerName || "Customer") + "_" + formatDate(new Date()) + ".pdf");
+  // Filename: RCO_CUSTOMER NAME_DDMMYY.pdf — always ALL CAPS
+  var d = new Date();
+  var dd = String(d.getDate()).padStart(2, "0");
+  var mm = String(d.getMonth() + 1).padStart(2, "0");
+  var yy = String(d.getFullYear()).substring(2);
+  var fileName = ("RCO_" + (customerName || "CUSTOMER") + "_" + dd + mm + yy).toUpperCase() + ".pdf";
+  var pdfBlob = response.getBlob().setName(fileName);
   var folderId = PropertiesService.getScriptProperties().getProperty("OUTPUT_FOLDER_ID");
   var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
   var pdfFile = folder.createFile(pdfBlob);
