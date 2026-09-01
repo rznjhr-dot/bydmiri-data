@@ -696,6 +696,24 @@
   }
 }
 
+/* ─── RCO progress pseudo-bar ─────────────────────────────── */
+
+.progress-slide {
+  animation: progress-slide 2.5s ease-out forwards;
+}
+
+@keyframes progress-slide {
+  0% {
+    width: 8%;
+  }
+  70% {
+    width: 85%;
+  }
+  100% {
+    width: 96%;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .page-enter {
     animation: fade-in-up 0.3s ease-out;

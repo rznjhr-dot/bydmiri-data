@@ -1,5 +1,17 @@
 [
   {
+    "version": "V4.7",
+    "date": "2026-09-01",
+    "changes": [
+      "New /rco page — RCO Generator: custom sales-order form that POSTs directly to the Google Form endpoint; Apps Script trigger copies the MASTER_RCO_TEMPLATE, fills all 22 placeholders (TextFinder), and drops a single-page portrait A4 PDF into the RCO Output BYD Drive folder ~15s after submit",
+      "Variant dropdown sourced live from the database (all 10 BYD model-variant combos); selecting one reveals a live price panel — selling price, insurance, OTR without/with insurance, exact cents from vehicles.json",
+      "Colour field — free-text input plus one-tap preset pills for all 9 real BYD colours (Aurora White, Ski White, Cosmos Black, Harbour Grey, Atlantis Grey, Ultraviolet, Sage Green, Breeze Green, Gemilang Blue)",
+      "Results tray — every submission stacks below the form with an animated progress bar that flips to 'PDF created in Google Drive' with a direct link to the output folder",
+      "Homepage quick actions reordered — Pricelist, Finance Calc, Price Breakdown, Charging Estimator, RCO Generator (new, last) in a single 5-column row",
+      "Apps Script housekeeping — script consolidated to rco-automation/rco-automation.gs in-repo with old versions archived; form slimmed to 14 fields (Trade-In, Registration Number, Downpayment removed); all values ALL CAPS except email (lowercase); empty inputs replaced with blanks so no {{placeholders}} leak into the PDF"
+    ]
+  },
+  {
     "version": "V4.6",
     "date": "2026-08-26",
     "changes": [
