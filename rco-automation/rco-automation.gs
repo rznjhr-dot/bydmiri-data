@@ -44,12 +44,9 @@ var FORM_FIELDS = {
   COLOUR: "Colour",
   CHASSIS: "Chassis Number",
   ENGINE: "Engine Number",
-  REG_NO: "Registration Number",
   YEAR_MAKE: "Year Make",
   LOAN_AMOUNT: "Loan Amount (MYR)",
   LOAN_PERIOD: "Loan Period (Months)",
-  DOWNPAYMENT: "Downpayment (MYR)",
-  TRADE_IN: "Trade-In Details",
   SALES_ADVISOR: "Sales Advisor",
   REMARKS: "Remarks"
 };
@@ -370,13 +367,6 @@ function onFormSubmit(e) {
   }
 }
 
-function calcInsurance(rrp) {
-  if (rrp < 100000) return 2300;
-  if (rrp < 150000) return 3000;
-  if (rrp < 200000) return 3500;
-  return 4000;
-}
-
 // === RCO ===
 function copyMasterTemplate() {
   var folderId = PropertiesService.getScriptProperties().getProperty("OUTPUT_FOLDER_ID");
@@ -526,7 +516,7 @@ function diagnoseTemplate() {
   Logger.log("=== DIAGNOSTIC COMPLETE ===");
 }
 
-// === MANUAL TEST ===
+// Current 14 fields only (Trade-In / RegNo / Downpayment removed)
 function testFormSubmit() {
   var e = {
     namedValues: {
@@ -539,12 +529,9 @@ function testFormSubmit() {
       "Colour": "White",
       "Chassis Number": "LGXC76A5X12345678",
       "Engine Number": "12345678",
-      "Registration Number": "QAB 1234",
       "Year Make": "2025",
       "Loan Amount (MYR)": "116370",
       "Loan Period (Months)": "108",
-      "Downpayment (MYR)": "12930",
-      "Trade-In Details": "",
       "Sales Advisor": "RIDZUAN BIN JAHARI",
       "Remarks": "Test"
     }
