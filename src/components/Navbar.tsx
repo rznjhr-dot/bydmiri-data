@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/pricelist", label: "Pricelist" },
   { href: "/admin", label: "DB Admin" },
   { href: "/rjeos", label: "RJEOS" },
+  { href: "/live-script", label: "Live Script" },
   { href: "/changelog", label: "Changelog" },
 ];
 
