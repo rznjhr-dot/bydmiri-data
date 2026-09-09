@@ -1,5 +1,16 @@
 [
   {
+    "version": "V4.8",
+    "date": "2026-09-09",
+    "changes": [
+      "New /ehakmilik page — e-Hakmilik Generator: ownership-claim confirmation letter for JPJ (bank use). Custom form POSTs to a dedicated Google Form endpoint; Apps Script trigger copies the Google DOC master template, replaces all 9 {{tags}} (DATE, OFFICER, BANK, HIRER, ICNO, CHASSIS, ENGINE, MODELVARIANT, YM), exports a PDF to the eHakmilik Output BYD Drive folder, then trashes the draft doc",
+      "8 form fields — Hirer Name, IC/Business Reg No, Chassis No, Engine No, Model Variant (10-combo dropdown), Year Make, Bank, Officer Name (bank & officer both free-text); signature fixed as RIDZUAN JAHARI in the template",
+      "Model line renders as 'BYD <variant>' (template prefixes BYD, dropdown value is 'ATTO 3 - ULTRA' style); all values ALL CAPS; PDF filename EHAKMILIK_HIRER NAME_DDMMYY.pdf; verified end-to-end — single-page A4 portrait PDF in Drive ~15s after submit",
+      "Navbar adds e-Hakmilik link (after Pricelist); homepage 'More' rail and command palette gain the e-Hakmilik entry",
+      "New Apps Script project 'eHakmilik Automation (BYD Miri)' mirrored from the RCO generator flow; source kept at ehakmilik-automation/ehakmilik-automation.gs; Google Form + response sheet + LOGS tab + output folder + spreadsheet onFormSubmit trigger all created via setupEhakmilikAutomation()"
+    ]
+  },
+  {
     "version": "V4.7",
     "date": "2026-09-01",
     "changes": [

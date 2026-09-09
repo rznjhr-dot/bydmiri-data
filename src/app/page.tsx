@@ -32,6 +32,12 @@ const primaryTools = [
     desc: "Sales order → PDF in Drive",
     icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M9 15l2 2 4-4",
   },
+  {
+    href: "/ehakmilik",
+    title: "e-Hakmilik",
+    desc: "Ownership claim → PDF in Drive",
+    icon: "M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z M9 12l2 2 4-4",
+  },
 ];
 
 const moreTools = [
@@ -146,17 +152,13 @@ export default function Home() {
             <h2 className="section-title mb-0">Quick actions</h2>
             <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">{primaryTools.length} tools</span>
           </div>
-          <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 sm:gap-2">
             {primaryTools.map((tool) => (
-              <a key={tool.href} href={tool.href} className="tool-card group relative sm:!gap-2.5 sm:!p-5 sm:!rounded-[var(--radius-xl)]">
+              <a key={tool.href} href={tool.href} className="tool-card group relative !gap-1.5 !p-3 sm:!gap-2 sm:!p-4 sm:!rounded-[var(--radius-xl)] flex-col !items-center !justify-center !text-center">
                 <div className="tool-card-icon sm:!w-10 sm:!h-10 sm:!rounded-[var(--radius-lg)] bg-[var(--color-accent-light)] text-[var(--color-accent)]">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="sm:w-[20px] sm:h-[20px]"><path d={tool.icon} /></svg>
                 </div>
-                <div>
-                  <div className="tool-card-title sm:!text-[0.9375rem]">{tool.title}</div>
-                  <div className="tool-card-desc sm:!text-[0.75rem]">{tool.desc}</div>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <div className="tool-card-title !text-[0.65rem] leading-tight sm:!text-[0.8125rem] sm:leading-snug">{tool.title}</div>
               </a>
             ))}
           </div>

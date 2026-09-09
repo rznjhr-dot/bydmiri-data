@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/", label: "Dashboard" },
   { href: "/vehicles", label: "Vehicles" },
   { href: "/pricelist", label: "Pricelist" },
+  { href: "/ehakmilik", label: "e-Hakmilik" },
   { href: "/admin", label: "DB Admin" },
   { href: "/rjeos", label: "RJEOS" },
   { href: "/live-script", label: "Live Script" },

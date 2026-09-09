@@ -10,3 +10,4 @@ tsconfig.tsbuildinfo
 # Playwright MCP test artifacts
 .playwright-mcp/
 *.playwright-mcp/
+ehakmilik-automation/*.pdf
