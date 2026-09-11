@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState, useCallback } from "react";
 import Link from "next/link";
-import html2canvas from "html2canvas";
+import type { Options as Html2CanvasOptions } from "html2canvas";
 import { company, vehicles, finance, promotions, pricingMeta } from "@/data";
 import { formatCurrency, calcMonthlyFromPrice } from "@/utils/finance";
 import { getRebate } from "@/utils/promotions";
@@ -147,7 +147,8 @@ export default function PricelistPage() {
       const isFull = exportQuality === "full";
       const DPI = 600;
       const scale = isFull ? DPI / 96 : Math.min(2, (window.devicePixelRatio || 1) * 1.5);
-      const opts: Parameters<typeof html2canvas>[1] = {
+      const { default: html2canvas } = await import("html2canvas");
+      const opts: Partial<Html2CanvasOptions> = {
         backgroundColor: "#ffffff",
         scale,
       };

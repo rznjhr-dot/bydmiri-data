@@ -4,6 +4,10 @@ out/
 .DS_Store
 *.local
 
+# Local tool/CLI state (regenerated automatically)
+/.netlify
+/.ghost
+
 # Build cache
 tsconfig.tsbuildinfo
 

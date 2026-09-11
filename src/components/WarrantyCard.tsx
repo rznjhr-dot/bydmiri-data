@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useCallback } from "react";
-import html2canvas from "html2canvas";
 import { warranty } from "@/data";
 
 export default function WarrantyCard() {
@@ -10,6 +9,7 @@ export default function WarrantyCard() {
   const handleScreenshot = useCallback(async () => {
     if (!resultsRef.current) return;
     try {
+      const { default: html2canvas } = await import("html2canvas");
       const canvas = await html2canvas(resultsRef.current, {
         backgroundColor: "#ffffff",
         scale: 2,
