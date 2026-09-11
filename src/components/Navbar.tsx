@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/admin", label: "DB Admin" },
   { href: "/rjeos", label: "RJEOS" },
   { href: "/live-script", label: "Live Script" },
+  { href: "/jpj", label: "JPJ Check" },
   { href: "/changelog", label: "Changelog" },
 ];
 
