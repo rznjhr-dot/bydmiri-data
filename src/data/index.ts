@@ -143,7 +143,6 @@ export interface PromotionsData {
     overrides: Record<string, number>;
     label: string;
   };
-  cspReplacements?: Record<string, string>;
   freebies: string[];
   interestRate: number;
   notes: string;

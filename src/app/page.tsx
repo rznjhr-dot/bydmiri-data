@@ -47,7 +47,6 @@ const moreTools = [
   { href: "/rjeos", label: "RJEOS", icon: "M4 7V4h16v3M9 20h6M12 4v16" },
   { href: "/marketing-ai", label: "Marketing AI", icon: "M3 11 22 2l-9 19-2-8-8-2z" },
   { href: "/agent-hub", label: "Agent Hub", icon: "M12 2a2 2 0 0 1 2 2c0 .6-.3 1.2-.7 1.6A2 2 0 0 1 14 9h4a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h4a2 2 0 0 1 .7-3.4A2 2 0 0 1 10 4a2 2 0 0 1 2-2z" },
-  { href: "/admin", label: "Database Admin", icon: "M12 2 2 7l10 5 10-5zM2 17l10 5 10-5M2 12l10 5 10-5" },
 ];
 
 function ReferenceSection({

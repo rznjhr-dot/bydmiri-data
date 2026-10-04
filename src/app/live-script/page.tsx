@@ -39,7 +39,7 @@ const segments: Segment[] = [
     num: "4", title: "Rebate Callout (Urgency)", time: "~1-2 min",
     when: "Sprinkle between models. Create urgency.",
     script: [
-      "Okay sebelum aku sambung — rebate bulan ni, Ogos 2026. Ini campaign. Bukan permanent.",
+      "Okay sebelum aku sambung — rebate bulan ni, Oktober 2026. Ini campaign. Bukan permanent.",
       "**Atto 3 Ultra & Premium — RM14,000 each!** • Atto 2 Premium — RM9,000 • Sealion 7 Premium — RM7,000 • Sealion 7 Performance — RM6,000",
       "Campaign bulan ni je. Jangan tunggu next month sebab rebate mungkin dah turun atau hilang.",
     ],
@@ -126,8 +126,8 @@ const models: Model[] = [
 ];
 
 const pmScripts = [
-  { label: "⭐ RECOMMENDED", text: "Eh hello! Thanks bro support live BYD Miri tadi 🙏\n\nMacam aku cakap tadi, rebate bulan ni sampai RM14,000. Bukan permanent tau, campaign Ogos je.\n\nNi aku attach full pricelist semua 10 models BYD — harga OTR, rebate, monthly installment semua ada.\n\nKalau nak tau installment khusus untuk kau, atau nak check eligibility 0% downpayment, just WhatsApp aku:\n\n📲 011 3193 3930\n\nFree check, no obligation bro. Test drive pun boleh arrange 😎" },
-  { label: "Formal (older viewers)", text: "Selamat hari! Terima kasih support live BYD Miri tadi 🙏\n\nSaya Ridzuan, sales advisor BYD di Kah Progression Auto Miri. Rebate bulan Ogos ini sampai RM14,000.\n\nAttached full pricelist untuk semua model BYD — harga OTR, rebate, dan anggaran installment.\n\nKalau encik/puan nak check eligibility loan atau nak schedule test drive, boleh WhatsApp saya:\n\n📲 011 3193 3930\n\nFree check, no obligation. Saya akan urus dari awal sampai habis 😊" },
+  { label: "⭐ RECOMMENDED", text: "Eh hello! Thanks bro support live BYD Miri tadi 🙏\n\nMacam aku cakap tadi, rebate bulan ni sampai RM14,000. Bukan permanent tau, campaign Oktober je.\n\nNi aku attach full pricelist semua 10 models BYD — harga OTR, rebate, monthly installment semua ada.\n\nKalau nak tau installment khusus untuk kau, atau nak check eligibility 0% downpayment, just WhatsApp aku:\n\n📲 011 3193 3930\n\nFree check, no obligation bro. Test drive pun boleh arrange 😎" },
+  { label: "Formal (older viewers)", text: "Selamat hari! Terima kasih support live BYD Miri tadi 🙏\n\nSaya Ridzuan, sales advisor BYD di Kah Progression Auto Miri. Rebate bulan Oktober ini sampai RM14,000.\n\nAttached full pricelist untuk semua model BYD — harga OTR, rebate, dan anggaran installment.\n\nKalau encik/puan nak check eligibility loan atau nak schedule test drive, boleh WhatsApp saya:\n\n📲 011 3193 3930\n\nFree check, no obligation. Saya akan urus dari awal sampai habis 😊" },
   { label: "Super ringkas", text: "Yo bro thanks support live tadi! 🔥\n\nNi pricelist semua model BYD. Rebate bulan ni paling gila — Atto 3 dapat RM14,000 off.\n\nKalau kau minat mana-mana model, WhatsApp aku 011 3193 3930. Aku kira installment untuk kau, free check eligibility, no pressure 👍" },
 ];
 

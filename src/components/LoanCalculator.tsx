@@ -7,7 +7,6 @@ import { calcMonthlyPayment } from "@/utils/finance";
 import {
   getRebate,
   getCspRebate,
-  getCspReplacement,
   getPromotionOptions,
   getDefaultPromotion,
   type PromotionOption,
@@ -37,14 +36,13 @@ export default function LoanCalculator() {
   const [tenure, setTenure] = useState(finance.defaultTenure);
   const [downpaymentPct, setDownpaymentPct] = useState<number | null>(10);
   const [downpaymentCustom, setDownpaymentCustom] = useState("");
+  const [loanCustom, setLoanCustom] = useState("");
   const [includeCspRebate, setIncludeCspRebate] = useState(true);
   const [customInterestRate, setCustomInterestRate] = useState(String(finance.interestRate));
   const [promoChoice, setPromoChoice] = useState<number | null>(null);
 
   const currentVehicle = vehicles.find((v) => v.model === selectedModel) ?? vehicles[0];
   const currentVariant: Variant = currentVehicle.variants[selectedVariantIdx];
-
-  const cspReplacement = getCspReplacement(selectedModel);
 
   const promoOptions = useMemo(
     () => getPromotionOptions(selectedModel, currentVariant.name),
@@ -76,6 +74,12 @@ export default function LoanCalculator() {
   }, [currentVariant, includeRebate, cspRebateAmount, promoRebateVal]);
 
   const loanAmount = useMemo(() => {
+    if (loanCustom) {
+      const custom = parseFloat(loanCustom.replace(/,/g, ""));
+      if (!isNaN(custom) && custom >= 0) {
+        return Math.min(custom, priceAfterRebate);
+      }
+    }
     if (downpaymentCustom) {
       const custom = parseFloat(downpaymentCustom.replace(/,/g, ""));
       if (!isNaN(custom) && custom >= 0) {
@@ -86,7 +90,7 @@ export default function LoanCalculator() {
       return priceAfterRebate * (1 - downpaymentPct / 100);
     }
     return priceAfterRebate * (finance.loanMargin / 100);
-  }, [priceAfterRebate, downpaymentPct, downpaymentCustom]);
+  }, [priceAfterRebate, downpaymentPct, downpaymentCustom, loanCustom]);
 
   const downpaymentAmount = useMemo(() => {
     return priceAfterRebate - loanAmount;
@@ -101,7 +105,9 @@ export default function LoanCalculator() {
 
   const buildQuotation = useCallback(() => {
     const today = new Date().toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric" });
-    const downRemark = downpaymentCustom
+    const downRemark = loanCustom
+      ? "(custom loan: RM " + loanCustom + ")"
+      : downpaymentCustom
       ? "(custom: RM " + downpaymentCustom + ")"
       : "(" + downpaymentPct + "% downpayment)";
     const lines = [
@@ -116,8 +122,8 @@ export default function LoanCalculator() {
     if (includeRebate && promoRebateVal > 0) {
       lines.push("Rebate: -" + formatCurrency(promoRebateVal, 2));
     }
-    if (includeCspRebate && (cspReplacement || cspRebateAmount > 0)) {
-      lines.push(cspReplacement || ("CSP/GSP/SSP Rebate: -" + formatCurrency(cspRebateAmount, 2)));
+    if (includeCspRebate && cspRebateAmount > 0) {
+      lines.push("CSP/GSP/SSP Rebate: -" + formatCurrency(cspRebateAmount, 2));
     }
     lines.push("After Rebate: " + formatCurrency(priceAfterRebate, 2));
     lines.push("");
@@ -133,7 +139,7 @@ export default function LoanCalculator() {
     lines.push("━━━━━━━━━━━━━━━━━━");
     lines.push("BYD Miri - Ridzuan Jahari " + today);
     return lines.join("\n");
-  }, [currentVehicle, currentVariant, includeRebate, promoRebateVal, includeCspRebate, cspReplacement, cspRebateAmount, parsedInterestRate, priceAfterRebate, downpaymentAmount, loanAmount, tenure, monthlyPayment, downpaymentPct, downpaymentCustom]);
+  }, [currentVehicle, currentVariant, includeRebate, promoRebateVal, includeCspRebate, cspRebateAmount, parsedInterestRate, priceAfterRebate, downpaymentAmount, loanAmount, tenure, monthlyPayment, downpaymentPct, downpaymentCustom, loanCustom]);
 
   const handleCopyQuotation = useCallback(async () => {
     const text = buildQuotation();
@@ -174,6 +180,8 @@ export default function LoanCalculator() {
                     setSelectedModel(e.target.value);
                     setSelectedVariantIdx(0);
                     setPromoChoice(null);
+                    setDownpaymentCustom("");
+                    setLoanCustom("");
                   }}
                   className="select !text-xs !py-1.5"
                 >
@@ -194,6 +202,8 @@ export default function LoanCalculator() {
                     onChange={(e) => {
                       setSelectedVariantIdx(Number(e.target.value));
                       setPromoChoice(null);
+                      setDownpaymentCustom("");
+                      setLoanCustom("");
                     }}
                     className="select !text-xs !py-1.5"
                   >
@@ -210,7 +220,7 @@ export default function LoanCalculator() {
             {/* Rebate control — promo selector (multi-option models) OR simple toggle */}
             <div className="grid grid-cols-2 gap-2">
               {promoOptions && promoOptions.length > 1 ? (
-                <div className={`bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)] ${cspReplacement ? "col-span-2" : ""}`}>
+                <div className="bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
                   <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-1">
                     Promotion
                   </label>
@@ -255,19 +265,15 @@ export default function LoanCalculator() {
                   )}
                 </div>
               )}
-              {!(promoOptions && promoOptions.length > 1 && cspReplacement) && (
+              {!(promoOptions && promoOptions.length > 1) && (
               <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
                 <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeCspRebate(!includeCspRebate)}>
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
                     <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
-                  <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)] truncate">{cspReplacement || finance.additionalRebate.label.split(" ")[0]}</span>
+                  <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)] truncate">{finance.additionalRebate.label.split(" ")[0]}</span>
                 </label>
-                {cspReplacement ? (
-                  <span className="text-[0.7rem] font-semibold text-purple-600 text-right leading-tight max-w-[50%]">{cspReplacement.replace(" (worth RM3,888)", "")}</span>
-                ) : (
-                  <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount, 2)}</span>
-                )}
+                <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount, 2)}</span>
               </div>
               )}
             </div>
@@ -285,9 +291,10 @@ export default function LoanCalculator() {
                     onClick={() => {
                       setDownpaymentPct(pct);
                       setDownpaymentCustom("");
+                      setLoanCustom("");
                     }}
                     className={`pill !text-xs !py-2 flex-1 ${
-                      downpaymentPct === pct && !downpaymentCustom ? "pill-active" : ""
+                      downpaymentPct === pct && !downpaymentCustom && !loanCustom ? "pill-active" : ""
                     }`}
                   >
                     {pct}%
@@ -298,17 +305,48 @@ export default function LoanCalculator() {
                 <span className="input-prefix !text-[0.7rem]">RM</span>
                 <input
                   type="text"
-                  inputMode="numeric"
+                  inputMode="decimal"
                   placeholder="Custom amount"
                   value={downpaymentCustom}
                   onChange={(e) => {
-                    const val = e.target.value.replace(/[^0-9,]/g, "");
+                    const val = e.target.value.replace(/[^0-9.,]/g, "");
                     setDownpaymentCustom(val);
-                    if (val) setDownpaymentPct(null);
+                    if (val) {
+                      setDownpaymentPct(null);
+                      setLoanCustom("");
+                    }
                   }}
                   className="input !text-xs !py-1.5"
                 />
               </div>
+            </div>
+
+            {/* Custom loan amount */}
+            <div>
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
+                Custom Loan Amount
+              </label>
+              <div className="input-group">
+                <span className="input-prefix !text-[0.7rem]">RM</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="Custom loan amount"
+                  value={loanCustom}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^0-9.,]/g, "");
+                    setLoanCustom(val);
+                    if (val) {
+                      setDownpaymentPct(null);
+                      setDownpaymentCustom("");
+                    }
+                  }}
+                  className="input !text-xs !py-1.5"
+                />
+              </div>
+              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-0.5">
+                Kosong = guna downpayment / loan margin
+              </p>
             </div>
 
             {/* Tenure + Interest row */}
@@ -397,14 +435,10 @@ export default function LoanCalculator() {
                   <span className="font-semibold text-green-600">-{formatCurrency(promoRebateVal, 2)}</span>
                 </div>
               )}
-              {includeCspRebate && (cspReplacement || cspRebateAmount > 0) && (
+              {includeCspRebate && cspRebateAmount > 0 && (
                 <div className="flex justify-between col-span-2">
-                  <span className="text-[var(--color-text-tertiary)]">{cspReplacement || finance.additionalRebate.label}</span>
-                  {cspReplacement ? (
-                    <span className="font-semibold text-purple-600 text-right text-[0.7rem] max-w-[50%] leading-tight">{cspReplacement}</span>
-                  ) : (
-                    <span className="font-semibold text-blue-600">-{formatCurrency(cspRebateAmount, 2)}</span>
-                  )}
+                  <span className="text-[var(--color-text-tertiary)]">{finance.additionalRebate.label}</span>
+                  <span className="font-semibold text-blue-600">-{formatCurrency(cspRebateAmount, 2)}</span>
                 </div>
               )}
               <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">

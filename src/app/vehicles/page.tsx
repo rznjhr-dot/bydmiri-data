@@ -166,9 +166,9 @@ export default function VehiclesPage() {
         ) : (
           /* ─── Unified dense table — one row per variant ─── */
           <div className="card !p-0 overflow-hidden">
-            <div className="overflow-x-auto">
+            <div className="overflow-auto max-h-[calc(100vh-9rem)]">
               <table className="veh-table w-full border-collapse">
-                <thead className="sticky top-14 sm:top-16 z-10 bg-[var(--color-bg-secondary)]">
+                <thead className="sticky top-0 z-10 bg-[var(--color-bg-secondary)]">
                   <tr className="border-b border-[var(--color-border-primary)]">
                     <th className="text-left font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
                       Model / Variant

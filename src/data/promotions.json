@@ -1,10 +1,10 @@
 {
-  "campaign": "August 2026 Promotion",
+  "campaign": "October 2026 Promotion",
   "status": "Active",
-  "period": "August 2026",
-  "validFrom": "2026-08-01",
-  "validTo": "2026-08-31",
-  "lastUpdated": "2026-08-16",
+  "period": "October 2026",
+  "validFrom": "2026-10-01",
+  "validTo": "2026-10-31",
+  "lastUpdated": "2026-10-04",
   "promotionOptions": {
     "Atto 2": {
       "Premium": [
@@ -13,22 +13,10 @@
     },
     "Atto 3": {
       "Ultra": [
-        { "title": "RM14,000 Cash Rebate", "rebate": 14000, "default": true },
-        {
-          "title": "RM10,000 Cash Rebate + FREE 6 Years Standard Service Package",
-          "rebate": 10000,
-          "default": false,
-          "free_gift": "6 Years Standard Service Package"
-        }
+        { "title": "RM14,000 Cash Rebate", "rebate": 14000, "default": true }
       ],
       "Premium": [
-        { "title": "RM14,000 Cash Rebate", "rebate": 14000, "default": true },
-        {
-          "title": "RM10,000 Cash Rebate + FREE 6 Years Standard Service Package",
-          "rebate": 10000,
-          "default": false,
-          "free_gift": "6 Years Standard Service Package"
-        }
+        { "title": "RM14,000 Cash Rebate", "rebate": 14000, "default": true }
       ]
     },
     "Sealion 7": {
@@ -77,10 +65,7 @@
     },
     "label": "CSP/GSP/SSP"
   },
-  "cspReplacements": {
-    "Atto 3": "6 Years Standard Service Package (worth RM3,888)"
-  },
   "freebies": [],
   "interestRate": 2.30,
-  "notes": "Prices are East Malaysia OTR with insurance. Promotion valid for August 2026 only. T&Cs apply."
+  "notes": "Prices are East Malaysia OTR with insurance. Promotion valid for October 2026 only. T&Cs apply."
 }

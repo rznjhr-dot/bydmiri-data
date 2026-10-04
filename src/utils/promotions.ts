@@ -15,11 +15,6 @@ export function getCspRebate(model: string): number {
   return promotions.cspRebate.overrides[model] ?? promotions.cspRebate.default;
 }
 
-export function getCspReplacement(model: string): string | null {
-  if (!promotions.cspReplacements) return null;
-  return promotions.cspReplacements[model] ?? null;
-}
-
 export function getInterestRate(): number {
   return promotions.interestRate;
 }

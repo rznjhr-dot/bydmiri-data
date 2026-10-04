@@ -8,7 +8,6 @@ const formatCurrency = (amount: number) => _fc(amount, 2);
 import {
   getRebate,
   getCspRebate,
-  getCspReplacement,
   getDefaultPromotion,
 } from "@/utils/promotions";
 
@@ -45,7 +44,6 @@ export default function TopUpCalculator() {
   const currentVariant: Variant = currentVehicle.variants[selectedVariantIdx];
 
   const estInsurance = currentVariant.otr - currentVariant.otrWithoutInsurance;
-  const cspReplacement = getCspReplacement(selectedModel);
   const bookingFee = parseNum(bookingFeeInput) ?? (currentVariant.bookingFee ?? 1000);
 
   const rebate = useMemo(() => {
@@ -215,13 +213,9 @@ export default function TopUpCalculator() {
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
                     <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
-                  <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)] truncate">{cspReplacement || finance.additionalRebate.label.split(" ")[0]}</span>
+                  <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)] truncate">{finance.additionalRebate.label.split(" ")[0]}</span>
                 </label>
-                {cspReplacement ? (
-                  <span className="text-[0.7rem] font-semibold text-purple-600 text-right leading-tight max-w-[50%]">{cspReplacement.replace(" (worth RM3,888)", "")}</span>
-                ) : (
-                  <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspAmount)}</span>
-                )}
+                <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspAmount)}</span>
               </div>
             </div>
 

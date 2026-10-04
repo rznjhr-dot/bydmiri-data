@@ -906,6 +906,17 @@
   letter-spacing: -0.01em;
 }
 
+/* Segment classification (e.g. "B-Segment SUV") — a quiet annotation:
+   smaller, lighter, italicised, so the eye lands on model + variant. */
+.pl-segment {
+  font-size: 0.72em;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.005em;
+  white-space: nowrap;
+}
+
 /* Mobile (<640px): stack rows into labeled cards — no horizontal scroll.
    Each td displays its data-label as a left column; Monthly is promoted
    to a full-width hero row at the bottom of each card. */
@@ -1039,6 +1050,8 @@
     box-shadow: none !important;
     border-radius: 0 !important;
     padding: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
   }
   /* Vector-sharp text in PDF output */
   .pl-card,
@@ -1057,8 +1070,14 @@
   .pl-card footer {
     break-inside: avoid;
   }
+  /* A4 portrait is the default; the pricelist page injects an
+     `@page { size: A4 landscape }` rule when the user picks Landscape,
+     and marks the sheet with data-orientation so it can widen to fill. */
   @page {
-    size: A4;
+    size: A4 portrait;
     margin: 12mm;
+  }
+  .pl-card[data-orientation="landscape"] {
+    max-width: none !important;
   }
 }

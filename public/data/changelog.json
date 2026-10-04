@@ -1,5 +1,22 @@
 [
   {
+    "version": "V4.10",
+    "date": "2026-10-04",
+    "changes": [
+      "Removed the DB Admin page (/admin) from the project — no longer reachable; navbar link, homepage quick-action card, and its dedicated helper calcMonthlyAtDefaults() removed with it"
+    ]
+  },
+  {
+    "version": "V4.9",
+    "date": "2026-10-04",
+    "changes": [
+      "October 2026 campaign live — rebate structure unchanged from prior month (Atto 2 RM9k, Atto 3 RM14k, Sealion 7 RM4k/RM7k/RM6k, Seal RM3k, Seal 6 RM1k, M6 RM4k)",
+      "Atto 3 — 6 Years Free Service Package option removed across all surfaces; Atto 3 now RM14,000 cash rebate only (no service-package alternative, no CSP replacement)",
+      "Finance calculator: custom downpayment amount now accepts cents (2 decimal places); new Custom Loan Amount bracket lets you key an exact loan figure directly",
+      "Rebate period metadata advanced to October 2026"
+    ]
+  },
+  {
     "version": "V4.8",
     "date": "2026-09-09",
     "changes": [

@@ -86,7 +86,7 @@ Use when the task is about the official public site. The workflow differs:
 Compare the stated task against the source files. Ask: which files does this change touch? Which pages import them?
 
 File → page mapping (via `src/data/index.ts`):
-- `vehicles.json` / `promotions.json` / `finance.json` → `/` (stats), `/vehicles`, `/finance`, `/top-up`, `/ev-market/compare`, `/admin`
+- `vehicles.json` / `promotions.json` / `finance.json` → `/` (stats), `/vehicles`, `/finance`, `/top-up`, `/ev-market/compare`
 - `charging.json` → `/charging`
 - `competitors.json` / `ev-news.json` → `/ev-market`, `/ev-market/compare`
 - `warranty.json` → `/warranty`

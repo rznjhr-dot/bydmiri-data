@@ -1,7 +1,7 @@
 /* ─── Shared finance math (single source of truth) ───
  *
- * Flat-rate loan calculation used by /vehicles, /finance,
- * /top-up and /admin. Keep every surface in
+ * Flat-rate loan calculation used by /vehicles, /finance and
+ * /top-up. Keep every surface in
  * sync by importing from here instead of re-implementing.
  */
 import { finance } from "@/data";
@@ -39,15 +39,6 @@ export function calcMonthlyPayment(loanAmount: number, params: MonthlyParams = D
 export function calcMonthlyFromPrice(price: number, downPct = 0, params: MonthlyParams = DEFAULT_FINANCE_PARAMS): number {
   const loan = price * (1 - downPct / 100);
   return calcMonthlyPayment(loan, params);
-}
-
-/**
- * Admin helper: monthly estimate at finance.json defaults
- * (loan margin % of effective price, default tenure & rate).
- */
-export function calcMonthlyAtDefaults(effectivePrice: number): number {
-  const loan = effectivePrice * (finance.loanMargin / 100);
-  return calcMonthlyPayment(loan);
 }
 
 export function formatCurrency(amount: number, fractionDigits = 0): string {
