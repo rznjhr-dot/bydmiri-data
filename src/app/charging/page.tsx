@@ -11,12 +11,12 @@ export default function ChargingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
             Charging
           </h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
@@ -60,8 +60,8 @@ export default function ChargingPage() {
 
         {/* ─── Disclaimer ──────────── */}
         <section>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-            <p className="text-xs text-amber-700 leading-relaxed">
+          <div className="bg-[var(--color-neutral-50)] border border-[var(--color-border-primary)] rounded-lg p-3">
+            <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
               <strong className="font-semibold">Note:</strong>{" "}
               {charging.disclaimer}
             </p>

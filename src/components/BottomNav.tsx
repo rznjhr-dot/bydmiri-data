@@ -33,10 +33,10 @@ export default function BottomNav() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth={isActive ? 2.25 : 1.75}
+                  strokeWidth={isActive ? 2 : 1.5}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  color={isActive ? "var(--color-accent)" : "var(--color-text-tertiary)"}
+                  color={isActive ? "var(--color-figure-black)" : "var(--color-text-tertiary)"}
                 >
                   <path d={item.icon} />
                 </svg>

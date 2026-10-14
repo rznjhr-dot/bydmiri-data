@@ -42,19 +42,19 @@ export default function CreativeDirectorPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/marketing-ai"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Marketing AI
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Creative Director</h1>
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">Creative Director</h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Review creative quality across 9 weighted criteria</p>
         </div>
       </section>
 
       <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Score Result */}
-        <div className="card border-l-4 border-l-accent bg-gradient-to-br from-accent/5 to-white">
+        <div className="card border-l-2 border-l-[var(--color-figure-black)]">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="font-bold text-[var(--color-text-primary)] text-sm">Creative Score</h2>
@@ -68,7 +68,7 @@ export default function CreativeDirectorPage() {
           <div className="mt-3 h-2 bg-[var(--color-bg-tertiary)] rounded-full overflow-hidden">
             <div
               className="h-full rounded-full transition-all duration-500"
-              style={{ width: `${result.total}%`, backgroundColor: result.color === "red" ? "#dc2626" : result.color === "orange" ? "#d97706" : result.color === "yellow" ? "#ca8a04" : result.color === "lightgreen" ? "#16a34a" : "#16a34a" }}
+              style={{ width: `${result.total}%`, backgroundColor: "var(--color-figure-black)" }}
             />
           </div>
         </div>
@@ -100,7 +100,7 @@ export default function CreativeDirectorPage() {
                           onClick={() => updateScore(criterion.id, s)}
                           className={`flex-1 text-center px-2 py-1.5 rounded-lg text-[0.7rem] font-medium transition-all ${
                             currentScore === s
-                              ? "bg-accent text-white shadow-sm"
+                              ? "bg-accent text-white "
                               : "bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)] hover:bg-[var(--color-border-primary)]"
                           }`}
                           title={lvl?.description}
@@ -120,7 +120,7 @@ export default function CreativeDirectorPage() {
         </section>
 
         {/* Scoring Reference */}
-        <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
+        <section className="card">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">Scoring Ranges</h2>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
             {marketingScoring.scoringRanges.map((r) => (

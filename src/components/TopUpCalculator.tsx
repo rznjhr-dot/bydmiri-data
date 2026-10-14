@@ -200,22 +200,22 @@ export default function TopUpCalculator() {
               <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
                 <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeRebate(!includeRebate)}>
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeRebate ? "bg-accent" : "bg-neutral-300"}`}>
-                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
+                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white  transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
                   </div>
                   <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)]">Rebate</span>
                 </label>
                 {rebate > 0 && (
-                  <span className="text-[0.7rem] font-semibold text-green-600">{formatCurrency(rebate)}</span>
+                  <span className="text-[0.7rem] font-semibold text-[var(--color-figure-black)]">{formatCurrency(rebate)}</span>
                 )}
               </div>
               <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
                 <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeCspRebate(!includeCspRebate)}>
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
-                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
+                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white  transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
                   <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)] truncate">{finance.additionalRebate.label.split(" ")[0]}</span>
                 </label>
-                <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspAmount)}</span>
+                <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)]">{formatCurrency(cspAmount)}</span>
               </div>
             </div>
 
@@ -281,7 +281,7 @@ export default function TopUpCalculator() {
           </div>
 
           {/* Results */}
-          <div className="p-2.5 bg-gradient-to-r from-[var(--color-accent-light)]/70 to-[var(--color-bg-secondary)]">
+          <div className="p-2.5 bg-[var(--color-neutral-50)]">
             <div className="flex items-center justify-between mb-1.5">
               <h3 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)]">
                 Price Breakdown Summary
@@ -295,7 +295,7 @@ export default function TopUpCalculator() {
                 {copied ? (
                   <>
                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    <span className="text-green-500">Copied!</span>
+                    <span className="text-[var(--color-figure-black)]">Copied!</span>
                   </>
                 ) : (
                   <>
@@ -352,11 +352,11 @@ export default function TopUpCalculator() {
               </div>
               <div className="flex justify-between col-span-2">
                 <span className="text-[var(--color-text-tertiary)]">Rebate / Promo</span>
-                <span className="font-semibold text-green-600">-{formatCurrency(rebateTotal)}</span>
+                <span className="font-semibold text-[var(--color-figure-black)]">-{formatCurrency(rebateTotal)}</span>
               </div>
               <div className="flex justify-between col-span-2">
                 <span className="text-[var(--color-text-tertiary)]">Booking Fees</span>
-                <span className="font-semibold text-amber-600">-{formatCurrency(bookingFee)}</span>
+                <span className="font-semibold text-[var(--color-text-tertiary)]">-{formatCurrency(bookingFee)}</span>
               </div>
               <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">
                 <span className="text-[var(--color-text-primary)] font-semibold">Subtotal Deductions (B)</span>
@@ -369,11 +369,11 @@ export default function TopUpCalculator() {
               </div>
             </div>
 
-            <div className={`mt-2 rounded-lg px-2.5 py-2 border-t-2 ${balance > 0 ? "border-red-200 bg-red-50" : "border-green-200 bg-green-50"}`}>
+            <div className={`mt-2 rounded-lg px-2.5 py-2 border-t-2 ${balance > 0 ? "border-[var(--color-figure-black)] bg-white" : "border-[var(--color-figure-black)] bg-[var(--color-neutral-50)]"}`}>
               <p className="text-[0.7rem] font-medium text-[var(--color-text-tertiary)]">
                 {balance > 0 ? "Customer kena bayar (balance payable)" : "Tiada baki diperlukan"}
               </p>
-              <p className={`text-lg sm:text-xl font-bold tracking-tight num ${balance > 0 ? "text-red-600" : "text-green-600"}`}>
+              <p className={`text-lg sm:text-xl font-bold tracking-tight num ${balance > 0 ? "text-[var(--color-figure-black)]" : "text-[var(--color-figure-black)]"}`}>
                 {formatCurrency(balance)}
               </p>
             </div>

@@ -193,7 +193,7 @@ export default function EhakmilikForm() {
         </div>
 
         {error && (
-          <div className="mx-4 mb-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs px-3 py-2">
+          <div className="mx-4 mb-3 rounded-lg bg-[var(--color-neutral-100)] border border-[var(--color-figure-black)] text-[var(--color-figure-black)] text-xs px-3 py-2">
             {error}
           </div>
         )}
@@ -245,8 +245,8 @@ export default function EhakmilikForm() {
                   </div>
                   {r.done ? (
                     <div className="flex items-center gap-1.5 mt-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-success, #16a34a)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      <span className="text-[0.7rem] font-semibold text-[var(--color-success, #16a34a)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-figure-black)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span className="text-[0.7rem] font-semibold text-[var(--color-figure-black)]">
                         PDF created in Google Drive
                       </span>
                       <a

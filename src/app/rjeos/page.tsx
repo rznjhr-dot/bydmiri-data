@@ -208,7 +208,7 @@ function ScenarioCard({
       onClick={onClick}
       className={`text-left px-3 py-2.5 rounded-lg border text-sm transition-all cursor-pointer ${
         selected
-          ? "border-warning/60 bg-warning-subtle text-text-primary font-medium shadow-sm"
+          ? "border-warning/60 bg-warning-subtle text-text-primary font-medium "
           : "border-border-primary bg-bg-secondary text-text-tertiary hover:border-border-hover hover:bg-bg-hover"
       }`}
     >
@@ -234,7 +234,7 @@ function PillButton({
       onClick={onClick}
       className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
         selected
-          ? "bg-warning text-white shadow-sm"
+          ? "bg-[var(--color-figure-black)] text-white "
           : "bg-bg-tertiary text-text-tertiary hover:bg-bg-hover hover:text-text-secondary"
       }`}
     >
@@ -313,7 +313,7 @@ export default function RJEOSPage() {
   return (
     <div className="min-h-screen bg-bg-primary">
       {/* ─── Hero Header ─────────────────────────────── */}
-      <section className="border-b border-border-primary bg-gradient-to-b from-bg-primary via-bg-primary to-bg-secondary">
+      <section className="border-b border-border-primary ">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
           <Link
             href="/"
@@ -323,19 +323,19 @@ export default function RJEOSPage() {
             Dashboard
           </Link>
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20">
+            <div className="w-12 h-12 rounded-xl bg-[var(--color-figure-black)] flex items-center justify-center ">
               <span className="text-white text-sm font-black tracking-tight">RJ</span>
             </div>
             <div>
               <div className="flex items-center gap-3">
-                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-text-primary">
-                  RJEOS<span className="text-warning">™</span>
+                <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-text-primary">
+                  RJEOS<span className="text-[var(--color-text-tertiary)]">™</span>
                 </h1>
-                <span className="bg-warning-subtle text-warning text-[0.7rem] font-semibold px-2 py-0.5 rounded border border-warning/30">
+                <span className="label text-[0.62rem] text-[var(--color-text-secondary)] px-2 py-0.5 border border-[var(--color-border-primary)]">
                   v{rjeos.version}
                 </span>
-                <span className="bg-bg-tertiary text-text-tertiary text-[0.7rem] font-semibold px-2 py-0.5 rounded border border-border-primary">
-                  CONSTITUTION LOCKED
+                <span className="label text-[0.62rem] text-[var(--color-text-tertiary)] px-2 py-0.5 border border-[var(--color-border-primary)]">
+                  Constitution locked
                 </span>
               </div>
               <p className="text-sm text-text-tertiary mt-0.5">
@@ -574,7 +574,7 @@ export default function RJEOSPage() {
             {/* Actions */}
             <button
               onClick={handleCopy}
-              className="w-full py-3.5 rounded-xl bg-warning hover:brightness-110 text-white font-bold text-sm transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-warning/20"
+              className="w-full py-3.5 rounded-[var(--radius-xl)] bg-[var(--color-figure-black)] hover:bg-[var(--color-absolute-black)] text-white font-medium text-sm transition-colors cursor-pointer flex items-center justify-center gap-2 "
             >
               {copied ? (
                 <>

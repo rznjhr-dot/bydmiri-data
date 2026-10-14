@@ -74,12 +74,12 @@ export default function MarketingBrainPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/marketing-ai"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Marketing AI
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Marketing Brain</h1>
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">Marketing Brain</h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Chief Marketing Officer — orchestrates all modules, decides strategy, delegates work</p>
         </div>
       </section>
@@ -109,7 +109,7 @@ export default function MarketingBrainPage() {
           </div>
 
           {decisionFramework[activeStep] && (
-            <div className="card border-l-4 border-l-accent mt-2">
+            <div className="card border-l-2 border-l-[var(--color-figure-black)] mt-2">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs font-bold text-accent">{decisionFramework[activeStep].step}</span>
                 <span className="text-xs text-[var(--color-text-tertiary)]">—</span>
@@ -146,7 +146,7 @@ export default function MarketingBrainPage() {
         </section>
 
         {/* Architecture Overview */}
-        <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
+        <section className="card">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">System Architecture</h2>
           <div className="text-xs text-[var(--color-text-tertiary)] leading-relaxed space-y-2">
             <p>

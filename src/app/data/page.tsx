@@ -21,12 +21,12 @@ export default function DataIndex() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
             /data &mdash; Machine Readable
           </h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
@@ -63,10 +63,10 @@ export default function DataIndex() {
           ))}
         </div>
 
-        <div className="mt-6 card bg-amber-50/80 border border-amber-200/60">
+        <div className="mt-6 card bg-[var(--color-neutral-50)] border border-[var(--color-border-primary)]">
           <div className="flex items-start gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600 shrink-0 mt-0.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <p className="text-sm text-amber-800">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-tertiary)] shrink-0 mt-0.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <p className="text-sm text-[var(--color-text-tertiary)]">
               <strong>Note:</strong> These endpoints return raw JSON. Designed for
               AI agents and programmatic access. For a human-readable view, visit the{" "}
               <Link href="/" className="underline font-medium">Dashboard</Link>.

@@ -103,15 +103,15 @@ export default function CommandPalette() {
       onClick={() => setOpen(false)}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
 
       {/* Dialog */}
       <div
-        className="relative w-full max-w-lg bg-[var(--color-bg-secondary)] rounded-xl shadow-dialog border border-[var(--color-border-primary)] overflow-hidden animate-in"
+        className="relative w-full max-w-lg bg-white rounded-[var(--radius-lg)] shadow-[var(--shadow-dialog)] border border-[var(--color-figure-black)] overflow-hidden animate-in"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 px-4 border-b border-[var(--color-border-primary)]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-tertiary)] shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-tertiary)] shrink-0">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
           </svg>
           <input
@@ -123,7 +123,7 @@ export default function CommandPalette() {
             onKeyDown={onKeyDown}
             className="flex-1 py-3.5 text-sm bg-transparent outline-none text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)]"
           />
-          <kbd className="text-[0.7rem]">ESC</kbd>
+          <kbd>ESC</kbd>
         </div>
 
         {filtered.length === 0 ? (
@@ -131,30 +131,30 @@ export default function CommandPalette() {
             No results for &ldquo;{query}&rdquo;
           </div>
         ) : (
-          <div className="max-h-72 overflow-y-auto p-2 space-y-0.5">
+          <div className="max-h-72 overflow-y-auto p-2">
             {filtered.map((item, i) => (
               <button
                 key={`${item.href}-${i}`}
                 onClick={() => navigate(item.href)}
                 onMouseEnter={() => setSelectedIndex(i)}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-colors cursor-pointer ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors cursor-pointer ${
                   i === selectedIndex
-                    ? "bg-accent/10 text-accent"
-                    : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-hover)]"
+                    ? "bg-[var(--color-figure-black)] text-white"
+                    : "text-[var(--color-text-secondary)] hover:bg-[var(--color-neutral-100)]"
                 }`}
               >
                 <span
-                  className={`text-[0.7rem] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 ${
-                    item.category === "Vehicle"
-                      ? "bg-[var(--color-accent-light)] text-[var(--color-accent)]"
-                      : "bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)]"
+                  className={`label text-[0.6rem] px-1.5 py-0.5 border shrink-0 ${
+                    i === selectedIndex
+                      ? "border-white/40 text-white"
+                      : "border-[var(--color-border-primary)] text-[var(--color-text-tertiary)]"
                   }`}
                 >
                   {item.category}
                 </span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{item.label}</p>
-                  <p className="text-xs text-[var(--color-text-tertiary)] truncate">
+                  <p className="text-sm truncate">{item.label}</p>
+                  <p className={`text-xs truncate ${i === selectedIndex ? "text-white/60" : "text-[var(--color-text-tertiary)]"}`}>
                     {item.description}
                   </p>
                 </div>

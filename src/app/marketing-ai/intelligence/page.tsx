@@ -22,12 +22,12 @@ export default function MarketingIntelligencePage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/marketing-ai"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Marketing AI
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Marketing Intelligence</h1>
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">Marketing Intelligence</h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Marketing Director — analyses events, festive calendars, and opportunities</p>
         </div>
       </section>
@@ -65,7 +65,7 @@ export default function MarketingIntelligencePage() {
             <h2 className="section-title">{category.label}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {category.events.map((event) => (
-                <div key={event.name} className="card border-l-4 border-l-accent">
+                <div key={event.name} className="card border-l-2 border-l-[var(--color-figure-black)]">
                   <div className="flex items-start justify-between mb-1">
                     <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{event.name}</h3>
                     <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded font-medium">{event.date}</span>
@@ -82,7 +82,7 @@ export default function MarketingIntelligencePage() {
         ))}
 
         {/* Intelligence Prompt */}
-        <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
+        <section className="card">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Marketing Intelligence Director</h2>
           <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
             This module uses a dedicated AI prompt at <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/marketing-intelligence.md</code>.

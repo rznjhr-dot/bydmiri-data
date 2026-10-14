@@ -15,12 +15,12 @@ export default function CampaignGeneratorPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/marketing-ai"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Marketing AI
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Campaign Generator Engine</h1>
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">Campaign Generator Engine</h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Generates complete 18-asset campaign packages for every channel</p>
         </div>
       </section>
@@ -52,7 +52,7 @@ export default function CampaignGeneratorPage() {
         {campaign && (
           <>
             {/* Campaign Details */}
-            <div className="card border-l-4 border-l-accent">
+            <div className="card border-l-2 border-l-[var(--color-figure-black)]">
               <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-1">{campaign.name}</h2>
               <p className="text-xs text-[var(--color-text-tertiary)] mb-3">{campaign.description}</p>
 
@@ -141,7 +141,7 @@ export default function CampaignGeneratorPage() {
         )}
 
         {/* Prompt Reference */}
-        <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
+        <section className="card">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Campaign Generator</h2>
           <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
             Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/campaign-generator.md</code> to generate full campaign packages

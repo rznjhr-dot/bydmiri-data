@@ -9,9 +9,9 @@ const navLinks = [
   { href: "/vehicles", label: "Vehicles" },
   { href: "/pricelist", label: "Pricelist" },
   { href: "/ehakmilik", label: "e-Hakmilik" },
-  { href: "/rjeos", label: "RJEOS" },
-  { href: "/live-script", label: "Live Script" },
+  { href: "/rco", label: "RCO" },
   { href: "/jpj", label: "JPJ Check" },
+  { href: "/live-script", label: "Live Script" },
   { href: "/changelog", label: "Changelog" },
 ];
 
@@ -36,34 +36,35 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
         scrolled
-          ? "bg-[var(--color-bg-secondary)]/88 backdrop-blur-xl border-b border-[var(--color-border-primary)] shadow-[var(--shadow-medium)]"
-          : "bg-[var(--color-bg-secondary)]/72 backdrop-blur-md border-b border-[var(--color-border-primary)]/60"
+          ? "bg-white/90 backdrop-blur-xl border-[var(--color-border-primary)]"
+          : "bg-white/70 backdrop-blur-md border-[var(--color-border-secondary)]"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-10 sm:h-11">
-          {/* Logo / Brand */}
+        <div className="flex items-center justify-between h-12 sm:h-14">
+          {/* Brand */}
           <Link
             href="/"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-6 h-6 rounded-[6px] bg-gradient-to-br from-[var(--color-accent)] to-[#123a8f] flex items-center justify-center shadow-[var(--shadow-accent)] group-hover:shadow-[var(--shadow-accent-glow)] transition-shadow">
-              <span className="text-white text-[0.6rem] font-extrabold tracking-tight">RJ</span>
+            className="flex items-center gap-3 group shrink-0"
+          >
+            <div className="w-7 h-7 bg-[var(--color-figure-black)] flex items-center justify-center">
+              <span className="text-white text-[0.6rem] font-bold tracking-tight">RJ</span>
             </div>
-            <div className="hidden sm:block">
-              <p className="text-[0.7rem] font-bold text-[var(--color-text-primary)] tracking-tight leading-tight">
+            <div className="hidden sm:block leading-none">
+              <p className="label text-[0.7rem] text-[var(--color-text-primary)]">
                 Ridzuan &middot; BYD Miri
               </p>
-              <p className="text-[0.6rem] text-[var(--color-text-tertiary)] font-medium leading-tight -mt-0.5">
+              <p className="text-[0.6rem] text-[var(--color-text-tertiary)] mt-1">
                 Personal Database
               </p>
             </div>
           </Link>
 
-          {/* Nav Links (desktop) */}
-          <nav className="hidden md:flex items-center gap-0.5">
+          {/* Nav (desktop) */}
+          <nav className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -73,7 +74,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`nav-pill !text-[0.65rem] !px-1.5 !py-0.5 ${isActive ? "nav-pill-active" : ""}`}
+                  className={`nav-pill ${isActive ? "nav-pill-active" : ""}`}
                 >
                   {link.label}
                 </Link>
@@ -81,26 +82,25 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right section */}
+          {/* Right */}
           <div className="flex items-center gap-2">
             <button
               onClick={openPalette}
               aria-label="Open command palette"
-              className="hidden sm:flex items-center gap-2 px-2 py-0.5 rounded-full text-[0.65rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)]/60 border border-[var(--color-border-primary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-secondary)] transition-all w-36 cursor-pointer"
+              className="hidden sm:flex items-center gap-2 pl-3 pr-2 py-1.5 rounded-[var(--radius-xl)] text-[0.7rem] text-[var(--color-text-tertiary)] border border-[var(--color-border-primary)] hover:border-[var(--color-figure-black)] hover:text-[var(--color-figure-black)] transition-colors w-40 cursor-pointer"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <span className="flex-1 text-left">Search...</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span className="flex-1 text-left label text-[0.6rem]">Search</span>
               <kbd>⌘K</kbd>
             </button>
 
-            {/* Mobile menu button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 rounded-lg text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer touch-target"
+              className="lg:hidden p-2 text-[var(--color-text-secondary)] hover:text-[var(--color-figure-black)] transition-colors cursor-pointer touch-target"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 {menuOpen ? (
                   <>
                     <line x1="18" y1="6" x2="6" y2="18"/>
@@ -120,7 +120,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <nav className="md:hidden pb-4 border-t border-[var(--color-border-primary)] pt-3 space-y-1">
+          <nav className="lg:hidden py-3 border-t border-[var(--color-border-primary)]">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -130,10 +130,10 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`block px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  className={`block px-3 py-2.5 label text-[0.7rem] transition-colors ${
                     isActive
-                      ? "bg-[var(--color-accent-light)] text-[var(--color-accent)] font-semibold"
-                      : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)]"
+                      ? "text-[var(--color-figure-black)]"
+                      : "text-[var(--color-text-tertiary)] hover:text-[var(--color-figure-black)]"
                   }`}
                 >
                   {link.label}
@@ -142,7 +142,7 @@ export default function Navbar() {
             })}
             <button
               onClick={openPalette}
-              className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer touch-target"
+              className="w-full flex items-center gap-2 px-3 py-2.5 label text-[0.7rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-figure-black)] transition-colors cursor-pointer touch-target"
               aria-label="Search"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>

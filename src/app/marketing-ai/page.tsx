@@ -102,17 +102,17 @@ export default function MarketingAIPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
           </Link>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-[var(--color-figure-black)] flex items-center justify-center ">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
+              <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
                 Marketing AI
               </h1>
               <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">
@@ -135,7 +135,7 @@ export default function MarketingAIPage() {
         </div>
 
         {/* System Overview */}
-        <div className="card border-l-4 border-l-accent bg-accent/5">
+        <div className="card border-l-2 border-l-[var(--color-figure-black)] bg-accent/5">
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 4-2 4h-4s-2-2-2-4a4 4 0 0 1 4-4z"/><path d="M12 8v6"/><path d="M12 16v2"/><path d="M8 22h8"/><path d="M12 22v-4"/></svg>
@@ -191,7 +191,7 @@ export default function MarketingAIPage() {
                   <span className="text-xs font-medium text-accent group-hover:text-accent-hover transition-colors">
                     Open Module &rarr;
                   </span>
-                  <span className={`w-1.5 h-1.5 rounded-full ${mod.status === "active" ? "bg-green-500" : "bg-amber-400"}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${mod.status === "active" ? "bg-[var(--color-figure-black)]" : "bg-[var(--color-calibration-gray)]"}`} />
                 </div>
               </Link>
             ))}

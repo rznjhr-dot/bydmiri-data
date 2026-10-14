@@ -222,9 +222,9 @@ export default function ChargingTimeEstimator() {
                     />
                     {/* From handle */}
                     <div
-                      className={`absolute w-7 h-7 -translate-x-1/2 rounded-full shadow-sm cursor-grab active:cursor-grabbing z-10 transition-all flex items-center justify-center ${
+                      className={`absolute w-7 h-7 -translate-x-1/2 rounded-full  cursor-grab active:cursor-grabbing z-10 transition-all flex items-center justify-center ${
                         draggingRef.current === "from"
-                          ? "bg-white border-2 border-accent scale-110 shadow-md"
+                          ? "bg-white border-2 border-accent scale-110 "
                           : "bg-white border-2 border-[var(--color-border-primary)] hover:border-accent"
                       }`}
                       style={{ left: `${fromPct}%` }}
@@ -236,9 +236,9 @@ export default function ChargingTimeEstimator() {
                     </div>
                     {/* To handle */}
                     <div
-                      className={`absolute w-7 h-7 -translate-x-1/2 rounded-full shadow-sm cursor-grab active:cursor-grabbing z-10 transition-all flex items-center justify-center ${
+                      className={`absolute w-7 h-7 -translate-x-1/2 rounded-full  cursor-grab active:cursor-grabbing z-10 transition-all flex items-center justify-center ${
                         draggingRef.current === "to"
-                          ? "bg-white border-2 border-accent scale-110 shadow-md"
+                          ? "bg-white border-2 border-accent scale-110 "
                           : "bg-white border-2 border-[var(--color-border-primary)] hover:border-accent"
                       }`}
                       style={{ left: `${toPct}%` }}
@@ -259,7 +259,7 @@ export default function ChargingTimeEstimator() {
             </div>
 
             {!currentVariant.battery && (
-              <p className="text-xs text-amber-600">
+              <p className="text-xs text-[var(--color-text-tertiary)]">
                 Battery capacity not available for this variant
               </p>
             )}
@@ -273,7 +273,7 @@ export default function ChargingTimeEstimator() {
           </div>
 
           {/* Results */}
-          <div className="lg:col-span-2 bg-gradient-to-br from-accent/5 to-[var(--color-bg-secondary)] border-t lg:border-t-0 lg:border-l border-[var(--color-border-primary)]/60 p-4 sm:p-5 flex flex-col justify-between">
+          <div className="lg:col-span-2 bg-[var(--color-neutral-50)] border-t lg:border-t-0 lg:border-l border-[var(--color-border-primary)]/60 p-4 sm:p-5 flex flex-col justify-between">
             <div>
               <h3 className="text-xs font-semibold text-[var(--color-text-tertiary)] uppercase tracking-widest mb-3">
                 Estimated Charging Time

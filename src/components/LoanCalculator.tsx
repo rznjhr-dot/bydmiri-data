@@ -256,12 +256,12 @@ export default function LoanCalculator() {
                 <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
                   <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeRebate(!includeRebate)}>
                     <div className={`w-7 h-4 rounded-full transition-colors relative ${includeRebate ? "bg-accent" : "bg-neutral-300"}`}>
-                      <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
+                      <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white  transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
                     </div>
                     <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)]">Rebate</span>
                   </label>
                   {promoRebateVal > 0 && (
-                    <span className="text-[0.7rem] font-semibold text-green-600">{formatCurrency(promoRebateVal, 2)}</span>
+                    <span className="text-[0.7rem] font-semibold text-[var(--color-figure-black)]">{formatCurrency(promoRebateVal, 2)}</span>
                   )}
                 </div>
               )}
@@ -269,11 +269,11 @@ export default function LoanCalculator() {
               <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
                 <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeCspRebate(!includeCspRebate)}>
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
-                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
+                    <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white  transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
                   <span className="text-[0.7rem] font-medium text-[var(--color-text-secondary)] truncate">{finance.additionalRebate.label.split(" ")[0]}</span>
                 </label>
-                <span className="text-[0.7rem] font-semibold text-blue-600">{formatCurrency(cspRebateAmount, 2)}</span>
+                <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)]">{formatCurrency(cspRebateAmount, 2)}</span>
               </div>
               )}
             </div>
@@ -391,7 +391,7 @@ export default function LoanCalculator() {
           </div>
 
           {/* Results */}
-          <div className="p-2.5 bg-gradient-to-r from-[var(--color-accent-light)]/70 to-[var(--color-bg-secondary)]">
+          <div className="p-2.5 bg-[var(--color-neutral-50)]">
             <div className="flex items-center justify-between mb-1.5">
               <h3 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)]">
                 Payment Summary
@@ -405,7 +405,7 @@ export default function LoanCalculator() {
                 {copied ? (
                   <>
                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    <span className="text-green-500">Copied!</span>
+                    <span className="text-[var(--color-figure-black)]">Copied!</span>
                   </>
                 ) : (
                   <>
@@ -432,13 +432,13 @@ export default function LoanCalculator() {
               {includeRebate && promoRebateVal > 0 && (
                 <div className="flex justify-between col-span-2">
                   <span className="text-[var(--color-text-tertiary)]">Rebate</span>
-                  <span className="font-semibold text-green-600">-{formatCurrency(promoRebateVal, 2)}</span>
+                  <span className="font-semibold text-[var(--color-figure-black)]">-{formatCurrency(promoRebateVal, 2)}</span>
                 </div>
               )}
               {includeCspRebate && cspRebateAmount > 0 && (
                 <div className="flex justify-between col-span-2">
                   <span className="text-[var(--color-text-tertiary)]">{finance.additionalRebate.label}</span>
-                  <span className="font-semibold text-blue-600">-{formatCurrency(cspRebateAmount, 2)}</span>
+                  <span className="font-semibold text-[var(--color-text-tertiary)]">-{formatCurrency(cspRebateAmount, 2)}</span>
                 </div>
               )}
               <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">

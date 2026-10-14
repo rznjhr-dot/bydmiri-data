@@ -148,9 +148,9 @@ function renderScript(text: string) {
   const parts = text.split(/(\*\*[^*]+\*\*|\+\+[^+]+\+\+)/g);
   return parts.map((p, j) => {
     if (p.startsWith("**") && p.endsWith("**"))
-      return <span key={j} className="px-1 rounded bg-red-50 text-red-700 font-semibold">{p.slice(2, -2)}</span>;
+      return <span key={j} className="px-1 rounded bg-[var(--color-figure-black)] text-white font-semibold">{p.slice(2, -2)}</span>;
     if (p.startsWith("++") && p.endsWith("++"))
-      return <span key={j} className="px-1 rounded bg-emerald-50 text-emerald-700 font-semibold">{p.slice(2, -2)}</span>;
+      return <span key={j} className="px-1 rounded bg-[var(--color-neutral-100)] text-[var(--color-text-primary)] font-semibold">{p.slice(2, -2)}</span>;
     return <span key={j}>{p}</span>;
   });
 }
@@ -167,7 +167,7 @@ function CopyButton({ text }: { text: string }) {
       }}
       className={`text-[0.65rem] font-semibold px-2.5 py-1 rounded-lg border transition-colors shrink-0 ${
         copied
-          ? "bg-emerald-600 text-white border-emerald-600"
+          ? "bg-[var(--color-figure-black)] text-white border-[var(--color-figure-black)]"
           : "bg-[var(--color-bg-secondary)] text-[var(--color-text-tertiary)] border-[var(--color-border-primary)] hover:bg-[var(--color-accent)] hover:text-white hover:border-[var(--color-accent)]"
       }`}>
       {copied ? "✓ Copied" : "📋 Copy"}
@@ -194,15 +194,15 @@ export default function LiveScriptPage() {
     <div className="min-h-screen">
       <section className="page-header">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5 sm:py-7">
-          <Link href="/" className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2">
+          <Link href="/" className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
           </Link>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
+            <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
               TikTok Live Script
             </h1>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-red-600 text-white text-[0.65rem] font-bold px-2.5 py-1">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-figure-black)] text-white text-[0.65rem] font-bold px-2.5 py-1">
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> LIVE PACK
             </span>
           </div>
@@ -221,7 +221,7 @@ export default function LiveScriptPage() {
             <div key={s.num} className="card card-elevated p-4">
               <SectionHeader num={s.num} title={s.title} meta={s.time} />
               {s.when && (
-                <p className="text-[0.7rem] text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg px-2.5 py-1.5 mb-2">
+                <p className="text-[0.7rem] text-[var(--color-text-secondary)] bg-[var(--color-neutral-50)] border border-[var(--color-border-primary)] rounded-lg px-2.5 py-1.5 mb-2">
                   <strong>When:</strong> {s.when}
                 </p>
               )}
@@ -247,16 +247,16 @@ export default function LiveScriptPage() {
               <div key={m.name} className="card card-elevated p-3.5">
                 <div className="flex items-center justify-between gap-2 mb-1">
                   <p className="font-bold text-sm text-[var(--color-text-primary)]">{m.name}</p>
-                  <span className={`text-[0.6rem] font-bold px-2 py-0.5 rounded-full shrink-0 ${m.hot ? "bg-red-50 text-red-700" : "bg-[var(--color-accent-light)] text-[var(--color-accent)]"}`}>
+                  <span className={`text-[0.6rem] font-bold px-2 py-0.5 rounded-full shrink-0 ${m.hot ? "bg-[var(--color-figure-black)] text-white" : "bg-[var(--color-accent-light)] text-[var(--color-accent)]"}`}>
                     {m.tag}
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[0.72rem] font-mono mb-2">
                   <span className="text-[var(--color-text-tertiary)]">OTR <b className="text-[var(--color-text-primary)]">{m.otr}</b></span>
-                  <span className="text-red-600 font-semibold">{m.rebate}</span>
+                  <span className="text-[var(--color-figure-black)] font-semibold">{m.rebate}</span>
                   <span className="text-[var(--color-text-tertiary)]">0% <b className="text-[var(--color-text-primary)]">{m.zero}</b></span>
                   <span className="text-[var(--color-text-tertiary)]">10% <b className="text-[var(--color-text-primary)]">{m.ten}</b></span>
-                  <span className="text-emerald-600 font-semibold">{m.range}</span>
+                  <span className="text-[var(--color-text-secondary)] font-semibold">{m.range}</span>
                 </div>
                 <p className="text-[0.75rem] leading-relaxed text-[var(--color-text-secondary)] border-t border-[var(--color-border-secondary)] pt-2">
                   🎙️ {m.script}
@@ -283,10 +283,10 @@ export default function LiveScriptPage() {
                   <tr key={m.name} className="border-t border-[var(--color-border-secondary)]">
                     <td className="px-2.5 py-1.5 font-sans font-semibold whitespace-nowrap">{m.name}</td>
                     <td className="px-2.5 py-1.5">{m.otr}</td>
-                    <td className="px-2.5 py-1.5 text-red-600 font-semibold">{m.rebate}</td>
+                    <td className="px-2.5 py-1.5 text-[var(--color-figure-black)] font-semibold">{m.rebate}</td>
                     <td className="px-2.5 py-1.5">{m.zero}</td>
                     <td className="px-2.5 py-1.5">{m.ten}</td>
-                    <td className="px-2.5 py-1.5 text-emerald-600">{m.range}</td>
+                    <td className="px-2.5 py-1.5 text-[var(--color-text-secondary)]">{m.range}</td>
                   </tr>
                 ))}
               </tbody>
@@ -344,7 +344,7 @@ export default function LiveScriptPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {tips.map((tip) => (
-              <div key={tip.t} className="rounded-lg border border-[var(--color-border-primary)] border-l-[3px] border-l-emerald-500 bg-[var(--color-bg-secondary)] p-2.5 text-[0.7rem] leading-snug text-[var(--color-text-secondary)]">
+              <div key={tip.t} className="rounded-lg border border-[var(--color-border-primary)] border-l-[3px] border-l-[var(--color-figure-black)] bg-[var(--color-bg-secondary)] p-2.5 text-[0.7rem] leading-snug text-[var(--color-text-secondary)]">
                 <strong className="text-[var(--color-text-primary)] block mb-0.5">{tip.t}</strong>
                 {tip.d}
               </div>

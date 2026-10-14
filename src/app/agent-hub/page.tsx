@@ -24,12 +24,12 @@ export default function AgentHubPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
             AI Agent Hub
           </h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
@@ -40,7 +40,7 @@ export default function AgentHubPage() {
 
       <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* System Status */}
-        <div className="card border-l-4 border-l-accent bg-accent/5">
+        <div className="card border-l-2 border-l-[var(--color-figure-black)] bg-accent/5">
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 4-2 4h-4s-2-2-2-4a4 4 0 0 1 4-4z"/><path d="M12 8v6"/><path d="M12 16v2"/><path d="M8 22h8"/><path d="M12 22v-4"/></svg>
@@ -103,8 +103,8 @@ export default function AgentHubPage() {
                   <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{sop.title}</h3>
                   <span className={`text-[0.7rem] font-semibold px-1.5 py-0.5 rounded ${
                     sop.status === "Active" 
-                      ? "bg-green-50 text-green-700" 
-                      : "bg-amber-50 text-amber-700"
+                      ? "bg-[var(--color-figure-black)] text-white" 
+                      : "bg-[var(--color-neutral-100)] text-[var(--color-text-secondary)]"
                   }`}>
                     {sop.status}
                   </span>
@@ -116,7 +116,7 @@ export default function AgentHubPage() {
         </section>
 
         {/* Data Architecture */}
-        <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
+        <section className="card">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-3">Data Architecture for AI Agents</h2>
           <div className="text-sm text-[var(--color-text-tertiary)] leading-relaxed space-y-2">
             <p>

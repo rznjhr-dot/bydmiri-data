@@ -1,91 +1,112 @@
 @import "tailwindcss";
 
-/* ─── Design System — BYD Miri Sales Console ─────────────────────
-   Design read: internal sales-operations dashboard, single user,
-   mobile-heavy. Trust-first precision-instrument language.
-   Dials: VARIANCE 4 · MOTION 3 · DENSITY 6
+/* ─── Design System — BYD Miri · Figure 03 dossier ────────────────
+   Design read: the site as a technical product dossier. Expansive
+   Lab White fields, exact black type, hairline rules, and machine
+   display faces carry the weight. Colour is withheld — depth comes
+   from whitespace, 1px rules, and black/white chapter inversions.
+   Type: Space Grotesk (display / technical figures / uppercase nav),
+         Inter (body, forms, controls).
+   Dials: VARIANCE 2 · MOTION 2 · DENSITY 5
    Principles:
-   - Hairline dividers over boxed cards when hierarchy allows
-   - Geist Sans for text, Geist Mono for all numerals (tabular-nums)
-   - One accent (steel blue), desaturated, locked across the app
-   - Radius scale: sharp inner (4px), soft surfaces (10/14), pill interactive
-   - Tinted shadows (navy hue), no pure-black drop shadows
-   - No eyebrows above every section; sentence case over ALL-CAPS labels
-   - Motion: CSS-only, transform/opacity, 150-220ms, honors reduced-motion
+   - Lab White #ffffff canvas; Absolute Black #000000 for inverted
+     chapters; Figure Black #0c0c0c for primary type & controls
+   - Machine Gray #6d6d6d for measurements/labels; Calibration Gray
+     #cecece for 1px rules
+   - No saturated accents, gradients, or colourful status treatments
+   - No elevation — separate with rules and inversion
+   - Uppercase tracked labels over sentence case body
+   - Motion: transform/opacity only, 150–220ms, honours reduced-motion
 */
 
 @theme {
-  /* Semantic Colors — Light (steel-blue tinted neutrals) */
-  --color-bg-primary: #f4f6fa;      /* app canvas — cool steel */
-  --color-bg-secondary: #ffffff;    /* elevated surface */
-  --color-bg-tertiary: #eaedf4;     /* recessed field */
-  --color-bg-hover: #e4e8f1;
+  /* ── Figure 03 palette ─────────────────────────────────────── */
+  --color-lab-white: #ffffff;
+  --color-figure-black: #0c0c0c;
+  --color-absolute-black: #000000;
+  --color-machine-gray: #6d6d6d;
+  --color-calibration-gray: #cecece;
+  --color-paper: #f5f5f5;
 
-  --color-text-primary: #0d1019;    /* near-black, navy-warm */
-  --color-text-secondary: #3a3f55;
-  --color-text-tertiary: #6f7591;
-  --color-text-disabled: #a8aebf;
+  /* ── Semantic: surfaces (all flush white; rules carry separation) */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f5f5f5;
+  --color-bg-hover: #ededed;
 
-  --color-border-primary: #d9dde8;
-  --color-border-secondary: #eaedf4;
-  --color-border-hover: #a8aebf;
+  /* ── Semantic: type ─────────────────────────────────────────── */
+  --color-text-primary: #0c0c0c;
+  --color-text-secondary: #3d3d3d;
+  --color-text-tertiary: #6d6d6d;
+  --color-text-disabled: #cecece;
 
-  /* Single accent: steel blue, saturation ~72% (under 80% per skill) */
-  --color-accent: #2356c8;
-  --color-accent-hover: #1a44a3;
-  --color-accent-light: #eaf0fb;
-  --color-accent-subtle: rgba(35, 86, 200, 0.07);
+  /* ── Semantic: rules ────────────────────────────────────────── */
+  --color-border-primary: #cecece;
+  --color-border-secondary: #e8e8e8;
+  --color-border-hover: #0c0c0c;
 
-  --color-success: #047857;
-  --color-success-light: #d1fae5;
-  --color-success-subtle: rgba(4, 120, 87, 0.07);
+  /* ── The single "accent" is Figure Black ────────────────────── */
+  --color-accent: #0c0c0c;
+  --color-accent-hover: #000000;
+  --color-accent-light: #f2f2f2;
+  --color-accent-subtle: rgba(12, 12, 12, 0.045);
 
-  --color-warning: #b45309;
-  --color-warning-light: #fef3c7;
-  --color-warning-subtle: rgba(180, 83, 9, 0.07);
+  /* ── Status — desaturated to ink/gray (no colourful treatments) */
+  --color-success: #0c0c0c;
+  --color-success-light: #f2f2f2;
+  --color-success-subtle: rgba(12, 12, 12, 0.045);
+  --color-warning: #6d6d6d;
+  --color-warning-light: #f5f5f5;
+  --color-warning-subtle: rgba(12, 12, 12, 0.035);
+  --color-danger: #0c0c0c;
+  --color-danger-light: #f2f2f2;
+  --color-danger-subtle: rgba(12, 12, 12, 0.045);
 
-  --color-danger: #b91c1c;
-  --color-danger-light: #fee2e2;
-  --color-danger-subtle: rgba(185, 28, 28, 0.07);
+  /* ── Neutrals — pure grayscale ramp ─────────────────────────── */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e8e8e8;
+  --color-neutral-300: #cecece;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #6d6d6d;
+  --color-neutral-600: #3d3d3d;
+  --color-neutral-700: #1a1a1a;
+  --color-neutral-800: #0c0c0c;
+  --color-neutral-900: #000000;
 
-  /* Neutrals — consistent cool-navy family, no warm/cool mixing */
-  --color-neutral-50: #f6f8fb;
-  --color-neutral-100: #eef1f6;
-  --color-neutral-200: #e0e4ee;
-  --color-neutral-300: #c0c5d6;
-  --color-neutral-400: #8a90a8;
-  --color-neutral-500: #4a5069;
-  --color-neutral-600: #2d3148;
-  --color-neutral-700: #1a1d2e;
-  --color-neutral-800: #0b0d14;
-  --color-neutral-900: #06070b;
+  /* ── Elevation — none. Depth from rules + inversion. ───────── */
+  --shadow-subtle: none;
+  --shadow-medium: none;
+  --shadow-elevated: none;
+  --shadow-dialog: 0 24px 60px rgba(0, 0, 0, 0.20);
+  --shadow-accent: none;
+  --shadow-accent-lg: none;
+  --shadow-accent-glow: none;
 
-  /* Shadows — layered, tinted with the navy hue of the palette */
-  --shadow-subtle: 0 1px 2px rgba(13, 16, 25, 0.05), 0 1px 3px rgba(13, 16, 25, 0.04);
-  --shadow-medium: 0 2px 4px rgba(13, 16, 25, 0.04), 0 8px 20px rgba(13, 16, 25, 0.06);
-  --shadow-elevated: 0 4px 8px rgba(13, 16, 25, 0.05), 0 18px 36px rgba(13, 16, 25, 0.08);
-  --shadow-dialog: 0 8px 16px rgba(13, 16, 25, 0.08), 0 32px 64px rgba(13, 16, 25, 0.12);
-  /* Accent-tinted shadows for branded interactive elements */
-  --shadow-accent: 0 2px 8px rgba(35, 86, 200, 0.32);
-  --shadow-accent-lg: 0 8px 24px rgba(35, 86, 200, 0.32);
-  --shadow-accent-glow: 0 4px 16px rgba(35, 86, 200, 0.42);
-
-  /* Radius scale — documented rule:
-     inner chips 4px · surfaces 10/14px · interactive 9999px (pill) */
+  /* ── Radius: links 8 · panels 12 · buttons 24 · inputs/images 0 */
   --radius-sm: 4px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 18px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 24px;
 
-  /* Fluid type scale — mobile-first, 11.2px absolute floor */
-  --text-2xs: 0.7rem;
+  /* ── Type ───────────────────────────────────────────────────── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* legacy aliases so existing var(--font-geist-*) references resolve */
+  --font-geist-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-geist-mono: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-2xs: 0.6875rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-hero: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  --text-hero: clamp(2.5rem, 1.25rem + 5vw, 4.5rem);
 
-  /* Spacing */
-  --space-section: clamp(1.25rem, 3vw, 2rem);
-  --space-card: clamp(1rem, 2.5vw, 1.25rem);
+  /* ── Spacing rhythm ─────────────────────────────────────────── */
+  --space-section: clamp(2rem, 4vw, 2.5rem);
+  --space-card: clamp(1.25rem, 2.5vw, 2rem);
 }
 
 /* ─── Base ──────────────────────────────────────────────────── */
@@ -100,182 +121,177 @@
 
   body {
     color: var(--color-text-primary);
-    background-color: var(--color-bg-primary);
-    font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
-  }
-
-  /* Subtle grain — on a fixed pseudo so it never repaints during scroll */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image: radial-gradient(rgba(13, 16, 25, 0.018) 1px, transparent 1px);
-    background-size: 22px 22px;
+    background-color: var(--color-lab-white);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    font-feature-settings: "ss12" 1;
   }
 
   * {
     box-sizing: border-box;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 400 !important;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+  }
+
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-figure-black);
     outline-offset: 2px;
     border-radius: 2px;
   }
 
   ::selection {
-    background-color: var(--color-accent-subtle);
-    color: var(--color-accent);
+    background-color: var(--color-figure-black);
+    color: #ffffff;
   }
 
-  /* Numerals: every price, stat & spec reads in mono with tabular
-     figures — the instrument-panel signature of this design system */
+  /* Instrument figures: every price, stat & spec reads in the
+     machine display face with tabular figures */
   .stat-value,
   .stat-label,
   .chip,
   .data-row-value,
-  .data-row-label {
+  .data-row-label,
+  .num {
     font-variant-numeric: tabular-nums;
   }
 
-  /* Scrollbar styling */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-neutral-300);
-    border-radius: 3px;
+    background: var(--color-calibration-gray);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-neutral-400);
+    background: var(--color-machine-gray);
   }
 }
 
 /* ─── Component Classes ─────────────────────────────────────── */
 
 @layer components {
-  /* Card System — elevation only when hierarchy demands.
-     Default: hairline border + subtle shadow, no hover lift on
-     static cards. `.card-interactive` opts in to lift. */
+  /* Panel — flush on Lab White, 1px Calibration rule, no shadow */
   .card {
     background-color: var(--color-bg-secondary);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-subtle);
-    padding: 1.25rem;
     border: 1px solid var(--color-border-primary);
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    box-shadow: none;
   }
   .card-elevated {
-    box-shadow: var(--shadow-medium);
+    box-shadow: none;
   }
   .card-interactive {
     cursor: pointer;
-    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    transition: border-color 0.18s ease, background-color 0.18s ease;
   }
   .card-interactive:hover {
-    box-shadow: var(--shadow-elevated);
-    border-color: color-mix(in srgb, var(--color-accent) 24%, var(--color-border-primary));
+    border-color: var(--color-figure-black);
+    background-color: var(--color-neutral-50);
   }
   .card-interactive:active {
-    transform: scale(0.99);
+    background-color: var(--color-neutral-100);
   }
   @media (max-width: 640px) {
     .card {
-      padding: 0.875rem;
-      border-radius: var(--radius-md);
+      padding: 1rem;
     }
   }
 
-  /* Badge System — squircle (radius-sm), not pill. One weight. */
+  /* Badge — uppercase technical tag, square-ish, hairline */
   .badge {
     display: inline-flex;
     align-items: center;
+    gap: 0.25rem;
     border-radius: var(--radius-sm);
     padding: 0.125rem 0.5rem;
+    font-family: var(--font-display);
     font-size: 0.6875rem;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.5;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     white-space: nowrap;
+    border: 1px solid var(--color-border-primary);
+    background-color: transparent;
+    color: var(--color-text-tertiary);
   }
   .badge-blue {
-    background-color: var(--color-accent-light);
-    color: var(--color-accent);
-    border: 1px solid color-mix(in srgb, var(--color-accent) 22%, transparent);
+    background-color: var(--color-figure-black);
+    color: #ffffff;
+    border-color: var(--color-figure-black);
   }
   .badge-green {
-    background-color: var(--color-success-light);
-    color: var(--color-success);
-    border: 1px solid color-mix(in srgb, var(--color-success) 22%, transparent);
+    background-color: transparent;
+    color: var(--color-figure-black);
+    border-color: var(--color-figure-black);
   }
   .badge-gray {
-    background-color: var(--color-neutral-100);
-    color: var(--color-text-tertiary);
-    border: 1px solid var(--color-border-primary);
+    background-color: transparent;
+    color: var(--color-machine-gray);
+    border-color: var(--color-calibration-gray);
   }
   .badge-amber {
-    background-color: var(--color-warning-light);
-    color: var(--color-warning);
-    border: 1px solid color-mix(in srgb, var(--color-warning) 22%, transparent);
+    background-color: var(--color-neutral-100);
+    color: var(--color-machine-gray);
+    border-color: var(--color-calibration-gray);
   }
-  /* badge-purple removed — single-accent lock, no secondary purple */
 
-  /* Section Title — sentence case default, tighter, no eyebrow needed */
+  /* Section title — uppercase machina instrumentation label */
   .section-title {
-    font-size: 0.9375rem;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
     color: var(--color-text-primary);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.015em;
+    margin-bottom: 0.75rem;
   }
   @media (max-width: 640px) {
     .section-title {
-      font-size: 0.875rem;
-      margin-bottom: 0.375rem;
+      font-size: 0.75rem;
     }
   }
 
-  /* Page Header — ambient steel-blue radial wash, not a flat band */
+  /* Page header — plain white field with a single rule beneath */
   .page-header {
-    position: relative;
     border-bottom: 1px solid var(--color-border-primary);
-    background:
-      radial-gradient(1100px 280px at 18% -40%, rgba(35, 86, 200, 0.07), transparent 60%),
-      radial-gradient(700px 240px at 88% -50%, rgba(4, 120, 87, 0.035), transparent 55%),
-      linear-gradient(180deg, #ffffff 0%, var(--color-bg-primary) 100%);
+    background: var(--color-lab-white);
   }
 
-  /* Tool Card — premium quick-action cards.
-     No inner border on the icon tile; the accent wash IS the container. */
+  /* Tool tile — hairline panel, inverts on hover */
   .tool-card {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.375rem;
-    padding: 0.625rem;
+    gap: 0.5rem;
+    padding: 0.75rem;
     border-radius: var(--radius-lg);
     background-color: var(--color-bg-secondary);
     border: 1px solid var(--color-border-primary);
-    box-shadow: var(--shadow-subtle);
-    transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
+    box-shadow: none;
+    transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
     text-decoration: none;
     color: var(--color-text-primary);
   }
   .tool-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-elevated);
-    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border-primary));
-  }
-  .tool-card:active {
-    transform: translateY(0) scale(0.99);
+    border-color: var(--color-figure-black);
+    background-color: var(--color-figure-black);
+    color: #ffffff;
   }
   .tool-card-icon {
     display: flex;
@@ -283,17 +299,15 @@
     justify-content: center;
     width: 1.75rem;
     height: 1.75rem;
-    border-radius: var(--radius-md);
-    transition: transform 0.22s ease;
-  }
-  .tool-card:hover .tool-card-icon {
-    transform: scale(1.08);
+    border-radius: var(--radius-sm);
+    transition: color 0.18s ease;
   }
   .tool-card-title {
+    font-family: var(--font-display);
     font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    line-height: 1.3;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
   }
   .tool-card-desc {
     font-size: 0.65rem;
@@ -301,122 +315,122 @@
     line-height: 1.4;
     margin-top: -0.25rem;
   }
+  .tool-card:hover .tool-card-desc {
+    color: rgba(255, 255, 255, 0.7);
+  }
 
-  /* Chip — mono value chip, sharp corners */
+  /* Chip — technical value chip */
   .chip {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
     padding: 0.1875rem 0.5rem;
     border-radius: var(--radius-sm);
-    background-color: var(--color-bg-tertiary);
+    background-color: transparent;
     border: 1px solid var(--color-border-primary);
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-family: var(--font-display);
     font-size: 0.6875rem;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--color-text-secondary);
     white-space: nowrap;
   }
 
-  /* Nav pill — navbar links. Active = accent wash, no hard border */
+  /* Nav label — uppercase machina, black fill when active */
   .nav-pill {
     display: inline-flex;
     align-items: center;
     padding: 0.375rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-text-secondary);
-    transition: all 0.15s ease;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    transition: color 0.15s ease, background-color 0.15s ease;
     border: 1px solid transparent;
   }
   .nav-pill:hover {
-    color: var(--color-text-primary);
-    background-color: var(--color-bg-tertiary);
+    color: var(--color-figure-black);
+    background-color: var(--color-neutral-100);
   }
   .nav-pill-active {
-    color: var(--color-accent);
-    background-color: var(--color-accent-light);
-    border-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
-    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--color-figure-black);
+    border-color: var(--color-figure-black);
   }
   .nav-pill-active:hover {
-    color: var(--color-accent-hover);
-    background-color: var(--color-accent-light);
+    color: #ffffff;
+    background-color: var(--color-absolute-black);
   }
 
-  /* Divider — gradient hairline */
+  /* Rule */
   .divider-gradient {
     height: 1px;
     border: none;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-border-primary) 25%,
-      var(--color-border-primary) 75%,
-      transparent
-    );
+    background: var(--color-border-primary);
   }
 
-  /* Form Elements — label above, helper below, focus ring uses accent */
+  /* Forms — transparent field with a single black underline */
   .input {
     width: 100%;
-    border: 1px solid var(--color-border-primary);
-    border-radius: var(--radius-md);
-    padding: 0.625rem 0.875rem;
+    border: none;
+    border-bottom: 1px solid var(--color-figure-black);
+    border-radius: 0;
+    padding: 0.5rem 0;
     font-size: 0.875rem;
-    background-color: var(--color-bg-secondary);
+    font-family: var(--font-sans);
+    background-color: transparent;
     color: var(--color-text-primary);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: border-color 0.15s ease, border-width 0.15s ease;
     outline: none;
   }
   .input::placeholder {
     color: var(--color-text-disabled);
   }
   .input:focus {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px var(--color-accent-subtle);
+    border-bottom-width: 2px;
   }
 
   .input-group {
     position: relative;
   }
   .input-group .input {
-    padding-left: 2.25rem;
+    padding-left: 2rem;
   }
   .input-group .input-prefix {
     position: absolute;
-    left: 0.75rem;
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
     color: var(--color-text-tertiary);
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.8125rem;
+    font-weight: 400;
     pointer-events: none;
   }
 
   .select {
     width: 100%;
-    border: 1px solid var(--color-border-primary);
-    border-radius: var(--radius-md);
-    padding: 0.625rem 0.875rem;
+    border: none;
+    border-bottom: 1px solid var(--color-figure-black);
+    border-radius: 0;
+    padding: 0.5rem 1.5rem 0.5rem 0;
     font-size: 0.875rem;
-    background-color: var(--color-bg-secondary);
+    font-family: var(--font-sans);
+    background-color: transparent;
     color: var(--color-text-primary);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: border-color 0.15s ease, border-width 0.15s ease;
     outline: none;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236f7591' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230c0c0c' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    padding-right: 2.25rem;
+    background-position: right 0.125rem center;
   }
   .select:focus {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px var(--color-accent-subtle);
+    border-bottom-width: 2px;
   }
 
-  /* Toggle Switch — accent (not success) for consistency */
+  /* Toggle — monochrome */
   .toggle {
     position: relative;
     display: inline-flex;
@@ -428,11 +442,11 @@
     height: 1.5rem;
     border-radius: 9999px;
     transition: background-color 0.2s ease;
-    background-color: var(--color-neutral-300);
+    background-color: var(--color-calibration-gray);
     position: relative;
   }
   .toggle.active .toggle-track {
-    background-color: var(--color-accent);
+    background-color: var(--color-figure-black);
   }
   .toggle-thumb {
     position: absolute;
@@ -441,27 +455,29 @@
     width: 1.125rem;
     height: 1.125rem;
     border-radius: 9999px;
-    background-color: white;
+    background-color: #ffffff;
     transition: transform 0.2s ease;
-    box-shadow: 0 1px 3px rgba(13, 16, 25, 0.18);
   }
   .toggle.active .toggle-thumb {
     transform: translateX(1rem);
   }
 
-  /* Pill Button — interactive radius 9999, touch target safe */
+  /* Pill — 24px radius technical control */
   .pill {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.375rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    transition: all 0.15s ease;
+    gap: 0.375rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
     cursor: pointer;
-    border: none;
-    background-color: var(--color-neutral-100);
+    border: 1px solid var(--color-border-primary);
+    background-color: transparent;
     color: var(--color-text-secondary);
     white-space: nowrap;
     min-height: 2.25rem;
@@ -473,40 +489,41 @@
     inset: -0.375rem;
   }
   .pill:hover {
-    background-color: var(--color-bg-hover);
-    color: var(--color-text-primary);
+    border-color: var(--color-figure-black);
+    color: var(--color-figure-black);
   }
   .pill:active {
-    transform: scale(0.96);
+    transform: scale(0.98);
   }
   .pill-active {
-    background-color: var(--color-accent);
-    color: white;
-    box-shadow: var(--shadow-accent);
+    background-color: var(--color-figure-black);
+    border-color: var(--color-figure-black);
+    color: #ffffff;
   }
   .pill-active:hover {
-    background-color: var(--color-accent-hover);
-    color: white;
+    background-color: var(--color-absolute-black);
+    color: #ffffff;
   }
 
-  /* Button */
+  /* Button — 24px radius; primary is Figure Black fill */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-sans);
     font-size: 0.8125rem;
-    font-weight: 600;
-    transition: all 0.15s ease;
+    font-weight: 500;
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
     cursor: pointer;
-    border: none;
+    border: 1px solid transparent;
     text-decoration: none;
     white-space: nowrap;
   }
   .btn:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
   }
   @media (pointer: coarse) {
     .btn {
@@ -517,94 +534,86 @@
     }
   }
   .btn-primary {
-    background-color: var(--color-accent);
-    color: white;
+    background-color: var(--color-figure-black);
+    border-color: var(--color-figure-black);
+    color: #ffffff;
   }
   .btn-primary:hover {
-    background-color: var(--color-accent-hover);
+    background-color: var(--color-absolute-black);
   }
   .btn-secondary {
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-    border: 1px solid var(--color-border-primary);
+    background-color: transparent;
+    color: var(--color-figure-black);
+    border-color: var(--color-figure-black);
   }
   .btn-secondary:hover {
-    background-color: var(--color-bg-hover);
-    border-color: var(--color-border-hover);
+    background-color: var(--color-figure-black);
+    color: #ffffff;
   }
   .btn-ghost {
     background-color: transparent;
-    color: var(--color-text-secondary);
+    color: var(--color-text-tertiary);
   }
   .btn-ghost:hover {
-    background-color: var(--color-bg-hover);
-    color: var(--color-text-primary);
+    background-color: var(--color-neutral-100);
+    color: var(--color-figure-black);
   }
   .btn-sm {
-    padding: 0.375rem 0.75rem;
+    padding: 0.375rem 0.875rem;
     font-size: 0.75rem;
-    border-radius: var(--radius-sm);
   }
 
-  /* Stat Card — recessed surface (tertiary bg) for instrument feel */
+  /* Stat — technical readout on a hairline rail */
   .stat {
-    text-align: center;
-    padding: 0.875rem 0.75rem;
-    border-radius: var(--radius-lg);
-    background-color: var(--color-bg-tertiary);
-    border: 1px solid var(--color-border-secondary);
+    text-align: left;
+    padding: 1rem 0.25rem 0.75rem;
+    border: none;
+    border-top: 1px solid var(--color-figure-black);
+    border-radius: 0;
+    background-color: transparent;
     position: relative;
-    overflow: hidden;
-  }
-  .stat::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--color-accent), transparent);
+    overflow: visible;
   }
   .stat-value {
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    font-weight: 400;
+    color: var(--color-text-primary);
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.05;
   }
   .stat-label {
+    font-family: var(--font-display);
     font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--color-text-tertiary);
-    margin-top: 0.125rem;
-    font-weight: 500;
-    /* sentence case, not ALL-CAPS — removed 0.12em tracking */
-  }
-  @media (max-width: 640px) {
-    .stat-value {
-      font-size: 1.25rem;
-    }
-    .stat {
-      padding: 0.5rem;
-    }
+    margin-top: 0.375rem;
+    font-weight: 400;
   }
 
-  /* Data Row — hairline pair, mono value */
+  /* Data row — technical specification rail pair */
   .data-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0.125rem 0;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.4375rem 0;
+    border-bottom: 1px solid var(--color-border-secondary);
+  }
+  .data-row:last-child {
+    border-bottom: none;
   }
   .data-row-label {
     color: var(--color-text-tertiary);
     font-size: 0.8125rem;
   }
   .data-row-value {
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-weight: 400;
     color: var(--color-text-primary);
     font-size: 0.875rem;
+    text-align: right;
   }
 
   /* Kbd */
@@ -614,24 +623,23 @@
     justify-content: center;
     padding: 0.125rem 0.375rem;
     font-size: 0.6875rem;
-    font-weight: 500;
-    font-family: inherit;
+    font-weight: 400;
+    font-family: var(--font-display);
     color: var(--color-text-tertiary);
-    background-color: var(--color-neutral-100);
+    background-color: transparent;
     border: 1px solid var(--color-border-primary);
     border-radius: var(--radius-sm);
     min-width: 1.5rem;
     height: 1.375rem;
   }
 
-  /* Status dot */
+  /* Status dot — ink, not green */
   .status-dot {
     display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.4375rem;
+    height: 0.4375rem;
     border-radius: 9999px;
-    background-color: var(--color-success);
-    box-shadow: 0 0 0 3px var(--color-success-subtle);
+    background-color: var(--color-figure-black);
   }
 }
 
@@ -654,32 +662,31 @@
   border-radius: var(--radius-lg);
   font-size: 0.8125rem;
   font-weight: 500;
-  box-shadow: var(--shadow-elevated);
   border: 1px solid;
   animation: toast-in 0.25s ease-out;
   max-width: 24rem;
 }
 
 .toast-success {
-  background-color: var(--color-success-light);
-  color: var(--color-success);
-  border-color: var(--color-success);
+  background-color: var(--color-figure-black);
+  color: #ffffff;
+  border-color: var(--color-figure-black);
 }
 
 .toast-error {
-  background-color: var(--color-danger-light);
-  color: var(--color-danger);
-  border-color: var(--color-danger);
+  background-color: #ffffff;
+  color: var(--color-figure-black);
+  border-color: var(--color-figure-black);
 }
 
 @keyframes toast-in {
   from {
     opacity: 0;
-    transform: translateY(1rem) scale(0.95);
+    transform: translateY(1rem);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
@@ -741,11 +748,10 @@
 }
 
 .bottom-nav-inner {
-  background-color: color-mix(in srgb, var(--color-bg-secondary) 88%, transparent);
+  background-color: color-mix(in srgb, var(--color-bg-secondary) 92%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--color-border-primary);
-  box-shadow: 0 -4px 24px rgba(15, 23, 42, 0.06);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -762,13 +768,16 @@
 }
 
 .bottom-nav-label {
+  font-family: var(--font-display);
   font-size: 0.625rem;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--color-text-tertiary);
 }
 
 .bottom-nav-item.active .bottom-nav-label {
-  color: var(--color-accent);
+  color: var(--color-figure-black);
 }
 
 /* ─── Skip to Content (Accessibility) ─────────────────────── */
@@ -780,10 +789,10 @@
   transform: translateX(-50%);
   z-index: 9999;
   padding: 0.75rem 1.5rem;
-  background: var(--color-accent);
-  color: white;
+  background: var(--color-figure-black);
+  color: #ffffff;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   transition: top 0.2s ease;
   text-decoration: none;
@@ -805,15 +814,12 @@
     min-width: 44px;
   }
 
-  /* Prevent text overflow on cards */
   .card {
     word-break: break-word;
   }
 
-  /* Ensure data rows don't overflow */
   .data-row {
     flex-wrap: wrap;
-    gap: 0.25rem;
   }
 }
 
@@ -833,11 +839,10 @@
 
 @media (max-width: 360px) {
   .stat-value {
-    font-size: 1.25rem !important;
+    font-size: 1.25rem;
   }
   .badge {
     font-size: 0.625rem;
-    padding: 0.125rem 0.5rem;
   }
 }
 
@@ -857,19 +862,33 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  /* Instrument numerals: every currency/percent figure renders in mono */
+  /* Machine display face for titles / technical figures */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+  /* Uppercase tracked instrumentation label */
+  .label {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 400;
+  }
+  /* Instrument numerals */
   .num {
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-family: var(--font-display);
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.01em;
+  }
+  /* Inverted chapter — Absolute Black field, reversed type */
+  .chapter-dark {
+    background-color: var(--color-absolute-black);
+    color: #ffffff;
   }
 }
 
 /* ─── Pricelist: adaptive table density ────────────────────── */
-/* Editorial rhythm: 10px tracked-out labels, 13px tabular numerals
-   with tight leading, hairline dividers. Font size, line height &
-   cell padding scale down in subtle steps as optional columns are
-   toggled on. The page sets the custom properties. */
 .pl-table {
   --pl-fs: 0.8125rem;
   --pl-head-fs: 0.625rem;
@@ -878,15 +897,16 @@
   --pl-lh: 1.35;
   font-size: var(--pl-fs);
   line-height: var(--pl-lh);
-  /* Sharper glyph rasterization for html2canvas capture */
   text-rendering: geometricPrecision;
   font-kerning: normal;
   font-variant-ligatures: common-ligatures;
 }
 .pl-table th {
+  font-family: var(--font-display);
   font-size: var(--pl-head-fs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   padding: var(--pl-py) var(--pl-px);
 }
 .pl-table td {
@@ -900,14 +920,11 @@
 .pl-table td:last-child {
   padding-right: 0;
 }
-/* Numerals: optically tightened */
 .pl-table td.tabular-nums,
 .pl-table td .tabular-nums {
   letter-spacing: -0.01em;
 }
 
-/* Segment classification (e.g. "B-Segment SUV") — a quiet annotation:
-   smaller, lighter, italicised, so the eye lands on model + variant. */
 .pl-segment {
   font-size: 0.72em;
   font-style: italic;
@@ -917,9 +934,6 @@
   white-space: nowrap;
 }
 
-/* Mobile (<640px): stack rows into labeled cards — no horizontal scroll.
-   Each td displays its data-label as a left column; Monthly is promoted
-   to a full-width hero row at the bottom of each card. */
 @media (max-width: 639.98px) {
   .pl-table thead {
     display: none;
@@ -952,15 +966,15 @@
   }
   .pl-table td[data-label]::before {
     content: attr(data-label);
+    font-family: var(--font-display);
     font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-weight: 400;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-text-tertiary);
     text-align: left;
     flex-shrink: 0;
   }
-  /* Model cell — header of the card */
   .pl-table td[data-label="Model"] {
     padding-bottom: 0.375rem;
     margin-bottom: 0.25rem;
@@ -970,21 +984,17 @@
   .pl-table td[data-label="Model"]::before {
     display: none;
   }
-  /* Monthly — hero row */
   .pl-table td.pl-monthly {
     margin-top: 0.375rem;
     padding-top: 0.5rem;
-    border-top: 1px solid var(--color-border-secondary);
-    background: linear-gradient(180deg, var(--color-accent-light), transparent);
+    border-top: 1px solid var(--color-figure-black);
+    background: transparent;
     margin-left: -0.875rem;
     margin-right: -0.875rem;
     padding-left: 0.875rem;
     padding-right: 0.875rem;
-    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    border-radius: 0;
     font-size: 0.9375rem;
-  }
-  .pl-table td.pl-monthly::before {
-    color: var(--color-accent);
   }
 }
 
@@ -994,8 +1004,11 @@
   line-height: 1.35;
 }
 .veh-table th {
+  font-family: var(--font-display);
   font-size: 0.625rem;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   padding: 0.5625rem 0.625rem;
 }
 .veh-table td {
@@ -1027,10 +1040,86 @@
   }
 }
 
+/* ─── Vehicles: stacked cards on small screens ─────────────── */
+@media (max-width: 1023.98px) {
+  .veh-wrap {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .veh-table thead {
+    display: none;
+  }
+  .veh-table,
+  .veh-table tbody,
+  .veh-table tr,
+  .veh-table td {
+    display: block;
+    width: 100%;
+  }
+  .veh-table tr.veh-group {
+    background: transparent;
+    padding: 0.75rem 0 0.25rem;
+    border: none;
+  }
+  .veh-table tr.veh-group td {
+    padding: 0;
+  }
+  .veh-table tr.veh-row {
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--radius-md);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .veh-table tr.veh-row td {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.25rem 0;
+    text-align: right;
+    border-bottom: 1px solid var(--color-border-secondary);
+    white-space: normal;
+  }
+  .veh-table tr.veh-row td:last-child {
+    border-bottom: none;
+  }
+  .veh-table tr.veh-row td[data-label]::before {
+    content: attr(data-label);
+    font-family: var(--font-display);
+    font-size: 0.625rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: left;
+    flex-shrink: 0;
+  }
+  .veh-table tr.veh-row td:first-child {
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--color-border-secondary);
+  }
+  .veh-table tr.veh-row td:first-child::before {
+    display: none;
+  }
+  .veh-chevron {
+    display: none !important;
+  }
+  .veh-table tr.veh-detail {
+    border: 1px solid var(--color-border-primary);
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    margin: -0.5rem 0 0.5rem;
+    background: var(--color-neutral-50);
+  }
+  .veh-table tr.veh-detail td {
+    padding: 0.875rem;
+  }
+}
+
 /* ─── Pricelist: print ─────────────────────────────────────── */
 
 @media print {
-  /* Strip app chrome — sheet only */
   body > header,
   .bottom-nav,
   .page-header,
@@ -1053,26 +1142,20 @@
     max-width: none !important;
     width: 100% !important;
   }
-  /* Vector-sharp text in PDF output */
   .pl-card,
   .pl-table {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  /* Keep brand colors in PDF */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
-  /* Avoid splitting rows across pages */
   tr,
   .pl-card header,
   .pl-card footer {
     break-inside: avoid;
   }
-  /* A4 portrait is the default; the pricelist page injects an
-     `@page { size: A4 landscape }` rule when the user picks Landscape,
-     and marks the sheet with data-orientation so it can widen to fill. */
   @page {
     size: A4 portrait;
     margin: 12mm;

@@ -4,8 +4,8 @@ export default function NotFound() {
   return (
     <div className="min-h-[80vh] flex items-center justify-center">
       <div className="text-center max-w-md mx-auto px-4">
-        <p className="text-6xl font-extrabold text-accent mb-4">404</p>
-        <h1 className="text-xl font-bold text-[var(--color-text-primary)] mb-2">Page not found</h1>
+        <p className="display text-7xl text-[var(--color-figure-black)] mb-4">404</p>
+        <h1 className="display text-xl text-[var(--color-text-primary)] mb-2">Page not found</h1>
         <p className="text-sm text-[var(--color-text-tertiary)] mb-6">
           This page doesn&apos;t exist in the Master Databook.
         </p>

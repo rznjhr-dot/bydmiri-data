@@ -113,12 +113,12 @@ export default function VehiclesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
             Vehicle Database
           </h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
@@ -149,7 +149,7 @@ export default function VehiclesPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search model or variant..."
-            className="w-full pl-10 pr-9 py-2.5 rounded-full border border-[var(--color-border-primary)] bg-white text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)] shadow-[var(--shadow-subtle)] focus:outline-none focus:ring-4 focus:ring-[var(--color-accent-subtle)] focus:border-[var(--color-accent)]/50 transition-all"
+            className="w-full pl-10 pr-9 py-3 border-b border-[var(--color-figure-black)] bg-transparent text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)] focus:outline-none transition-colors"
           />
           {search && (
             <button
@@ -166,7 +166,7 @@ export default function VehiclesPage() {
         ) : (
           /* ─── Unified dense table — one row per variant ─── */
           <div className="card !p-0 overflow-hidden">
-            <div className="overflow-auto max-h-[calc(100vh-9rem)]">
+            <div className="veh-wrap overflow-auto max-h-[calc(100vh-9rem)]">
               <table className="veh-table w-full border-collapse">
                 <thead className="sticky top-0 z-10 bg-[var(--color-bg-secondary)]">
                   <tr className="border-b border-[var(--color-border-primary)]">
@@ -208,7 +208,7 @@ export default function VehiclesPage() {
                         <Fragment key={rowKey}>
                           {/* Model group separator */}
                           {vi === 0 && (
-                            <tr key={`${vehicle.model}-group`} className="bg-[var(--color-bg-tertiary)]/60">
+                            <tr key={`${vehicle.model}-group`} className="veh-group bg-[var(--color-bg-tertiary)]/60">
                               <td colSpan={9} className="py-1.5 px-3">
                                 <span className="text-[0.7rem] font-bold uppercase tracking-[0.1em] text-[var(--color-text-secondary)]">
                                   {vehicle.model}
@@ -224,35 +224,35 @@ export default function VehiclesPage() {
                           <tr
                             key={rowKey}
                             onClick={() => setExpanded(isOpen ? null : rowKey)}
-                            className={`border-b border-[var(--color-border-secondary)] cursor-pointer transition-colors ${
-                              isOpen ? "bg-[var(--color-accent-light)]/60" : "hover:bg-[var(--color-accent-light)]/40"
+                            className={`veh-row border-b border-[var(--color-border-secondary)] cursor-pointer transition-colors ${
+                              isOpen ? "bg-[var(--color-neutral-100)]" : "hover:bg-[var(--color-neutral-50)]"
                             }`}
                           >
-                            <td className="pr-2">
+                            <td className="pr-2" data-label="Variant">
                               <span className="font-semibold text-[var(--color-text-primary)]">{variant.name}</span>
                             </td>
-                            <td className="text-right text-[var(--color-text-tertiary)] tabular-nums whitespace-nowrap">
+                            <td className="text-right text-[var(--color-text-tertiary)] tabular-nums whitespace-nowrap" data-label="Range">
                               {variant.range}km
                             </td>
-                            <td className="text-right text-[var(--color-text-tertiary)] tabular-nums whitespace-nowrap">
+                            <td className="text-right text-[var(--color-text-tertiary)] tabular-nums whitespace-nowrap" data-label="Battery">
                               {variant.battery ? `${variant.battery}kWh` : "—"}
                             </td>
-                            <td className="text-right font-semibold text-[var(--color-success)] tabular-nums whitespace-nowrap">
+                            <td className="text-right font-semibold text-[var(--color-success)] tabular-nums whitespace-nowrap" data-label="Rebate">
                               {rebate > 0 ? `-${formatCurrency(rebate)}` : "—"}
                             </td>
-                            <td className="text-right font-medium text-[var(--color-text-secondary)] tabular-nums whitespace-nowrap">
+                            <td className="text-right font-medium text-[var(--color-text-secondary)] tabular-nums whitespace-nowrap" data-label="OTR w/ Ins.">
                               {formatCurrency(variant.otr)}
                             </td>
-                            <td className="text-right font-bold text-[var(--color-text-primary)] tabular-nums whitespace-nowrap">
+                            <td className="text-right font-bold text-[var(--color-text-primary)] tabular-nums whitespace-nowrap" data-label="Effective">
                               {formatCurrency(effective)}
                             </td>
-                            <td className="text-right font-extrabold text-[var(--color-accent)] tabular-nums whitespace-nowrap">
+                            <td className="text-right font-extrabold text-[var(--color-accent)] tabular-nums whitespace-nowrap" data-label="0% /mo">
                               {formatCurrency(calcMonthlyFromPrice(effective, 0))}
                             </td>
-                            <td className="text-right font-bold text-[var(--color-accent)] tabular-nums whitespace-nowrap">
+                            <td className="text-right font-bold text-[var(--color-accent)] tabular-nums whitespace-nowrap" data-label="10% /mo">
                               {formatCurrency(calcMonthlyFromPrice(effective, 10))}
                             </td>
-                            <td className="text-center">
+                            <td className="veh-chevron text-center">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="12"
@@ -271,7 +271,7 @@ export default function VehiclesPage() {
                           </tr>
                           {/* Expanded detail — everything from the old card */}
                           {isOpen && (
-                            <tr key={`${rowKey}-detail`} className="border-b border-[var(--color-border-secondary)] bg-[var(--color-accent-light)]/30">
+                            <tr key={`${rowKey}-detail`} className="veh-detail border-b border-[var(--color-border-secondary)] bg-[var(--color-neutral-50)]">
                               <td colSpan={9} className="px-3 py-3">
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                   {/* Price breakdown */}
@@ -288,7 +288,7 @@ export default function VehiclesPage() {
                                         <span className="data-row-label">
                                           Est. Insurance
                                           {variant.sumInsured && (
-                                            <span className="text-[0.7rem] text-blue-400 ml-1 font-normal">
+                                            <span className="text-[0.7rem] text-[var(--color-text-tertiary)] ml-1 font-normal">
                                               (Sum RM {variant.sumInsured.toLocaleString("en-MY")})
                                             </span>
                                           )}

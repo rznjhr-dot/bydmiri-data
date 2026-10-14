@@ -6,9 +6,9 @@ import { marketingBranding } from "@/data";
 import type { BrandRule } from "@/types/marketing";
 
 const severityColors: Record<string, string> = {
-  critical: "bg-red-50 text-red-700 border-red-200",
-  high: "bg-amber-50 text-amber-700 border-amber-200",
-  medium: "bg-blue-50 text-blue-700 border-blue-200",
+  critical: "bg-[var(--color-figure-black)] text-white border-[var(--color-figure-black)]",
+  high: "bg-[var(--color-neutral-100)] text-[var(--color-text-secondary)] border-[var(--color-border-primary)]",
+  medium: "bg-[var(--color-neutral-100)] text-[var(--color-text-secondary)] border-[var(--color-border-primary)]",
 };
 
 export default function BrandGuardianPage() {
@@ -25,12 +25,12 @@ export default function BrandGuardianPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Link
             href="/marketing-ai"
-            className="inline-flex items-center gap-1 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
+            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Marketing AI
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">Brand Guardian</h1>
+          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">Brand Guardian</h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Protect BYD branding with compliance rules and automated rejection reasons</p>
         </div>
       </section>
@@ -136,7 +136,7 @@ export default function BrandGuardianPage() {
         </section>
 
         {/* Prompt Reference */}
-        <section className="card border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-white">
+        <section className="card">
           <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Brand Guardian</h2>
           <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
             Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/brand-guardian.md</code> to auto-reject brand violations across all rules.
