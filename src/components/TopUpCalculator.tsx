@@ -38,6 +38,7 @@ export default function TopUpCalculator() {
   const [actualInsurance, setActualInsurance] = useState("");
   const [approvedLoan, setApprovedLoan] = useState("");
   const [bookingFeeInput, setBookingFeeInput] = useState("");
+  const [wallboxInput, setWallboxInput] = useState("");
   const [customRebateInput, setCustomRebateInput] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -46,6 +47,7 @@ export default function TopUpCalculator() {
 
   const estInsurance = currentVariant.otr - currentVariant.otrWithoutInsurance;
   const bookingFee = parseNum(bookingFeeInput) ?? (currentVariant.bookingFee ?? 1000);
+  const wallbox = parseNum(wallboxInput) ?? 0;
 
   const rebate = useMemo(() => {
     if (!includeRebate) return 0;
@@ -75,7 +77,7 @@ export default function TopUpCalculator() {
   const b2InspectionFee = currentVariant.b2InspectionFee ?? 200;
   const evPlateFee = currentVariant.evPlateFee ?? 150;
   const subtotalA =
-    sellingPrice + roadTax + insurancePremium + registrationFee + b2InspectionFee + evPlateFee;
+    sellingPrice + roadTax + insurancePremium + registrationFee + b2InspectionFee + evPlateFee + wallbox;
 
   // Deductions (B) — full loan assumed; bank-approved amount if entered
   const rebateTotal = hasCustomRebate ? Math.max(0, customRebate) : rebate + cspAmount;
@@ -101,6 +103,7 @@ export default function TopUpCalculator() {
       "Registration Fees: " + formatCurrency(registrationFee),
       "B2 Inspection Fees: " + formatCurrency(b2InspectionFee),
       "EV Plate Fees: " + formatCurrency(evPlateFee),
+      ...(wallbox > 0 ? ["Wallbox: " + formatCurrency(wallbox)] : []),
       "Subtotal Price (A): " + formatCurrency(subtotalA),
       "",
       "DEDUCTIONS",
@@ -139,7 +142,7 @@ export default function TopUpCalculator() {
       setCopied(true);
     }
     setTimeout(() => setCopied(false), 2000);
-  }, [currentVehicle, currentVariant, sellingPrice, roadTax, insurancePremium, registrationFee, b2InspectionFee, evPlateFee, subtotalA, financing, approved, rebateTotal, bookingFee, subtotalB, balance]);
+  }, [currentVehicle, currentVariant, sellingPrice, roadTax, insurancePremium, registrationFee, b2InspectionFee, evPlateFee, wallbox, subtotalA, financing, approved, rebateTotal, bookingFee, subtotalB, balance]);
 
   const onModelChange = (model: string) => {
     setSelectedModel(model);
@@ -147,6 +150,7 @@ export default function TopUpCalculator() {
     setActualInsurance("");
     setApprovedLoan("");
     setBookingFeeInput("");
+    setWallboxInput("");
     setCustomRebateInput("");
   };
 
@@ -155,6 +159,7 @@ export default function TopUpCalculator() {
     setActualInsurance("");
     setApprovedLoan("");
     setBookingFeeInput("");
+    setWallboxInput("");
     setCustomRebateInput("");
   };
 
@@ -308,6 +313,48 @@ export default function TopUpCalculator() {
                 Default: {formatCurrency(currentVariant.bookingFee ?? 1000)} · kosong = guna default
               </p>
             </div>
+
+            {/* Wallbox */}
+            <div>
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
+                Wallbox (kosong = tiada)
+              </label>
+              <div className="input-group mb-1.5">
+                <span className="input-prefix !text-[0.7rem]">RM</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="Tiada"
+                  value={wallboxInput}
+                  onChange={(e) => setWallboxInput(e.target.value.replace(/[^0-9.,]/g, ""))}
+                  className="input !text-xs !py-1.5"
+                />
+              </div>
+              <div className="flex gap-1.5">
+                {[1499, 2499].map((amount) => (
+                  <button
+                    key={amount}
+                    type="button"
+                    onClick={() => setWallboxInput(String(amount))}
+                    className={`pill !text-xs !py-1.5 flex-1 ${wallbox === amount ? "pill-active" : ""}`}
+                  >
+                    {formatCurrency(amount)}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setWallboxInput("")}
+                  className={`pill !text-xs !py-1.5 flex-1 ${wallbox <= 0 ? "pill-active" : ""}`}
+                >
+                  Tiada
+                </button>
+              </div>
+              <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mt-0.5">
+                {wallbox > 0
+                  ? "Wallbox ditambah ke harga jualan (Subtotal A)."
+                  : "Kosong = tiada wallbox dalam pembelian."}
+              </p>
+            </div>
           </div>
 
           {/* Results */}
@@ -368,6 +415,12 @@ export default function TopUpCalculator() {
                 <span className="text-[var(--color-text-tertiary)]">EV Plate Fees</span>
                 <span className="font-medium">{formatCurrency(evPlateFee)}</span>
               </div>
+              {wallbox > 0 && (
+                <div className="flex justify-between col-span-2">
+                  <span className="text-[var(--color-text-tertiary)]">Wallbox</span>
+                  <span className="font-medium">{formatCurrency(wallbox)}</span>
+                </div>
+              )}
               <div className="flex justify-between col-span-2 border-t border-[var(--color-border-primary)]/50 pt-0.5">
                 <span className="text-[var(--color-text-primary)] font-semibold">Subtotal Price (A)</span>
                 <span className="font-bold">{formatCurrency(subtotalA)}</span>

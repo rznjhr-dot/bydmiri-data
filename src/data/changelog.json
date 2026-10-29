@@ -1,5 +1,12 @@
 [
   {
+    "version": "V4.13",
+    "date": "2026-10-29",
+    "changes": [
+      "Price Breakdown (/top-up) — new Wallbox column with RM1,499 / RM2,499 presets; empty means no wallbox. When set, the amount is added to the Selling Price Breakdown (Subtotal A) and shown in the summary and copied text"
+    ]
+  },
+  {
     "version": "V4.12",
     "date": "2026-10-29",
     "changes": [
