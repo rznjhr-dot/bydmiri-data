@@ -82,33 +82,104 @@ export default function JpjLauncher() {
   };
 
   const busy = status === "launching" || status === "checking";
+  const online = status === "up";
+
+  const copy: Record<Status, { title: string; hint: string }> = {
+    idle: {
+      title: "Launch JPJ Checker",
+      hint: "Starts the app and opens localhost:8501",
+    },
+    checking: {
+      title: "Checking status…",
+      hint: "Looking for a running instance",
+    },
+    launching: {
+      title: "Starting JPJ Checker…",
+      hint: "Terminal is open — this can take a few seconds",
+    },
+    up: {
+      title: "Open JPJ Checker",
+      hint: "Already running on localhost:8501",
+    },
+    timeout: {
+      title: "Retry launch",
+      hint: "No response within 60 seconds",
+    },
+  };
+
+  const current = copy[status];
 
   return (
     <div className="flex flex-col gap-2">
       <button
+        type="button"
         onClick={startLaunch}
         disabled={busy}
         className={`
-          inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold
-          transition-all cursor-pointer border
+          group flex w-full items-center gap-3 rounded-xl border px-3.5 py-3 text-left
+          transition-all duration-150 cursor-pointer
           ${
-            status === "up"
-              ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)] hover:brightness-110"
-              : "bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] border-[var(--color-border-primary)] hover:border-[var(--color-accent)]"
+            online
+              ? "border-[var(--color-figure-black)] bg-white text-[var(--color-figure-black)] hover:bg-[var(--color-neutral-50)]"
+              : "border-[var(--color-figure-black)] bg-[var(--color-figure-black)] text-white hover:bg-[var(--color-absolute-black)]"
           }
-          ${busy ? "opacity-60 cursor-wait" : ""}
+          ${busy ? "cursor-wait opacity-70" : "active:scale-[0.995]"}
         `}
       >
-        {status === "up" && (
-          <span className="inline-block w-2 h-2 rounded-full bg-[var(--color-figure-black)] animate-pulse" />
+        <span
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-colors ${
+            online
+              ? "border-[var(--color-figure-black)] bg-[var(--color-figure-black)] text-white"
+              : "border-white/20 bg-white/10 text-white"
+          }`}
+        >
+          {busy ? (
+            <Spinner />
+          ) : online ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 9 3 3-3 3"/><path d="M13 15h5"/></svg>
+          )}
+        </span>
+
+        <span className="min-w-0 flex-1">
+          <span
+            aria-live="polite"
+            className="flex items-center gap-2 text-sm font-semibold leading-tight"
+          >
+            {online && (
+              <span className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-current animate-pulse" />
+            )}
+            {current.title}
+          </span>
+          <span
+            className={`mt-0.5 block text-[0.68rem] leading-snug ${
+              online ? "text-[var(--color-text-tertiary)]" : "text-white/60"
+            }`}
+          >
+            {current.hint}
+          </span>
+        </span>
+
+        {!busy && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            className={`shrink-0 transition-transform duration-150 group-hover:translate-x-0.5 ${
+              online ? "text-[var(--color-figure-black)]/60" : "text-white/70"
+            }`}
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
         )}
-        {status === "launching" && <Spinner />}
-        {status === "checking" && <Spinner />}
-        {status === "up"
-          ? "JPJ Checker — Online, Click to Open"
-          : status === "launching"
-            ? "Booting JPJ Checker…"
-            : "Launch JPJ Checker"}
       </button>
 
       {status === "timeout" && (

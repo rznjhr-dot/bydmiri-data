@@ -1,98 +1,132 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import JpjLauncher from "@/components/JpjLauncher";
+import JpjRunningNumbers from "@/components/JpjRunningNumbers";
+import { PageSection, PageShell } from "@/components/PageShell";
 
 export const metadata: Metadata = {
   title: "JPJ Checker · BYD Miri",
-  description: "Launch the local JPJ number-plate checker (Streamlit on :8501)",
+  description:
+    "Check registration-number availability across 32 Malaysian states with the local JPJ Checker.",
 };
 
 export default function JpjPage() {
   return (
-    <div className="min-h-screen">
-      <section className="page-header">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-          <Link
-            href="/"
-            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Dashboard
-          </Link>
-          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
-            JPJ Checker
-          </h1>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            Semak nombor pendaftaran across 32 states — runs locally on your Mac
-          </p>
-        </div>
-      </section>
+    <PageShell
+      eyebrow="Local tool · macOS"
+      title="JPJ Checker"
+      description="Check a registration number across 32 states — runs locally on this Mac."
+      width="wide"
+    >
+        {/* Current running numbers (live from JPJ.my) */}
+        <JpjRunningNumbers />
 
-      <main id="main-content" className="page-enter max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-6">
         {/* Launcher */}
-        <div className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] p-5 sm:p-6">
-          <h2 className="text-base font-bold text-[var(--color-text-primary)] mb-1">
-            Launch the tool
-          </h2>
-          <p className="text-sm text-[var(--color-text-tertiary)] mb-4 leading-relaxed">
-            Click starts the JPJ Checker app on this Mac (Terminal opens once,
-            browser follows automatically). If it&rsquo;s already running, it
-            opens straight away.
-          </p>
-          <JpjLauncher />
-        </div>
+        <PageSection
+          eyebrow="Start here"
+          title="Launch JPJ Checker"
+          description="Start the JPJ Checker on this Mac. Terminal opens once while the app boots, then your browser follows automatically. If it's already running, it opens right away."
+          flush
+        >
+          <div className="bg-[var(--color-bg-tertiary)]/40 px-5 py-4 sm:px-6">
+            <JpjLauncher />
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.62rem] font-medium uppercase tracking-[0.08em] text-[var(--color-text-tertiary)]">
+              <span>Runs locally</span>
+              <span aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-[var(--color-border-primary)] sm:block" />
+              <span>Terminal opens once</span>
+              <span aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-[var(--color-border-primary)] sm:block" />
+              <span>localhost:8501</span>
+            </div>
+          </div>
+        </PageSection>
 
         {/* How it works */}
-        <div className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] p-5 sm:p-6">
-          <h2 className="text-base font-bold text-[var(--color-text-primary)] mb-3">
-            How the scan works
-          </h2>
-          <ol className="space-y-2.5 text-sm text-[var(--color-text-secondary)] leading-relaxed">
-            <li className="flex gap-2.5">
-              <span className="flex-none w-5 h-5 rounded-full bg-[var(--color-bg-tertiary)] border border-[var(--color-border-primary)] text-[0.65rem] font-bold flex items-center justify-center text-[var(--color-text-tertiary)]">1</span>
-              Type the number (e.g. <code className="px-1 rounded bg-[var(--color-bg-tertiary)] font-mono text-xs">888</code>) and hit Cari
-            </li>
-            <li className="flex gap-2.5">
-              <span className="flex-none w-5 h-5 rounded-full bg-[var(--color-bg-tertiary)] border border-[var(--color-border-primary)] text-[0.65rem] font-bold flex items-center justify-center text-[var(--color-text-tertiary)]">2</span>
-              A JPJ window opens — log in once (password + CAPTCHA)
-            </li>
-            <li className="flex gap-2.5">
-              <span className="flex-none w-5 h-5 rounded-full bg-[var(--color-bg-tertiary)] border border-[var(--color-border-primary)] text-[0.65rem] font-bold flex items-center justify-center text-[var(--color-text-tertiary)]">3</span>
-              Window minimizes itself — 32-state scan runs in background
-            </li>
-            <li className="flex gap-2.5">
-              <span className="flex-none w-5 h-5 rounded-full bg-[var(--color-bg-tertiary)] border border-[var(--color-border-primary)] text-[0.65rem] font-bold flex items-center justify-center text-[var(--color-text-tertiary)]">4</span>
-              Results as plate cards ✅/❌ + copy-paste customer summary
-            </li>
+        <PageSection
+          eyebrow="Workflow"
+          title="How it works"
+          description="Four steps from plate number to a copy-ready result."
+          flush
+        >
+          <ol className="divide-y divide-[var(--color-border-primary)]/60 px-5 sm:px-6">
+            {[
+              {
+                title: "Enter a number",
+                body: (
+                  <>
+                    Type the registration number (for example,{" "}
+                    <code className="px-1 rounded bg-[var(--color-bg-tertiary)] font-mono text-xs">888</code>
+                    ) and select Cari.
+                  </>
+                ),
+              },
+              {
+                title: "Sign in to JPJ",
+                body: "A JPJ window opens. Sign in once with your password and CAPTCHA.",
+              },
+              {
+                title: "Let the scan run",
+                body: "The window minimises while the 32-state check runs in the background.",
+              },
+              {
+                title: "Review the results",
+                body: "Available and unavailable plates appear as cards, with a customer-ready summary you can copy.",
+              },
+            ].map((step, index) => (
+              <li key={step.title} className="flex gap-3 py-3 first:pt-4 last:pb-4">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)] text-[0.65rem] font-semibold text-[var(--color-text-tertiary)]">
+                  {index + 1}
+                </span>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                    {step.title}
+                  </p>
+                  <p className="mt-0.5 text-sm text-[var(--color-text-tertiary)] leading-relaxed">
+                    {step.body}
+                  </p>
+                </div>
+              </li>
+            ))}
           </ol>
-        </div>
+        </PageSection>
 
         {/* Troubleshooting */}
-        <div className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] p-5 sm:p-6">
-          <h2 className="text-base font-bold text-[var(--color-text-primary)] mb-3">
-            Troubleshooting
-          </h2>
-          <ul className="space-y-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">
-            <li>
-              <strong className="text-[var(--color-text-primary)]">Button does nothing?</strong>{" "}
-              The app lives at <code className="px-1 rounded bg-[var(--color-bg-tertiary)] font-mono text-xs">~/Applications/JPJ Checker.app</code> — launch it once manually so macOS trusts it, then this button works forever.
+        <PageSection
+          eyebrow="Support"
+          title="Troubleshooting"
+          description="Common issues when the app will not start or connect."
+          flush
+        >
+          <ul className="divide-y divide-[var(--color-border-primary)]/60 px-5 sm:px-6">
+            <li className="py-3 first:pt-4">
+              <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                The launch button does nothing
+              </p>
+              <p className="mt-0.5 text-sm text-[var(--color-text-tertiary)] leading-relaxed">
+                Open{" "}
+                <code className="px-1 rounded bg-[var(--color-bg-tertiary)] font-mono text-xs">~/Applications/JPJ Checker.app</code>{" "}
+                once manually so macOS trusts it. The button works after that.
+              </p>
             </li>
-            <li>
-              <strong className="text-[var(--color-text-primary)]">Server won&rsquo;t boot?</strong>{" "}
-              Log at <code className="px-1 rounded bg-[var(--color-bg-tertiary)] font-mono text-xs">~/.jpj_checker.log</code>
+            <li className="py-3">
+              <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                The server does not start
+              </p>
+              <p className="mt-0.5 text-sm text-[var(--color-text-tertiary)] leading-relaxed">
+                Check the log at{" "}
+                <code className="px-1 rounded bg-[var(--color-bg-tertiary)] font-mono text-xs">~/.jpj_checker.log</code>{" "}
+                for the startup error.
+              </p>
             </li>
-            <li>
-              <strong className="text-[var(--color-text-primary)]">Only works on this Mac</strong> — the tool is local by design (JPJ login + CAPTCHA is manual).
+            <li className="py-3 last:pb-4">
+              <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                Available on this Mac only
+              </p>
+              <p className="mt-0.5 text-sm text-[var(--color-text-tertiary)] leading-relaxed">
+                The tool is local by design. The JPJ login and CAPTCHA must be
+                completed manually in the browser window.
+              </p>
             </li>
           </ul>
-        </div>
-      </main>
-
-      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
-          <p className="text-xs text-[var(--color-text-tertiary)]">&copy; {new Date().getFullYear()} Ridzuan Jahari</p>
-        </div>
-      </footer>
-    </div>
+        </PageSection>
+    </PageShell>
   );
 }

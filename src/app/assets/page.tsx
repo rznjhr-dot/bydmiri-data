@@ -1,80 +1,193 @@
-import Link from "next/link";
+import { PageSection, PageShell } from "@/components/PageShell";
 
 const assets = [
-  { category: "Posters", icon: "🖼️", count: 0 },
-  { category: "Videos", icon: "🎬", count: 0 },
-  { category: "Images", icon: "📷", count: 0 },
-  { category: "Templates", icon: "📄", count: 0 },
-  { category: "Captions", icon: "💬", count: 0 },
-];
+  { category: "Posters", icon: "poster", count: 0 },
+  { category: "Videos", icon: "video", count: 0 },
+  { category: "Images", icon: "image", count: 0 },
+  { category: "Templates", icon: "template", count: 0 },
+  { category: "Captions", icon: "caption", count: 0 },
+] as const;
+
+const assetIcons = {
+  poster: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <path d="m21 15-5-5L5 21" />
+    </svg>
+  ),
+  video: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="2" y="5" width="14" height="14" rx="2" />
+      <path d="m16 10 6-3v10l-6-3" />
+    </svg>
+  ),
+  image: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M14.5 4h-5L8 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4z" />
+      <circle cx="12" cy="13" r="3" />
+    </svg>
+  ),
+  template: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M8 13h8M8 17h8" />
+    </svg>
+  ),
+  caption: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      <path d="M8 9h8M8 13h5" />
+    </svg>
+  ),
+};
 
 export default function AssetsPage() {
   return (
-    <div className="min-h-screen">
-      <section className="page-header">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <Link
-            href="/"
-            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Dashboard
-          </Link>
-          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
-            Marketing Assets
-          </h1>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            Posters, videos, images, templates, and captions for BYD Miri sales &amp; marketing.
-          </p>
-        </div>
-      </section>
-
-      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-4">
-        {/* Asset categories */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+    <PageShell
+      title="Marketing assets"
+      description="Posters, videos, images, templates, and captions for BYD Miri sales and marketing."
+      eyebrow="Library"
+      width="default"
+    >
+      <PageSection
+        eyebrow="Categories"
+        title="Asset categories"
+        description="Upload posters, videos, images, document templates, and social captions, then tag them by model, campaign, and content type."
+      >
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {assets.map((asset) => (
-            <div key={asset.category} className="card card-elevated flex flex-col items-center justify-center py-6 text-center">
-              <span className="text-3xl mb-3">{asset.icon}</span>
-              <h3 className="font-bold text-[var(--color-text-primary)] text-base mb-1">{asset.category}</h3>
-              <p className="text-xs text-[var(--color-text-tertiary)]">
+            <div
+              key={asset.category}
+              className="flex flex-col items-center justify-center rounded-lg border border-[var(--color-border-primary)] px-3 py-6 text-center"
+            >
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]">
+                {assetIcons[asset.icon]}
+              </span>
+              <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
+                {asset.category}
+              </h3>
+              <p className="mt-1 text-xs text-[var(--color-text-tertiary)]">
                 {asset.count > 0 ? `${asset.count} files` : "Coming soon"}
               </p>
             </div>
           ))}
         </div>
+      </PageSection>
 
-        {/* Info card */}
-        <div className="card bg-accent/5 border border-accent/10">
-          <div className="flex items-start gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <div className="text-sm text-[var(--color-text-tertiary)] leading-relaxed">
-              <p className="font-medium text-[var(--color-text-secondary)] mb-1">Asset Library — Coming Soon</p>
-              <p>
-                This page will host all marketing and sales assets in a searchable, filterable library.
-                Upload posters, videos, images, document templates, and social media captions here.
-                Assets can be tagged by vehicle model, campaign, and content type.
-              </p>
-            </div>
+      <div className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)]/50 px-5 py-4 sm:px-6">
+        <div className="flex items-start gap-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="mt-0.5 shrink-0 text-[var(--color-text-tertiary)]"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4M12 8h.01" />
+          </svg>
+          <div className="text-sm leading-relaxed text-[var(--color-text-tertiary)]">
+            <p className="font-medium text-[var(--color-text-secondary)]">
+              Asset library — coming soon
+            </p>
+            <p className="mt-1">
+              This page will host all marketing and sales assets in a
+              searchable, filterable library. Assets can be tagged by vehicle
+              model, campaign, and content type.
+            </p>
           </div>
         </div>
+      </div>
 
-        {/* Search placeholder */}
-        <div className="card border border-dashed border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)]/50">
-          <div className="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-tertiary)]"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <span className="text-sm text-[var(--color-text-tertiary)]">Search assets by name, model, or tag...</span>
-            <span className="ml-auto text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-border-primary)]/60 px-2 py-0.5 rounded">Soon</span>
-          </div>
+      <div className="rounded-2xl border border-dashed border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)]/40 px-4 py-3 sm:px-5">
+        <div className="flex items-center gap-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="shrink-0 text-[var(--color-text-tertiary)]"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <span className="min-w-0 truncate text-sm text-[var(--color-text-tertiary)]">
+            Search assets by name, model, or tag…
+          </span>
+          <span className="label ml-auto shrink-0 rounded border border-[var(--color-border-primary)] px-2 py-0.5 text-[0.55rem] text-[var(--color-text-tertiary)]">
+            Soon
+          </span>
         </div>
-      </main>
-
-      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-[var(--color-text-tertiary)]">
-            &copy; {new Date().getFullYear()} Ridzuan Jahari
-          </p>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </PageShell>
   );
 }

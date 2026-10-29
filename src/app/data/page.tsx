@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PageSection, PageShell } from "@/components/PageShell";
 
 const datasets = [
   { name: "company.json", path: "/data/company.json", schema: "company" },
@@ -16,87 +17,99 @@ const datasets = [
 
 export default function DataIndex() {
   return (
-    <div className="min-h-screen">
-      <section className="page-header">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-          <Link
-            href="/"
-            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Dashboard
-          </Link>
-          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
-            /data &mdash; Machine Readable
-          </h1>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            All datasets exposed as raw JSON for AI agents and automated systems.
-          </p>
-        </div>
-      </section>
-
-      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-6">
-        <div className="space-y-2">
+    <PageShell
+      title="Machine-readable data"
+      description="Every dataset exposed as raw JSON for AI agents and automated systems."
+      eyebrow="Developers"
+      width="default"
+    >
+      <PageSection
+        eyebrow="Endpoints"
+        title="Datasets"
+        description={`${datasets.length} JSON files, served directly from the public directory.`}
+        flush
+      >
+        <ul className="divide-y divide-[var(--color-border-primary)]/60">
           {datasets.map((ds) => (
-            <a
-              key={ds.name}
-              href={ds.path}
-              className="card card-interactive flex items-center justify-between hover:border-accent/30 transition-all"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <li key={ds.name}>
+              <a
+                href={ds.path}
+                className="group flex items-center justify-between gap-3 px-5 py-3 transition-colors hover:bg-[var(--color-bg-tertiary)] sm:px-6"
+              >
+                <div className="flex min-w-0 items-center gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <path d="M14 2v6h6" />
+                      <path d="M16 13H8M16 17H8" />
+                    </svg>
+                  </span>
+                  <div className="min-w-0">
+                    <p className="truncate font-mono text-sm font-medium text-[var(--color-text-primary)]">
+                      {ds.name}
+                    </p>
+                    {ds.schema && (
+                      <p className="truncate font-mono text-[0.7rem] text-[var(--color-text-tertiary)]">
+                        schema: {ds.schema}.schema.json
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <p className="font-mono text-sm font-medium text-[var(--color-text-primary)]">
-                    {ds.name}
-                  </p>
-                  {ds.schema && (
-                    <span className="text-[0.7rem] text-[var(--color-text-tertiary)] font-mono">
-                      schema: {ds.schema}.schema.json
-                    </span>
-                  )}
-                </div>
-              </div>
-              <span className="text-accent text-sm font-mono">&rarr;</span>
-            </a>
+                <span
+                  aria-hidden="true"
+                  className="shrink-0 font-mono text-sm text-[var(--color-text-tertiary)] transition-transform group-hover:translate-x-0.5"
+                >
+                  &rarr;
+                </span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
+      </PageSection>
 
-        <div className="mt-6 card bg-[var(--color-neutral-50)] border border-[var(--color-border-primary)]">
-          <div className="flex items-start gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-tertiary)] shrink-0 mt-0.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <p className="text-sm text-[var(--color-text-tertiary)]">
-              <strong>Note:</strong> These endpoints return raw JSON. Designed for
-              AI agents and programmatic access. For a human-readable view, visit the{" "}
-              <Link href="/" className="underline font-medium">Dashboard</Link>.
+      <PageSection
+        eyebrow="Reference"
+        title="Schemas and usage"
+        description="Responses are raw JSON. JSON Schema files document every field so agents can validate the data."
+      >
+        <div className="space-y-4">
+          <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+            These endpoints are designed for AI agents and programmatic access.
+            For a human-readable view, open the{" "}
+            <Link
+              href="/"
+              className="font-medium underline underline-offset-2"
+            >
+              dashboard
+            </Link>
+            .
+          </p>
+          <div className="rounded-lg border border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)]/60 px-3 py-2.5">
+            <p className="label text-[0.6rem] text-[var(--color-text-tertiary)]">
+              Schema path
             </p>
+            <code className="mt-1 block break-all font-mono text-xs text-[var(--color-text-secondary)]">
+              /schemas/&lt;name&gt;.schema.json
+            </code>
           </div>
-        </div>
-
-        <div className="mt-3 card bg-accent/5 border border-accent/10">
-          <div className="flex items-start gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <div>
-              <p className="text-sm text-[var(--color-text-secondary)] font-medium mb-1">JSON Schema Reference</p>
-              <p className="text-sm text-[var(--color-text-tertiary)] leading-relaxed">
-                JSON Schema definitions are available for each dataset at{" "}
-                <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-xs font-mono">/schemas/&lt;name&gt;.schema.json</code>.
-                These schemas define the structure, types, and descriptions for every field,
-                enabling AI agents to understand and validate the data programmatically.
-              </p>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 text-center">
-          <p className="text-xs text-[var(--color-text-tertiary)]">
-            &copy; {new Date().getFullYear()} Ridzuan Jahari
+          <p className="text-sm leading-relaxed text-[var(--color-text-tertiary)]">
+            Schemas define the structure, types, and descriptions for every
+            field, enabling agents to understand and validate the data
+            programmatically.
           </p>
         </div>
-      </footer>
-    </div>
+      </PageSection>
+    </PageShell>
   );
 }

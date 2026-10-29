@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { marketingEvents } from "@/data";
 import type { EventCategory } from "@/types/marketing";
+import { PageShell, PageSection } from "@/components/PageShell";
 
 export default function MarketingIntelligencePage() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
@@ -17,30 +17,25 @@ export default function MarketingIntelligencePage() {
   const totalEvents = allEvents.length;
 
   return (
-    <div className="min-h-screen">
-      <section className="page-header">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <Link
-            href="/marketing-ai"
-            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Marketing AI
-          </Link>
-          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">Marketing Intelligence</h1>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Marketing Director — analyses events, festive calendars, and opportunities</p>
-        </div>
-      </section>
+    <PageShell
+      title="Marketing Intelligence"
+      eyebrow="Marketing AI · Intelligence"
+      description="Marketing director view of the events, festive dates, and cultural moments worth planning around."
+      width="default"
+      backHref="/marketing-ai"
+      backLabel="Marketing AI"
+    >
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="stat"><div className="stat-value">{totalEvents}</div><div className="stat-label">Total Events</div></div>
+        <div className="stat"><div className="stat-value">{marketingEvents.categories.length}</div><div className="stat-label">Categories</div></div>
+        <div className="stat"><div className="stat-value">Next 30 Days</div><div className="stat-label">Priority Window</div></div>
+      </div>
 
-      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3">
-          <div className="stat"><div className="stat-value">{totalEvents}</div><div className="stat-label">Total Events</div></div>
-          <div className="stat"><div className="stat-value">{marketingEvents.categories.length}</div><div className="stat-label">Categories</div></div>
-          <div className="stat"><div className="stat-value">Next 30 Days</div><div className="stat-label">Priority Window</div></div>
-        </div>
-
-        {/* Category Filter */}
+      <PageSection
+        eyebrow="Calendar"
+        title="Opportunities"
+        description="Filter the calendar by category, then open an event to see its lead time and angle."
+      >
         <div className="flex flex-wrap gap-1.5">
           <button
             onClick={() => setActiveCategory("all")}
@@ -59,37 +54,42 @@ export default function MarketingIntelligencePage() {
           ))}
         </div>
 
-        {/* Events by Category */}
-        {filteredCategories.map((category) => (
-          <section key={category.id}>
-            <h2 className="section-title">{category.label}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {category.events.map((event) => (
-                <div key={event.name} className="card border-l-2 border-l-[var(--color-figure-black)]">
-                  <div className="flex items-start justify-between mb-1">
-                    <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{event.name}</h3>
-                    <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded font-medium">{event.date}</span>
+        <div className="mt-5 space-y-5">
+          {filteredCategories.map((category) => (
+            <div key={category.id}>
+              <h3 className="label text-[0.62rem] text-[var(--color-text-tertiary)]">
+                {category.label}
+              </h3>
+              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {category.events.map((event) => (
+                  <div key={event.name} className="card border-l-2 border-l-[var(--color-figure-black)]">
+                    <div className="flex items-start justify-between gap-3 mb-1">
+                      <h4 className="font-semibold text-[var(--color-text-primary)] text-sm">{event.name}</h4>
+                      <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded font-medium shrink-0">{event.date}</span>
+                    </div>
+                    <p className="text-xs text-[var(--color-text-tertiary)] mb-2">{event.opportunity}</p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">Lead: {event.leadTime}</span>
+                      <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">{event.type.replace(/_/g, " ")}</span>
+                    </div>
                   </div>
-                  <p className="text-xs text-[var(--color-text-tertiary)] mb-2">{event.opportunity}</p>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">Lead: {event.leadTime}</span>
-                    <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">{event.type.replace(/_/g, " ")}</span>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </section>
-        ))}
+          ))}
+        </div>
+      </PageSection>
 
-        {/* Intelligence Prompt */}
-        <section className="card">
-          <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Marketing Intelligence Director</h2>
-          <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
-            This module uses a dedicated AI prompt at <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/marketing-intelligence.md</code>.
-            The prompt instructs the AI to analyse events, suggest campaigns, recommend audiences, and define emotional direction.
-          </p>
-        </section>
-      </main>
-    </div>
+      <PageSection
+        eyebrow="Model"
+        title="AI prompt"
+        description="How the intelligence director reads the calendar."
+      >
+        <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
+          This module uses a dedicated AI prompt at <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono break-all">src/data/prompts/marketing-intelligence.md</code>.
+          The prompt instructs the AI to analyse events, suggest campaigns, recommend audiences, and define emotional direction.
+        </p>
+      </PageSection>
+    </PageShell>
   );
 }

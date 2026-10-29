@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import Link from "next/link";
+import { PageShell } from "@/components/PageShell";
 import { rjeos, vehicles } from "@/data";
 import type { RJEOSSelections, RJEOSOutputSize, RJEOSDesignDirection, RJEOSScene, RJEOSSalesAdvisor } from "@/types/rjeos";
 
@@ -311,44 +311,29 @@ export default function RJEOSPage() {
   const totalArticles = rjeos.constitution.articles.length;
 
   return (
-    <div className="min-h-screen bg-bg-primary">
-      {/* ─── Hero Header ─────────────────────────────── */}
-      <section className="border-b border-border-primary ">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1 text-sm text-text-tertiary hover:text-text-secondary transition-colors mb-4"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Dashboard
-          </Link>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[var(--color-figure-black)] flex items-center justify-center ">
-              <span className="text-white text-sm font-black tracking-tight">RJ</span>
-            </div>
-            <div>
-              <div className="flex items-center gap-3">
-                <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-text-primary">
-                  RJEOS<span className="text-[var(--color-text-tertiary)]">™</span>
-                </h1>
-                <span className="label text-[0.62rem] text-[var(--color-text-secondary)] px-2 py-0.5 border border-[var(--color-border-primary)]">
-                  v{rjeos.version}
-                </span>
-                <span className="label text-[0.62rem] text-[var(--color-text-tertiary)] px-2 py-0.5 border border-[var(--color-border-primary)]">
-                  Constitution locked
-                </span>
-              </div>
-              <p className="text-sm text-text-tertiary mt-0.5">
-                Ridzuan Jahari Editorial Operating System — Premium Automotive Editorial Campaign Engine
-              </p>
-            </div>
-          </div>
+    <PageShell
+      eyebrow="Editorial engine"
+      title="RJEOS™"
+      description="Ridzuan Jahari Editorial Operating System — a premium automotive editorial campaign engine."
+      width="wide"
+      icon={
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-figure-black)]">
+          <span className="text-sm font-black tracking-tight text-white">RJ</span>
         </div>
-      </section>
-
-      <main id="main-content" className="page-enter max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      }
+      meta={
+        <>
+          <span className="label text-[0.62rem] text-[var(--color-text-secondary)] px-2 py-0.5 border border-[var(--color-border-primary)]">
+            v{rjeos.version}
+          </span>
+          <span className="label text-[0.62rem] text-[var(--color-text-tertiary)] px-2 py-0.5 border border-[var(--color-border-primary)]">
+            Constitution locked
+          </span>
+        </>
+      }
+    >
         {/* ─── Constitution Reference ─────────────────── */}
-        <section className="mb-6">
+        <section>
           <button
             onClick={() => setConstitutionOpen(!constitutionOpen)}
             className="w-full flex items-center justify-between p-3 sm:p-4 rounded-xl border border-border-primary bg-bg-secondary hover:bg-bg-hover transition-all cursor-pointer group"
@@ -615,15 +600,6 @@ export default function RJEOSPage() {
             </div>
           </div>
         </div>
-      </main>
-
-      <footer className="border-t border-border-primary bg-bg-primary mt-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-text-tertiary">
-            RJEOS™ — Ridzuan Jahari Editorial Operating System v{rjeos.version}
-          </p>
-        </div>
-      </footer>
-    </div>
+    </PageShell>
   );
 }

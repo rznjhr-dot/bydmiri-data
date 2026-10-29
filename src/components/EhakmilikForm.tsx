@@ -113,11 +113,12 @@ export default function EhakmilikForm() {
   return (
     <div className="space-y-4">
       {/* ── Form ─────────────────────────────────────────── */}
-      <form onSubmit={submit} className="card card-elevated !p-0 overflow-hidden">
-        <div className="px-4 pt-4 pb-3 border-b border-[var(--color-border-primary)]/60">
-          <h2 className="section-title text-sm !mb-0">New e-Hakmilik Letter</h2>
-          <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">
-            Submits to Google Forms &rarr; PDF auto-generated in Drive
+      <form onSubmit={submit} className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] !p-0 overflow-hidden">
+        <div className="border-b border-[var(--color-border-primary)] px-5 py-4">
+          <p className="label text-[0.6rem] text-[var(--color-text-tertiary)]">Letter</p>
+          <h2 className="mt-1 text-base font-bold text-[var(--color-text-primary)]">New e-Hakmilik letter</h2>
+          <p className="mt-1 text-sm text-[var(--color-text-tertiary)]">
+            Submits to Google Forms; the PDF is generated in Drive automatically.
           </p>
         </div>
 
@@ -128,11 +129,11 @@ export default function EhakmilikForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className={label}>Hirer Name *</label>
-                <input className="input !text-xs !py-1.5" value={hirer} onChange={(e) => setHirer(e.target.value)} placeholder="Ahmad bin Abu" />
+                <input className="input" value={hirer} onChange={(e) => setHirer(e.target.value)} placeholder="Ahmad bin Abu" />
               </div>
               <div>
                 <label className={label}>IC / Business Reg. No *</label>
-                <input className="input !text-xs !py-1.5" value={icno} onChange={(e) => setIcno(e.target.value)} placeholder="900101135011" inputMode="numeric" />
+                <input className="input" value={icno} onChange={(e) => setIcno(e.target.value)} placeholder="900101135011" inputMode="numeric" />
               </div>
             </div>
           </fieldset>
@@ -142,7 +143,7 @@ export default function EhakmilikForm() {
             <legend className={legend}>Vehicle</legend>
             <div>
               <label className={label}>Model &amp; Variant *</label>
-              <select className="select !text-xs !py-1.5" value={variant} onChange={(e) => setVariant(e.target.value)}>
+              <select className="select" value={variant} onChange={(e) => setVariant(e.target.value)}>
                 <option value="">Select model &amp; variant…</option>
                 {variantOptions.map((o) => (
                   <option key={o} value={o}>{o}</option>
@@ -152,15 +153,15 @@ export default function EhakmilikForm() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label className={label}>Year Make *</label>
-                <input className="input !text-xs !py-1.5" value={yearMake} onChange={(e) => setYearMake(e.target.value)} inputMode="numeric" />
+                <input className="input" value={yearMake} onChange={(e) => setYearMake(e.target.value)} inputMode="numeric" />
               </div>
               <div>
                 <label className={label}>Chassis No. *</label>
-                <input className="input !text-xs !py-1.5" value={chassis} onChange={(e) => setChassis(e.target.value)} placeholder="LGXC…" />
+                <input className="input" value={chassis} onChange={(e) => setChassis(e.target.value)} placeholder="LGXC…" />
               </div>
               <div>
                 <label className={label}>Engine No. *</label>
-                <input className="input !text-xs !py-1.5" value={engine} onChange={(e) => setEngine(e.target.value)} placeholder="EV…" />
+                <input className="input" value={engine} onChange={(e) => setEngine(e.target.value)} placeholder="EV…" />
               </div>
             </div>
           </fieldset>
@@ -171,17 +172,17 @@ export default function EhakmilikForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className={label}>Bank *</label>
-                <input className="input !text-xs !py-1.5" value={bank} onChange={(e) => setBank(e.target.value)} placeholder="Maybank" />
+                <input className="input" value={bank} onChange={(e) => setBank(e.target.value)} placeholder="Maybank" />
               </div>
               <div>
                 <label className={label}>Officer Name *</label>
-                <input className="input !text-xs !py-1.5" value={officer} onChange={(e) => setOfficer(e.target.value)} placeholder="En. Ahmad Faizal" />
+                <input className="input" value={officer} onChange={(e) => setOfficer(e.target.value)} placeholder="En. Ahmad Faizal" />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className={label}>Sales Advisor (optional)</label>
-                <input className="input !text-xs !py-1.5" value={saName} onChange={(e) => setSaName(e.target.value)} placeholder="Blank = Ridzuan Jahari" />
+                <input className="input" value={saName} onChange={(e) => setSaName(e.target.value)} placeholder="Blank = Ridzuan Jahari" />
               </div>
             </div>
             <p className="text-[0.65rem] text-[var(--color-text-tertiary)] leading-relaxed">
@@ -217,11 +218,14 @@ export default function EhakmilikForm() {
 
       {/* ── Results tray ─────────────────────────────────── */}
       {results.length > 0 && (
-        <section className="card !p-0 overflow-hidden">
-          <div className="px-4 pt-3.5 pb-2.5 border-b border-[var(--color-border-primary)]/60 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <h2 className="section-title text-sm !mb-0">Generated Letters</h2>
-              <span className="badge badge-blue !text-[0.6rem]">{results.length}</span>
+        <section className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] !p-0 overflow-hidden">
+          <div className="flex items-center justify-between border-b border-[var(--color-border-primary)] px-5 py-4">
+            <div>
+              <p className="label text-[0.6rem] text-[var(--color-text-tertiary)]">History</p>
+              <div className="mt-1 flex items-center gap-2">
+                <h2 className="text-base font-bold text-[var(--color-text-primary)]">Generated letters</h2>
+                <span className="badge badge-gray !text-[0.6rem]">{results.length}</span>
+              </div>
             </div>
             <a
               href={DRIVE_FOLDER}

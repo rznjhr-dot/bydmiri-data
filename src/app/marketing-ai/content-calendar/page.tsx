@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
 import { marketingEvents, marketingSchedules } from "@/data";
+import { PageShell, PageSection } from "@/components/PageShell";
 
 export default function ContentCalendarPage() {
   const [selectedMonth, setSelectedMonth] = useState("all");
@@ -26,30 +26,25 @@ export default function ContentCalendarPage() {
   const today = new Date().toISOString().substring(0, 10);
 
   return (
-    <div className="min-h-screen">
-      <section className="page-header">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <Link
-            href="/marketing-ai"
-            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Marketing AI
-          </Link>
-          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">Content Calendar AI</h1>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">Auto-detect celebrations, holidays, and monthly campaign opportunities</p>
-        </div>
-      </section>
+    <PageShell
+      title="Content Calendar AI"
+      eyebrow="Marketing AI · Content Calendar"
+      description="Auto-detects celebrations, holidays, and monthly campaign opportunities from today's date."
+      width="default"
+      backHref="/marketing-ai"
+      backLabel="Marketing AI"
+    >
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="stat"><div className="stat-value">{allEvents.length}</div><div className="stat-label">Total Events</div></div>
+        <div className="stat"><div className="stat-value">{marketingSchedules.platforms.length}</div><div className="stat-label">Platforms</div></div>
+        <div className="stat"><div className="stat-value">{selectedMonth === "all" ? "All Time" : selectedMonth}</div><div className="stat-label">Viewing</div></div>
+      </div>
 
-      <main id="main-content" className="page-enter max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3">
-          <div className="stat"><div className="stat-value">{allEvents.length}</div><div className="stat-label">Total Events</div></div>
-          <div className="stat"><div className="stat-value">{marketingSchedules.platforms.length}</div><div className="stat-label">Platforms</div></div>
-          <div className="stat"><div className="stat-value">{selectedMonth === "all" ? "All Time" : selectedMonth}</div><div className="stat-label">Viewing</div></div>
-        </div>
-
-        {/* Month Filter */}
+      <PageSection
+        eyebrow="Planning"
+        title="Events and opportunities"
+        description="Every dated moment in the calendar, grouped by month and flagged when it is close."
+      >
         <div className="flex flex-wrap gap-1.5">
           <button
             onClick={() => setSelectedMonth("all")}
@@ -68,9 +63,8 @@ export default function ContentCalendarPage() {
           ))}
         </div>
 
-        {/* Today's Opportunities */}
-        <div className="card border-l-2 border-l-[var(--color-figure-black)] bg-accent/5">
-          <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-1">Today is {today}</h2>
+        <div className="card border-l-2 border-l-[var(--color-figure-black)] bg-accent/5 mt-4">
+          <h3 className="font-bold text-[var(--color-text-primary)] text-sm mb-1">Today is {today}</h3>
           <p className="text-xs text-[var(--color-text-tertiary)] mb-2">
             {filteredEvents.filter((e) => e.date >= today).length} upcoming events match your filter.
           </p>
@@ -83,76 +77,79 @@ export default function ContentCalendarPage() {
           </div>
         </div>
 
-        {/* Events List */}
-        <section>
-          <h2 className="section-title">Events & Opportunities ({filteredEvents.length})</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {filteredEvents.map((event) => (
-              <div
-                key={`${event.name}-${event.date}`}
-                className={`card border-l-4 ${
-                  event.date < today
-                    ? "border-l-neutral-300 opacity-60"
-                    : "border-l-accent"
-                }`}
-              >
-                <div className="flex items-start justify-between mb-1">
-                  <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{event.name}</h3>
-                  <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded font-medium">{event.category}</span>
-                </div>
-                <p className="text-xs text-[var(--color-text-tertiary)] mb-1">{event.opportunity}</p>
-                <div className="flex items-center gap-2">
-                  <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">{event.date}</span>
-                  <span className="text-[var(--color-text-tertiary)]">·</span>
-                  <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">Lead: {event.leadTime}</span>
-                  {event.date >= today && event.date <= getDateDaysAhead(14) && (
-                    <span className="text-[0.7rem] text-white bg-[var(--color-figure-black)] border border-[var(--color-figure-black)] px-1.5 py-0.5 rounded font-semibold">URGENT</span>
-                  )}
-                </div>
+        <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {filteredEvents.map((event) => (
+            <div
+              key={`${event.name}-${event.date}`}
+              className={`card border-l-4 ${
+                event.date < today
+                  ? "border-l-[var(--color-border-primary)] opacity-60"
+                  : "border-l-[var(--color-figure-black)]"
+              }`}
+            >
+              <div className="flex items-start justify-between gap-3 mb-1">
+                <h3 className="font-semibold text-[var(--color-text-primary)] text-sm">{event.name}</h3>
+                <span className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded font-medium shrink-0">{event.category}</span>
               </div>
-            ))}
-          </div>
-        </section>
+              <p className="text-xs text-[var(--color-text-tertiary)] mb-1">{event.opportunity}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">{event.date}</span>
+                <span className="text-[var(--color-text-tertiary)]">·</span>
+                <span className="text-[0.7rem] text-[var(--color-text-tertiary)]">Lead: {event.leadTime}</span>
+                {event.date >= today && event.date <= getDateDaysAhead(14) && (
+                  <span className="text-[0.7rem] text-white bg-[var(--color-figure-black)] border border-[var(--color-figure-black)] px-1.5 py-0.5 rounded font-semibold">URGENT</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </PageSection>
 
-        {/* Posting Schedules */}
-        <section>
-          <h2 className="section-title">Platform Posting Schedules</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {marketingSchedules.platforms.map((platform) => (
-              <div key={platform.id} className="card">
-                <h3 className="font-semibold text-[var(--color-text-primary)] text-sm mb-1">{platform.name}</h3>
-                <p className="text-xs text-[var(--color-text-tertiary)] mb-2">{platform.recommendedFrequency}</p>
-                <div className="space-y-1 mb-2">
-                  {platform.bestTimes.map((time) => (
-                    <div key={time} className="text-[0.7rem] text-[var(--color-text-tertiary)]">⏰ {time}</div>
+      <PageSection
+        eyebrow="Cadence"
+        title="Platform posting schedules"
+        description="Recommended frequency, posting windows, and content mix for each channel."
+      >
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {marketingSchedules.platforms.map((platform) => (
+            <div key={platform.id} className="card">
+              <h3 className="font-semibold text-[var(--color-text-primary)] text-sm mb-1">{platform.name}</h3>
+              <p className="text-xs text-[var(--color-text-tertiary)] mb-2">{platform.recommendedFrequency}</p>
+              <div className="space-y-1 mb-2">
+                {platform.bestTimes.map((time) => (
+                  <div key={time} className="flex items-center gap-1.5 text-[0.7rem] text-[var(--color-text-tertiary)]">
+                    <span aria-hidden="true" className="h-1 w-1 shrink-0 rounded-full bg-[var(--color-border-primary)]" />
+                    {time}
+                  </div>
+                ))}
+              </div>
+              <div className="pt-2 border-t border-[var(--color-border-primary)]">
+                <h4 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1">Content mix</h4>
+                <div className="space-y-0.5">
+                  {platform.contentMix.map((mix) => (
+                    <div key={mix.type} className="flex items-center justify-between gap-2 text-[0.7rem]">
+                      <span className="text-[var(--color-text-tertiary)] capitalize">{mix.type.replace(/_/g, " ")}</span>
+                      <span className="font-medium text-[var(--color-text-secondary)]">{mix.percentage}%</span>
+                    </div>
                   ))}
                 </div>
-                <div className="pt-2 border-t border-[var(--color-border-primary)]">
-                  <h4 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] uppercase tracking-wider mb-1">Content Mix</h4>
-                  <div className="space-y-0.5">
-                    {platform.contentMix.map((mix) => (
-                      <div key={mix.type} className="flex items-center justify-between text-[0.7rem]">
-                        <span className="text-[var(--color-text-tertiary)] capitalize">{mix.type.replace(/_/g, " ")}</span>
-                        <span className="font-medium text-[var(--color-text-secondary)]">{mix.percentage}%</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+          ))}
+        </div>
+      </PageSection>
 
-        {/* Prompt Reference */}
-        <section className="card">
-          <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">AI Prompt: Content Calendar</h2>
-          <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
-            Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono">src/data/prompts/content-calendar.md</code> to detect date-based opportunities
-            and recommend campaigns automatically based on today's date.
-          </p>
-        </section>
-      </main>
-    </div>
+      <PageSection
+        eyebrow="Model"
+        title="AI prompt"
+        description="How the calendar detects and ranks date-based opportunities."
+      >
+        <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
+          Uses <code className="bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded text-[0.7rem] font-mono break-all">src/data/prompts/content-calendar.md</code> to detect date-based opportunities
+          and recommend campaigns automatically based on today&apos;s date.
+        </p>
+      </PageSection>
+    </PageShell>
   );
 }
 

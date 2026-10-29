@@ -1,32 +1,62 @@
 [
   {
+    "version": "V4.15",
+    "date": "2026-10-29",
+    "changes": [
+      "Site-wide page system: every route now shares one PageShell with a fluid 1240px desktop canvas, consistent breadcrumb, eyebrow/title/supporting line, deliberate 1100px tool width or 880px reading width, and a unified footer",
+      "Dashboard: section hierarchy aligned to the new system, 1240px canvas, and refreshed Quick actions and More tools grids",
+      "Calculators: Finance Calculator and Price Breakdown now use a two-column desktop layout — controls on the left and live summary on the right; the Charging Estimator gained a labelled panel and section header",
+      "All content pages migrated to the shared frame and consistent panels: Charging, Warranty, Data, Handbook, Assets, Agent Hub, Marketing AI and its nine modules, Pricelist, Vehicles, RJEOS, Live Script, RCO and e-Hakmilik",
+      "Global polish: balanced headline wrapping, improved paragraph wrapping, scroll offsets for anchored sections, print-safe footer hiding, and form fields restored to comfortable 14px sizing"
+    ]
+  },
+  {
+    "version": "V4.14",
+    "date": "2026-10-29",
+    "changes": [
+      "JPJ Checker (/jpj): added a live Current Running Numbers board sourced from JPJ.my, grouped into Peninsular, Sarawak, and Sabah columns with state, latest plate, last-updated timestamp, manual refresh, and dimmed rows flagged unavailable",
+      "JPJ data is proxied through /api/jpj-plates — a Next.js rewrite in development and a Netlify redirect in production — keeping the static export free of API routes"
+    ]
+  },
+  {
     "version": "V4.13",
     "date": "2026-10-29",
     "changes": [
-      "Price Breakdown (/top-up) — new Wallbox column with RM1,499 / RM2,499 presets; empty means no wallbox. When set, the amount is added to the Selling Price Breakdown (Subtotal A) and shown in the summary and copied text"
+      "Price Breakdown (/top-up): added a Wallbox field with RM1,499 and RM2,499 presets and a none option; when set, the wallbox amount is included in Subtotal A and reflected in the summary and copied text"
     ]
   },
   {
     "version": "V4.12",
     "date": "2026-10-29",
     "changes": [
-      "Price Breakdown (/top-up) — new Custom Total Rebate field lets you key an exact rebate amount; when filled it overrides and disables the auto Rebate and CSP/GSP/SSP toggles (for unexpected HQ promos), and the summary row now shows a single 'Rebate' line"
+      "Price Breakdown (/top-up): added a Custom Total Rebate field; a manual amount overrides the automatic rebate and CSP/GSP/SSP toggles, which are disabled while the override is active",
+      "The summary and copied text now show a single Rebate line"
+    ]
+  },
+  {
+    "version": "V4.11",
+    "date": "2026-10-14",
+    "changes": [
+      "Site-wide redesign around a monochrome technical-dossier language using Lab White, Figure/Absolute Black, Machine Gray, and Calibration Gray; depth now comes from hairline rules and black/white inversion rather than gradients, shadows, or colour-coded status",
+      "Typography updated to Space Grotesk for display, navigation, and figures, with Inter for body copy; inputs restyled as square fields with an underline treatment",
+      "Dashboard rebuilt as an editorial cover with a specification rail and an inverted chapter; navbar, bottom navigation, command palette, pricelist, vehicles, calculators, forms, RJEOS, and Marketing AI pages migrated to the new tokens",
+      "Vehicle table now renders stacked cards below 1024px and a dense table above; navbar switches to a hamburger below the lg breakpoint to fix 768–1023px overflow; navigation order updated so RCO replaces RJEOS and JPJ Check precedes Live Script"
     ]
   },
   {
     "version": "V4.10",
     "date": "2026-10-04",
     "changes": [
-      "Removed the DB Admin page (/admin) from the project — no longer reachable; navbar link, homepage quick-action card, and its dedicated helper calcMonthlyAtDefaults() removed with it"
+      "Removed the DB Admin page (/admin) and all entry points, including the navbar link, homepage quick-action card, and the calcMonthlyAtDefaults() helper"
     ]
   },
   {
     "version": "V4.9",
     "date": "2026-10-04",
     "changes": [
-      "October 2026 campaign live — rebate structure unchanged from prior month (Atto 2 RM9k, Atto 3 RM14k, Sealion 7 RM4k/RM7k/RM6k, Seal RM3k, Seal 6 RM1k, M6 RM4k)",
-      "Atto 3 — 6 Years Free Service Package option removed across all surfaces; Atto 3 now RM14,000 cash rebate only (no service-package alternative, no CSP replacement)",
-      "Finance calculator: custom downpayment amount now accepts cents (2 decimal places); new Custom Loan Amount bracket lets you key an exact loan figure directly",
+      "Published the October 2026 campaign with the rebate structure unchanged: Atto 2 RM9,000; Atto 3 RM14,000; Sealion 7 RM4,000/RM7,000/RM6,000; Seal RM3,000; Seal 6 RM1,000; M6 RM4,000",
+      "Atto 3: removed the 6-Year Free Service Package option across all surfaces; the model now carries a RM14,000 cash rebate only, with no service-package alternative or CSP replacement",
+      "Finance Calculator: custom downpayment now accepts cents, and a Custom Loan Amount bracket allows an exact loan figure to be entered directly",
       "Rebate period metadata advanced to October 2026"
     ]
   },
@@ -34,204 +64,204 @@
     "version": "V4.8",
     "date": "2026-09-09",
     "changes": [
-      "New /ehakmilik page — e-Hakmilik Generator: ownership-claim confirmation letter for JPJ (bank use). Custom form POSTs to a dedicated Google Form endpoint; Apps Script trigger copies the Google DOC master template, replaces all 9 {{tags}} (DATE, OFFICER, BANK, HIRER, ICNO, CHASSIS, ENGINE, MODELVARIANT, YM), exports a PDF to the eHakmilik Output BYD Drive folder, then trashes the draft doc",
-      "8 form fields — Hirer Name, IC/Business Reg No, Chassis No, Engine No, Model Variant (10-combo dropdown), Year Make, Bank, Officer Name (bank & officer both free-text); signature fixed as RIDZUAN JAHARI in the template",
-      "Model line renders as 'BYD <variant>' (template prefixes BYD, dropdown value is 'ATTO 3 - ULTRA' style); all values ALL CAPS; PDF filename EHAKMILIK_HIRER NAME_DDMMYY.pdf; verified end-to-end — single-page A4 portrait PDF in Drive ~15s after submit",
-      "Navbar adds e-Hakmilik link (after Pricelist); homepage 'More' rail and command palette gain the e-Hakmilik entry",
-      "New Apps Script project 'eHakmilik Automation (BYD Miri)' mirrored from the RCO generator flow; source kept at ehakmilik-automation/ehakmilik-automation.gs; Google Form + response sheet + LOGS tab + output folder + spreadsheet onFormSubmit trigger all created via setupEhakmilikAutomation()"
+      "Added /ehakmilik, an e-Hakmilik Generator for JPJ ownership-claim confirmation letters; the form posts to a dedicated Google Form endpoint, and an Apps Script trigger copies the master Google Doc, replaces all nine {{tags}} (DATE, OFFICER, BANK, HIRER, ICNO, CHASSIS, ENGINE, MODELVARIANT, YM), exports a PDF to the eHakmilik Output BYD Drive folder, and trashes the draft",
+      "The form has eight fields: Hirer Name, IC/Business Registration No., Chassis No., Engine No., Model Variant (10-model dropdown), Year Make, Bank, and Officer Name; bank and officer are free text, and the signature is fixed as RIDZUAN JAHARI",
+      "Model lines render as BYD <variant>, values are uppercase, and PDFs are named EHAKMILIK_<HIRER NAME>_DDMMYY.pdf; verified end-to-end as a single-page A4 portrait PDF appearing in Drive roughly 15 seconds after submission",
+      "Added e-Hakmilik to the navbar after Pricelist, the homepage More rail, and the command palette",
+      "New Apps Script project eHakmilik Automation (BYD Miri) mirrors the RCO flow; source is kept at ehakmilik-automation/ehakmilik-automation.gs, and setupEhakmilikAutomation() creates the Google Form, response sheet, LOGS tab, output folder, spreadsheet, and onFormSubmit trigger"
     ]
   },
   {
     "version": "V4.7",
     "date": "2026-09-01",
     "changes": [
-      "New /rco page — RCO Generator: custom sales-order form that POSTs directly to the Google Form endpoint; Apps Script trigger copies the MASTER_RCO_TEMPLATE, fills all 22 placeholders (TextFinder), and drops a single-page portrait A4 PDF into the RCO Output BYD Drive folder ~15s after submit",
-      "Variant dropdown sourced live from the database (all 10 BYD model-variant combos); selecting one reveals a live price panel — selling price, insurance, OTR without/with insurance, exact cents from vehicles.json",
-      "Colour field — free-text input plus one-tap preset pills for all 9 real BYD colours (Aurora White, Ski White, Cosmos Black, Harbour Grey, Atlantis Grey, Ultraviolet, Sage Green, Breeze Green, Gemilang Blue)",
-      "Results tray — every submission stacks below the form with an animated progress bar that flips to 'PDF created in Google Drive' with a direct link to the output folder",
-      "Homepage quick actions reordered — Pricelist, Finance Calc, Price Breakdown, Charging Estimator, RCO Generator (new, last) in a single 5-column row",
-      "Apps Script housekeeping — script consolidated to rco-automation/rco-automation.gs in-repo with old versions archived; form slimmed to 14 fields (Trade-In, Registration Number, Downpayment removed); all values ALL CAPS except email (lowercase); empty inputs replaced with blanks so no {{placeholders}} leak into the PDF"
+      "Added /rco, an RCO Generator that posts a sales-order form to a Google Form endpoint; an Apps Script trigger copies MASTER_RCO_TEMPLATE, fills all 22 placeholders via TextFinder, and writes a single-page A4 portrait PDF to the RCO Output BYD Drive folder roughly 15 seconds after submission",
+      "Variant dropdown is sourced from the vehicle database and covers all 10 combinations; selecting a variant reveals a live price panel with selling price, insurance, OTR with and without insurance, and exact cents from vehicles.json",
+      "Colour field supports free text plus one-tap presets for all nine BYD colours: Aurora White, Ski White, Cosmos Black, Harbour Grey, Atlantis Grey, Ultraviolet, Sage Green, Breeze Green, and Gemilang Blue",
+      "Submissions stack below the form with an animated progress bar that changes to PDF created in Google Drive and links directly to the output folder",
+      "Homepage quick actions reordered to Pricelist, Finance Calculator, Price Breakdown, Charging Estimator, and RCO Generator in a single five-column row",
+      "Apps Script consolidated to rco-automation/rco-automation.gs with older versions archived; the form was reduced to 14 fields by removing Trade-In, Registration Number, and Downpayment, and values are uppercase except email, with empty inputs replaced by blanks to prevent placeholder leaks"
     ]
   },
   {
     "version": "V4.6",
     "date": "2026-08-26",
     "changes": [
-      "Price Breakdown (/top-up) simplified for post-loan-approval workflow — downpayment selector, custom input, and summary row removed; full loan assumed by default, balance = selling price − financing − rebate − booking",
-      "All amounts on Price Breakdown now display with cents (formatCurrency forced to 2 decimal places) — real customer-facing figures, no rounding",
-      "Finance Calculator (/finance) — tenure selector regridded from 4×2 to a single 8-column row; all prices (OTR, insurance, rebate, after-rebate, downpayment) now show cents except loan amount and monthly payment (bank uses whole numbers)",
-      "Finance Calculator bottom bar redesigned — Loan Amount (left) · rate × tenure in months (center) · Monthly payment (right) in one row",
-      "Navbar shrunk — height reduced to 10/11 (was 14/16), icon 6×6, text 0.6rem, pill text 0.65rem; nav order updated to Dashboard → Vehicles → Pricelist → DB Admin → RJEOS → Changelog",
-      "Homepage quick actions grid changed to fixed 4-column single row; 'More' tools converted from scroll rail to single-row flex with responsive icon/text scaling (14→18px, 0.6→0.7rem)"
+      "Price Breakdown (/top-up) simplified for the post-loan-approval workflow: the downpayment selector, custom input, and summary row were removed; a full loan is assumed by default, with balance = selling price − financing − rebate − booking fee",
+      "All Price Breakdown amounts now display cents for customer-facing accuracy",
+      "Finance Calculator (/finance): the tenure selector moved from a 4×2 grid to a single eight-column row; prices (OTR, insurance, rebate, after-rebate, downpayment) show cents, while loan amount and monthly payment remain whole numbers",
+      "Finance Calculator bottom bar redesigned into one row showing loan amount, rate × tenure in months, and monthly payment",
+      "Navbar reduced in height (to 10/11 from 14/16) with a 6×6 icon and smaller text; navigation order updated to Dashboard → Vehicles → Pricelist → DB Admin → RJEOS → Changelog",
+      "Homepage quick actions changed to a fixed four-column row; the More tools rail became a single-row flex layout with responsive icon and text scaling"
     ]
   },
   {
     "version": "V4.5",
     "date": "2026-08-17",
     "changes": [
-      "Pricelist mobile layout — table transforms into labeled stacked cards below 640px (CSS data-label technique, no horizontal scrolling); Monthly promoted to a full-width accent hero row per card; works with any optional-column combination",
-      "PNG export upgraded to true 600 DPI — renders at 6.25× on a pinned 1280px desktop layout and embeds a spec-compliant pHYs chunk (CRC32-validated) so editors/printers read 600 DPI instead of default 72; filename now carries -600dpi suffix",
-      "Dual-quality export toggle — '600 DPI' (print-grade, fixed desktop layout) vs 'Web' (captures current viewport at min(2, dpr×1.5) for ~10–15× smaller files suited for WhatsApp/Instagram)",
-      "Down-payment segmented control now 3-state — 0%, 10% or Both side-by-side monthly columns; adaptive density compensates for the extra column",
-      "Export typography sharpened — text-rendering: geometricPrecision, kerning and common ligatures on the price table; antialiasing enforced in print CSS for vector-sharp PDF text"
+      "Pricelist mobile layout: the table becomes labelled stacked cards below 640px using a CSS data-label technique, eliminating horizontal scrolling; monthly payment is promoted to a full-width accent row per card and works with any optional-column combination",
+      "PNG export upgraded to true 600 DPI, rendered at 6.25× on a pinned 1280px desktop layout with a CRC32-validated pHYs chunk so editors and printers read 600 DPI; filenames carry a -600dpi suffix",
+      "Added a dual-quality export toggle: 600 DPI for print and Web for current-viewport captures at min(2, dpr×1.5), producing files roughly 10–15× smaller for WhatsApp and Instagram",
+      "Downpayment segmented control extended to three states — 0%, 10%, or Both — with adaptive density to accommodate the extra column",
+      "Export typography sharpened with text-rendering: geometricPrecision, kerning and ligatures on the price table, and antialiasing enforced in print CSS for vector-sharp text"
     ]
   },
   {
     "version": "V4.4",
     "date": "2026-08-17",
     "changes": [
-      "New customer-facing /pricelist page — printable price sheet with OTR → Rebate → Effective → Monthly hierarchy, 0%/10% downpayment toggle, optional spec columns (range, power, road tax, insurance, battery), adaptive density that rescales type as columns are toggled, PNG export and clean print/PDF output",
-      "Homepage rebranded as personal database — 'Ridzuan Jahari · BYD Miri' identity with status pills and live stats; hero converted to unified light-mode design for site-wide visual consistency",
-      "Pricelist promoted to featured primary card on homepage; navbar and command palette updated",
-      "Vehicle Database redesigned as one dense table — 10 variants visible in a single screen (was ~400px-tall cards), expandable rows reveal price breakdown, specs and promotion options; sticky column headers; ~80% less scrolling",
-      "EV Market and AI Prompt Studio sections removed — pages, components and unused types cleaned up",
-      "Footer colophon — centered typographic lockup (consultant | dealer | bydmiri.com) on pricelist; pricing disclaimer corrected to 'OTR with ESTIMATED insurance' with warranty footnote",
-      "Code cleanup — dead CSS removed (header-gradient, text-gradient, skeleton loaders, legacy BYD color palette, unused utility classes); homepage reference sections deduplicated into a shared ReferenceSection component"
+      "Added the customer-facing /pricelist page: a printable price sheet with an OTR → Rebate → Effective → Monthly hierarchy, 0%/10% downpayment toggle, optional spec columns (range, power, road tax, insurance, battery), adaptive density, PNG export, and clean print/PDF output",
+      "Homepage rebranded as a personal database with the Ridzuan Jahari · BYD Miri identity, status pills, live stats, and a unified light-mode hero",
+      "Pricelist promoted to the featured primary card; navbar and command palette updated",
+      "Vehicle Database redesigned as a single dense table showing all 10 variants on one screen, with expandable rows for price breakdown, specifications, and promotion options, sticky headers, and roughly 80% less scrolling",
+      "Removed the EV Market and AI Prompt Studio sections, including their pages, components, and unused types",
+      "Added a centred typographic footer to the pricelist (consultant | dealer | bydmiri.com); corrected the pricing disclaimer to OTR with ESTIMATED insurance and added a warranty footnote",
+      "Removed dead CSS (header-gradient, text-gradient, skeleton loaders, legacy BYD palette, unused utilities) and consolidated homepage reference sections into a shared ReferenceSection component"
     ]
   },
   {
     "version": "V4.3",
     "date": "2026-08-16",
     "changes": [
-      "Mobile-first redesign — bottom tab navigation (Home / Finance / Price / Charge) with safe-area support on phones",
-      "Homepage streamlined — Finance Calc, Price Breakdown & Charging Estimator now primary cards; Vehicle DB, Warranty, Handbook, EV Market, Prompt Studio, RJEOS, Marketing AI, Agent Hub & Admin moved to a compact scroll rail",
-      "Latest Updates section compressed to 2 bullets with link to full changelog; AI Agent notice, Finance Rules & Sales Rules collapsed into tappable accordions",
-      "Typography floor raised site-wide — all text now ≥ 11.2px (254 micro-labels upgraded from 7–10px)",
-      "Touch targets enlarged — tenure pills regridded at full height, downpayment/promo pills 44px effective, charging slider handles 28px visual / 44px track",
-      "Fluid hero type scale, tabular-nums on prices & stats, reduced-motion support, scroll-snap tool rail"
+      "Mobile-first redesign with bottom tab navigation (Home, Finance, Price, Charge) and safe-area support on phones",
+      "Homepage streamlined: Finance Calculator, Price Breakdown, and Charging Estimator are now primary cards; Vehicle DB, Warranty, Handbook, EV Market, Prompt Studio, RJEOS, Marketing AI, Agent Hub, and Admin moved to a compact scroll rail",
+      "Latest Updates compressed to two bullets with a link to the full changelog; the AI Agent notice, Finance Rules, and Sales Rules moved into tappable accordions",
+      "Raised the typography floor site-wide so all text is at least 11.2px, upgrading 254 micro-labels from 7–10px",
+      "Enlarged touch targets: tenure pills regridded at full height, downpayment and promo pills at 44px effective, and charging slider handles at 28px visual / 44px track",
+      "Added fluid hero type scaling, tabular numerals for prices and stats, reduced-motion support, and a scroll-snap tool rail"
     ]
   },
   {
     "version": "V4.2",
     "date": "2026-08-16",
     "changes": [
-      "Sealion 7 rebates updated — Dynamic RM4,000 (unchanged), Premium RM3,888 → RM7,000, Performance RM2,888 → RM6,000; Atto 3 confirmed at RM14,000 (Ultra & Premium)",
-      "public/data now auto-syncs from src/data on every build (scripts/sync-public-data.mjs) — single source of truth; build fails on malformed or orphaned JSON",
-      "New typed data layer (src/data/index.ts) with load-time shape validation — all 'as unknown as' JSON casts removed across pages and components",
-      "Shared loan math extracted to utils/finance.ts — /vehicles, /finance, /ev-market/compare and /admin now use one calculator",
-      "Rules page active-section highlight now live-updates on hashchange (was computed once during render)",
-      "Safe fallbacks replace non-null assertions in calculators — a renamed model in JSON no longer crashes the page",
-      "Prompt history & saved prompts validate entries on load — corrupt localStorage no longer breaks the page",
-      "ESLint config moved to eslint.config.mjs (silences ESM reparse warning)"
+      "Sealion 7 rebates updated: Dynamic RM4,000 (unchanged), Premium RM3,888 → RM7,000, and Performance RM2,888 → RM6,000; Atto 3 confirmed at RM14,000 for Ultra and Premium",
+      "public/data now syncs from src/data on every build via scripts/sync-public-data.mjs, making src/data the single source of truth; builds fail on malformed or orphaned JSON",
+      "Added a typed data layer (src/data/index.ts) with load-time shape validation, removing all as unknown as JSON casts across pages and components",
+      "Extracted shared loan math to utils/finance.ts, now used by /vehicles, /finance, /ev-market/compare, and /admin",
+      "Rules page active-section highlight now updates on hashchange instead of only during render",
+      "Safe fallbacks replace non-null assertions in calculators, so a renamed model in JSON no longer crashes the page",
+      "Prompt history and saved prompts validate entries on load, so corrupt localStorage no longer breaks the page",
+      "Moved the ESLint config to eslint.config.mjs to silence the ESM reparse warning"
     ]
   },
   {
     "version": "V4.1",
     "date": "2026-08-01",
     "changes": [
-      "Complete design system revamp — premium redesign across all 33 pages: refined palette (deeper blue accent #1d4ed8, emerald success), navy-tinted layered shadows, enlarged radii",
-      "New component classes: .page-header radial-gradient headers, .tool-card quick actions with tinted icons, .chip value badges, .nav-pill pill-shaped nav links, .divider-gradient hairlines",
-      "Dashboard rebuilt — radial-glow hero with live stats strip (Models / Variants / OTR Range / Interest), 6-card tool grid, premium AI Agent section",
-      "Navbar revamped — gradient logo with glow, pill nav states, blurred backdrop + layered shadow on scroll",
-      "Vehicle DB & Finance Calculator upgraded — rounded-full search with focus ring, elevated variant cards with segment chips, gradient monthly panels, promo selector pills with accent glow",
-      "Warranty coverage & Command Palette (⌘K) migrated to new design tokens",
-      "Site-wide tokenization — 500+ legacy neutral color classes replaced with semantic design tokens for consistent theming"
+      "Complete design system revamp across all 33 pages: refined palette (deeper blue accent #1d4ed8, emerald success), navy-tinted layered shadows, and larger radii",
+      "Added component classes for radial-gradient page headers, quick-action tool cards with tinted icons, value chips, pill-shaped nav links, and gradient divider hairlines",
+      "Rebuilt the dashboard with a radial-glow hero, live stats strip (Models, Variants, OTR Range, Interest), six-card tool grid, and a premium AI Agent section",
+      "Revamped the navbar with a gradient logo, pill nav states, and a blurred backdrop with layered shadow on scroll",
+      "Upgraded Vehicle DB and Finance Calculator with a rounded search field and focus ring, elevated variant cards with segment chips, gradient monthly panels, and promo selector pills with accent glow",
+      "Migrated the warranty coverage section and command palette (⌘K) to the new design tokens",
+      "Replaced more than 500 legacy neutral colour classes with semantic tokens for consistent theming"
     ]
   },
   {
     "version": "V4.0",
     "date": "2026-07-31",
     "changes": [
-      "Sealion 7 lineup updated — new Dynamic variant (RWD, 170 kW, 520 km NEDC) joins all-new Premium & Performance (91.39 kWh battery, 650/600 km NEDC)",
-      "Active lineup now 6 model families, 10 variants",
-      "August 2026 promotion live — Atto 2 RM9k, Atto 3 RM14k default (or RM10k + 6yr service pkg), Sealion 7 RM4k/RM3,888/RM2,888, Seal RM3k, Seal 6 RM1k, M6 RM4k",
-      "Promotion engine now supports multiple options per variant (title, rebate, default, free_gift) — default option auto-displayed across all surfaces, alternatives on vehicle detail",
-      "Atto 3 promotion selector live on /vehicles & /finance — pick RM14k cash (no service pkg) OR RM10k + FREE 6yr service pkg; selector replaces the old rebate toggle, no duplicate controls",
-      "Sealion 7 CSP/GSP/SSP set to RM0 (matches Atto 3); service-package toggle hidden on /finance for Atto 3 — service pkg governed by promotion choice only",
-      "OTR prices updated per KPA Miri Pricelist (31 Jul 2026), Sealion 7 OTR-without-insurance updated (insurance = OTR − OTR w/o ins)",
-      "Database metadata bumped to V4.0.0, campaign version 2026-08"
+      "Sealion 7 lineup updated: the new Dynamic variant (RWD, 170 kW, 520 km NEDC) joins the all-new Premium and Performance (91.39 kWh battery, 650/600 km NEDC)",
+      "Active lineup now covers 6 model families and 10 variants",
+      "Published the August 2026 promotion: Atto 2 RM9,000; Atto 3 RM14,000 default (or RM10,000 plus a 6-year service package); Sealion 7 RM4,000/RM3,888/RM2,888; Seal RM3,000; Seal 6 RM1,000; M6 RM4,000",
+      "Promotion engine now supports multiple options per variant (title, rebate, default, free gift); the default option is shown across all surfaces and alternatives appear on vehicle details",
+      "Added the Atto 3 promotion selector on /vehicles and /finance: RM14,000 cash without a service package, or RM10,000 with a free 6-year service package; the selector replaces the old rebate toggle and avoids duplicate controls",
+      "Set Sealion 7 CSP/GSP/SSP to RM0 (matching Atto 3) and hid the service-package toggle on /finance for Atto 3, since the package is controlled by the promotion choice",
+      "Updated OTR prices to the KPA Miri Pricelist (31 July 2026) and refreshed Sealion 7 OTR without insurance (insurance = OTR − OTR without insurance)",
+      "Bumped database metadata to V4.0.0 and the campaign version to 2026-08"
     ]
   },
   {
     "version": "V1.6",
     "date": "2026-07-15",
     "changes": [
-      "vehicles.json rebate field synced to promotions.json as single source of truth",
-      "Monthly estimates now show both 10% down (emerald) and 0% down (amber) on main website",
-      "Full Lineup table column order: Model → Range → OTR Price → Rebate → 10% → 0%",
-      "OTR header renamed to 'OTR Price' for clarity",
-      "(2026) suffix removed from Atto 3 variant names",
-      "Pricelist page: Price Breakdown colspan corrected, overflow-x-auto for scrollable table",
-      "Responsive alignment fixes for mobile: whitespace-nowrap on all monetary values"
+      "Synced the vehicles.json rebate field with promotions.json as the single source of truth",
+      "Monthly estimates now show both 10% down (emerald) and 0% down (amber) on the main website",
+      "Full Lineup table column order set to Model → Range → OTR Price → Rebate → 10% → 0%",
+      "Renamed the OTR header to OTR Price for clarity",
+      "Removed the (2026) suffix from Atto 3 variant names",
+      "Fixed the Price Breakdown colspan and enabled overflow-x-auto for the scrollable table",
+      "Applied responsive alignment fixes on mobile, including whitespace-nowrap on monetary values"
     ]
   },
   {
     "version": "V1.5",
     "date": "2026-07-15",
     "changes": [
-      "Pricing model verified — all monthly calculations confirmed on /vehicles page using promotions.json (rebate only, no CSP/GSP)",
-      "Monthly display: 0% Down + 10% Down for every variant, flat rate 2.30%, 9 years",
-      "Rebate-only pricing confirmed across all 6 models (10 variants)",
-      "Data pipeline documented: edit promotions.json → build → deploy → main website auto-updates"
+      "Verified the pricing model: all monthly calculations on /vehicles use promotions.json and account for rebate only, with no CSP/GSP",
+      "Monthly display now shows both 0% and 10% down for every variant at a 2.30% flat rate over nine years",
+      "Confirmed rebate-only pricing across all 6 models and 10 variants",
+      "Documented the data pipeline: edit promotions.json → build → deploy → main website updates automatically"
     ]
   },
   {
     "version": "V1.4",
     "date": "2026-07-09",
     "changes": [
-      "Charging rate database restructured with configurable charging profiles — rates no longer hardcoded in components",
-      "8 charging profiles added: Home (RM0.30/kWh), Public DC Fast Charging (RM1.40/kWh default), plus future-ready operator slots",
-      "Charging Time Estimator now reads all rates from charging.json — AC uses home profile, DC uses public_default (RM1.40/kWh)",
-      "DC charging cost simplified to single rate (RM1.40/kWh) — no range display or operator dropdown",
-      "Prompt Generator reads home charging rate from profile instead of hardcoded RM0.30",
-      "Disclaimer added to /charging page: 'Public charging fees vary between charging networks and locations'",
-      "Charging schema updated to validate new chargingProfiles structure"
+      "Restructured the charging rate database around configurable charging profiles so rates are no longer hardcoded in components",
+      "Added eight charging profiles, including Home (RM0.30/kWh) and Public DC Fast Charging (RM1.40/kWh default), plus slots for future operators",
+      "Charging Time Estimator now reads all rates from charging.json; AC uses the home profile and DC uses public_default (RM1.40/kWh)",
+      "Simplified DC charging cost to a single RM1.40/kWh rate, removing the range display and operator dropdown",
+      "Prompt Generator now reads the home charging rate from the profile instead of a hardcoded RM0.30",
+      "Added a /charging disclaimer noting that public charging fees vary by network and location",
+      "Updated the charging schema to validate the new chargingProfiles structure"
     ]
   },
   {
     "version": "V1.3",
     "date": "2026-07-08",
     "changes": [
-      "Dedicated promotions.json — single source of truth for monthly-changing rebates, CSP/GSP/SSP & freebies",
-      "July 2026 promo live: Atto 2 RM11k, Atto 3 RM10k (+6yr service pkg), Seal RM3k, Sealion 7 RM7k, M6 RM4k, Seal 6 RM1k",
-      "Promotion system: all components read from promotions.json instead of vehicles.json for rebates",
-      "CSP replacement support — Atto 3 gets 6-Year Service Package (RM3,888) instead of cash rebate",
-      "Published on /data page as machine-readable JSON for external agents",
-      "Clean SEB references from rebate data (rebates are dealer discounts, not electricity subsidies)"
+      "Introduced promotions.json as the single source of truth for monthly rebates, CSP/GSP/SSP, and freebies",
+      "Published the July 2026 promotion: Atto 2 RM11,000; Atto 3 RM10,000 plus a 6-year service package; Seal RM3,000; Sealion 7 RM7,000; M6 RM4,000; Seal 6 RM1,000",
+      "All components now read rebates from promotions.json instead of vehicles.json",
+      "Added CSP replacement support: Atto 3 offers a 6-Year Service Package (RM3,888) in place of a cash rebate",
+      "Published promotions.json on /data as machine-readable JSON for external agents",
+      "Removed SEB references from rebate data, since rebates are dealer discounts rather than electricity subsidies"
     ]
   },
   {
     "version": "V1.2",
     "date": "2026-07-05",
     "changes": [
-      "EV Market Malaysia hub launched — live news feed for EV industry updates, pricing & rebate changes",
-      "EV comparison tool — side-by-side BYD vs competitor comparison with auto-suggest",
-      "7 competitor brands added: Proton e.MAS, Chery, MG, Leapmotor, Jaecoo, Jetour, Tesla (36 variants total)",
-      "All competitor specs researched and verified from Paul Tan, SoyaCincau, AutoBuzz & official sources",
-      "NEDC ranges added for all BYD models (official BYD Malaysia data)",
-      "East Malaysia pricing markup tracked (Proton +RM3k confirmed, Jaecoo +RM2,750 confirmed, Tesla national pricing)",
-      "Monthly payment estimator with 2.30% flat rate, 9yr, 10% down — includes EM markup & insurance estimate",
-      "Insurance estimate tiers: RM2.3k (<RM100k), RM3k (RM100-150k), RM3.5k (RM150-200k), RM4k (>RM200k)",
-      "BYD advantages section — Blade Battery, 6+8 yr warranty, V2L standard, World #1 EV maker",
-      "Live-data badge, category filters, market highlights, and mobile-optimised layout",
-      "Font optimised for screen readability (system-ui stack, subpixel antialiasing, max contrast)",
-      "24 EV news items with source links from Malaysia's top automotive publications"
+      "Launched the EV Market Malaysia hub with a live news feed covering industry updates, pricing, and rebate changes",
+      "Added an EV comparison tool for side-by-side BYD versus competitor comparisons with auto-suggest",
+      "Added seven competitor brands — Proton e.MAS, Chery, MG, Leapmotor, Jaecoo, Jetour, and Tesla — covering 36 variants",
+      "Researched and verified all competitor specifications from Paul Tan, SoyaCincau, AutoBuzz, and official sources",
+      "Added official NEDC ranges for all BYD models",
+      "Documented East Malaysia pricing markups: Proton +RM3,000 (confirmed), Jaecoo +RM2,750 (confirmed), and Tesla at national pricing",
+      "Built a monthly payment estimator at a 2.30% flat rate over nine years with 10% down, including the East Malaysia markup and insurance estimate",
+      "Added insurance estimate tiers: RM2,300 below RM100k, RM3,000 for RM100–150k, RM3,500 for RM150–200k, and RM4,000 above RM200k",
+      "Published a BYD advantages section covering the Blade Battery, 6+8-year warranty, standard V2L, and global EV leadership",
+      "Added a live-data badge, category filters, market highlights, and a mobile-optimised layout",
+      "Optimised fonts for screen readability with a system-ui stack, subpixel antialiasing, and high contrast",
+      "Curated 24 EV news items with links to Malaysia's leading automotive publications"
     ]
   },
   {
     "version": "V1.1",
     "date": "2026-06-24",
     "changes": [
-      "RJEOS editorial campaign engine launched with constitution, design directions, creative package builder",
-      "Dashboard restructuring — Finance Calc, Charging, Warranty moved to standalone pages",
-      "Vehicle DB mobile compact view with search filter and expandable specs",
-      "Finance Calculator compact redesign for iPhone 16 (tighter padding, toggle switches)",
-      "Dark/light mode support added to RJEOS page via semantic CSS variables",
-      "Added OEM Social design direction in RJEOS (clean, bright, family-oriented artwork)",
-      "Fixed Seal rebate to RM2,000 and Seal 6 rebate to RM1,800",
-      "Navbar simplified — core navigation only (Dashboard, Vehicles, AI Prompt Studio, RJEOS, Changelog)"
+      "Launched the RJEOS editorial campaign engine with a constitution, design directions, and a creative package builder",
+      "Restructured the dashboard and moved Finance Calculator, Charging, and Warranty to standalone pages",
+      "Added a compact mobile view to the Vehicle DB with search filtering and expandable specifications",
+      "Redesigned the Finance Calculator for iPhone 16 with tighter padding and toggle switches",
+      "Added dark/light mode support to the RJEOS page via semantic CSS variables",
+      "Introduced the OEM Social design direction for clean, bright, family-oriented artwork",
+      "Corrected the Seal rebate to RM2,000 and the Seal 6 rebate to RM1,800",
+      "Simplified the navbar to core navigation only: Dashboard, Vehicles, AI Prompt Studio, RJEOS, and Changelog"
     ]
   },
   {
     "version": "V1.0",
     "date": "2026-06-17",
     "changes": [
-      "Initial launch of BYD Miri Knowledge Base",
-      "Complete vehicle catalog with pricing and rebates",
-      "Finance rules and loan calculator parameters",
-      "Sarawak charging network directory",
-      "Sales and content rules documented",
-      "AI agent integration instructions"
+      "Launched the BYD Miri Knowledge Base",
+      "Published the complete vehicle catalogue with pricing and rebates",
+      "Documented finance rules and loan calculator parameters",
+      "Added the Sarawak charging network directory",
+      "Documented sales and content rules",
+      "Added AI agent integration instructions"
     ]
   }
 ]

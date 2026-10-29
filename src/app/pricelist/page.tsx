@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import Link from "next/link";
 import type { Options as Html2CanvasOptions } from "html2canvas";
+import { PageShell } from "@/components/PageShell";
 import { company, vehicles, finance, promotions, pricingMeta } from "@/data";
 import { formatCurrency, calcMonthlyFromPrice } from "@/utils/finance";
 import { getRebate } from "@/utils/promotions";
@@ -259,29 +259,14 @@ export default function PricelistPage() {
   }, [exportQuality, orientation]);
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <section className="page-header" data-print="hide">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-          <Link
-            href="/"
-            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Dashboard
-          </Link>
-          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
-            Official Pricelist
-          </h1>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            {company.branch} &middot; {company.rebatePeriod} campaign &middot; valid {promotions.validFrom} to {promotions.validTo}
-          </p>
-        </div>
-      </section>
-
-      <main id="main-content" className="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4">
-        {/* Controls (screen only) */}
-        <div data-print="hide" className="flex flex-wrap items-center gap-2">
+    <PageShell
+      eyebrow="Pricing"
+      title="Official pricelist"
+      description={`Official ${company.rebatePeriod} campaign pricing for ${company.branch}, valid ${promotions.validFrom} to ${promotions.validTo}.`}
+      width="wide"
+    >
+      {/* Controls (screen only) */}
+      <div data-print="hide" className="flex flex-wrap items-center gap-2">
           {/* Down-payment segmented control: 0% / 10% / Both */}
           <div
             role="radiogroup"
@@ -578,7 +563,6 @@ export default function PricelistPage() {
             </div>
           </footer>
         </div>
-      </main>
-    </div>
+    </PageShell>
   );
 }

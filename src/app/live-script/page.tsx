@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { PageShell } from "@/components/PageShell";
 
 /* ---------- DATA ---------- */
 
@@ -191,30 +191,26 @@ function SectionHeader({ num, title, meta }: { num: string; title: string; meta?
 
 export default function LiveScriptPage() {
   return (
-    <div className="min-h-screen">
-      <section className="page-header">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5 sm:py-7">
-          <Link href="/" className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Dashboard
-          </Link>
-          <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
-              TikTok Live Script
-            </h1>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-figure-black)] text-white text-[0.65rem] font-bold px-2.5 py-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> LIVE PACK
-            </span>
-          </div>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            🔄 Loop 1 → 10, repeat · ⏱️ ~15-20 min/loop · Rotate 1 model per cycle · Prices:{" "}
-            <a href="https://bydmiri.com/pricelist" className="text-[var(--color-accent)] underline">bydmiri.com/pricelist</a> (Aug 2026)
-          </p>
-        </div>
-      </section>
-
-      <main className="page-enter max-w-5xl mx-auto px-4 sm:px-6 py-5 space-y-6">
-
+    <PageShell
+      eyebrow="Live sales kit"
+      title="TikTok live script"
+      description="Loop 1 → 10, repeat. Roughly 15–20 minutes per loop, rotating one model each cycle."
+      width="wide"
+      meta={
+        <>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-figure-black)] px-2.5 py-1 text-[0.65rem] font-bold text-white">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" /> LIVE PACK
+          </span>
+          <span className="text-xs text-[var(--color-text-tertiary)]">
+            Prices:{" "}
+            <a href="https://bydmiri.com/pricelist" className="text-[var(--color-accent)] underline">
+              bydmiri.com/pricelist
+            </a>{" "}
+            (Aug 2026)
+          </span>
+        </>
+      }
+    >
         {/* SEGMENTS — 2-col grid on desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-start">
           {segments.map((s) => (
@@ -317,7 +313,9 @@ export default function LiveScriptPage() {
         {/* PM SCRIPTS */}
         <div>
           <div className="flex items-center gap-2.5 mb-1">
-            <span className="w-6 h-6 rounded-md bg-[var(--color-accent)] text-white text-[0.7rem] font-extrabold flex items-center justify-center">💬</span>
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[var(--color-accent)] text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
             <h2 className="font-bold text-sm text-[var(--color-text-primary)]">PM Scripts (Post-Live)</h2>
           </div>
           <p className="text-[0.7rem] text-[var(--color-text-tertiary)] mb-3 ml-9">Send ke engaged viewers. Space out 10-15 min — jangan blast semua sekali (spam flag).</p>
@@ -355,7 +353,6 @@ export default function LiveScriptPage() {
         <p className="text-center text-xs text-[var(--color-text-tertiary)] pt-3 pb-8">
           BYD Miri — TikTok Live Script Pack · Kah Progression Auto Miri 🔴
         </p>
-      </main>
-    </div>
+    </PageShell>
   );
 }

@@ -152,11 +152,12 @@ export default function RcoForm() {
   return (
     <div className="space-y-4">
       {/* ── Form ─────────────────────────────────────────── */}
-      <form onSubmit={submit} className="card card-elevated !p-0 overflow-hidden">
-        <div className="px-4 pt-4 pb-3 border-b border-[var(--color-border-primary)]/60">
-          <h2 className="section-title text-sm !mb-0">New RCO</h2>
-          <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">
-            Submits to Google Forms &rarr; PDF auto-generated in Drive
+      <form onSubmit={submit} className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] !p-0 overflow-hidden">
+        <div className="border-b border-[var(--color-border-primary)] px-5 py-4">
+          <p className="label text-[0.6rem] text-[var(--color-text-tertiary)]">Order</p>
+          <h2 className="mt-1 text-base font-bold text-[var(--color-text-primary)]">New RCO</h2>
+          <p className="mt-1 text-sm text-[var(--color-text-tertiary)]">
+            Submits to Google Forms; the PDF is generated in Drive automatically.
           </p>
         </div>
 
@@ -167,24 +168,24 @@ export default function RcoForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className={label}>Name *</label>
-                <input className="input !text-xs !py-1.5" value={name} onChange={(e) => setName(e.target.value)} placeholder="Ahmad bin Abu" />
+                <input className="input" value={name} onChange={(e) => setName(e.target.value)} placeholder="Ahmad bin Abu" />
               </div>
               <div>
                 <label className={label}>IC Number *</label>
-                <input className="input !text-xs !py-1.5" value={ic} onChange={(e) => setIc(e.target.value)} placeholder="900101135011" inputMode="numeric" />
+                <input className="input" value={ic} onChange={(e) => setIc(e.target.value)} placeholder="900101135011" inputMode="numeric" />
               </div>
               <div>
                 <label className={label}>Phone *</label>
-                <input className="input !text-xs !py-1.5" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="013 889 7766" inputMode="tel" />
+                <input className="input" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="013 889 7766" inputMode="tel" />
               </div>
               <div>
                 <label className={label}>Email</label>
-                <input className="input !text-xs !py-1.5" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="customer@email.com" />
+                <input className="input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="customer@email.com" />
               </div>
             </div>
             <div>
               <label className={label}>Address *</label>
-              <textarea className="input !text-xs !py-1.5 min-h-[60px] resize-y" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Lot 88, Jalan Miri Pujut, 98000 Miri, Sarawak" />
+              <textarea className="input min-h-[60px] resize-y" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Lot 88, Jalan Miri Pujut, 98000 Miri, Sarawak" />
             </div>
           </fieldset>
 
@@ -193,7 +194,7 @@ export default function RcoForm() {
             <legend className={legend}>Vehicle</legend>
             <div>
               <label className={label}>Variant *</label>
-              <select className="select !text-xs !py-1.5" value={variant} onChange={(e) => setVariant(e.target.value)}>
+              <select className="select" value={variant} onChange={(e) => setVariant(e.target.value)}>
                 <option value="">Select model &amp; variant…</option>
                 {variantOptions.map((o) => (
                   <option key={o} value={o}>{o}</option>
@@ -223,7 +224,7 @@ export default function RcoForm() {
               <label className={label}>Colour</label>
               <div className="flex flex-col sm:flex-row gap-2">
                 <input
-                  className="input !text-xs !py-1.5 sm:flex-1"
+                  className="input sm:flex-1"
                   value={colour}
                   onChange={(e) => setColour(e.target.value)}
                   placeholder="Type colour…"
@@ -249,15 +250,15 @@ export default function RcoForm() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label className={label}>Year Make</label>
-                <input className="input !text-xs !py-1.5" value={yearMake} onChange={(e) => setYearMake(e.target.value)} inputMode="numeric" />
+                <input className="input" value={yearMake} onChange={(e) => setYearMake(e.target.value)} inputMode="numeric" />
               </div>
               <div>
                 <label className={label}>Chassis No.</label>
-                <input className="input !text-xs !py-1.5" value={chassis} onChange={(e) => setChassis(e.target.value)} placeholder="LGXC…" />
+                <input className="input" value={chassis} onChange={(e) => setChassis(e.target.value)} placeholder="LGXC…" />
               </div>
               <div>
                 <label className={label}>Engine No.</label>
-                <input className="input !text-xs !py-1.5" value={engine} onChange={(e) => setEngine(e.target.value)} placeholder="EV…" />
+                <input className="input" value={engine} onChange={(e) => setEngine(e.target.value)} placeholder="EV…" />
               </div>
             </div>
           </fieldset>
@@ -270,12 +271,12 @@ export default function RcoForm() {
                 <label className={label}>Loan Amount (RM)</label>
                 <div className="input-group">
                   <span className="input-prefix !text-[0.7rem]">RM</span>
-                  <input className="input !text-xs !py-1.5" value={loanAmount} onChange={(e) => setLoanAmount(e.target.value)} inputMode="decimal" placeholder="116,370" />
+                  <input className="input" value={loanAmount} onChange={(e) => setLoanAmount(e.target.value)} inputMode="decimal" placeholder="116,370" />
                 </div>
               </div>
               <div>
                 <label className={label}>Loan Period (months)</label>
-                <select className="select !text-xs !py-1.5" value={loanPeriod} onChange={(e) => setLoanPeriod(e.target.value)}>
+                <select className="select" value={loanPeriod} onChange={(e) => setLoanPeriod(e.target.value)}>
                   {LOAN_MONTHS.map((m) => (
                     <option key={m} value={m}>{m} months</option>
                   ))}
@@ -289,11 +290,11 @@ export default function RcoForm() {
             <legend className={legend}>Sales</legend>
             <div>
               <label className={label}>Sales Advisor</label>
-              <input className="input !text-xs !py-1.5" value={advisor} onChange={(e) => setAdvisor(e.target.value)} />
+              <input className="input" value={advisor} onChange={(e) => setAdvisor(e.target.value)} />
             </div>
             <div>
               <label className={label}>Remarks</label>
-              <textarea className="input !text-xs !py-1.5 min-h-[50px] resize-y" value={remarks} onChange={(e) => setRemarks(e.target.value)} placeholder="Optional notes…" />
+              <textarea className="input min-h-[50px] resize-y" value={remarks} onChange={(e) => setRemarks(e.target.value)} placeholder="Optional notes…" />
             </div>
           </fieldset>
         </div>
@@ -323,11 +324,14 @@ export default function RcoForm() {
 
       {/* ── Results tray ─────────────────────────────────── */}
       {results.length > 0 && (
-        <section className="card !p-0 overflow-hidden">
-          <div className="px-4 pt-3.5 pb-2.5 border-b border-[var(--color-border-primary)]/60 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <h2 className="section-title text-sm !mb-0">Generated RCOs</h2>
-              <span className="badge badge-blue !text-[0.6rem]">{results.length}</span>
+        <section className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] !p-0 overflow-hidden">
+          <div className="flex items-center justify-between border-b border-[var(--color-border-primary)] px-5 py-4">
+            <div>
+              <p className="label text-[0.6rem] text-[var(--color-text-tertiary)]">History</p>
+              <div className="mt-1 flex items-center gap-2">
+                <h2 className="text-base font-bold text-[var(--color-text-primary)]">Generated RCOs</h2>
+                <span className="badge badge-gray !text-[0.6rem]">{results.length}</span>
+              </div>
             </div>
             <a
               href={DRIVE_FOLDER}

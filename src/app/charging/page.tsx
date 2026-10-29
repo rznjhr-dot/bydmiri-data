@@ -1,79 +1,84 @@
 "use client";
 
-import Link from "next/link";
+import { PageSection, PageShell } from "@/components/PageShell";
 import ChargingTimeEstimator from "@/components/ChargingTimeEstimator";
 import { charging } from "@/data";
 
 export default function ChargingPage() {
   return (
-    <div className="min-h-screen">
-      <section className="page-header">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-          <Link
-            href="/"
-            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Dashboard
-          </Link>
-          <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
-            Charging
-          </h1>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            Charging time estimator &amp; station network
-          </p>
-        </div>
-      </section>
+    <PageShell
+      title="Charging"
+      description="Estimate charging time and cost, then browse the station network."
+      eyebrow="Energy"
+      width="wide"
+    >
+      <ChargingTimeEstimator />
 
-      <main id="main-content" className="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4">
-        {/* ─── Charging Time Estimator ──── */}
-        <ChargingTimeEstimator />
-
-        {/* ─── Charging Network ──────────── */}
-        <section>
-          <h2 className="section-title">Charging Network</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            {charging.cities.map((city) => (
-              <div key={city.city} className="card card-elevated">
-                <h3 className="font-bold text-[var(--color-text-primary)] text-sm mb-1.5 flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent shrink-0"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  {city.city}
-                </h3>
-                <div className="space-y-1">
-                  {city.stations.map((station, i) => (
-                    <div key={i} className="bg-[var(--color-bg-tertiary)] rounded p-1.5 text-xs">
-                      <p className="font-medium text-[var(--color-text-secondary)] truncate text-xs">{station.location}</p>
-                      <div className="flex justify-between mt-0.5 text-[0.7rem] text-[var(--color-text-tertiary)]">
-                        <span>{station.power}</span>
-                        <span>{station.provider}</span>
-                      </div>
+      <PageSection
+        eyebrow="Network"
+        title="Charging stations"
+        description="Locations, charger output, and provider across Miri and nearby towns."
+      >
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {charging.cities.map((city) => (
+            <div
+              key={city.city}
+              className="rounded-lg border border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)]/50 p-3"
+            >
+              <h3 className="flex items-center gap-1.5 text-sm font-semibold text-[var(--color-text-primary)]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="shrink-0 text-[var(--color-text-tertiary)]"
+                  aria-hidden="true"
+                >
+                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+                {city.city}
+              </h3>
+              <div className="mt-2 space-y-1.5">
+                {city.stations.map((station, i) => (
+                  <div
+                    key={i}
+                    className="rounded-md border border-[var(--color-border-primary)]/70 bg-[var(--color-bg-secondary)] px-2 py-1.5 text-xs"
+                  >
+                    <p className="truncate font-medium text-[var(--color-text-secondary)]">
+                      {station.location}
+                    </p>
+                    <div className="mt-0.5 flex justify-between gap-2 text-[0.7rem] text-[var(--color-text-tertiary)]">
+                      <span className="whitespace-nowrap">{station.power}</span>
+                      <span className="min-w-0 truncate text-right">
+                        {station.provider}
+                      </span>
                     </div>
-                  ))}
-                  {city.stations.length === 0 && (
-                    <p className="text-xs text-[var(--color-text-tertiary)] italic">No charging stations listed</p>
-                  )}
-                </div>
+                  </div>
+                ))}
+                {city.stations.length === 0 && (
+                  <p className="text-xs italic text-[var(--color-text-tertiary)]">
+                    No charging stations listed.
+                  </p>
+                )}
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ─── Disclaimer ──────────── */}
-        <section>
-          <div className="bg-[var(--color-neutral-50)] border border-[var(--color-border-primary)] rounded-lg p-3">
-            <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">
-              <strong className="font-semibold">Note:</strong>{" "}
-              {charging.disclaimer}
-            </p>
-          </div>
-        </section>
-      </main>
-
-      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
-          <p className="text-xs text-[var(--color-text-tertiary)]">&copy; {new Date().getFullYear()} Ridzuan Jahari</p>
+            </div>
+          ))}
         </div>
-      </footer>
-    </div>
+      </PageSection>
+
+      <div className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-tertiary)]/50 px-5 py-4 sm:px-6">
+        <p className="text-xs leading-relaxed text-[var(--color-text-tertiary)]">
+          <strong className="font-semibold text-[var(--color-text-secondary)]">
+            Note:
+          </strong>{" "}
+          {charging.disclaimer}
+        </p>
+      </div>
+    </PageShell>
   );
 }

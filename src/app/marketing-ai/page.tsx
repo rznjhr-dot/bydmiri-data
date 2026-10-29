@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { company } from "@/data";
 import type { ModuleInfo } from "@/types/marketing";
+import { PageShell, PageSection } from "@/components/PageShell";
 
 const modules: ModuleInfo[] = [
   {
@@ -96,116 +97,89 @@ const quickStats = [
 
 export default function MarketingAIPage() {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <section className="page-header">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <Link
-            href="/"
-            className="label inline-flex items-center gap-1 text-[0.62rem] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors mb-3"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            Dashboard
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[var(--color-figure-black)] flex items-center justify-center ">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-            </div>
-            <div>
-              <h1 className="display text-[clamp(1.5rem,4vw,2.25rem)] tracking-[-0.025em] text-[var(--color-text-primary)]">
-                Marketing AI
-              </h1>
-              <p className="text-sm text-[var(--color-text-tertiary)] mt-0.5">
-                AI-powered marketing operating system for BYD Miri
-              </p>
-            </div>
-          </div>
+    <PageShell
+      eyebrow="Marketing OS"
+      title="Marketing AI"
+      description="An AI-powered marketing operating system for BYD Miri, built from connected, purpose-built modules."
+      width="wide"
+      icon={
+        <div className="w-10 h-10 rounded-xl bg-[var(--color-figure-black)] flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
         </div>
-      </section>
+      }
+    >
+      {/* Quick Stats */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {quickStats.map((stat) => (
+          <div key={stat.label} className="stat">
+            <div className="stat-value">{stat.value}</div>
+            <div className="stat-label">{stat.label}</div>
+          </div>
+        ))}
+      </div>
 
-      <main id="main-content" className="page-enter max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        {/* Quick Stats */}
-        <div className="grid grid-cols-3 gap-3">
-          {quickStats.map((stat) => (
-            <div key={stat.label} className="stat">
-              <div className="stat-value">{stat.value}</div>
-              <div className="stat-label">{stat.label}</div>
-            </div>
+      {/* System Overview */}
+      <PageSection
+        eyebrow="System"
+        title="Marketing AI operating system"
+        description={`${modules.length} integrated modules working together as a complete marketing operating system. Each module has a clear responsibility, structured data, and dedicated AI prompts.`}
+      >
+        <div className="flex flex-wrap gap-1.5">
+          <span className="badge badge-blue text-[0.7rem]">{company.version}</span>
+          <span className="badge badge-green text-[0.7rem]">AI-Powered</span>
+          <span className="badge badge-gray text-[0.7rem]">{modules.length} Modules</span>
+        </div>
+      </PageSection>
+
+      {/* Module Grid */}
+      <PageSection
+        eyebrow="Directory"
+        title="Modules"
+        action={
+          <span className="label text-[0.62rem] text-[var(--color-text-tertiary)]">
+            {modules.filter((m) => m.status === "active").length} active
+          </span>
+        }
+        flush
+      >
+        <div className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 sm:p-5 lg:grid-cols-3">
+          {modules.map((mod) => (
+            <Link
+              key={mod.id}
+              href={mod.href}
+              className="group relative flex flex-col overflow-hidden rounded-xl border border-[var(--color-border-primary)] p-4 transition-colors hover:border-[var(--color-figure-black)] hover:bg-[var(--color-neutral-50)]"
+            >
+              <div className="flex flex-1 items-start gap-3">
+                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                    <path d={mod.icon} />
+                  </svg>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{mod.title}</h3>
+                    {mod.status === "coming_soon" && (
+                      <span className="badge badge-amber text-[0.7rem] py-0 px-1.5">Soon</span>
+                    )}
+                  </div>
+                  <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed line-clamp-2">{mod.description}</p>
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {mod.capabilities.slice(0, 3).map((cap) => (
+                      <span key={cap} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{cap}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3 pt-2.5 border-t border-[var(--color-border-primary)] flex items-center justify-between">
+                <span className="text-xs font-medium text-accent group-hover:text-accent-hover transition-colors">
+                  Open Module &rarr;
+                </span>
+                <span className={`w-1.5 h-1.5 rounded-full ${mod.status === "active" ? "bg-[var(--color-figure-black)]" : "bg-[var(--color-calibration-gray)]"}`} />
+              </div>
+            </Link>
           ))}
         </div>
-
-        {/* System Overview */}
-        <div className="card border-l-2 border-l-[var(--color-figure-black)] bg-accent/5">
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 4-2 4h-4s-2-2-2-4a4 4 0 0 1 4-4z"/><path d="M12 8v6"/><path d="M12 16v2"/><path d="M8 22h8"/><path d="M12 22v-4"/></svg>
-            </div>
-            <div>
-              <h2 className="font-bold text-[var(--color-text-primary)] text-sm mb-2">Marketing AI Operating System</h2>
-              <p className="text-sm text-[var(--color-text-tertiary)] leading-relaxed">
-                {modules.length} integrated modules working together as a complete marketing operating system.
-                Each module has a clear responsibility, structured data, and dedicated AI prompts.
-              </p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                <span className="badge badge-blue text-[0.7rem]">{company.version}</span>
-                <span className="badge badge-green text-[0.7rem]">AI-Powered</span>
-                <span className="badge badge-gray text-[0.7rem]">{modules.length} Modules</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Module Grid */}
-        <section>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="section-title mb-0">Modules</h2>
-            <span className="text-[0.7rem] text-[var(--color-text-tertiary)] font-medium">
-              {modules.filter((m) => m.status === "active").length} active
-            </span>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {modules.map((mod) => (
-              <Link key={mod.id} href={mod.href} className="card card-interactive group relative overflow-hidden">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
-                      <path d={mod.icon} />
-                    </svg>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <h3 className="font-semibold text-[var(--color-text-primary)] text-sm truncate">{mod.title}</h3>
-                      {mod.status === "coming_soon" && (
-                        <span className="badge badge-amber text-[0.7rem] py-0 px-1.5">Soon</span>
-                      )}
-                    </div>
-                    <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed line-clamp-2">{mod.description}</p>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      {mod.capabilities.slice(0, 3).map((cap) => (
-                        <span key={cap} className="text-[0.7rem] text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-1.5 py-0.5 rounded">{cap}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-3 pt-2.5 border-t border-[var(--color-border-primary)] flex items-center justify-between">
-                  <span className="text-xs font-medium text-accent group-hover:text-accent-hover transition-colors">
-                    Open Module &rarr;
-                  </span>
-                  <span className={`w-1.5 h-1.5 rounded-full ${mod.status === "active" ? "bg-[var(--color-figure-black)]" : "bg-[var(--color-calibration-gray)]"}`} />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      <footer className="border-t border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] mt-8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-[var(--color-text-tertiary)]">
-            &copy; {new Date().getFullYear()} Ridzuan Jahari — Marketing AI Operating System
-          </p>
-        </div>
-      </footer>
-    </div>
+      </PageSection>
+    </PageShell>
   );
 }

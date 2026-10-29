@@ -2,19 +2,37 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center">
-      <div className="text-center max-w-md mx-auto px-4">
-        <p className="display text-7xl text-[var(--color-figure-black)] mb-4">404</p>
-        <h1 className="display text-xl text-[var(--color-text-primary)] mb-2">Page not found</h1>
-        <p className="text-sm text-[var(--color-text-tertiary)] mb-6">
-          This page doesn&apos;t exist in the Master Databook.
+    <div className="min-h-[80vh] flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <p className="label text-[0.62rem] text-[var(--color-text-tertiary)]">
+          Error · 404
         </p>
-        <Link
-          href="/"
-          className="btn btn-primary inline-flex"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-          Back to Dashboard
+        <p className="display mt-3 text-6xl leading-none tracking-[-0.03em] text-[var(--color-figure-black)]">
+          404
+        </p>
+        <h1 className="display mt-4 text-xl tracking-[-0.02em] text-[var(--color-text-primary)]">
+          Page not found
+        </h1>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-tertiary)]">
+          This page doesn&rsquo;t exist in the Master Databook. Check the address
+          or return to the dashboard.
+        </p>
+        <Link href="/" className="btn btn-primary mt-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+          Back to dashboard
         </Link>
       </div>
     </div>

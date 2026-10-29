@@ -127,10 +127,19 @@ export default function ChargingTimeEstimator() {
   }, []);
 
   return (
-    <section>
-      <h2 className="section-title">Charging Time Estimator</h2>
-      <div className="card card-elevated overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
+    <div className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] overflow-hidden">
+      <div className="border-b border-[var(--color-border-primary)] px-5 py-4 sm:px-6">
+        <p className="label text-[0.6rem] text-[var(--color-text-tertiary)]">
+          Calculator
+        </p>
+        <h2 className="mt-1 text-base font-bold text-[var(--color-text-primary)]">
+          Charging time estimator
+        </h2>
+        <p className="mt-1 text-sm leading-relaxed text-[var(--color-text-tertiary)]">
+          Choose a model, charger type, and charge range to estimate time and cost.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
           {/* Controls */}
           <div className="lg:col-span-3 p-4 sm:p-5 space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -346,6 +355,5 @@ export default function ChargingTimeEstimator() {
           </div>
         </div>
       </div>
-    </section>
   );
 }

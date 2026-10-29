@@ -164,12 +164,10 @@ export default function TopUpCalculator() {
   };
 
   return (
-    <section>
-      <h2 className="section-title text-[0.85rem]">Price Breakdown</h2>
-      <div className="card card-elevated overflow-hidden !p-0">
-        <div className="divide-y divide-[var(--color-border-primary)]/60">
+    <div className="rounded-2xl border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-[var(--color-border-primary)]">
           {/* Controls */}
-          <div className="p-2.5 space-y-2">
+          <div className="p-4 sm:p-5 space-y-3">
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
@@ -358,7 +356,7 @@ export default function TopUpCalculator() {
           </div>
 
           {/* Results */}
-          <div className="p-2.5 bg-[var(--color-neutral-50)]">
+          <div className="p-4 sm:p-5 bg-[var(--color-neutral-50)]">
             <div className="flex items-center justify-between mb-1.5">
               <h3 className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)]">
                 Price Breakdown Summary
@@ -464,6 +462,5 @@ export default function TopUpCalculator() {
           </div>
         </div>
       </div>
-    </section>
   );
 }

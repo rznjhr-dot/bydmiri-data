@@ -126,7 +126,7 @@ Summarise: files changed, fields changed (old → new), changelog entry added, c
 
 - **Design tokens only.** Never introduce raw hex colors, arbitrary shadows, or one-off spacing. Use the existing tokens in `globals.css` (`var(--color-*)`, `var(--shadow-*)`, `var(--radius-*)`). Tailwind classes may reference these vars.
 - **Typography floor: 0.7rem (11.2px).** Nothing smaller, ever.
-- **Component classes over ad-hoc markup:** `.card`, `.tool-card`, `.stat`, `.badge`, `.pill`, `.chip`, `.btn`, `.data-row`, `.section-title`. If a pattern already exists as a class, use it.
+- **Component classes over ad-hoc markup:** `.card`, `.tool-card`, `.stat`, `.badge`, `.pill`, `.chip`, `.btn`, `.data-row`. If a pattern already exists as a class, use it.
 - **Mobile-first is the default posture.** Bottom tab bar exists on mobile; never add fixed overlays that conflict with it. Touch targets ≥ 44px effective.
 - **Prices always via `formatCurrency()` or `.toLocaleString("en-MY")`** — never string-concat raw numbers.
 - **Tone of voice:** factual, confident, concise. Malaysian English. Prices stated as "OTR with insurance" when shown. No exclamation marks, no marketing fluff in data-driven surfaces (save the flair for the AI prompt tools).
