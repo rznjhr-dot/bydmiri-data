@@ -38,6 +38,7 @@ export default function TopUpCalculator() {
   const [actualInsurance, setActualInsurance] = useState("");
   const [approvedLoan, setApprovedLoan] = useState("");
   const [bookingFeeInput, setBookingFeeInput] = useState("");
+  const [customRebateInput, setCustomRebateInput] = useState("");
   const [copied, setCopied] = useState(false);
 
   const currentVehicle = vehicles.find((v) => v.model === selectedModel) ?? vehicles[0];
@@ -62,6 +63,10 @@ export default function TopUpCalculator() {
 
   const actualIns = parseNum(actualInsurance) ?? estInsurance;
 
+  // Custom total rebate — overrides & disables the auto rebate + CSP when filled
+  const customRebate = parseNum(customRebateInput);
+  const hasCustomRebate = customRebate !== null;
+
   // Selling price breakdown (A)
   const sellingPrice = currentVariant.rrp ?? currentVariant.otrWithoutInsurance;
   const roadTax = currentVariant.roadTax ?? 0;
@@ -73,7 +78,7 @@ export default function TopUpCalculator() {
     sellingPrice + roadTax + insurancePremium + registrationFee + b2InspectionFee + evPlateFee;
 
   // Deductions (B) — full loan assumed; bank-approved amount if entered
-  const rebateTotal = rebate + cspAmount;
+  const rebateTotal = hasCustomRebate ? Math.max(0, customRebate) : rebate + cspAmount;
   const approved = parseNum(approvedLoan);
   const financing =
     approved !== null
@@ -100,7 +105,7 @@ export default function TopUpCalculator() {
       "",
       "DEDUCTIONS",
       "Financing Amount: " + (approved !== null ? formatCurrency(financing) : "Auto (" + formatCurrency(financing) + ")"),
-      "Rebate / Promo: -" + formatCurrency(rebateTotal),
+      "Rebate: -" + formatCurrency(rebateTotal),
       "Booking Fees: -" + formatCurrency(bookingFee),
       "Subtotal Deductions (B): " + formatCurrency(subtotalB),
       "",
@@ -142,6 +147,7 @@ export default function TopUpCalculator() {
     setActualInsurance("");
     setApprovedLoan("");
     setBookingFeeInput("");
+    setCustomRebateInput("");
   };
 
   const onVariantChange = (idx: number) => {
@@ -149,6 +155,7 @@ export default function TopUpCalculator() {
     setActualInsurance("");
     setApprovedLoan("");
     setBookingFeeInput("");
+    setCustomRebateInput("");
   };
 
   return (
@@ -196,9 +203,9 @@ export default function TopUpCalculator() {
             </div>
 
             {/* Rebate + CSP toggles */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className={`grid grid-cols-2 gap-2 ${hasCustomRebate ? "opacity-40 pointer-events-none" : ""}`}>
               <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
-                <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeRebate(!includeRebate)}>
+                <label className="flex items-center gap-2 cursor-pointer" onClick={() => !hasCustomRebate && setIncludeRebate(!includeRebate)}>
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeRebate ? "bg-accent" : "bg-neutral-300"}`}>
                     <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white  transition-transform ${includeRebate ? "translate-x-3" : ""}`} />
                   </div>
@@ -209,7 +216,7 @@ export default function TopUpCalculator() {
                 )}
               </div>
               <div className="flex items-center justify-between bg-[var(--color-bg-tertiary)]/60 rounded-xl px-2.5 py-2 border border-[var(--color-border-primary)]">
-                <label className="flex items-center gap-2 cursor-pointer" onClick={() => setIncludeCspRebate(!includeCspRebate)}>
+                <label className="flex items-center gap-2 cursor-pointer" onClick={() => !hasCustomRebate && setIncludeCspRebate(!includeCspRebate)}>
                   <div className={`w-7 h-4 rounded-full transition-colors relative ${includeCspRebate ? "bg-accent" : "bg-neutral-300"}`}>
                     <div className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white  transition-transform ${includeCspRebate ? "translate-x-3" : ""}`} />
                   </div>
@@ -217,6 +224,29 @@ export default function TopUpCalculator() {
                 </label>
                 <span className="text-[0.7rem] font-semibold text-[var(--color-text-tertiary)]">{formatCurrency(cspAmount)}</span>
               </div>
+            </div>
+
+            {/* Custom total rebate */}
+            <div>
+              <label className="block text-[0.7rem] font-semibold text-[var(--color-text-tertiary)] mb-0.5">
+                Custom Total Rebate (override semua rebate)
+              </label>
+              <div className="input-group">
+                <span className="input-prefix !text-[0.7rem]">RM</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="Kosong = guna rebate auto"
+                  value={customRebateInput}
+                  onChange={(e) => setCustomRebateInput(e.target.value.replace(/[^0-9.,]/g, ""))}
+                  className="input !text-xs !py-1.5"
+                />
+              </div>
+              <p className={`text-[0.7rem] mt-0.5 ${hasCustomRebate ? "text-[var(--color-figure-black)] font-medium" : "text-[var(--color-text-tertiary)]"}`}>
+                {hasCustomRebate
+                  ? "Override aktif — Rebate & " + finance.additionalRebate.label + " di atas diabaikan."
+                  : "Kosong = guna rebate auto. Isi untuk promo HQ yang tak tersangka."}
+              </p>
             </div>
 
             {/* Actual insurance */}
@@ -351,7 +381,7 @@ export default function TopUpCalculator() {
                 <span className="font-medium">{approved !== null ? formatCurrency(financing) : "Auto (" + formatCurrency(financing) + ")"}</span>
               </div>
               <div className="flex justify-between col-span-2">
-                <span className="text-[var(--color-text-tertiary)]">Rebate / Promo</span>
+                <span className="text-[var(--color-text-tertiary)]">Rebate</span>
                 <span className="font-semibold text-[var(--color-figure-black)]">-{formatCurrency(rebateTotal)}</span>
               </div>
               <div className="flex justify-between col-span-2">

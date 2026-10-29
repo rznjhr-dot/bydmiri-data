@@ -1,5 +1,12 @@
 [
   {
+    "version": "V4.12",
+    "date": "2026-10-29",
+    "changes": [
+      "Price Breakdown (/top-up) — new Custom Total Rebate field lets you key an exact rebate amount; when filled it overrides and disables the auto Rebate and CSP/GSP/SSP toggles (for unexpected HQ promos), and the summary row now shows a single 'Rebate' line"
+    ]
+  },
+  {
     "version": "V4.10",
     "date": "2026-10-04",
     "changes": [
